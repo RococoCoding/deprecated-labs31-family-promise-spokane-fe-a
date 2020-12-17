@@ -1,18 +1,10 @@
 import React from 'react';
-import { Form, Button, DatePicker, Checkbox, Radio, Card } from 'antd';
-import moment from 'moment';
+import { Form, Button, Input, Checkbox, Card } from 'antd';
+
 const DomesticViolence = ({ navigation, tempFormStyle, formData, setForm }) => {
   const { previous, next } = navigation;
   const { familyInfo } = formData;
-  const setFormDate = (e, dateString) => {
-    familyInfo = Object.assign(familyInfo, {
-      ...familyInfo,
-      domestic_violence_info: {
-        ...familyInfo.domestic_violence_info,
-        date_last_incident: dateString,
-      },
-    });
-  };
+
   return (
     <div style={tempFormStyle}>
       <Card title="Domestic DomesticViolence" bordered={false}>
@@ -46,16 +38,10 @@ const DomesticViolence = ({ navigation, tempFormStyle, formData, setForm }) => {
             </Checkbox>
           </Form.Item>
           <Form.Item label="Date of most recent DV incident">
-            <DatePicker
-              format="DD/MM/YYYY"
+            <Input
               name="familyInfo.domestic_violence_info.date_last_incident"
-              defaultValue={moment(
-                familyInfo.domestic_violence_info.date_last_incident != ''
-                  ? familyInfo.domestic_violence_info.date_last_incident
-                  : '01/01/2020',
-                'DD/MM/YYYY'
-              )}
-              onChange={setFormDate}
+              value={familyInfo.domestic_violence_info.date_last_incident}
+              onChange={setForm}
             />
           </Form.Item>
           <Form.Item>

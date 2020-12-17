@@ -17,7 +17,7 @@ const Insurance = ({ navigation, tempFormStyle, formData, setForm }) => {
   };
   return (
     <div style={tempFormStyle}>
-      <Card title="Family Members" bordered={false}>
+      <Card title="Insurance" bordered={false}>
         <Form.Item>
           <Button type="primary" htmlType="button" onClick={previous}>
             Previous
@@ -26,7 +26,6 @@ const Insurance = ({ navigation, tempFormStyle, formData, setForm }) => {
             Submit
           </Button>
         </Form.Item>
-        <h1>Insurance</h1>
         <Form
           layout="vertical"
           style={{ maxWidth: '800px', alignItems: 'center' }}

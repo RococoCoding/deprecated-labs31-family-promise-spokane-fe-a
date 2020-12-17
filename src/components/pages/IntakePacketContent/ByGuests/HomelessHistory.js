@@ -38,7 +38,7 @@ const HomelessHistory = ({ navigation, formData, setForm, tempFormStyle }) => {
             />
           </Form.Item>
           <Form.Item label="How long were you at this location?">
-            <Form.Item label="Days">
+            <Form.Item>
               <Input
                 name={'familyInfo.homeless_info.length_at_prior_location'}
                 value={familyInfo.homeless_info.length_at_prior_location}
@@ -64,13 +64,6 @@ const HomelessHistory = ({ navigation, formData, setForm, tempFormStyle }) => {
             <Input
               name={'familyInfo.homeless_info.total_len_homeless'}
               value={familyInfo.homeless_info.total_len_homeless}
-              onChange={setForm}
-            />
-          </Form.Item>
-          <Form.Item label=" If yes when?">
-            <Input
-              name={'familyInfo.homeless_info.length_at_current_location'}
-              value={familyInfo.homeless_info.length_at_current_location}
               onChange={setForm}
             />
           </Form.Item>
