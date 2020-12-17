@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  Form,
-  Input,
-  InputNumber,
-  DatePicker,
-  Button,
-  Checkbox,
-  Card,
-} from 'antd';
+import { Form, Input, Button, Card } from 'antd';
 const HomelessHistory = ({ navigation, formData, setForm, tempFormStyle }) => {
   const { previous, next } = navigation;
   const { familyInfo } = formData;
@@ -31,6 +23,22 @@ const HomelessHistory = ({ navigation, formData, setForm, tempFormStyle }) => {
             />
           </Form.Item>
           <Form.Item label="Where did you stay last night?">
+            <Input
+              name={'familyInfo.homeless_info.current_location'}
+              value={familyInfo.homeless_info.current_location}
+              onChange={setForm}
+            />
+          </Form.Item>
+          <Form.Item label="How long were you at this location?">
+            <Form.Item>
+              <Input
+                name={'familyInfo.homeless_info.length_at_current_location'}
+                value={familyInfo.homeless_info.length_at_current_location}
+                onChange={setForm}
+              />
+            </Form.Item>
+          </Form.Item>
+          <Form.Item label="If less than 7 nights, where did you stay immediately prior to that?">
             <Input
               name={'familyInfo.homeless_info.prior_location'}
               value={familyInfo.homeless_info.prior_location}
