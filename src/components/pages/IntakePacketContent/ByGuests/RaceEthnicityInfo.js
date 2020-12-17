@@ -38,26 +38,29 @@ const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
             apply for EACH family member.
           </h3>
           {Object.keys(formData.familyMember).map((mem, key) => (
-            <Space>
+            <>
               <p>{familyMember[mem].demographics.first_name}</p>
-              <Checkbox.Group
-                defaultValue={familyMember[mem].demographics.race}
-              >
-                <Row>
-                  {options.map(race => (
-                    <Col span={3} style={{ display: 'inline-block' }}>
-                      <Form.Item label={race}>
-                        <Checkbox
-                          onChange={setFormRace}
-                          defaultChecked={true}
-                          value={race}
-                        />
-                      </Form.Item>
-                    </Col>
-                  ))}
-                </Row>
-              </Checkbox.Group>
-            </Space>
+
+              <Space>
+                <Checkbox.Group
+                  defaultValue={familyMember[mem].demographics.race}
+                >
+                  <Row>
+                    {options.map(race => (
+                      <Col span={3} style={{ display: 'inline-block' }}>
+                        <Form.Item label={race}>
+                          <Checkbox
+                            onChange={setFormRace}
+                            defaultChecked={true}
+                            value={race}
+                          />
+                        </Form.Item>
+                      </Col>
+                    ))}
+                  </Row>
+                </Checkbox.Group>
+              </Space>
+            </>
           ))}
         </Form>
       </Card>
