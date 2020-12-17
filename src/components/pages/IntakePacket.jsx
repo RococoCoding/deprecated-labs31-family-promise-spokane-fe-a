@@ -87,6 +87,8 @@ const defaultData = {
 
 const IntakePacket = () => {
   const [count, setCount] = useState(0);
+  const nameString = (n, location) => `familyMember.${n}.${location}`;
+
   const tempFormStyle = {
     marginLeft: '20%',
     marginTop: '50px',
@@ -103,6 +105,7 @@ const IntakePacket = () => {
     tempFormStyle,
     count,
     setCount,
+    nameString,
   };
 
   switch (id) {

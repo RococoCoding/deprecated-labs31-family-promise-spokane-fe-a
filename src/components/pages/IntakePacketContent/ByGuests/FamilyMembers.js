@@ -8,6 +8,7 @@ const FamilyMembers = ({
   tempFormStyle,
   count,
   setCount,
+  nameString,
 }) => {
   const addMember = key => {
     formData.familyMember[key] = {
@@ -47,9 +48,7 @@ const FamilyMembers = ({
     };
   };
   const { previous, next } = navigation;
-  const { familyMember, familyInfo } = formData;
-
-  const nameString = (n, location) => `familyMember.${n}.${location}`;
+  const { familyMember } = formData;
 
   const onChangeHandlder = () => {
     addMember(count);
