@@ -23,7 +23,7 @@ const steps = [
   { id: 'Insurance' },
 ];
 
-const defaultData = {
+let defaultData = {
   familyInfo: {
     user_id: 1,
     case_number: 25,
