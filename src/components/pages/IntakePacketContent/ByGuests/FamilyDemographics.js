@@ -35,6 +35,12 @@ const FamilyDemographics = ({
       demographics: { ...familyMember[0].demographics, employer: value },
     });
   };
+  const setFormSSN = value => {
+    familyMember[0] = Object.assign(familyMember[0], {
+      ...familyMember[0],
+      demographics: { ...familyMember[0].demographics, SSN: value },
+    });
+  };
   const setFormSelect = value => {
     console.log(value);
     familyMember[0] = Object.assign(familyMember[0], {
@@ -88,11 +94,10 @@ const FamilyDemographics = ({
                   />
                 </Form.Item>
                 <Form.Item label="Last 4 of SSN">
-                  <Input
+                  <InputNumber
                     placeholder="0000"
-                    name={nameString(mem, 'demographics.SSN')}
-                    value={familyMember[mem].demographics.SSN}
-                    onChange={setForm}
+                    onChange={setFormSSN}
+                    defaultValue={familyMember[mem].demographics.employer}
                   />
                 </Form.Item>
                 <Form.Item

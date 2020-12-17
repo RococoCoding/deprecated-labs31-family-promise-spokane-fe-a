@@ -49,19 +49,19 @@ const BarriersPage = ({
         <Form layout="vertical">
           {Object.keys(formData.familyMember).map((mem, key) => (
             <>
-              <Space>
-                <p>{familyMember[mem].bearers.first_name}</p>
+              <Space key={`${mem}${key}`}>
+                <p>{familyMember[mem].barriers.first_name}</p>
                 <Row>
                   {options.map(barrier => (
                     <Col span={3} style={{ display: 'inline-block' }}>
                       <Form.Item label={barrier}>
                         <Checkbox
                           defaultChecked={
-                            familyMember[mem].bearers[optionDataName[barrier]]
+                            familyMember[mem].barriers[optionDataName[barrier]]
                           }
                           name={nameString(
                             mem,
-                            `bearers.${optionDataName[barrier]}`
+                            `barriers.${optionDataName[barrier]}`
                           )}
                           onChange={setForm}
                         />
@@ -73,17 +73,17 @@ const BarriersPage = ({
 
               <Form.Item label="Please list any documented disabilities or chronic health issues as well as any major allergies">
                 <TextArea
-                  name={nameString(mem, 'bearers.list_issues')}
+                  name={nameString(mem, 'barriers.list_issues')}
                   onChange={setForm}
-                  value={familyMember[mem].bearers.list_issues}
+                  value={familyMember[mem].barriers.list_issues}
                   autoSize={{ minRows: 3, maxRows: 5 }}
                 ></TextArea>
               </Form.Item>
               <Form.Item label="Please list Indefinite Conditions for each family member (Alcohol Abuse, Developmental Disability, Chronic Health Issue, Mental Illness, ....)">
                 <TextArea
-                  name={nameString(mem, 'bearers.list_indefinite_conditions')}
+                  name={nameString(mem, 'barriers.list_indefinite_conditions')}
                   onChange={setForm}
-                  value={familyMember[mem].bearers.list_indefinite_conditions}
+                  value={familyMember[mem].barriers.list_indefinite_conditions}
                   autoSize={{ minRows: 3, maxRows: 5 }}
                 ></TextArea>
               </Form.Item>

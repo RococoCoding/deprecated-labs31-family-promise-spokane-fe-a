@@ -8,6 +8,28 @@ const ChildSchoolInfo = ({
   formData,
   nameString,
 }) => {
+  const gradeOptions = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12',
+  ];
+  const attendStatOptions = [
+    'regular',
+    'ireggular',
+    'drop out',
+    'suspended',
+    'expelled',
+  ];
+  const schoolTypeOptions = ['public', 'private'];
   const { familyMember } = formData;
   const { previous, next } = navigation;
   const { TextArea } = Input;
@@ -55,7 +77,9 @@ const ChildSchoolInfo = ({
                   }
                   onChange={setFormGrade}
                 >
-                  <option value="spouse">Self</option>
+                  {gradeOptions.map(grade => (
+                    <option value={grade}>{grade}</option>
+                  ))}
                 </Select>
               </Form.Item>
               <Form.Item label="Currently Enrolled?">
@@ -71,9 +95,9 @@ const ChildSchoolInfo = ({
                   onChange={setFormAttend}
                   placeholder="Please select an option"
                 >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
+                  {attendStatOptions.map(op => (
+                    <option value={op}>{op}</option>
+                  ))}
                 </Select>
               </Form.Item>
               <Form.Item label="School Type">
@@ -82,9 +106,9 @@ const ChildSchoolInfo = ({
                   defaultValue={familyMember[mem].schools.school_type}
                   onChange={setFormType}
                 >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
+                  {schoolTypeOptions.map(op => (
+                    <option value={op}>{op}</option>
+                  ))}
                 </Select>
               </Form.Item>
               <Form.Item label="School Name">

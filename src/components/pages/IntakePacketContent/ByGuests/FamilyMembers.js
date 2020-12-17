@@ -1,6 +1,5 @@
 import React from 'react';
 import { Form, Input, Button, Space, Card } from 'antd';
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 const FamilyMembers = ({
   navigation,
   formData,
@@ -23,7 +22,7 @@ const FamilyMembers = ({
         employer: '',
         race: [],
       },
-      bearers: {
+      barriers: {
         alcohol_abuse: false,
         developmental_disabilities: false,
         chronic_health_issues: false,
@@ -43,7 +42,6 @@ const FamilyMembers = ({
         school_name: '',
         mckinney_school: false,
       },
-      flag: '',
       pet: 0,
     };
   };
@@ -77,10 +75,17 @@ const FamilyMembers = ({
                 align: 'baseline',
               }}
             >
-              <Form.Item label="Fullname">
+              <Form.Item label="First Name">
                 <Input
                   name={nameString(mem, 'demographics.first_name')}
                   value={familyMember[mem].demographics.first_name}
+                  onChange={setForm}
+                ></Input>
+              </Form.Item>
+              <Form.Item label="Last Name">
+                <Input
+                  name={nameString(mem, 'demographics.last_name')}
+                  value={familyMember[mem].demographics.last_name}
                   onChange={setForm}
                 ></Input>
               </Form.Item>
