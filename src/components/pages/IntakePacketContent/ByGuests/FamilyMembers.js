@@ -5,15 +5,9 @@ const FamilyMembers = ({ navigation, formData, setForm, tempFormStyle }) => {
   const { previous, next } = navigation;
   const { familyMember, familyInfo } = formData;
 
-  const last = 'tate burger';
-  const first = 'temp';
-  const handleAddButton = value => {
-    console.log('helloworld', value);
-  };
-  const onChangeHandlder = value => {
-    console.log(value.target.value);
-    console.log(familyInfo);
-  };
+  const nameString = (n, location) => `familyMember.${n}.${location}`;
+
+  const onChangeHandlder = value => {};
 
   const addMember = (firstname, lastName, relationship) => {
     formData.familyMember[`${firstname}${lastName}`] = {
@@ -64,6 +58,7 @@ const FamilyMembers = ({ navigation, formData, setForm, tempFormStyle }) => {
           </Button>
         </Form.Item>
         <Form layout="vertical">
+          {/*Displays family members currently in formData */}
           {Object.keys(formData.familyMember).map((mem, key) => (
             <Space
               key={key}
@@ -75,20 +70,21 @@ const FamilyMembers = ({ navigation, formData, setForm, tempFormStyle }) => {
             >
               <Form.Item label="Fullname">
                 <Input
-                  name="familyMember.tateburger.demographics.first_name"
-                  value={familyMember.tateburger.demographics.first_name}
+                  name={nameString(mem, 'demographics.first_name')}
+                  value={familyMember[mem].demographics.first_name}
                   onChange={setForm}
                 ></Input>
               </Form.Item>
               <Form.Item label="Relationship">
                 <Input
-                  name="familyMember.tateburger.demographics.relationship"
-                  value={familyMember.tateburger.demographics.relationship}
+                  name={nameString(mem, 'demographics.relationship')}
+                  value={familyMember[mem].demographics.relationship}
                   onChange={setForm}
                 />
               </Form.Item>
             </Space>
           ))}
+          {/*Creates new family member object in formData */}
           <Form.List name="users">
             {(fields, { add, remove }) => (
               <>
@@ -103,16 +99,13 @@ const FamilyMembers = ({ navigation, formData, setForm, tempFormStyle }) => {
                   >
                     <Form.Item label="First">
                       <Input
-                        name={`familyMember[${first}]`}
+                        name="temp"
                         onChange={onChangeHandlder}
                         placeholder="First Name"
                       />
                     </Form.Item>
                     <Form.Item label="Last">
-                      <Input
-                        name={`familyMember[${last}]`}
-                        placeholder="Last Name"
-                      />
+                      <Input name="" placeholder="Last Name" />
                     </Form.Item>
                     <Form.Item label="Relationship">
                       <Input placeholder="Relationship" />
