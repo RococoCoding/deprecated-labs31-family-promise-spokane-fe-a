@@ -35,14 +35,11 @@ const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
   };
   const initChecked = mem => {
     const arr = [];
-    console.log(familyMember[mem].demographics.race);
-
     options.map(race => {
       if (familyMember[mem].demographics.race.has(race)) {
         arr.push(race);
       }
     });
-
     return arr;
   };
   return (
@@ -58,6 +55,7 @@ const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
         </Form.Item>
 
         <Form layout="vertical">
+          {console.log(familyMember[0].demographics)}
           <h3>
             Please answer the following questions about race. Check all that
             apply for EACH family member.
