@@ -13,14 +13,13 @@ const Insurance = ({ navigation, tempFormStyle, formData, setForm }) => {
     'Other',
   ];
   const submitHandlder = e => {
-    console.log(formData.familyInfo);
     e.preventDefault();
     axios
-      .post(`https://httpbin.org/post`, formData.familyInfo)
+      .post(`http://localhost:8080/families`, familyInfo)
       .then(res => {
         console.log(res);
       })
-      .catch(err => console.log(err.res));
+      .catch(err => console.log(err));
   };
   return (
     <div style={tempFormStyle}>
