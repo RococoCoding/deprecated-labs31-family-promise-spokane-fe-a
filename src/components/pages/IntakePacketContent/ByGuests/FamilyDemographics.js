@@ -20,6 +20,9 @@ const FamilyDemographics = ({
   const { previous, next } = navigation;
   const { familyMember, familyInfo } = formData;
   const genderOptions = ['Male', 'Female', 'Other'];
+
+  /*Issues with setForm on inputs other than Input and Checkbox. 
+  The following functions manually update the entire form. */
   const setFormDate = (e, dateString) => {
     familyMember[0] = Object.assign(familyMember[0], {
       ...familyMember[0],
