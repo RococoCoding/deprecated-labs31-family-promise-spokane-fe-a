@@ -36,7 +36,7 @@ const FamilyMembers = ({
       },
       schools: {
         highest_grade_completed: '',
-        enrolled_status: true,
+        enrolled_status: false,
         reason_not_enrolled: '',
         attendance_status: '',
         school_type: '',
