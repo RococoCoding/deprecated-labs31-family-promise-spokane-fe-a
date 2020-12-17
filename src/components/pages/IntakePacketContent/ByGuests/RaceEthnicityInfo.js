@@ -4,7 +4,7 @@ import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
   const { previous, next } = navigation;
-  const { familyMember } = formData;
+  let { familyMember } = formData;
   const options = [
     'Hispanic/Latino',
     'American Indian or Alaska Native',
@@ -15,33 +15,11 @@ const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
     'Unknown',
     'Refuse',
   ];
-  let raceSet = new Set();
-  const setFormRace = value => {
-    familyMember[0] = Object.assign(familyMember[0], {
-      ...familyMember[0],
-      demographics: { ...familyMember[0].demographics, race: value },
-    });
+
+  const setFormRace = e => {
+    familyMember[0].demographics.race.push(e.target.value);
   };
-  const onCheck = e => {
-    const checked = e.target.checked;
-    const value = e.target.value;
-    if (checked == true) {
-      raceSet.add(value);
-    } else if (checked == false) {
-      raceSet.delete(value);
-    }
-    setFormRace(raceSet);
-    console.log(familyMember[0].demographics.race);
-  };
-  const initChecked = mem => {
-    const arr = [];
-    options.map(race => {
-      if (familyMember[mem].demographics.race.has(race)) {
-        arr.push(race);
-      }
-    });
-    return arr;
-  };
+
   return (
     <div style={tempFormStyle}>
       <Card title="Race/Ethnicity Info" bordered={false}>
@@ -55,7 +33,6 @@ const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
         </Form.Item>
 
         <Form layout="vertical">
-          {console.log(familyMember[0].demographics)}
           <h3>
             Please answer the following questions about race. Check all that
             apply for EACH family member.
@@ -63,13 +40,15 @@ const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
           {Object.keys(formData.familyMember).map((mem, key) => (
             <Space>
               <p>{familyMember[mem].demographics.first_name}</p>
-              <Checkbox.Group defaultValue={initChecked(mem)}>
+              <Checkbox.Group
+                defaultValue={familyMember[mem].demographics.race}
+              >
                 <Row>
                   {options.map(race => (
                     <Col span={3} style={{ display: 'inline-block' }}>
                       <Form.Item label={race}>
                         <Checkbox
-                          onChange={onCheck}
+                          onChange={setFormRace}
                           defaultChecked={true}
                           value={race}
                         />
