@@ -1,19 +1,9 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox, Select, InputNumber, Card } from 'antd';
+import { Form, Input, Button, Checkbox, Select, Card } from 'antd';
 
-const { Option } = Select;
 const Insurance = ({ navigation, tempFormStyle, formData, setForm }) => {
   const { previous, next } = navigation;
-  const { familyInfo, familyMember } = formData;
-
-  const handleSelect = (value, name) => {
-    console.log(value, name, familyInfo.insurance.members_covered);
-  };
-  const handleCheck = value => {
-    console.log(familyInfo.insurance);
-    console.log(familyInfo.insurance);
-  };
-  const updateFormData = () => {};
+  const { familyInfo } = formData;
   const insuranceSources = [
     'State',
     'Private',
@@ -22,15 +12,18 @@ const Insurance = ({ navigation, tempFormStyle, formData, setForm }) => {
     'Medicare',
     'Other',
   ];
+  const submitHandlder = () => {
+    console.log(formData);
+  };
   return (
     <div style={tempFormStyle}>
       <Card title="Family Members" bordered={false}>
         <Form.Item>
-          <Button type="primary" htmlType="button" onClick={handleCheck}>
+          <Button type="primary" htmlType="button" onClick={previous}>
             Previous
           </Button>
-          <Button type="primary" htmlType="button" onClick={next}>
-            Next
+          <Button type="primary" htmlType="Submit" onClick={submitHandlder}>
+            Submit
           </Button>
         </Form.Item>
         <h1>Insurance</h1>
