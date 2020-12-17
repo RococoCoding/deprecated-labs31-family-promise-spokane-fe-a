@@ -21,7 +21,7 @@ const FamilyMembers = ({
         SSN: '',
         income: '',
         employer: '',
-        race: new Set(),
+        race: [],
       },
       bearers: {
         alcohol_abuse: false,
