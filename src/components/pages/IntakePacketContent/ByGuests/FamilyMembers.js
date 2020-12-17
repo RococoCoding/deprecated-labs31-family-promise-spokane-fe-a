@@ -1,21 +1,21 @@
 import React from 'react';
 import { Form, Input, Button, Space, Card } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-const FamilyMembers = ({ navigation, formData, setForm, tempFormStyle }) => {
-  const { previous, next } = navigation;
-  const { familyMember, familyInfo } = formData;
-
-  const nameString = (n, location) => `familyMember.${n}.${location}`;
-
-  const onChangeHandlder = value => {};
-
-  const addMember = (firstname, lastName, relationship) => {
-    formData.familyMember[`${firstname}${lastName}`] = {
+const FamilyMembers = ({
+  navigation,
+  formData,
+  setForm,
+  tempFormStyle,
+  count,
+  setCount,
+}) => {
+  const addMember = key => {
+    formData.familyMember[key] = {
       demographics: {
-        first_name: firstname,
-        last_name: lastName,
+        first_name: '',
+        last_name: '',
         gender: '',
-        relationship: relationship,
+        relationship: '',
         DOB: '',
         SSN: '',
         income: '',
@@ -46,6 +46,16 @@ const FamilyMembers = ({ navigation, formData, setForm, tempFormStyle }) => {
       pet: 0,
     };
   };
+  const { previous, next } = navigation;
+  const { familyMember, familyInfo } = formData;
+
+  const nameString = (n, location) => `familyMember.${n}.${location}`;
+
+  const onChangeHandlder = () => {
+    addMember(count);
+    setCount(count + 1);
+  };
+
   return (
     <div style={tempFormStyle}>
       <Card title="Family Members" bordered={false}>
@@ -85,47 +95,7 @@ const FamilyMembers = ({ navigation, formData, setForm, tempFormStyle }) => {
             </Space>
           ))}
           {/*Creates new family member object in formData */}
-          <Form.List name="users">
-            {(fields, { add, remove }) => (
-              <>
-                {fields.map(field => (
-                  <Space
-                    key={field.key}
-                    style={{
-                      display: 'flex',
-                      marginBottom: 8,
-                      align: 'baseline',
-                    }}
-                  >
-                    <Form.Item label="First">
-                      <Input
-                        name="temp"
-                        onChange={onChangeHandlder}
-                        placeholder="First Name"
-                      />
-                    </Form.Item>
-                    <Form.Item label="Last">
-                      <Input name="" placeholder="Last Name" />
-                    </Form.Item>
-                    <Form.Item label="Relationship">
-                      <Input placeholder="Relationship" />
-                    </Form.Item>
-                    <MinusCircleOutlined onClick={() => remove(field.name)} />
-                  </Space>
-                ))}
-                <Form.Item>
-                  <Button
-                    type="dashed"
-                    onClick={add}
-                    block
-                    icon={<PlusOutlined />}
-                  >
-                    Add field
-                  </Button>
-                </Form.Item>
-              </>
-            )}
-          </Form.List>
+          <Button onClick={onChangeHandlder}>Add Member</Button>
         </Form>
       </Card>
     </div>

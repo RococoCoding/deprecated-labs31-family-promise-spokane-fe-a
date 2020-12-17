@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, useStep } from 'react-hooks-helper';
 
 import IdVerification from './IntakePacketContent/BySupervisor/IdVerification';
@@ -82,46 +82,11 @@ const defaultData = {
     avatar_url:
       'https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg',
   },
-  familyMember: {
-    tateburger: {
-      demographics: {
-        first_name: 'tate',
-        last_name: 'burger',
-        gender: '',
-        relationship: 'mom',
-        DOB: '',
-        SSN: '',
-        income: '',
-        employer: '',
-        race: '',
-      },
-      bearers: {
-        alcohol_abuse: false,
-        developmental_disabilities: false,
-        chronic_health_issues: false,
-        drug_abuse: false,
-        'HIV-AIDs': false,
-        mental_illness: false,
-        physical_disabilities: false,
-        list_indefinite_conditions: null,
-        list_issues: null,
-      },
-      schools: {
-        highest_grade_completed: '',
-        enrolled_status: true,
-        reason_not_enrolled: '',
-        attendance_status: '',
-        school_type: '',
-        school_name: '',
-        mckinney_school: false,
-      },
-      flag: '',
-      pet: 0,
-    },
-  },
+  familyMember: {},
 };
 
 const IntakePacket = () => {
+  const [count, setCount] = useState(0);
   const tempFormStyle = {
     marginLeft: '20%',
     marginTop: '50px',
@@ -131,7 +96,14 @@ const IntakePacket = () => {
   const [formData, setForm] = useForm(defaultData);
   const { step, navigation } = useStep({ initialStep: 0, steps });
   const { id } = step;
-  const props = { navigation, formData, setForm, tempFormStyle };
+  const props = {
+    navigation,
+    formData,
+    setForm,
+    tempFormStyle,
+    count,
+    setCount,
+  };
 
   switch (id) {
     case 'ContactInfo':
