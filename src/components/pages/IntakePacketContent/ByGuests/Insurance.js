@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox, Select, Card } from 'antd';
-
+import axios from 'axios';
 const Insurance = ({ navigation, tempFormStyle, formData, setForm }) => {
   const { previous, next } = navigation;
   const { familyInfo } = formData;
@@ -12,8 +12,15 @@ const Insurance = ({ navigation, tempFormStyle, formData, setForm }) => {
     'Medicare',
     'Other',
   ];
-  const submitHandlder = () => {
-    console.log(formData);
+  const submitHandlder = e => {
+    console.log(formData.familyInfo);
+    e.preventDefault();
+    axios
+      .post(`https://httpbin.org/post`, formData.familyInfo)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err.res));
   };
   return (
     <div style={tempFormStyle}>
