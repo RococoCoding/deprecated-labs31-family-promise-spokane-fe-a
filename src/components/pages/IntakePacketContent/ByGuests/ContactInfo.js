@@ -42,7 +42,13 @@ const ContactInfo = ({ navigation, formData, setForm, tempFormStyle }) => {
             </Form.Item>
           </Space>
           <Form.Item>
-            <Checkbox>Safe to leave message</Checkbox>
+            <Checkbox
+              name="familyInfo.phone_one.safeToLeaveMssg"
+              onChange={setForm}
+              checked={familyInfo.phone_one.safeToLeaveMssg}
+            >
+              Safe to leave message
+            </Checkbox>
           </Form.Item>
           <Space style={{ display: 'flex', marginBottom: 8 }} align="baseline">
             <Form.Item>
@@ -63,7 +69,13 @@ const ContactInfo = ({ navigation, formData, setForm, tempFormStyle }) => {
             </Form.Item>
           </Space>
           <Form.Item>
-            <Checkbox>Safe to leave message</Checkbox>
+            <Checkbox
+              name="familyInfo.phone_two.safeToLeaveMssg"
+              onChange={setForm}
+              checked={familyInfo.phone_two.safeToLeaveMssg}
+            >
+              Safe to leave message
+            </Checkbox>
           </Form.Item>
           {/*Missing safe alternitive contact table in database*/}
           <h3>Safe alternitive contact:</h3>

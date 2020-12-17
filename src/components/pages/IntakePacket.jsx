@@ -70,7 +70,7 @@ const defaultData = {
       pregnancies: false,
       has_insurance: false,
       members_covered: 0,
-      health_insurance_type: '',
+      health_insurance_type: 'Default',
     },
     domestic_violence_info: {
       fleeing_dv: false,
@@ -82,7 +82,43 @@ const defaultData = {
     avatar_url:
       'https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg',
   },
-  familyMember: [],
+  familyMember: {
+    tateburger: {
+      demographics: {
+        first_name: 'tate',
+        last_name: 'burger',
+        gender: '',
+        relationship: 'mom',
+        DOB: '',
+        SSN: '',
+        income: '',
+        employer: '',
+        race: '',
+      },
+      bearers: {
+        alcohol_abuse: false,
+        developmental_disabilities: false,
+        chronic_health_issues: false,
+        drug_abuse: false,
+        'HIV-AIDs': false,
+        mental_illness: false,
+        physical_disabilities: false,
+        list_indefinite_conditions: null,
+        list_issues: null,
+      },
+      schools: {
+        highest_grade_completed: '',
+        enrolled_status: true,
+        reason_not_enrolled: '',
+        attendance_status: '',
+        school_type: '',
+        school_name: '',
+        mckinney_school: false,
+      },
+      flag: '',
+      pet: 0,
+    },
+  },
 };
 
 const IntakePacket = () => {
@@ -96,6 +132,7 @@ const IntakePacket = () => {
   const { step, navigation } = useStep({ initialStep: 0, steps });
   const { id } = step;
   const props = { navigation, formData, setForm, tempFormStyle };
+
   switch (id) {
     case 'ContactInfo':
       return <ContactInfo {...props} />;
