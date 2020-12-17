@@ -7,6 +7,7 @@ import {
   DatePicker,
   InputNumber,
   Card,
+  Select,
 } from 'antd';
 import moment from 'moment';
 const FamilyDemographics = ({
@@ -18,6 +19,7 @@ const FamilyDemographics = ({
 }) => {
   const { previous, next } = navigation;
   const { familyMember, familyInfo } = formData;
+  const genderOptions = ['Male', 'Female', 'Other'];
   const setFormDate = (e, dateString) => {
     familyMember[0] = Object.assign(familyMember[0], {
       ...familyMember[0],
@@ -28,6 +30,13 @@ const FamilyDemographics = ({
     familyMember[0] = Object.assign(familyMember[0], {
       ...familyMember[0],
       demographics: { ...familyMember[0].demographics, employer: value },
+    });
+  };
+  const setFormSelect = value => {
+    console.log(value);
+    familyMember[0] = Object.assign(familyMember[0], {
+      ...familyMember[0],
+      demographics: { ...familyMember[0].demographics, gender: value },
     });
   };
   return (
@@ -51,11 +60,15 @@ const FamilyDemographics = ({
                 align="baseline"
               >
                 <Form.Item label="Gender">
-                  <Input
-                    name={nameString(mem, 'demographics.gender')}
-                    value={familyMember[mem].demographics.gender}
-                    onChange={setForm}
-                  />
+                  <Select
+                    placeholder="Please select an option"
+                    defaultValue={familyMember[mem].demographics.gender}
+                    onChange={setFormSelect}
+                  >
+                    {genderOptions.map(option => (
+                      <Select.Option value={option}>{option}</Select.Option>
+                    ))}
+                  </Select>
                 </Form.Item>
 
                 <Form.Item label="Birthdate">
