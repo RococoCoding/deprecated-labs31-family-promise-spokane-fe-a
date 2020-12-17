@@ -2,8 +2,9 @@ import React from 'react';
 import { Form, Input, Button, Space, Checkbox, Row, Col, Card } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
-const RaceEthnicityInfo = ({ navigation, tempFormStyle }) => {
+const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
   const { previous, next } = navigation;
+  const { familyMember } = formData;
   const options = [
     'Hispanic/Latino',
     'American Indian or Alaska Native',
@@ -14,6 +15,36 @@ const RaceEthnicityInfo = ({ navigation, tempFormStyle }) => {
     'Unknown',
     'Refuse',
   ];
+  let raceSet = new Set();
+  const setFormRace = value => {
+    familyMember[0] = Object.assign(familyMember[0], {
+      ...familyMember[0],
+      demographics: { ...familyMember[0].demographics, race: value },
+    });
+  };
+  const onCheck = e => {
+    const checked = e.target.checked;
+    const value = e.target.value;
+    if (checked == true) {
+      raceSet.add(value);
+    } else if (checked == false) {
+      raceSet.delete(value);
+    }
+    setFormRace(raceSet);
+    console.log(familyMember[0].demographics.race);
+  };
+  const initChecked = mem => {
+    const arr = [];
+    console.log(familyMember[mem].demographics.race);
+
+    options.map(race => {
+      if (familyMember[mem].demographics.race.has(race)) {
+        arr.push(race);
+      }
+    });
+
+    return arr;
+  };
   return (
     <div style={tempFormStyle}>
       <Card title="Race/Ethnicity Info" bordered={false}>
@@ -31,41 +62,26 @@ const RaceEthnicityInfo = ({ navigation, tempFormStyle }) => {
             Please answer the following questions about race. Check all that
             apply for EACH family member.
           </h3>
-
-          <Form.List name="users">
-            {(fields, { add, remove }) => (
-              <>
-                {fields.map(field => (
-                  <Space key={field.key}>
-                    <p>Name Full</p>
-                    <Checkbox.Group>
-                      <Row>
-                        {options.map((race, key) => (
-                          <Col span={3} style={{ display: 'inline-block' }}>
-                            <Form.Item label={race}>
-                              <Checkbox value={key} />
-                            </Form.Item>
-                          </Col>
-                        ))}
-                      </Row>
-                    </Checkbox.Group>
-
-                    <MinusCircleOutlined onClick={() => remove(field.name)} />
-                  </Space>
-                ))}
-                <Form.Item>
-                  <Button
-                    type="dashed"
-                    onClick={() => add()}
-                    block
-                    icon={<PlusOutlined />}
-                  >
-                    Add field
-                  </Button>
-                </Form.Item>
-              </>
-            )}
-          </Form.List>
+          {Object.keys(formData.familyMember).map((mem, key) => (
+            <Space>
+              <p>{familyMember[mem].demographics.first_name}</p>
+              <Checkbox.Group defaultValue={initChecked(mem)}>
+                <Row>
+                  {options.map(race => (
+                    <Col span={3} style={{ display: 'inline-block' }}>
+                      <Form.Item label={race}>
+                        <Checkbox
+                          onChange={onCheck}
+                          defaultChecked={true}
+                          value={race}
+                        />
+                      </Form.Item>
+                    </Col>
+                  ))}
+                </Row>
+              </Checkbox.Group>
+            </Space>
+          ))}
         </Form>
       </Card>
     </div>
