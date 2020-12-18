@@ -23,29 +23,28 @@ const FamilyDemographics = ({
 
   /*Issues with setForm on inputs other than Input and Checkbox. 
   The following functions manually update the entire form. */
-  let x = 0;
-  const setFormDate = (e, dateString) => {
-    familyMember[x] = Object.assign(familyMember[x], {
-      ...familyMember[x],
-      demographics: { ...familyMember[x].demographics, DOB: dateString },
+  const setFormDate = mem => (e, dateString) => {
+    familyMember[mem] = Object.assign(familyMember[mem], {
+      ...familyMember[mem],
+      demographics: { ...familyMember[mem].demographics, DOB: dateString },
     });
   };
-  const setFormNumber = value => {
-    familyMember[x] = Object.assign(familyMember[x], {
-      ...familyMember[x],
-      demographics: { ...familyMember[x].demographics, employer: value },
+  const setFormNumber = mem => value => {
+    familyMember[mem] = Object.assign(familyMember[mem], {
+      ...familyMember[mem],
+      demographics: { ...familyMember[mem].demographics, employer: value },
     });
   };
-  const setFormSSN = value => {
-    familyMember[x] = Object.assign(familyMember[x], {
-      ...familyMember[x],
-      demographics: { ...familyMember[x].demographics, SSN: value },
+  const setFormSSN = mem => value => {
+    familyMember[mem] = Object.assign(familyMember[mem], {
+      ...familyMember[mem],
+      demographics: { ...familyMember[mem].demographics, SSN: value },
     });
   };
-  const setFormSelect = value => {
-    familyMember[x] = Object.assign(familyMember[x], {
-      ...familyMember[x],
-      demographics: { ...familyMember[x].demographics, gender: value },
+  const setFormSelect = mem => value => {
+    familyMember[mem] = Object.assign(familyMember[mem], {
+      ...familyMember[mem],
+      demographics: { ...familyMember[mem].demographics, gender: value },
     });
   };
   return (
@@ -63,7 +62,6 @@ const FamilyDemographics = ({
           {/*Displays family members currently in formData */}
           {Object.keys(formData.familyMember).map((mem, key) => (
             <div key={key}>
-              {(x = mem)}
               <p>{familyMember[mem].demographics.first_name}</p>
               <Space
                 style={{ display: 'flex', marginBottom: 8 }}
@@ -73,7 +71,7 @@ const FamilyDemographics = ({
                   <Select
                     placeholder="Please select an option"
                     defaultValue={familyMember[mem].demographics.gender}
-                    onChange={setFormSelect}
+                    onChange={setFormSelect(mem)}
                   >
                     {genderOptions.map(option => (
                       <Select.Option value={option}>{option}</Select.Option>
@@ -91,13 +89,13 @@ const FamilyDemographics = ({
                         : '01/01/2020',
                       'DD/MM/YYYY'
                     )}
-                    onChange={setFormDate}
+                    onChange={setFormDate(mem)}
                   />
                 </Form.Item>
                 <Form.Item label="Last 4 of SSN">
                   <InputNumber
                     placeholder="0000"
-                    onChange={setFormSSN}
+                    onChange={setFormSSN(mem)}
                     defaultValue={familyMember[mem].demographics.employer}
                   />
                 </Form.Item>
@@ -116,7 +114,7 @@ const FamilyDemographics = ({
                     </Form.Item>
                     <Form.Item>
                       <InputNumber
-                        onChange={setFormNumber}
+                        onChange={setFormNumber(mem)}
                         formatter={value => `$ ${value}`}
                         defaultValue={familyMember[mem].demographics.employer}
                       />

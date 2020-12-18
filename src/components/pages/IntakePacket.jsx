@@ -30,7 +30,7 @@ const steps = [
 
 let defaultData = {
   familyInfo: {
-    user_id: '00u2lh0bsAliwLEe75d6',
+    user_id: null,
     case_number: null,
     phone_one: {
       name: null,
@@ -117,12 +117,14 @@ const IntakePacket = () => {
     count,
     setCount,
     nameString,
+    userId,
   };
 
-  /*if (!userId) {
+  if (!userId) {
     return <CreateOktaAccountForm setUserId={setUserId} />;
-  }*/
-
+  }
+  formData.familyInfo.user_id = userId;
+  console.log(formData);
   switch (id) {
     case 'IntakeStart':
       return <IntakeStart {...props} />;

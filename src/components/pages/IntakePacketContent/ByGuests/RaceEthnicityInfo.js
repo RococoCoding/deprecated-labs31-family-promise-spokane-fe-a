@@ -4,7 +4,6 @@ import { Form, Button, Space, Checkbox, Row, Col, Card } from 'antd';
 const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
   const { previous, next } = navigation;
   let { familyMember } = formData;
-  let x = 0;
   const options = [
     'Hispanic/Latino',
     'American Indian or Alaska Native',
@@ -16,8 +15,8 @@ const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
     'Refuse',
   ];
 
-  const setFormRace = (e, x) => {
-    familyMember[x].demographics.race.push(e.target.value);
+  const setFormRace = mem => e => {
+    familyMember[mem].demographics.race.push(e.target.value);
   };
 
   return (
@@ -39,7 +38,6 @@ const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
           </h3>
           {Object.keys(formData.familyMember).map((mem, key) => (
             <>
-              {(x = mem)}
               <p>{familyMember[mem].demographics.first_name}</p>
 
               <Space>
@@ -51,7 +49,7 @@ const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
                       <Col span={3} style={{ display: 'inline-block' }}>
                         <Form.Item label={race}>
                           <Checkbox
-                            onChange={setFormRace}
+                            onChange={setFormRace(mem)}
                             defaultChecked={true}
                             value={race}
                           />

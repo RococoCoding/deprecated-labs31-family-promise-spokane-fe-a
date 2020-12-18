@@ -8,10 +8,11 @@ const FamilyMembers = ({
   count,
   setCount,
   nameString,
+  userId,
 }) => {
-  const addMember = (key, family_id) => {
+  const addMember = key => {
     formData.familyMember[key] = {
-      family_id: family_id,
+      family_id: userId,
       date_of_enrollment: null,
       demographics: {
         first_name: null,
@@ -45,7 +46,7 @@ const FamilyMembers = ({
         school_name: null,
         mckinney_school: null,
       },
-      case_members: 3,
+      case_members: null,
       flag: null,
       percent_complete: 0,
     };
@@ -54,7 +55,7 @@ const FamilyMembers = ({
   const { familyMember } = formData;
 
   const onChangeHandlder = () => {
-    addMember(count, 1);
+    addMember(count);
     setCount(count + 1);
   };
 

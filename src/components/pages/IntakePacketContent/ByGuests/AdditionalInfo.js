@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Button, Card, Input, Checkbox, Row, Col } from 'antd';
-import axios from 'axios';
+import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 import { useHistory } from 'react-router-dom';
 
 const AdditionalInfo = ({ navigation, tempFormStyle, formData, setForm }) => {
@@ -10,13 +10,13 @@ const AdditionalInfo = ({ navigation, tempFormStyle, formData, setForm }) => {
 
   const submitHandlder = e => {
     e.preventDefault();
-    axios
-      .post(`http://localhost:8888/families`, familyInfo)
+    axiosWithAuth()
+      .post(`families`, familyInfo)
       .then(res => {
         console.log(res);
         Object.keys(formData.familyMember).map(mem => {
-          axios
-            .post('http://localhost:8888/members', familyMember[mem])
+          axiosWithAuth()
+            .post('members', familyMember[mem])
             .then(res => {
               console.log(res);
             })
