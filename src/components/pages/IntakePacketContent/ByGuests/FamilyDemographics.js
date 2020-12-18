@@ -23,28 +23,29 @@ const FamilyDemographics = ({
 
   /*Issues with setForm on inputs other than Input and Checkbox. 
   The following functions manually update the entire form. */
+  let x = 0;
   const setFormDate = (e, dateString) => {
-    familyMember[0] = Object.assign(familyMember[0], {
-      ...familyMember[0],
-      demographics: { ...familyMember[0].demographics, DOB: dateString },
+    familyMember[x] = Object.assign(familyMember[x], {
+      ...familyMember[x],
+      demographics: { ...familyMember[x].demographics, DOB: dateString },
     });
   };
   const setFormNumber = value => {
-    familyMember[0] = Object.assign(familyMember[0], {
-      ...familyMember[0],
-      demographics: { ...familyMember[0].demographics, employer: value },
+    familyMember[x] = Object.assign(familyMember[x], {
+      ...familyMember[x],
+      demographics: { ...familyMember[x].demographics, employer: value },
     });
   };
   const setFormSSN = value => {
-    familyMember[0] = Object.assign(familyMember[0], {
-      ...familyMember[0],
-      demographics: { ...familyMember[0].demographics, SSN: value },
+    familyMember[x] = Object.assign(familyMember[x], {
+      ...familyMember[x],
+      demographics: { ...familyMember[x].demographics, SSN: value },
     });
   };
   const setFormSelect = value => {
-    familyMember[0] = Object.assign(familyMember[0], {
-      ...familyMember[0],
-      demographics: { ...familyMember[0].demographics, gender: value },
+    familyMember[x] = Object.assign(familyMember[x], {
+      ...familyMember[x],
+      demographics: { ...familyMember[x].demographics, gender: value },
     });
   };
   return (
@@ -62,6 +63,7 @@ const FamilyDemographics = ({
           {/*Displays family members currently in formData */}
           {Object.keys(formData.familyMember).map((mem, key) => (
             <div key={key}>
+              {(x = mem)}
               <p>{familyMember[mem].demographics.first_name}</p>
               <Space
                 style={{ display: 'flex', marginBottom: 8 }}

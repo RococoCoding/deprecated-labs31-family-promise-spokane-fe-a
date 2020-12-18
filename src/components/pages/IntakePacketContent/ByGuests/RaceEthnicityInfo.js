@@ -4,6 +4,7 @@ import { Form, Button, Space, Checkbox, Row, Col, Card } from 'antd';
 const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
   const { previous, next } = navigation;
   let { familyMember } = formData;
+  let x = 0;
   const options = [
     'Hispanic/Latino',
     'American Indian or Alaska Native',
@@ -15,8 +16,8 @@ const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
     'Refuse',
   ];
 
-  const setFormRace = e => {
-    familyMember[0].demographics.race.push(e.target.value);
+  const setFormRace = (e, x) => {
+    familyMember[x].demographics.race.push(e.target.value);
   };
 
   return (
@@ -38,6 +39,7 @@ const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
           </h3>
           {Object.keys(formData.familyMember).map((mem, key) => (
             <>
+              {(x = mem)}
               <p>{familyMember[mem].demographics.first_name}</p>
 
               <Space>

@@ -8,6 +8,7 @@ const ChildSchoolInfo = ({
   formData,
   nameString,
 }) => {
+  let x = 0;
   const gradeOptions = [
     '1',
     '2',
@@ -33,22 +34,22 @@ const ChildSchoolInfo = ({
   const { familyMember } = formData;
   const { previous, next } = navigation;
   const { TextArea } = Input;
-  const setFormAttend = (value, x) => {
-    familyMember[0] = Object.assign(familyMember[0], {
-      ...familyMember[0],
-      schools: { ...familyMember[0].schools, attendance_status: value },
+  const setFormAttend = value => {
+    familyMember[x] = Object.assign(familyMember[x], {
+      ...familyMember[x],
+      schools: { ...familyMember[x].schools, attendance_status: value },
     });
   };
-  const setFormType = (value, x) => {
-    familyMember[0] = Object.assign(familyMember[0], {
-      ...familyMember[0],
-      schools: { ...familyMember[0].schools, school_type: value },
+  const setFormType = value => {
+    familyMember[x] = Object.assign(familyMember[x], {
+      ...familyMember[x],
+      schools: { ...familyMember[x].schools, school_type: value },
     });
   };
-  const setFormGrade = (value, x) => {
-    familyMember[0] = Object.assign(familyMember[0], {
-      ...familyMember[0],
-      schools: { ...familyMember[0].schools, highest_grade_completed: value },
+  const setFormGrade = (value, mem) => {
+    familyMember[x] = Object.assign(familyMember[x], {
+      ...familyMember[x],
+      schools: { ...familyMember[x].schools, highest_grade_completed: value },
     });
   };
   return (
@@ -69,6 +70,7 @@ const ChildSchoolInfo = ({
               style={{ display: 'flex', marginBottom: 8 }}
               align="baseline"
             >
+              {(x = mem)}
               <Form.Item label="Highestgrade completed">
                 <Select
                   placeholder="Please select an option"

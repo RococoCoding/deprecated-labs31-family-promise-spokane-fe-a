@@ -9,9 +9,9 @@ const FamilyMembers = ({
   setCount,
   nameString,
 }) => {
-  const addMember = key => {
+  const addMember = (key, family_id) => {
     formData.familyMember[key] = {
-      family_id: 1,
+      family_id: family_id,
       date_of_enrollment: null,
       demographics: {
         first_name: null,
@@ -54,16 +54,9 @@ const FamilyMembers = ({
   const { familyMember } = formData;
 
   const onChangeHandlder = () => {
-    addMember(count);
+    addMember(count, 1);
     setCount(count + 1);
   };
-  function handleChange(value) {
-    console.log(value);
-    // setForm({
-    //   ...formData,
-    //   demographics: { ...formData.demographics, gender: value },
-    // }); // { value: "lucy", key: "lucy", label: "Lucy (101)" }
-  }
 
   return (
     <div style={tempFormStyle}>

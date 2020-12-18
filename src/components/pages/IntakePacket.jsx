@@ -119,9 +119,9 @@ const IntakePacket = () => {
     nameString,
   };
 
-  if (!userId) {
+  /*if (!userId) {
     return <CreateOktaAccountForm setUserId={setUserId} />;
-  }
+  }*/
 
   switch (id) {
     case 'IntakeStart':
