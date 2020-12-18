@@ -124,7 +124,7 @@ const IntakePacket = () => {
     return <CreateOktaAccountForm setUserId={setUserId} />;
   }
   formData.familyInfo.user_id = userId;
-  console.log(formData);
+
   switch (id) {
     case 'IntakeStart':
       return <IntakeStart {...props} />;

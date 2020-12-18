@@ -6,13 +6,9 @@ const ContactInfo = ({ navigation, formData, setForm, tempFormStyle }) => {
   const { next, previous } = navigation;
   const { familyInfo } = formData;
 
-  const onFinish = values => {
-    console.log(values);
-  };
-
   return (
     <div style={tempFormStyle}>
-      <Card title="Contact Info" bordered={false} onSubmit={onFinish}>
+      <Card title="Contact Info" bordered={false}>
         <Form layout="vertical" name="control-hooks" span={18}>
           <Form.Item>
             <Button type="primary" htmlType="button" onClick={previous}>

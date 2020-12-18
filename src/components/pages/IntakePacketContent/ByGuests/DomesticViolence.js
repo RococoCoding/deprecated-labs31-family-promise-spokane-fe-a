@@ -70,7 +70,7 @@ const DomesticViolence = ({ navigation, tempFormStyle, formData, setForm }) => {
             If you wish to be anonymous AND you have registered with the HFCA,
             we will need your HMIS # - This number is assigned to you by the
             HFCA - If you have not registered with the HFCA we can assign you an
-            anonymous HMIS{' '}
+            anonymous HMIS.
           </p>
         </Form>
       </Card>
