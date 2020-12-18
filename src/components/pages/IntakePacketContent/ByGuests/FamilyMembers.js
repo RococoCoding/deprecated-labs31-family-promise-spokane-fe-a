@@ -12,6 +12,7 @@ const FamilyMembers = ({
   const addMember = key => {
     formData.familyMember[key] = {
       family_id: 1,
+      date_of_enrollment: null,
       demographics: {
         first_name: null,
         last_name: null,

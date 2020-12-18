@@ -3,7 +3,7 @@ import { Form, Input, Button, Checkbox, Card } from 'antd';
 import axios from 'axios';
 const Insurance = ({ navigation, tempFormStyle, formData, setForm }) => {
   const { previous } = navigation;
-  const { familyInfo } = formData;
+  const { familyInfo, familyMember } = formData;
 
   const submitHandlder = e => {
     e.preventDefault();
@@ -11,6 +11,16 @@ const Insurance = ({ navigation, tempFormStyle, formData, setForm }) => {
       .post(`http://localhost:8080/families`, familyInfo)
       .then(res => {
         console.log(res);
+        Object.keys(formData.familyMember).map(mem => {
+          axios
+            .post('http://localhost:8080/members', familyMember[mem])
+            .then(res => {
+              console.log(res);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        });
       })
       .catch(err => console.log(err));
   };
