@@ -18,7 +18,7 @@ const FamilyDemographics = ({
   nameString,
 }) => {
   const { previous, next } = navigation;
-  const { familyMember, familyInfo } = formData;
+  const { familyMember } = formData;
   const genderOptions = ['Male', 'Female', 'Other'];
 
   /*Issues with setForm on inputs other than Input and Checkbox. 
@@ -85,7 +85,7 @@ const FamilyDemographics = ({
                     format="DD/MM/YYYY"
                     name={nameString(mem, 'demographics.DOB')}
                     defaultValue={moment(
-                      familyMember[mem].demographics.DOB != ''
+                      familyMember[mem].demographics.DOB != null
                         ? familyMember[mem].demographics.DOB
                         : '01/01/2020',
                       'DD/MM/YYYY'

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Input, Space, Button, Card } from 'antd';
 
 import Checkbox from 'antd/lib/checkbox/Checkbox';
 const ContactInfo = ({ navigation, formData, setForm, tempFormStyle }) => {
-  const { previous, next } = navigation;
-  const { familyInfo, familyMember } = formData;
+  const { next } = navigation;
+  const { familyInfo } = formData;
 
   return (
     <div style={tempFormStyle}>

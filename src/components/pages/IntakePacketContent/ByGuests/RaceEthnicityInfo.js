@@ -1,6 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, Space, Checkbox, Row, Col, Card } from 'antd';
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { Form, Button, Space, Checkbox, Row, Col, Card } from 'antd';
 
 const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
   const { previous, next } = navigation;

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Form, Input, Button, Space, Checkbox, Row, Col, Card } from 'antd';
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 const BarriersPage = ({
   navigation,

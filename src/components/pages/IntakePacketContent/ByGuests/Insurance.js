@@ -1,17 +1,10 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox, Select, Card } from 'antd';
+import { Form, Input, Button, Checkbox, Card } from 'antd';
 import axios from 'axios';
 const Insurance = ({ navigation, tempFormStyle, formData, setForm }) => {
-  const { previous, next } = navigation;
+  const { previous } = navigation;
   const { familyInfo } = formData;
-  const insuranceSources = [
-    'State',
-    'Private',
-    'Employment',
-    'Medicaid',
-    'Medicare',
-    'Other',
-  ];
+
   const submitHandlder = e => {
     e.preventDefault();
     axios

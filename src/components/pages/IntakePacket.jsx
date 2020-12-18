@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useForm, useStep } from 'react-hooks-helper';
 
-import IdVerification from './IntakePacketContent/BySupervisor/IdVerification';
 import ContactInfo from './IntakePacketContent/ByGuests/ContactInfo';
 import FamilyMembers from './IntakePacketContent/ByGuests/FamilyMembers';
 import RaceEthnicityInfo from './IntakePacketContent/ByGuests/RaceEthnicityInfo';
@@ -80,7 +79,7 @@ let defaultData = {
       anonymity_preferred: null,
     },
     avatar_url: null,
-    pet: 0,
+    pets: 0,
     percent_complete: 0,
   },
   familyMember: {},
