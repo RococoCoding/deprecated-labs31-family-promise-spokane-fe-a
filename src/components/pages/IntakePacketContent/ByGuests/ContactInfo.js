@@ -78,16 +78,6 @@ const ContactInfo = ({ navigation, formData, setForm, tempFormStyle }) => {
               Safe to leave message
             </Checkbox>
           </Form.Item>
-          {/*Missing safe alternitive contact table in database*/}
-          <h3>Safe alternitive contact:</h3>
-          <Space style={{ display: 'flex', marginBottom: 8 }} align="baseline">
-            <Form.Item>
-              <Input placeholder="Full Name"></Input>
-            </Form.Item>
-            <Form.Item>
-              <Input placeholder="Number"></Input>
-            </Form.Item>
-          </Space>
           <h3>Emergancy Contact</h3>
           <Space style={{ display: 'flex', marginBottom: 8 }} align="baseline">
             <Form.Item>
