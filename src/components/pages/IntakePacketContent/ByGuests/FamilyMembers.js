@@ -57,6 +57,13 @@ const FamilyMembers = ({
     addMember(count);
     setCount(count + 1);
   };
+  function handleChange(value) {
+    console.log(value);
+    // setForm({
+    //   ...formData,
+    //   demographics: { ...formData.demographics, gender: value },
+    // }); // { value: "lucy", key: "lucy", label: "Lucy (101)" }
+  }
 
   return (
     <div style={tempFormStyle}>

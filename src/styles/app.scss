@@ -10,8 +10,12 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
 }
 
+@import './guest-notes';
+@import './flag-guest';
+@import './user-profile';
+@import './guest-table';
 @import './sidebar';
 @import './navbar';
+@import './analytics';

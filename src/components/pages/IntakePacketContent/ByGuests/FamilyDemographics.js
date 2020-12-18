@@ -42,7 +42,6 @@ const FamilyDemographics = ({
     });
   };
   const setFormSelect = value => {
-    console.log(value);
     familyMember[0] = Object.assign(familyMember[0], {
       ...familyMember[0],
       demographics: { ...familyMember[0].demographics, gender: value },

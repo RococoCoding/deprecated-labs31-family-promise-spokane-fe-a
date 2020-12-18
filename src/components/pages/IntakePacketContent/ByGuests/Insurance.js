@@ -1,9 +1,12 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox, Card } from 'antd';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+
 const Insurance = ({ navigation, tempFormStyle, formData, setForm }) => {
   const { previous } = navigation;
   const { familyInfo, familyMember } = formData;
+  const history = useHistory();
 
   const submitHandlder = e => {
     e.preventDefault();
@@ -20,6 +23,7 @@ const Insurance = ({ navigation, tempFormStyle, formData, setForm }) => {
             .catch(err => {
               console.log(err);
             });
+          history.push('/me');
         });
       })
       .catch(err => console.log(err));
@@ -31,7 +35,7 @@ const Insurance = ({ navigation, tempFormStyle, formData, setForm }) => {
           <Button type="primary" htmlType="button" onClick={previous}>
             Previous
           </Button>
-          <Button type="primary" htmlType="Submit" onClick={submitHandlder}>
+          <Button type="button" htmlType="Submit" onClick={submitHandlder}>
             Submit
           </Button>
         </Form.Item>

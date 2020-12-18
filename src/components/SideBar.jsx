@@ -8,6 +8,9 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
+import AssessmentIcon from '@material-ui/icons/Assessment';
+import BarChartOutlined from '@ant-design/icons/BarChartOutlined';
+import MonitorOutlined from '@ant-design/icons/MonitorOutlined';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -48,7 +51,7 @@ const SideBar = () => {
         <Menu.Item
           onClick={redirectToUserProfile}
           key="1"
-          icon={<PieChartOutlined />}
+          icon={<UserOutlined />}
         >
           Profile
         </Menu.Item>
@@ -56,14 +59,14 @@ const SideBar = () => {
         <Menu.Item
           onClick={redirectToAnalytics}
           key="2"
-          icon={<DesktopOutlined />}
+          icon={<BarChartOutlined />}
         >
           Analytics
         </Menu.Item>
         <Menu.Item
           onClick={redirectToGuests}
           key="3"
-          icon={<DesktopOutlined />}
+          icon={<MonitorOutlined />}
         >
           Guests
         </Menu.Item>

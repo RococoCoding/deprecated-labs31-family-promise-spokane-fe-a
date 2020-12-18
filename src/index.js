@@ -26,6 +26,7 @@ import UserProfile from './components/pages/UserProfile';
 import IntakePacket from './components/pages/IntakePacket';
 import Analytics from './components/pages/Analytics';
 import Guests from './components/pages/Guests/Guests';
+import FamilyMembers from './components/pages/FamilyMembers/Family';
 
 import './styles/app.scss';
 
@@ -64,8 +65,10 @@ function App() {
         <Route path="/intake" component={IntakePacket} />
         <Route path="/analytics" component={Analytics} />
         <Route path="/guests" component={Guests} />
+        <Route exact path="/family/:id" component={FamilyMembers} />
 
         {/* any of the routes you need secured should be registered as SecureRoutes */}
+
         <SecureRoute
           path="/"
           exact
