@@ -5,7 +5,7 @@ import { useOktaAuth } from '@okta/okta-react';
 
 const NavBar = () => {
   const history = useHistory();
-  const { authState, authService } = useOktaAuth();
+  const { authState, authService, oktaAuth } = useOktaAuth();
 
   const redirectToLogin = () => {
     history.push('/login');

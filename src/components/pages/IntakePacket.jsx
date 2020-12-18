@@ -11,6 +11,9 @@ import DomesticViolence from './IntakePacketContent/ByGuests/DomesticViolence';
 import HomelessHistory from './IntakePacketContent/ByGuests/HomelessHistory';
 import Insurance from './IntakePacketContent/ByGuests/Insurance';
 import FamilyDemographics from './IntakePacketContent/ByGuests/FamilyDemographics';
+import CreateOktaAccountForm from './IntakePacketContent/createOktaAccountForm/CreateOktaAccountForm';
+import { useState } from 'react';
+
 const steps = [
   { id: 'ContactInfo' },
   { id: 'FamilyMembers' },
@@ -92,10 +95,16 @@ const IntakePacket = () => {
     maxWidth: '900px',
   };
 
+  const [userId, setUserId] = useState(null);
   const [formData, setForm] = useForm(defaultData);
   const { step, navigation } = useStep({ initialStep: 0, steps });
   const { id } = step;
   const props = { navigation, formData, setForm, tempFormStyle };
+
+  if (!userId) {
+    return <CreateOktaAccountForm setUserId={setUserId} />;
+  }
+
   switch (id) {
     case 'ContactInfo':
       return <ContactInfo {...props} />;

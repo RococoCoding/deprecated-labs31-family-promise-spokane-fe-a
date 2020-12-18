@@ -1,12 +1,24 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useOktaAuth } from '@okta/okta-react';
 import RenderHomePage from './RenderHomePage';
+import { axiosWithAuth } from '../../../api/axiosWithAuth';
+import { setCurrentUser } from '../../../state/actions/index';
+import { useDispatch, useSelector } from 'react-redux';
 
 function HomeContainer({ LoadingComponent }) {
+  const dispatch = useDispatch();
+  const LOGGED_IN = useSelector(state => state.LOGGED_IN);
+  const LOADING = useSelector(state => state.LOADING);
   const { authState, authService } = useOktaAuth();
   const [userInfo, setUserInfo] = useState(null);
   // eslint-disable-next-line
   const [memoAuthService] = useMemo(() => [authService], []);
+
+  useEffect(() => {
+    if (!LOGGED_IN) {
+      dispatch(setCurrentUser());
+    }
+  }, []);
 
   useEffect(() => {
     let isSubscribed = true;
@@ -27,14 +39,16 @@ function HomeContainer({ LoadingComponent }) {
     return () => (isSubscribed = false);
   }, [memoAuthService]);
 
+  if (LOADING || !userInfo) {
+    return (
+      <div className="container">
+        <LoadingComponent />
+      </div>
+    );
+  }
   return (
     <>
-      {authState.isAuthenticated && !userInfo && (
-        <LoadingComponent message="Fetching user profile..." />
-      )}
-      {authState.isAuthenticated && userInfo && (
-        <RenderHomePage userInfo={userInfo} authService={authService} />
-      )}
+      <RenderHomePage userInfo={userInfo} authService={authService} />
     </>
   );
 }
