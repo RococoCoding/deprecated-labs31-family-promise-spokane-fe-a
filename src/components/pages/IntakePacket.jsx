@@ -10,7 +10,10 @@ import DomesticViolence from './IntakePacketContent/ByGuests/DomesticViolence';
 import HomelessHistory from './IntakePacketContent/ByGuests/HomelessHistory';
 import Insurance from './IntakePacketContent/ByGuests/Insurance';
 import FamilyDemographics from './IntakePacketContent/ByGuests/FamilyDemographics';
+import AdditionalInfo from './IntakePacketContent/ByGuests/AdditionalInfo';
+import IntakeStart from './IntakePacketContent/IntakeStart';
 const steps = [
+  { id: 'IntakeStart' },
   { id: 'ContactInfo' },
   { id: 'FamilyMembers' },
   { id: 'FamilyDemographics' },
@@ -20,6 +23,7 @@ const steps = [
   { id: 'DomesticViolence' },
   { id: 'HomelessHistory' },
   { id: 'Insurance' },
+  { id: 'AdditionalInfo' },
 ];
 
 let defaultData = {
@@ -66,7 +70,11 @@ let defaultData = {
       veteran_services: null,
     },
     insurance: {
-      pregnancies: null,
+      pregnancies: {
+        is_pregnant: null,
+        if_yes_who: null,
+        due_date: null,
+      },
       has_insurance: null,
       members_covered: null,
       health_insurance_type: null,
@@ -109,6 +117,8 @@ const IntakePacket = () => {
   };
 
   switch (id) {
+    case 'IntakeStart':
+      return <IntakeStart {...props} />;
     case 'ContactInfo':
       return <ContactInfo {...props} />;
     case 'FamilyMembers':
@@ -127,6 +137,8 @@ const IntakePacket = () => {
       return <HomelessHistory {...props} />;
     case 'Insurance':
       return <Insurance {...props} />;
+    case 'AdditionalInfo':
+      return <AdditionalInfo {...props} />;
     default:
       return null;
   }

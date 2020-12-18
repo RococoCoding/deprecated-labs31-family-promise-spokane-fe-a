@@ -3,7 +3,7 @@ import { Form, Input, Space, Button, Card } from 'antd';
 
 import Checkbox from 'antd/lib/checkbox/Checkbox';
 const ContactInfo = ({ navigation, formData, setForm, tempFormStyle }) => {
-  const { next } = navigation;
+  const { next, previous } = navigation;
   const { familyInfo } = formData;
 
   const onFinish = values => {
@@ -15,17 +15,14 @@ const ContactInfo = ({ navigation, formData, setForm, tempFormStyle }) => {
       <Card title="Contact Info" bordered={false} onSubmit={onFinish}>
         <Form layout="vertical" name="control-hooks" span={18}>
           <Form.Item>
-            <Button
-              type="primary"
-              htmlType="button"
-              onClick={() => {
-                console.log(formData);
-                next();
-              }}
-            >
+            <Button type="primary" htmlType="button" onClick={previous}>
+              Previous
+            </Button>
+            <Button type="primary" htmlType="button" onClick={next}>
               Next
             </Button>
           </Form.Item>
+
           <h3>Please included both adults personal phone numbers:</h3>
           <Space style={{ display: 'flex' }}>
             <Form.Item>
@@ -110,9 +107,6 @@ const ContactInfo = ({ navigation, formData, setForm, tempFormStyle }) => {
               ></Input>
             </Form.Item>
           </Space>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
         </Form>
       </Card>
     </div>

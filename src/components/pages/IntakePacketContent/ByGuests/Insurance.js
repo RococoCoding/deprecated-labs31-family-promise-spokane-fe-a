@@ -1,33 +1,10 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox, Card } from 'antd';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 
 const Insurance = ({ navigation, tempFormStyle, formData, setForm }) => {
-  const { previous } = navigation;
-  const { familyInfo, familyMember } = formData;
-  const history = useHistory();
+  const { previous, next } = navigation;
+  const { familyInfo } = formData;
 
-  const submitHandlder = e => {
-    e.preventDefault();
-    axios
-      .post(`http://localhost:8080/families`, familyInfo)
-      .then(res => {
-        console.log(res);
-        Object.keys(formData.familyMember).map(mem => {
-          axios
-            .post('http://localhost:8080/members', familyMember[mem])
-            .then(res => {
-              console.log(res);
-            })
-            .catch(err => {
-              console.log(err);
-            });
-          history.push('/me');
-        });
-      })
-      .catch(err => console.log(err));
-  };
   return (
     <div style={tempFormStyle}>
       <Card title="Insurance" bordered={false}>
@@ -35,8 +12,8 @@ const Insurance = ({ navigation, tempFormStyle, formData, setForm }) => {
           <Button type="primary" htmlType="button" onClick={previous}>
             Previous
           </Button>
-          <Button type="button" htmlType="Submit" onClick={submitHandlder}>
-            Submit
+          <Button type="primary" htmlType="button" onClick={next}>
+            next
           </Button>
         </Form.Item>
         <Form
@@ -47,6 +24,7 @@ const Insurance = ({ navigation, tempFormStyle, formData, setForm }) => {
             <Checkbox
               name="familyInfo.insurance.has_insurance"
               onChange={setForm}
+              defaultChecked={familyInfo.insurance.has_insurance}
             >
               Do you have insurance?
             </Checkbox>
