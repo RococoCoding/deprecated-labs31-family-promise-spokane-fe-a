@@ -27,22 +27,28 @@ import IntakePacket from './components/pages/IntakePacket';
 import Analytics from './components/pages/Analytics';
 import Guests from './components/pages/Guests/Guests';
 import FamilyMembers from './components/pages/FamilyMembers/Family';
-
+import Logout from './utils/logout';
 import './styles/app.scss';
+import { rootReducer } from './state/reducers/index';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import logger from 'redux-logger';
+
+const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
-  <Router>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Router>,
+  <Provider store={store}>
+    <Router>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 
 function App() {
-  useEffect(() => {
-    console.log('test');
-  }, []);
   // The reason to declare App this way is so that we can use any helper functions we'd need for business logic, in our case auth.
   // React Router has a nifty useHistory hook we can use at this level to ensure we have security around our routes.
   const history = useHistory();

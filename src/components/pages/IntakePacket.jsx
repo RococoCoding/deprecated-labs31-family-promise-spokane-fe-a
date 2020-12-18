@@ -12,6 +12,8 @@ import Insurance from './IntakePacketContent/ByGuests/Insurance';
 import FamilyDemographics from './IntakePacketContent/ByGuests/FamilyDemographics';
 import AdditionalInfo from './IntakePacketContent/ByGuests/AdditionalInfo';
 import IntakeStart from './IntakePacketContent/IntakeStart';
+import CreateOktaAccountForm from './IntakePacketContent/createOktaAccountForm/CreateOktaAccountForm';
+
 const steps = [
   { id: 'IntakeStart' },
   { id: 'ContactInfo' },
@@ -103,6 +105,7 @@ const IntakePacket = () => {
     maxWidth: '900px',
   };
 
+  const [userId, setUserId] = useState(null);
   const [formData, setForm] = useForm(defaultData);
   const { step, navigation } = useStep({ initialStep: 0, steps });
   const { id } = step;
@@ -115,6 +118,10 @@ const IntakePacket = () => {
     setCount,
     nameString,
   };
+
+  if (!userId) {
+    return <CreateOktaAccountForm setUserId={setUserId} />;
+  }
 
   switch (id) {
     case 'IntakeStart':

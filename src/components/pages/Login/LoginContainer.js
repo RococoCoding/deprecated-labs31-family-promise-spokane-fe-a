@@ -30,6 +30,9 @@ const LoginContainer = () => {
         display: 'page',
         scopes,
       },
+      features: {
+        registration: true,
+      },
     });
 
     widget.renderEl(
