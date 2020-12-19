@@ -72,7 +72,6 @@ const CreateOktaAccountForm = ({ setUserId }) => {
         >
           <Form.Item
             name="firstName"
-            initialValue={'Mary'}
             rules={[
               { required: true, message: 'Please input your first name!' },
             ]}
@@ -85,7 +84,6 @@ const CreateOktaAccountForm = ({ setUserId }) => {
 
           <Form.Item
             name="lastName"
-            initialValue={'Poppins'}
             rules={[
               { required: true, message: 'Please input your last name!' },
             ]}
@@ -98,7 +96,6 @@ const CreateOktaAccountForm = ({ setUserId }) => {
 
           <Form.Item
             name="email"
-            initialValue={'mpoppins@gmail.com'}
             rules={[{ required: true, message: 'Please input your Email!' }]}
           >
             <Input
@@ -108,7 +105,6 @@ const CreateOktaAccountForm = ({ setUserId }) => {
           </Form.Item>
           <Form.Item
             name="password"
-            initialValue={'testpassword'}
             rules={[{ required: true, message: 'Please input your Password!' }]}
           >
             <Input

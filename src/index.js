@@ -9,6 +9,8 @@ import {
 } from 'react-router-dom';
 import { Security, LoginCallback, SecureRoute } from '@okta/okta-react';
 
+import PrivateRoute from './utils/auth/PrivateRoute';
+
 import 'antd/dist/antd.less';
 
 import { NotFoundPage } from './components/pages/NotFound';
@@ -34,6 +36,8 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
+import GuestDashboard from './components/pages/guest-pages/GuestDashboard';
+import FamilyPage from './components/pages/guest-pages/FamilyPage';
 
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
@@ -67,13 +71,36 @@ function App() {
         <Route path="/login" component={LoginPage} />
         <Route path="/implicit/callback" component={LoginCallback} />
         <Route path="/landing" component={LandingPage} />
-        <Route path="/me" component={UserProfile} />
-        <Route path="/intake" component={IntakePacket} />
-        <Route path="/analytics" component={Analytics} />
-        <Route path="/guests" component={Guests} />
-        <Route exact path="/family/:id" component={FamilyMembers} />
 
         {/* any of the routes you need secured should be registered as SecureRoutes */}
+
+        <PrivateRoute exact path="/family/:id" component={FamilyMembers} />
+        <PrivateRoute
+          path="/me"
+          roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
+          component={UserProfile}
+        />
+        <PrivateRoute
+          path="/analytics"
+          roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
+          component={Analytics}
+        />
+        <PrivateRoute
+          path="/intake"
+          roles={['executive_director', 'supervisor', 'case_manager']}
+          component={IntakePacket}
+        />
+        <PrivateRoute
+          path="/guests"
+          roles={['executive_director', 'supervisor', 'case_manager']}
+          component={Guests}
+        />
+        <PrivateRoute
+          path="/guest-dashboard"
+          roles={['guest']}
+          component={GuestDashboard}
+        />
+        <PrivateRoute path="/family" roles={['guest']} component={FamilyPage} />
 
         <SecureRoute
           path="/"

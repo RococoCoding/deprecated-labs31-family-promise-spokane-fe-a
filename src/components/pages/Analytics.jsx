@@ -15,6 +15,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import { tableIcons } from '../../utils/tableIcons';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import Circle from 'react-circle';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles({
   root: {
@@ -56,6 +57,7 @@ const Analytics = () => {
   const [staffMembers, setStaffMembers] = useState([]);
   const classes = useStyles();
   const history = useHistory();
+  const user = useSelector(state => state.CURRENT_USER);
 
   return (
     <div className="dashboard-container">
@@ -101,30 +103,32 @@ const Analytics = () => {
           </Card>
         </div>
         <div className="second">
-          <div style={{ height: 400, width: '100%' }}>
-            <MaterialTable
-              icons={tableIcons}
-              title="Staff"
-              columns={columns}
-              data={staffMembers}
-              actions={[]}
-              editable={
-                {
-                  // onRowRedirect: (newData) =>
-                  //     new Promise((resolve) => {
-                  //         setTimeout(() => {
-                  //             resolve();
-                  //             setState((prevState) => {
-                  //                 const data = [...prevState.data];
-                  //                 data.push(newData);
-                  //                 return { ...prevState, data };
-                  //             });
-                  //         }, 600);
-                  //     }),
+          {user.role == 'executive_director' && (
+            <div style={{ height: 400, width: '100%' }}>
+              <MaterialTable
+                icons={tableIcons}
+                title="Staff"
+                columns={columns}
+                data={staffMembers}
+                actions={[]}
+                editable={
+                  {
+                    // onRowRedirect: (newData) =>
+                    //     new Promise((resolve) => {
+                    //         setTimeout(() => {
+                    //             resolve();
+                    //             setState((prevState) => {
+                    //                 const data = [...prevState.data];
+                    //                 data.push(newData);
+                    //                 return { ...prevState, data };
+                    //             });
+                    //         }, 600);
+                    //     }),
+                  }
                 }
-              }
-            />
-          </div>
+              />
+            </div>
+          )}
           <div className="carrying-capacity">
             <h2>Carrying Capacity</h2>
             <Circle
