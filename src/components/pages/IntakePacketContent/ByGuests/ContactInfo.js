@@ -1,32 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Input, Space, Button, Card } from 'antd';
 
 import Checkbox from 'antd/lib/checkbox/Checkbox';
 const ContactInfo = ({ navigation, formData, setForm, tempFormStyle }) => {
-  const [form] = Form.useForm();
-  const { previous, next } = navigation;
-  const { familyInfo, familyMember } = formData;
-
-  const onFinish = values => {
-    console.log(values);
-  };
+  const { next, previous } = navigation;
+  const { familyInfo } = formData;
 
   return (
     <div style={tempFormStyle}>
-      <Card title="Contact Info" bordered={false} onSubmit={onFinish}>
-        <Form layout="vertical" name="control-hooks" span={18} form={form}>
+      <Card title="Contact Info" bordered={false}>
+        <Form layout="vertical" name="control-hooks" span={18}>
           <Form.Item>
-            <Button
-              type="primary"
-              htmlType="button"
-              onClick={() => {
-                console.log(formData);
-                next();
-              }}
-            >
+            <Button type="primary" htmlType="button" onClick={previous}>
+              Previous
+            </Button>
+            <Button type="primary" htmlType="button" onClick={next}>
               Next
             </Button>
           </Form.Item>
+
           <h3>Please included both adults personal phone numbers:</h3>
           <Space style={{ display: 'flex' }}>
             <Form.Item>
@@ -47,7 +39,13 @@ const ContactInfo = ({ navigation, formData, setForm, tempFormStyle }) => {
             </Form.Item>
           </Space>
           <Form.Item>
-            <Checkbox>Safe to leave message</Checkbox>
+            <Checkbox
+              name="familyInfo.phone_one.safeToLeaveMssg"
+              onChange={setForm}
+              checked={familyInfo.phone_one.safeToLeaveMssg}
+            >
+              Safe to leave message
+            </Checkbox>
           </Form.Item>
           <Space style={{ display: 'flex', marginBottom: 8 }} align="baseline">
             <Form.Item>
@@ -68,18 +66,14 @@ const ContactInfo = ({ navigation, formData, setForm, tempFormStyle }) => {
             </Form.Item>
           </Space>
           <Form.Item>
-            <Checkbox>Safe to leave message</Checkbox>
+            <Checkbox
+              name="familyInfo.phone_two.safeToLeaveMssg"
+              onChange={setForm}
+              checked={familyInfo.phone_two.safeToLeaveMssg}
+            >
+              Safe to leave message
+            </Checkbox>
           </Form.Item>
-          {/*Missing safe alternitive contact table in database*/}
-          <h3>Safe alternitive contact:</h3>
-          <Space style={{ display: 'flex', marginBottom: 8 }} align="baseline">
-            <Form.Item>
-              <Input placeholder="Full Name"></Input>
-            </Form.Item>
-            <Form.Item>
-              <Input placeholder="Number"></Input>
-            </Form.Item>
-          </Space>
           <h3>Emergancy Contact</h3>
           <Space style={{ display: 'flex', marginBottom: 8 }} align="baseline">
             <Form.Item>
@@ -99,9 +93,6 @@ const ContactInfo = ({ navigation, formData, setForm, tempFormStyle }) => {
               ></Input>
             </Form.Item>
           </Space>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
         </Form>
       </Card>
     </div>

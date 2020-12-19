@@ -1,57 +1,48 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Form, Input, Button, Checkbox, Select, InputNumber, Card } from 'antd';
+import { Form, Input, Button, Checkbox, Card } from 'antd';
 
 const Insurance = ({ navigation, tempFormStyle, formData, setForm }) => {
   const { previous, next } = navigation;
-  const { familyInfo, familyMember } = formData;
+  const { familyInfo } = formData;
 
-  const insuranceSources = [
-    'State',
-    'Private',
-    'Employment',
-    'Medicaid',
-    'Medicare',
-    'Other',
-  ];
-  console.log(familyInfo.insurance.members_covered);
   return (
     <div style={tempFormStyle}>
-      <Card title="Family Members" bordered={false}>
+      <Card title="Insurance" bordered={false}>
         <Form.Item>
           <Button type="primary" htmlType="button" onClick={previous}>
             Previous
           </Button>
           <Button type="primary" htmlType="button" onClick={next}>
-            Next
+            next
           </Button>
         </Form.Item>
-        <h1>Insurance</h1>
         <Form
           layout="vertical"
           style={{ maxWidth: '800px', alignItems: 'center' }}
         >
           <Form.Item>
-            <Checkbox>Do you have insurance?</Checkbox>
+            <Checkbox
+              name="familyInfo.insurance.has_insurance"
+              onChange={setForm}
+              defaultChecked={familyInfo.insurance.has_insurance}
+            >
+              Do you have insurance?
+            </Checkbox>
           </Form.Item>
           <Form.Item label="Health insurance source ">
-            <Select>
-              {insuranceSources.map((source, key) => (
-                <Select.Option key={key}>{source}</Select.Option>
-              ))}
-            </Select>
+            <Input
+              name="familyInfo.insurance.health_insurance_type"
+              value={familyInfo.insurance.health_insurance_type}
+              onChange={setForm}
+            />
           </Form.Item>
           <Form.Item label="Household Members covered">
-            <InputNumber
+            <Input
               name="familyInfo.insurance.members_covered"
               value={familyInfo.insurance.members_covered}
               onChange={setForm}
             />
           </Form.Item>
-          <Link to="/me">
-            {' '}
-            <Button type="submit">Submit </Button>
-          </Link>
         </Form>
       </Card>
     </div>

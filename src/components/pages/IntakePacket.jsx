@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, useStep } from 'react-hooks-helper';
 
-import IdVerification from './IntakePacketContent/BySupervisor/IdVerification';
 import ContactInfo from './IntakePacketContent/ByGuests/ContactInfo';
 import FamilyMembers from './IntakePacketContent/ByGuests/FamilyMembers';
 import RaceEthnicityInfo from './IntakePacketContent/ByGuests/RaceEthnicityInfo';
@@ -11,10 +10,12 @@ import DomesticViolence from './IntakePacketContent/ByGuests/DomesticViolence';
 import HomelessHistory from './IntakePacketContent/ByGuests/HomelessHistory';
 import Insurance from './IntakePacketContent/ByGuests/Insurance';
 import FamilyDemographics from './IntakePacketContent/ByGuests/FamilyDemographics';
+import AdditionalInfo from './IntakePacketContent/ByGuests/AdditionalInfo';
+import IntakeStart from './IntakePacketContent/IntakeStart';
 import CreateOktaAccountForm from './IntakePacketContent/createOktaAccountForm/CreateOktaAccountForm';
-import { useState } from 'react';
 
 const steps = [
+  { id: 'IntakeStart' },
   { id: 'ContactInfo' },
   { id: 'FamilyMembers' },
   { id: 'FamilyDemographics' },
@@ -24,71 +25,80 @@ const steps = [
   { id: 'DomesticViolence' },
   { id: 'HomelessHistory' },
   { id: 'Insurance' },
+  { id: 'AdditionalInfo' },
 ];
 
-const defaultData = {
+let defaultData = {
   familyInfo: {
-    user_id: 1,
-    case_number: 25,
+    user_id: null,
+    case_number: null,
     phone_one: {
-      name: '',
-      number: '',
-      safeToLeaveMssg: false,
+      name: null,
+      number: null,
+      safeToLeaveMssg: null,
     },
     phone_two: {
-      name: '',
-      number: '',
-      safeToLeaveMssg: false,
+      name: null,
+      number: null,
+      safeToLeaveMssg: null,
     },
     emergencyContact: {
-      name: '',
-      number: '',
+      name: null,
+      number: null,
     },
     vehicle: {
-      make: '',
-      year: '',
-      color: '',
-      model: '',
-      license_plate: '',
+      make: null,
+      year: null,
+      color: null,
+      model: null,
+      license_plate: null,
     },
-    last_permanent_address: '',
+    last_permanent_address: null,
     homeless_info: {
-      prior_location: '',
-      current_location: '',
-      num_times_homeless: 0,
-      total_len_homeless: 0,
-      homeless_start_date: '',
-      length_at_prior_location: '',
-      length_at_current_location: '',
+      prior_location: null,
+      current_location: null,
+      num_times_homeless: null,
+      total_len_homeless: null,
+      homeless_start_date: null,
+      length_at_prior_location: null,
+      length_at_current_location: null,
     },
     gov_benefits: {
-      RRH: false,
-      snap: false,
-      'cps/fps': false,
-      foodstamps: false,
-      housing_voucher: false,
-      veteran_services: false,
+      RRH: null,
+      snap: null,
+      cps_fps: null,
+      foodstamps: null,
+      housing_voucher: null,
+      veteran_services: null,
     },
     insurance: {
-      pregnancies: false,
-      has_insurance: false,
-      members_covered: 0,
-      health_insurance_type: '',
+      pregnancies: {
+        is_pregnant: null,
+        if_yes_who: null,
+        due_date: null,
+      },
+      has_insurance: null,
+      members_covered: null,
+      health_insurance_type: null,
     },
     domestic_violence_info: {
-      fleeing_dv: false,
-      YWCA_contacted: false,
-      has_court_order: false,
-      date_last_incident: false,
-      anonymity_preferred: false,
+      fleeing_dv: null,
+      YWCA_contacted: null,
+      has_court_order: null,
+      date_last_incident: null,
+      anonymity_preferred: null,
     },
-    avatar_url:
-      'https://microlancer.lancerassets.com/v2/services/91/166a65bdfc45e5ade4cee71859b871/large_avatar.jpg',
+    avatar_url: null,
+    pets: 0,
+    percent_complete: 0,
   },
-  familyMember: [],
+  familyMember: {},
 };
 
 const IntakePacket = () => {
+  const [count, setCount] = useState(0);
+  const nameString = (n, location) => `familyMember.${n}.${location}`;
+
   const tempFormStyle = {
     marginLeft: '20%',
     marginTop: '50px',
@@ -99,13 +109,25 @@ const IntakePacket = () => {
   const [formData, setForm] = useForm(defaultData);
   const { step, navigation } = useStep({ initialStep: 0, steps });
   const { id } = step;
-  const props = { navigation, formData, setForm, tempFormStyle };
+  const props = {
+    navigation,
+    formData,
+    setForm,
+    tempFormStyle,
+    count,
+    setCount,
+    nameString,
+    userId,
+  };
 
   if (!userId) {
     return <CreateOktaAccountForm setUserId={setUserId} />;
   }
+  formData.familyInfo.user_id = userId;
 
   switch (id) {
+    case 'IntakeStart':
+      return <IntakeStart {...props} />;
     case 'ContactInfo':
       return <ContactInfo {...props} />;
     case 'FamilyMembers':
@@ -124,6 +146,8 @@ const IntakePacket = () => {
       return <HomelessHistory {...props} />;
     case 'Insurance':
       return <Insurance {...props} />;
+    case 'AdditionalInfo':
+      return <AdditionalInfo {...props} />;
     default:
       return null;
   }

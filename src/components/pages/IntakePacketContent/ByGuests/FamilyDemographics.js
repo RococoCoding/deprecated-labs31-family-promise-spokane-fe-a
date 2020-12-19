@@ -4,24 +4,49 @@ import {
   Input,
   Button,
   Space,
-  Select,
   DatePicker,
   InputNumber,
   Card,
+  Select,
 } from 'antd';
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import Checkbox from 'antd/lib/checkbox/Checkbox';
+import moment from 'moment';
 const FamilyDemographics = ({
   navigation,
   formData,
   setForm,
   tempFormStyle,
+  nameString,
 }) => {
-  function handleChange(value) {
-    console.log(value); // { value: "lucy", key: "lucy", label: "Lucy (101)" }
-  }
   const { previous, next } = navigation;
+  const { familyMember } = formData;
+  const genderOptions = ['Male', 'Female', 'Other'];
 
+  /*Issues with setForm on inputs other than Input and Checkbox. 
+  The following functions manually update the entire form. */
+  const setFormDate = mem => (e, dateString) => {
+    familyMember[mem] = Object.assign(familyMember[mem], {
+      ...familyMember[mem],
+      demographics: { ...familyMember[mem].demographics, DOB: dateString },
+    });
+  };
+  const setFormNumber = mem => value => {
+    familyMember[mem] = Object.assign(familyMember[mem], {
+      ...familyMember[mem],
+      demographics: { ...familyMember[mem].demographics, employer: value },
+    });
+  };
+  const setFormSSN = mem => value => {
+    familyMember[mem] = Object.assign(familyMember[mem], {
+      ...familyMember[mem],
+      demographics: { ...familyMember[mem].demographics, SSN: value },
+    });
+  };
+  const setFormSelect = mem => value => {
+    familyMember[mem] = Object.assign(familyMember[mem], {
+      ...familyMember[mem],
+      demographics: { ...familyMember[mem].demographics, gender: value },
+    });
+  };
   return (
     <div style={tempFormStyle}>
       <Card title="Family Demographics" bordered={false}>
@@ -34,65 +59,71 @@ const FamilyDemographics = ({
           </Button>
         </Form.Item>
         <Form layout="vertical">
-          <Form.Item>
-            <Checkbox>Someone in my household is a sex offender.</Checkbox>
-          </Form.Item>
-          <Form.List name="users">
-            {(fields, { add, remove }) => (
-              <>
-                {fields.map(field => (
-                  <Space
-                    key={field.key}
-                    style={{ display: 'flex', marginBottom: 8 }}
-                    align="baseline"
+          {/*Displays family members currently in formData */}
+          {Object.keys(formData.familyMember).map((mem, key) => (
+            <div key={key}>
+              <p>{familyMember[mem].demographics.first_name}</p>
+              <Space
+                style={{ display: 'flex', marginBottom: 8 }}
+                align="baseline"
+              >
+                <Form.Item label="Gender">
+                  <Select
+                    placeholder="Please select an option"
+                    defaultValue={familyMember[mem].demographics.gender}
+                    onChange={setFormSelect(mem)}
                   >
-                    <Form.Item label="Gender">
-                      <Select
-                        placeholder="Please select an option"
-                        onChange={handleChange}
-                      >
-                        <Select.Option value="male">Male</Select.Option>
-                        <Select.Option value="female">Female</Select.Option>
-                        <Select.Option value="other">Other</Select.Option>
-                      </Select>
-                    </Form.Item>
-
-                    <Form.Item label="Birthdate">
-                      <DatePicker format="DD/MM/YYYY" />
-                    </Form.Item>
-                    <Form.Item label="Last 4 of SSN">
-                      <Input placeholder="0000" />
-                    </Form.Item>
-                    <Form.Item
-                      label="Income Source (monthly)"
-                      required
-                      tooltip="An income source can be a Job, TANF, SSI, SSDI, ChildSupport, etc..."
-                    >
-                      <Input.Group compact>
-                        <Form.Item name={['address', 'source']}>
-                          <Input placeholder="Income source" />
-                        </Form.Item>
-                        <Form.Item>
-                          <InputNumber formatter={value => `$ ${value}`} />
-                        </Form.Item>
-                      </Input.Group>
-                    </Form.Item>
-                    <MinusCircleOutlined onClick={() => remove(field.name)} />
-                  </Space>
-                ))}
-                <Form.Item>
-                  <Button
-                    type="dashed"
-                    onClick={add}
-                    block
-                    icon={<PlusOutlined />}
-                  >
-                    Add field
-                  </Button>
+                    {genderOptions.map(option => (
+                      <Select.Option value={option}>{option}</Select.Option>
+                    ))}
+                  </Select>
                 </Form.Item>
-              </>
-            )}
-          </Form.List>
+
+                <Form.Item label="Birthdate">
+                  <DatePicker
+                    format="DD/MM/YYYY"
+                    name={nameString(mem, 'demographics.DOB')}
+                    defaultValue={moment(
+                      familyMember[mem].demographics.DOB != null
+                        ? familyMember[mem].demographics.DOB
+                        : '01/01/2020',
+                      'DD/MM/YYYY'
+                    )}
+                    onChange={setFormDate(mem)}
+                  />
+                </Form.Item>
+                <Form.Item label="Last 4 of SSN">
+                  <InputNumber
+                    placeholder="0000"
+                    onChange={setFormSSN(mem)}
+                    defaultValue={familyMember[mem].demographics.employer}
+                  />
+                </Form.Item>
+                <Form.Item
+                  label="Income Source (monthly)"
+                  tooltip="An income source can be a Job, TANF, SSI, SSDI, ChildSupport, etc..."
+                >
+                  <Input.Group compact>
+                    <Form.Item>
+                      <Input
+                        placeholder="Income source"
+                        name={nameString(mem, 'demographics.income')}
+                        value={familyMember[mem].demographics.income}
+                        onChange={setForm}
+                      />
+                    </Form.Item>
+                    <Form.Item>
+                      <InputNumber
+                        onChange={setFormNumber(mem)}
+                        formatter={value => `$ ${value}`}
+                        defaultValue={familyMember[mem].demographics.employer}
+                      />
+                    </Form.Item>
+                  </Input.Group>
+                </Form.Item>
+              </Space>
+            </div>
+          ))}
         </Form>
       </Card>
     </div>

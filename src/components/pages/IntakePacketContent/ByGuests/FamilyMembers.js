@@ -1,58 +1,63 @@
 import React from 'react';
-import { Form, Input, Button, Space, Select, Card } from 'antd';
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-const FamilyMembers = ({ navigation, formData, setForm, tempFormStyle }) => {
-  const { Option } = Select;
-  const { previous, next } = navigation;
-  const addMember = fullname => {
-    const famMem = {
-      key: {
-        demographics: {
-          first_name: '',
-          last_name: '',
-          gender: '',
-          relationship: '',
-          DOB: '',
-          SSN: '',
-          income: '',
-          employer: '',
-          race: '',
-        },
-        bearers: {
-          alcohol_abuse: false,
-          developmental_disabilities: false,
-          chronic_health_issues: false,
-          drug_abuse: false,
-          'HIV-AIDs': false,
-          mental_illness: false,
-          physical_disabilities: false,
-          list_indefinite_conditions: null,
-          list_issues: null,
-        },
-        schools: {
-          highest_grade_completed: '',
-          enrolled_status: true,
-          reason_not_enrolled: '',
-          attendance_status: '',
-          school_type: '',
-          school_name: '',
-          mckinney_school: false,
-        },
-        flag: '',
-        pet: 0,
+import { Form, Input, Button, Space, Card } from 'antd';
+const FamilyMembers = ({
+  navigation,
+  formData,
+  setForm,
+  tempFormStyle,
+  count,
+  setCount,
+  nameString,
+  userId,
+}) => {
+  const addMember = key => {
+    formData.familyMember[key] = {
+      family_id: userId,
+      date_of_enrollment: null,
+      demographics: {
+        first_name: null,
+        last_name: null,
+        gender: null,
+        relationship: null,
+        DOB: null,
+        SSN: null,
+        income: null,
+        employer: null,
+        race: [],
+        ethnicity: null,
       },
+      barriers: {
+        alcohol_abuse: null,
+        developmental_disabilities: null,
+        chronic_health_issues: null,
+        drug_abuse: null,
+        HIV_AIDs: null,
+        mental_illness: null,
+        physical_disabilities: null,
+        list_indefinite_conditions: null,
+        list_issues: null,
+      },
+      schools: {
+        highest_grade_completed: null,
+        enrolled_status: null,
+        reason_not_enrolled: null,
+        attendance_status: null,
+        school_type: null,
+        school_name: null,
+        mckinney_school: null,
+      },
+      case_members: null,
+      flag: null,
+      percent_complete: 0,
     };
-    famMem[fullname] = famMem['key'];
-    delete famMem['key'];
-    formData.familyMember.push(famMem);
   };
-  function handleChange(value) {
-    console.log(value);
-    // setForm({
-    //   ...formData,
-    //   demographics: { ...formData.demographics, gender: value },
-    // }); // { value: "lucy", key: "lucy", label: "Lucy (101)" }
-  }
+  const { previous, next } = navigation;
+  const { familyMember } = formData;
+
+  const onChangeHandlder = () => {
+    addMember(count);
+    setCount(count + 1);
+  };
 
   return (
     <div style={tempFormStyle}>
@@ -66,50 +71,41 @@ const FamilyMembers = ({ navigation, formData, setForm, tempFormStyle }) => {
           </Button>
         </Form.Item>
         <Form layout="vertical">
-          <Form.List name="users">
-            {(fields, { add, remove }) => (
-              <>
-                {fields.map(field => (
-                  <Space
-                    key={field.key}
-                    style={{
-                      display: 'flex',
-                      marginBottom: 8,
-                      align: 'baseline',
-                    }}
-                  >
-                    <Form.Item label="Fullname">
-                      <Input placeholder="First Last" />
-                    </Form.Item>
-                    <Form.Item label="Relationship">
-                      <Select
-                        name="gender"
-                        placeholder="Please select an option"
-                        onChange={handleChange}
-                      >
-                        <Option value="self">Self</Option>
-                        <Option value="spouse">Spouse</Option>
-                        <Option value="child">Child</Option>
-                        <Option value="sibling">Sibling</Option>
-                        <Option value="other">Other</Option>
-                      </Select>
-                    </Form.Item>
-                    <MinusCircleOutlined onClick={() => remove(field.name)} />
-                  </Space>
-                ))}
-                <Form.Item>
-                  <Button
-                    type="dashed"
-                    onClick={add}
-                    block
-                    icon={<PlusOutlined />}
-                  >
-                    Add field
-                  </Button>
-                </Form.Item>
-              </>
-            )}
-          </Form.List>
+          {/*Displays family members currently in formData */}
+          {Object.keys(formData.familyMember).map((mem, key) => (
+            <Space
+              key={key}
+              style={{
+                display: 'flex',
+                marginBottom: 8,
+                align: 'baseline',
+              }}
+            >
+              <Form.Item label="First Name">
+                <Input
+                  name={nameString(mem, 'demographics.first_name')}
+                  value={familyMember[mem].demographics.first_name}
+                  onChange={setForm}
+                ></Input>
+              </Form.Item>
+              <Form.Item label="Last Name">
+                <Input
+                  name={nameString(mem, 'demographics.last_name')}
+                  value={familyMember[mem].demographics.last_name}
+                  onChange={setForm}
+                ></Input>
+              </Form.Item>
+              <Form.Item label="Relationship">
+                <Input
+                  name={nameString(mem, 'demographics.relationship')}
+                  value={familyMember[mem].demographics.relationship}
+                  onChange={setForm}
+                />
+              </Form.Item>
+            </Space>
+          ))}
+          {/*Creates new family member object in formData */}
+          <Button onClick={onChangeHandlder}>Add Member</Button>
         </Form>
       </Card>
     </div>
