@@ -1,34 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../../common';
-
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 function RenderHomePage(props) {
-  const { userInfo, authService } = props;
-  return (
-    <div>
-      <h1>Hi {userInfo.name} Welcome to Labs Basic SPA</h1>
-      <div>
-        <p>
-          This is an example of a common example of how we'd like for you to
-          approach components.
-        </p>
-        <p>
-          <Link to="/profile-list">Profiles Example</Link>
-        </p>
-        <p>
-          <Link to="/example-list">Example List of Items</Link>
-        </p>
-        <p>
-          <Link to="/datavis">Data Visualizations Example</Link>
-        </p>
-        <p>
-          <Button
-            handleClick={() => authService.logout()}
-            buttonText="Logout"
-          />
-        </p>
-      </div>
-    </div>
-  );
+  const user = useSelector(state => state.CURRENT_USER);
+
+  React.useEffect(() => {
+    console.log(user);
+  }, [user]);
+
+  if (!user.role) {
+    return <div>Waiting..</div>;
+  }
+
+  switch (user.role) {
+    case 'guest':
+      return <Redirect to="guest-dashboard" />;
+    case 'supervisor':
+      return <Redirect to="/guests" />;
+    case 'case_manager':
+      return <Redirect to="/guests" />;
+    case 'executive_director':
+      return <Redirect to="/analytics" />;
+    default:
+      return <Redirect to="/login" />;
+  }
 }
 export default RenderHomePage;

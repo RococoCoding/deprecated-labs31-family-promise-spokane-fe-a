@@ -21,6 +21,7 @@ const NavBar = () => {
 
   const handleLogout = () => {
     authService.logout();
+    localStorage.clear();
   };
 
   return (

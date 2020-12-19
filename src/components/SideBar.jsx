@@ -11,11 +11,13 @@ import { useHistory } from 'react-router-dom';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import BarChartOutlined from '@ant-design/icons/BarChartOutlined';
 import MonitorOutlined from '@ant-design/icons/MonitorOutlined';
+import { useSelector } from 'react-redux';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
 const SideBar = () => {
+  const user = useSelector(state => state.CURRENT_USER);
   const history = useHistory();
   const [collapsed, setCollapsed] = React.useState(true);
   const onCollapse = () => {
@@ -38,43 +40,71 @@ const SideBar = () => {
     history.push('/guests');
   };
 
+  const redirectToFamily = () => {
+    history.push('/family');
+  };
+
   return (
-    <Sider
-      theme="light"
-      collapsible
-      collapsed={collapsed}
-      onCollapse={onCollapse}
-      id="sider"
-    >
-      <div className="logo" />
-      <Menu theme="light" mode="inline">
-        <Menu.Item
-          onClick={redirectToUserProfile}
-          key="1"
-          icon={<UserOutlined />}
+    <div>
+      {user.role && (
+        <Sider
+          theme="light"
+          collapsible
+          collapsed={collapsed}
+          onCollapse={onCollapse}
+          id="sider"
         >
-          Profile
-        </Menu.Item>
-        <br />
-        <Menu.Item
-          onClick={redirectToAnalytics}
-          key="2"
-          icon={<BarChartOutlined />}
-        >
-          Analytics
-        </Menu.Item>
-        <Menu.Item
-          onClick={redirectToGuests}
-          key="3"
-          icon={<MonitorOutlined />}
-        >
-          Guests
-        </Menu.Item>
-        <Menu.Item onClick={redirectToIntake} key="4" icon={<FileOutlined />}>
-          Register Family
-        </Menu.Item>
-      </Menu>
-    </Sider>
+          <div className="logo" />
+
+          <Menu theme="light" mode="inline">
+            <Menu.Item
+              onClick={redirectToUserProfile}
+              key="1"
+              icon={<UserOutlined />}
+            >
+              Profile
+            </Menu.Item>
+            <br />
+            <Menu.Item
+              onClick={redirectToAnalytics}
+              key="2"
+              icon={<BarChartOutlined />}
+            >
+              Analytics
+            </Menu.Item>
+            {user.role == 'guest' && (
+              <Menu.Item
+                onClick={redirectToFamily}
+                key="3"
+                icon={<TeamOutlined />}
+              >
+                Family
+              </Menu.Item>
+            )}
+            {['supervisor', 'executive_director', 'case_manager'].includes(
+              user.role
+            ) && (
+              <Menu>
+                <Menu.Item
+                  onClick={redirectToGuests}
+                  key="3"
+                  icon={<MonitorOutlined />}
+                >
+                  Guests
+                </Menu.Item>
+                <Menu.Item
+                  onClick={redirectToIntake}
+                  key="4"
+                  icon={<FileOutlined />}
+                >
+                  Register Family
+                </Menu.Item>
+              </Menu>
+            )}
+          </Menu>
+        </Sider>
+      )}
+    </div>
   );
 };
 
