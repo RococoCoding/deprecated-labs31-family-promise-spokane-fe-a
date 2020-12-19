@@ -16,6 +16,8 @@ export const setCurrentUser = () => async dispatch => {
     dispatch({ type: 'SET_CURRENT_USER', payload: currentUser });
   } catch (error) {
     alert('error');
+    console.log(error);
+    console.log(error?.response);
   } finally {
     dispatch({ type: 'SET_LOADING', payload: false });
   }

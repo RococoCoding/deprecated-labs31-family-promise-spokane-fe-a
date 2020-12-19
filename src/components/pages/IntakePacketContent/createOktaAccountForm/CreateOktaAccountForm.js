@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 
 const okta_register_url =
   'https://dev-2240040.okta.com/api/v1/registration/reg2labm2m2Z3iPh05d6/register';
@@ -25,11 +26,23 @@ const CreateOktaAccountForm = ({ setUserId }) => {
       const activationToken = await axios
         .post(okta_register_url, { userProfile: profileObj })
         .then(res => res.data.activationToken);
-      const userId = await axios
+      const response = await axios
         .post(okta_activate_url, { token: activationToken })
-        .then(res => res.data._embedded.user.id);
+        .then(res => res.data);
+
+      const userId = response._embedded.user.id;
+
+      const profile = {
+        id: response._embedded.user.id,
+        email: response._embedded.user.profile.login,
+        first_name: response._embedded.user.profile.firstName,
+        last_name: response._embedded.user.profile.lastName,
+      };
+
+      await axiosWithAuth().post('/users', profile);
       setUserId(userId);
     } catch (error) {
+      alert('error');
       setErrors(error.response?.data?.errorCauses[0]?.errorSummary);
     } finally {
       setLoading(false);
