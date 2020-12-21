@@ -38,6 +38,7 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 import GuestDashboard from './components/pages/guest-pages/GuestDashboard';
 import FamilyPage from './components/pages/guest-pages/FamilyPage';
+import Notes from './components/pages/Notes/Notes';
 
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
@@ -74,11 +75,21 @@ function App() {
 
         {/* any of the routes you need secured should be registered as SecureRoutes */}
 
-        <PrivateRoute exact path="/family/:id" component={FamilyMembers} />
+        <PrivateRoute
+          exact
+          path="/family/:id"
+          roles={['executive_director', 'supervisor', 'case_manager']}
+          component={FamilyMembers}
+        />
         <PrivateRoute
           path="/me"
           roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
           component={UserProfile}
+        />
+        <Route
+          path="/families/:family_id/notes/"
+          // roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
+          component={Notes}
         />
         <PrivateRoute
           path="/analytics"
