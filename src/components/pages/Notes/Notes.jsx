@@ -10,13 +10,19 @@ import {
 } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import ArrowLeftOutlined from '@ant-design/icons/ArrowLeftOutlined';
+import CaseNote from '../../modals/CaseNote';
 
 const Notes = () => {
   const params = useParams();
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentNote, setCurrentNote] = useState({});
 
+  const toggleCaseModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
   const fetchNotes = async family_id => {
     setLoading(true);
     try {
@@ -46,6 +52,14 @@ const Notes = () => {
 
   return (
     <div className="notes-page-container">
+      {isModalOpen && (
+        <CaseNote
+          setNotes={setNotes}
+          setCurrentNote={setCurrentNote}
+          note={currentNote}
+          toggleModal={toggleCaseModal}
+        />
+      )}
       <ArrowLeftOutlined
         style={{ fontSize: '30px' }}
         className="notes-page-back"
@@ -55,7 +69,16 @@ const Notes = () => {
       {notes.map(note => {
         return (
           <Card
-            extra={<Link to={`/families/${params.family_id}`}>More</Link>}
+            extra={
+              <p
+                onClick={() => {
+                  setCurrentNote(note);
+                  toggleCaseModal();
+                }}
+              >
+                More
+              </p>
+            }
             actions={[
               <p style={{ textAlign: 'left', paddingLeft: '25px' }}>
                 Comments
