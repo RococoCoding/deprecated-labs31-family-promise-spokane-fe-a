@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import LoadingComponent from '../../common/LoadingComponent';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
-import { Card } from 'antd';
+import { Card, Input, Button, Switch } from 'antd';
 import {
   EditOutlined,
   EllipsisOutlined,
@@ -11,8 +11,15 @@ import {
 import { Link } from 'react-router-dom';
 import ArrowLeftOutlined from '@ant-design/icons/ArrowLeftOutlined';
 import CaseNote from '../../modals/CaseNote';
+import { useSelector } from 'react-redux';
+
+const { TextArea } = Input;
 
 const Notes = () => {
+  const [formValues, setFormValues] = useState({});
+  const [creatingNote, setCreatingNote] = useState(false);
+  const user = useSelector(state => state.CURRENT_USER);
+  const [checked, setChecked] = useState(false);
   const params = useParams();
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -20,6 +27,37 @@ const Notes = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentNote, setCurrentNote] = useState({});
 
+  const handleFinish = e => {
+    e.preventDefault();
+    const newNote = {
+      subject: formValues.subject,
+      content: formValues.content,
+      shareable: formValues.shareable,
+      family_id: params.family_id,
+      author_id: user.id,
+    };
+
+    setCreatingNote(true);
+
+    axiosWithAuth()
+      .post(`/notes`, newNote)
+      .then(res => {
+        setNotes([...notes, res.data.notes]);
+        setFormValues({});
+      })
+      .catch(error => {
+        alert('Unable to create note');
+      })
+      .finally(() => {
+        setCreatingNote(false);
+      });
+  };
+  const handleChange = e => {
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+  };
+  const toggleChecked = checked => {
+    setChecked(checked);
+  };
   const toggleCaseModal = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -91,6 +129,35 @@ const Notes = () => {
           </Card>
         );
       })}
+      <hr />
+      <form className="notes-form" onSubmit={handleFinish}>
+        <div className="case-notes-switch">
+          <Switch
+            onChange={toggleChecked}
+            checkedChildren="Private"
+            unCheckedChildren="Public"
+          ></Switch>
+        </div>
+        <Input
+          name="subject"
+          onChange={handleChange}
+          value={formValues.subject}
+          size="large"
+          placeholder="Subject"
+        />
+        <TextArea
+          name="content"
+          onChange={handleChange}
+          value={formValues.content}
+          showCount
+          maxLength="256"
+          placeholder="Content"
+          autoSize={{ minRows: 4, maxRows: 10 }}
+        ></TextArea>
+        <Button disabled={creatingNote} htmlType="submit">
+          {creatingNote ? 'Loading...' : 'Submit'}
+        </Button>
+      </form>
     </div>
   );
 };
