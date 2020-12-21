@@ -38,11 +38,7 @@ You can find the deployed project at https://user-intake-familypromise.herokuapp
 
 ### Key Features
 
-- feature one
-- feature two
-- feature three
-- feature four
-- feature five
+- Supervisors can create a profile for a guest
 
 #### Front end deployed to `🚫insert service here`
 

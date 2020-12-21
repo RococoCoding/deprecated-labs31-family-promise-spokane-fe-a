@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
 import LoadingComponent from '../../common/LoadingComponent';
 import { useParams } from 'react-router-dom';
-import MaterialTable from 'material-table';
+import MaterialTable, { MTableToolbar } from 'material-table';
 import { useHistory } from 'react-router-dom';
 import NoteIcon from '@material-ui/icons/Note';
 import PeopleIcon from '@material-ui/icons/People';
@@ -13,10 +13,15 @@ import CardShadow from '../../CardShadow';
 import FlagGuest from '../../modals/FlagGuest';
 import GuestNotes from '../../modals/GuestNotes';
 import { CopyrightOutlined } from '@material-ui/icons';
+import Chip from '@material-ui/core/Chip';
+import { Button } from '@material-ui/core';
 
 const FamilyMembers = () => {
+  const history = useHistory();
   const params = useParams();
+  const [isNotesOpen, setIsNotesOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [familyInfo, setFamilyInfo] = useState({});
   const [state, setState] = useState({
     columns: [
       { title: 'First', field: 'first_name', type: 'hidden' },
@@ -27,8 +32,14 @@ const FamilyMembers = () => {
     data: [],
   });
 
-  const fetchFamilyMembers = async () => {
+  const fetchFamilyInfo = async () => {
     try {
+      const info = await axiosWithAuth()
+        .get(`/families/${params.id}`)
+        .then(res => res.data);
+
+      setFamilyInfo(info);
+
       const data = await axiosWithAuth()
         .get(`/families/${params.id}/members`)
         .then(res => res.data);
@@ -37,7 +48,7 @@ const FamilyMembers = () => {
       });
       let copy = { ...state };
       copy.data.push(...formattedData);
-      console.log(copy);
+
       setState(copy);
     } catch (error) {
       alert(error);
@@ -47,8 +58,12 @@ const FamilyMembers = () => {
   };
 
   useEffect(() => {
-    fetchFamilyMembers();
+    fetchFamilyInfo();
   }, []);
+
+  useEffect(() => {
+    console.log(familyInfo);
+  }, [familyInfo]);
 
   if (loading) {
     return (
@@ -77,33 +92,23 @@ const FamilyMembers = () => {
           title="Members"
           columns={state.columns}
           data={state.data}
-          actions={
-            [
-              // {
-              //     icon: NoteIcon,
-              //     tooltip: 'Notes',
-              //     onClick: (event, rowData) => {
-              //         // Do save operation
-              //         setIsNotesOpen(true)
-              //     },
-              // },
-              // {
-              //     icon: FlagIcon,
-              //     tooltip: 'Flag Guest',
-              //     onClick: (event, rowData) => {
-              //         setIsFlagOpen(true)
-              //         setGuestId(rowData.id)
-              //     },
-              // },
-              // {
-              //     icon: InfoIcon,
-              //     tooltip: 'More Info',
-              //     onClick: (event, rowData) => {
-              //         // Do save operation
-              //     },
-              // },
-            ]
-          }
+          components={{
+            Toolbar: props => (
+              <div>
+                <MTableToolbar {...props} />
+                <div style={{ padding: '0px 10px' }}>
+                  <Button
+                    onClick={() =>
+                      history.push(`/families/${familyInfo.id}/notes`)
+                    }
+                  >
+                    Notes
+                  </Button>
+                  <Button>Additional Information</Button>
+                </div>
+              </div>
+            ),
+          }}
         />
       </div>
     </div>
