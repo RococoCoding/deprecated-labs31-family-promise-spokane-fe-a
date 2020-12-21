@@ -86,9 +86,9 @@ function App() {
           roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
           component={UserProfile}
         />
-        <Route
+        <PrivateRoute
           path="/families/:family_id/notes/"
-          // roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
+          roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
           component={Notes}
         />
         <PrivateRoute

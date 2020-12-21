@@ -8,6 +8,6 @@ export const axiosWithAuth = () => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    baseURL: 'http://localhost:8000',
+    baseURL: 'https://family-pomise-spokane.herokuapp.com',
   });
 };
