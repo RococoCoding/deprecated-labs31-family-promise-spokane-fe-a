@@ -74,7 +74,12 @@ function App() {
 
         {/* any of the routes you need secured should be registered as SecureRoutes */}
 
-        <PrivateRoute exact path="/family/:id" component={FamilyMembers} />
+        <PrivateRoute
+          exact
+          path="/family/:id"
+          roles={['executive_director', 'supervisor', 'case_manager']}
+          component={FamilyMembers}
+        />
         <PrivateRoute
           path="/me"
           roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
