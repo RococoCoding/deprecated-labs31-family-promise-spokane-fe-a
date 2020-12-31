@@ -1,5 +1,15 @@
 import React from 'react';
-import { Form, Input, Button, Space, Checkbox, Row, Col, Card } from 'antd';
+import {
+  Form,
+  Input,
+  Button,
+  Space,
+  Checkbox,
+  Row,
+  Col,
+  Card,
+  Progress,
+} from 'antd';
 
 const BarriersPage = ({
   navigation,
@@ -32,6 +42,7 @@ const BarriersPage = ({
 
   return (
     <div style={tempFormStyle}>
+      <Progress percent={formData.familyInfo.percent_complete} />
       <Card title="Barriers" bordered={false}>
         <Form.Item>
           <Button type="primary" htmlType="button" onClick={previous}>

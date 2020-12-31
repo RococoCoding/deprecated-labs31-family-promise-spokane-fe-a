@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Space, Checkbox, Row, Col, Card } from 'antd';
+import { Form, Button, Space, Checkbox, Row, Col, Card, Progress } from 'antd';
 
 const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
   const { previous, next } = navigation;
@@ -21,6 +21,7 @@ const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
 
   return (
     <div style={tempFormStyle}>
+      <Progress percent={formData.familyInfo.percent_complete} />
       <Card title="Race/Ethnicity Info" bordered={false}>
         <Form.Item>
           <Button type="primary" htmlType="button" onClick={previous}>

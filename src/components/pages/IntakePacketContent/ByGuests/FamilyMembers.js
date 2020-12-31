@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, Space, Card } from 'antd';
+import { Form, Input, Button, Space, Card, Progress } from 'antd';
 const FamilyMembers = ({
   navigation,
   formData,
@@ -61,6 +61,7 @@ const FamilyMembers = ({
 
   return (
     <div style={tempFormStyle}>
+      <Progress percent={formData.familyInfo.percent_complete} />
       <Card title="Family Members" bordered={false}>
         <Form.Item>
           <Button type="primary" htmlType="button" onClick={previous}>

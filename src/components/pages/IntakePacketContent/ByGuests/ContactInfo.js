@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Space, Button, Card } from 'antd';
+import { Form, Input, Space, Button, Card, Progress } from 'antd';
 
 import Checkbox from 'antd/lib/checkbox/Checkbox';
 const ContactInfo = ({ navigation, formData, setForm, tempFormStyle }) => {
@@ -8,6 +8,7 @@ const ContactInfo = ({ navigation, formData, setForm, tempFormStyle }) => {
 
   return (
     <div style={tempFormStyle}>
+      <Progress percent={familyInfo.percent_complete} />
       <Card title="Contact Info" bordered={false}>
         <Form layout="vertical" name="control-hooks" span={18}>
           <Form.Item>

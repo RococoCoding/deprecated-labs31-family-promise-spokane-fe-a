@@ -8,6 +8,7 @@ import {
   InputNumber,
   Card,
   Select,
+  Progress,
 } from 'antd';
 import moment from 'moment';
 const FamilyDemographics = ({
@@ -49,6 +50,7 @@ const FamilyDemographics = ({
   };
   return (
     <div style={tempFormStyle}>
+      <Progress percent={formData.familyInfo.percent_complete} />
       <Card title="Family Demographics" bordered={false}>
         <Form.Item>
           <Button type="primary" htmlType="button" onClick={previous}>

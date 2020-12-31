@@ -1,5 +1,14 @@
 import React from 'react';
-import { Form, Input, Button, Space, Select, Checkbox, Card } from 'antd';
+import {
+  Form,
+  Input,
+  Button,
+  Space,
+  Select,
+  Checkbox,
+  Card,
+  Progress,
+} from 'antd';
 
 const ChildSchoolInfo = ({
   navigation,
@@ -55,6 +64,7 @@ const ChildSchoolInfo = ({
 
   return (
     <div style={tempFormStyle}>
+      <Progress percent={formData.familyInfo.percent_complete} />
       <Card title="School Verification" bordered={false}>
         <Form.Item>
           <Button type="primary" htmlType="button" onClick={previous}>

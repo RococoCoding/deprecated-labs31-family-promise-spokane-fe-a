@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Input, Checkbox, Card } from 'antd';
+import { Form, Button, Input, Checkbox, Card, Progress } from 'antd';
 
 const DomesticViolence = ({ navigation, tempFormStyle, formData, setForm }) => {
   const { previous, next } = navigation;
@@ -7,6 +7,7 @@ const DomesticViolence = ({ navigation, tempFormStyle, formData, setForm }) => {
 
   return (
     <div style={tempFormStyle}>
+      <Progress percent={formData.familyInfo.percent_complete} />
       <Card title="Domestic Violence" bordered={false}>
         <Form.Item>
           <Button type="primary" htmlType="button" onClick={previous}>

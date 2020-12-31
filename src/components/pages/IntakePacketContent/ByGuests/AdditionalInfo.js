@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Card, Input, Checkbox, Row, Col } from 'antd';
+import { Form, Button, Card, Input, Checkbox, Row, Col, Progress } from 'antd';
 import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 import { useHistory } from 'react-router-dom';
 
@@ -57,6 +57,7 @@ const AdditionalInfo = ({ navigation, tempFormStyle, formData, setForm }) => {
   };
   return (
     <div style={tempFormStyle}>
+      <Progress percent={formData.familyInfo.percent_complete} />
       <Card title="Additional Information" bordered={false}>
         <Form.Item>
           <Button type="primary" htmlType="button" onClick={previous}>

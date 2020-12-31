@@ -1,10 +1,11 @@
 import React from 'react';
-import { Form, Input, Button, Card } from 'antd';
+import { Form, Input, Button, Card, Progress } from 'antd';
 const HomelessHistory = ({ navigation, formData, setForm, tempFormStyle }) => {
   const { previous, next } = navigation;
   const { familyInfo } = formData;
   return (
     <div style={tempFormStyle}>
+      <Progress percent={formData.familyInfo.percent_complete} />
       <Card title="History" bordered={false}>
         <Form.Item>
           <Button type="primary" htmlType="button" onClick={previous}>
