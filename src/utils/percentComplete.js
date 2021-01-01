@@ -70,35 +70,32 @@ const valuesToExclude = [
   'predicted_exit_destination',
   'flag',
   'percent_complete',
+  'table_data',
 ];
 
 // get all the values from the family object
-const values = Object.values(family);
-
-const totalCalculatableValues = values.length - valuesToExclude.length;
-
-const completeValues = [];
-
-// iterate over dictionary
-for (let i = 0; i < values.length; i++) {
-  // find all null values, and add to array of null values
-  if (values[i] != null) {
-    // console.log(values[i])
-    completeValues.push(values[i]);
+function getAllValues(data) {
+  if (typeof data === 'object') {
+    for (const key in data) {
+      getAllValues(data[key]);
+    }
+  } else {
+    console.log(data);
   }
 }
+/// need to get a total number of all values because function doesn't count null values only complete values
 
-const totalCompleteValues = completeValues.length;
+// const totalCompleteValues = completeValues.length;
 
-//function to calculate percentage
-function percentage(partialValue, totalValue) {
-  return (100 * partialValue) / totalValue;
-}
+// //function to calculate percentage
+// function percentage(partialValue, totalValue) {
+//   return (100 * partialValue) / totalValue;
+// }
 
-// get a percent complete
-const percentComplete = percentage(
-  totalCompleteValues,
-  totalCalculatableValues
-);
+// // get a percent complete
+// const percentComplete = percentage(
+//   totalCompleteValues,
+//   totalCalculatableValues
+// );
 
-console.log(percentComplete);
+// console.log(percentComplete);
