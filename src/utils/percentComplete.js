@@ -13,8 +13,8 @@ const family = {
   enrolled_status: false,
   reason_not_enrolled: 'finished',
   attendance_status: 'inactive',
-  school_type: null,
-  school_name: null,
+  school_type: 'null',
+  school_name: 'null',
   mckinney_school: false,
   flag_level: 0,
   id: 1,
@@ -42,26 +42,27 @@ const family = {
     HIV_AIDs: false,
     mental_illness: false,
     physical_disabilities: true,
-    list_indefinite_conditions: null,
-    list_issues: null,
+    list_indefinite_conditions: 'null',
+    list_issues: 'null',
   },
   schools: {
     highest_grade_completed: '12th grade',
     enrolled_status: false,
     reason_not_enrolled: 'finished',
     attendance_status: 'inactive',
-    school_type: null,
-    school_name: null,
+    school_type: 'null',
+    school_name: 'null',
     mckinney_school: false,
   },
   case_members: 3,
   predicted_exit_destination: 'permanent exit',
-  flag: null,
+  flag: 'null',
   percent_complete: 0,
   tableData: {
     id: 0,
   },
 };
+
 // in effort to keep this percentage dynamic for future code changes this list should be updated with any values that are added that do not need to be calculated for percentage complete
 // for example if we ever add message_id or something like that to the families table we dont need to count that value in total percent complete
 const valuesToExclude = [
@@ -71,7 +72,13 @@ const valuesToExclude = [
   'flag',
   'percent_complete',
   'table_data',
+  // TODO include any values to exclude from members data
 ];
+
+// array to hold all values
+const allValues = [];
+// counter to hold null count
+let nullCount = 0;
 
 // get all the values from the family object
 function getAllValues(data) {
@@ -80,22 +87,45 @@ function getAllValues(data) {
       getAllValues(data[key]);
     }
   } else {
-    console.log(data);
+    // NOTE IF ANY VALUE IS NULL IT WILL THROW OFF THE PERCENTAGE
+    // INTAKE FORM SHOULD NOT LEAVE ANY VALUES NULL AND USE "N/A" FOR THIS TO WORK CORRECTLY
+    // TODO get with frontend to implement this
+    if (data == 'null') {
+      console.log('null', data);
+      nullCount += 1;
+      console.log('incomplete', nullCount);
+    }
+    // all values get pushed to array even NA or string value of 'null'
+    // exception is I couldn't find a way to count actual null types so will get with team to make sure no null types get saved unless they are in a string format
+
+    allValues.push(data);
   }
 }
-/// need to get a total number of all values because function doesn't count null values only complete values
 
-// const totalCompleteValues = completeValues.length;
+//function to calculate percentage
+function percentage(partialValue, totalValue) {
+  return (100 * partialValue) / totalValue;
+}
 
-// //function to calculate percentage
-// function percentage(partialValue, totalValue) {
-//   return (100 * partialValue) / totalValue;
-// }
+// function that returns a percent complete
+// pass in data
+function returnPercentComplete(data) {
+  // get an array of all complete values
+  getAllValues(data);
 
-// // get a percent complete
-// const percentComplete = percentage(
-//   totalCompleteValues,
-//   totalCalculatableValues
-// );
+  // get number of complete values
+  const total = allValues.length;
 
-// console.log(percentComplete);
+  // subtract nullCount from allValues.length and get number of complete values
+  const totalComplete = total - nullCount;
+
+  // calculate a percentage
+  const percent_complete = percentage(totalComplete, total);
+  // return a percentage
+  console.log(percent_complete);
+
+  return percent_complete;
+}
+
+// testing data from above should return 88%
+returnPercentComplete(family);
