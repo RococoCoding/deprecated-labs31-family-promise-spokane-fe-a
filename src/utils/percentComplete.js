@@ -77,26 +77,25 @@ const valuesToExclude = [
 
 // array to hold all values
 const allValues = [];
+
 // counter to hold null count
 let nullCount = 0;
 
-// get all the values from the family object
+// get all the values from the any object
 function getAllValues(data) {
   if (typeof data === 'object') {
     for (const key in data) {
       getAllValues(data[key]);
     }
   } else {
-    // NOTE IF ANY VALUE IS NULL IT WILL THROW OFF THE PERCENTAGE
-    // INTAKE FORM SHOULD NOT LEAVE ANY VALUES NULL AND USE "N/A" FOR THIS TO WORK CORRECTLY
+    // NOTE IF ANY VALUE IS TYPE NULL IT WILL THROW OFF THE PERCENTAGE
+    // INTAKE FORM SHOULD NOT LEAVE ANY VALUES NULL AND USE "N/A" OR STRING VALUE "NULL" FOR THIS TO WORK CORRECTLY
     // TODO get with frontend to implement this
-    if (data == 'null') {
-      console.log('null', data);
+    if (data === 'null') {
       nullCount += 1;
-      console.log('incomplete', nullCount);
     }
     // all values get pushed to array even NA or string value of 'null'
-    // exception is I couldn't find a way to count actual null types so will get with team to make sure no null types get saved unless they are in a string format
+    // exception is I couldn't find a way to count actual null types so will get with team to make sure no null types get saved unless they are in a string format or use "NA" or "Incomplete"
 
     allValues.push(data);
   }
@@ -114,18 +113,27 @@ function returnPercentComplete(data) {
   getAllValues(data);
 
   // get number of complete values
-  const total = allValues.length;
+  const total = allValues.length - valuesToExclude.length;
 
   // subtract nullCount from allValues.length and get number of complete values
   const totalComplete = total - nullCount;
 
   // calculate a percentage
   const percent_complete = percentage(totalComplete, total);
-  // return a percentage
-  console.log(percent_complete);
 
+  console.log('total', total);
+  console.log('incomplete', nullCount);
+  console.log('complete', totalComplete);
+
+  console.log(percent_complete + '% complete');
+
+  // return a percentage
   return percent_complete;
 }
 
-// testing data from above should return 88%
+// testing data from above should return 85% because:
+// there are 7 null values and 41 complete values in example above
+// there are are 53 total values minus values to exclude is 48
+// 41 out of 48 is about 85%
+
 returnPercentComplete(family);
