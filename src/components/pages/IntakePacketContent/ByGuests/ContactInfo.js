@@ -1,57 +1,54 @@
 import React from 'react';
 import { Form, Input, Space, Button, Card, Progress } from 'antd';
+import { totalCalculatableValues as total } from '../../../../utils/percentComplete';
 
 import Checkbox from 'antd/lib/checkbox/Checkbox';
-const ContactInfo = ({ navigation, formData, setForm, tempFormStyle }) => {
+const ContactInfo = ({
+  navigation,
+  formData,
+  setForm,
+  tempFormStyle,
+  step,
+  steps,
+}) => {
+  const pageNumber = steps.findIndex(item => item === step);
+  const pages = steps.length;
+  const percent = (pageNumber / pages) * 100;
+
   Object.filter = (obj, predicate) =>
     Object.assign(
       ...Object.keys(obj)
         .filter(key => predicate(obj[key]))
         .map(key => ({ [key]: obj[key] }))
     );
-  function ObjectLength(object) {
-    var length = 0;
-    for (var key in object) {
-      if (object.hasOwnProperty(key)) {
-        ++length;
-      }
-    }
-    return length;
-  }
 
   const { next, previous } = navigation;
   const { familyInfo } = formData;
-  const info = [familyInfo];
-  console.log(info);
-  const onProgress = () => {
-    const total =
-      ObjectLength(familyInfo.phone_one) +
-      ObjectLength(familyInfo.phone_two) +
-      ObjectLength(familyInfo.emergencyContact);
-    const phone1 =
-      Object.filter(familyInfo.phone_one, item => item != null) || {};
-    const phone2 =
-      Object.filter(familyInfo.phone_two, item => item != null) || {};
-    const emerg =
-      Object.filter(familyInfo.emergencyContact, item => item != null) || {};
-    const sum =
-      Object.keys(phone1).length +
-      Object.keys(phone2).length +
-      Object.keys(emerg).length;
-    console.log(`${sum}/${total}`);
-    return next;
-  };
+  // const onProgress = () => {
+  //   const phone1 =
+  //     Object.filter(familyInfo.phone_one, item => item != null) || {};
+  //   const phone2 =
+  //     Object.filter(familyInfo.phone_two, item => item != null) || {};
+  //   const emerg =
+  //     Object.filter(familyInfo.emergencyContact, item => item != null) || {};
+  //   const sum =
+  //     Object.keys(phone1).length +
+  //     Object.keys(phone2).length +
+  //     Object.keys(emerg).length;
+  //   console.log(`${sum}/${total}`);
+  //   next();
+  // };
 
   return (
     <div style={tempFormStyle}>
-      <Progress percent={familyInfo.percent_complete} />
+      <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Contact Info" bordered={false}>
         <Form layout="vertical" name="control-hooks" span={18}>
           <Form.Item>
             <Button type="primary" htmlType="button" onClick={previous}>
               Previous
             </Button>
-            <Button type="primary" htmlType="button" onClick={onProgress}>
+            <Button type="primary" htmlType="button" onClick={next}>
               Next
             </Button>
           </Form.Item>

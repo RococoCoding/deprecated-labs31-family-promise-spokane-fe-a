@@ -9,7 +9,12 @@ const FamilyMembers = ({
   setCount,
   nameString,
   userId,
+  steps,
+  step,
 }) => {
+  const pageNumber = steps.findIndex(item => item === step);
+  const pages = steps.length;
+  const percent = (pageNumber / pages) * 100;
   const addMember = key => {
     formData.familyMember[key] = {
       family_id: userId,
@@ -61,7 +66,7 @@ const FamilyMembers = ({
 
   return (
     <div style={tempFormStyle}>
-      <Progress percent={formData.familyInfo.percent_complete} />
+      <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Family Members" bordered={false}>
         <Form.Item>
           <Button type="primary" htmlType="button" onClick={previous}>

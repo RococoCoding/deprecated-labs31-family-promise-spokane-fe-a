@@ -1,13 +1,23 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox, Card, Progress } from 'antd';
 
-const Insurance = ({ navigation, tempFormStyle, formData, setForm }) => {
+const Insurance = ({
+  navigation,
+  tempFormStyle,
+  formData,
+  setForm,
+  steps,
+  step,
+}) => {
+  const pageNumber = steps.findIndex(item => item === step);
+  const pages = steps.length;
+  const percent = (pageNumber / pages) * 100;
   const { previous, next } = navigation;
   const { familyInfo } = formData;
 
   return (
     <div style={tempFormStyle}>
-      <Progress percent={formData.familyInfo.percent_complete} />
+      <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Insurance" bordered={false}>
         <Form.Item>
           <Button type="primary" htmlType="button" onClick={previous}>

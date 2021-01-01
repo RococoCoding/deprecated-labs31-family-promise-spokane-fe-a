@@ -119,6 +119,8 @@ const IntakePacket = () => {
     setCount,
     nameString,
     userId,
+    steps,
+    step,
   };
 
   // if (!userId) {

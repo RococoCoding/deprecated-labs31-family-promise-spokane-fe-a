@@ -16,7 +16,12 @@ const ChildSchoolInfo = ({
   setForm,
   formData,
   nameString,
+  steps,
+  step,
 }) => {
+  const pageNumber = steps.findIndex(item => item === step);
+  const pages = steps.length;
+  const percent = (pageNumber / pages) * 100;
   let x = 0;
   const gradeOptions = [
     '1',
@@ -64,7 +69,7 @@ const ChildSchoolInfo = ({
 
   return (
     <div style={tempFormStyle}>
-      <Progress percent={formData.familyInfo.percent_complete} />
+      <Progress percent={percent} status="active" showInfo={false} />
       <Card title="School Verification" bordered={false}>
         <Form.Item>
           <Button type="primary" htmlType="button" onClick={previous}>

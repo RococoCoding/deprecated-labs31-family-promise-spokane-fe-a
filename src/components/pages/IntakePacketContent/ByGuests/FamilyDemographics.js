@@ -17,7 +17,12 @@ const FamilyDemographics = ({
   setForm,
   tempFormStyle,
   nameString,
+  steps,
+  step,
 }) => {
+  const pageNumber = steps.findIndex(item => item === step);
+  const pages = steps.length;
+  const percent = (pageNumber / pages) * 100;
   const { previous, next } = navigation;
   const { familyMember } = formData;
   const genderOptions = ['Male', 'Female', 'Other'];
@@ -50,7 +55,7 @@ const FamilyDemographics = ({
   };
   return (
     <div style={tempFormStyle}>
-      <Progress percent={formData.familyInfo.percent_complete} />
+      <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Family Demographics" bordered={false}>
         <Form.Item>
           <Button type="primary" htmlType="button" onClick={previous}>

@@ -102,3 +102,5 @@ const percentComplete = percentage(
 );
 
 console.log(percentComplete);
+
+export { totalCalculatableValues };
