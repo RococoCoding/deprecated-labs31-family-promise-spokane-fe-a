@@ -1,5 +1,9 @@
 import React from 'react';
 import { Form, Button, Input, Checkbox, Card, Progress } from 'antd';
+import {
+  returnPercentComplete,
+  completed,
+} from '../../../../utils/percentComplete';
 
 const DomesticViolence = ({
   navigation,

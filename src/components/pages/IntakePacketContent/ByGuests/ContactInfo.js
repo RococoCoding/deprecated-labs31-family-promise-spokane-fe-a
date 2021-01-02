@@ -1,6 +1,9 @@
 import React from 'react';
 import { Form, Input, Space, Button, Card, Progress } from 'antd';
-import { totalCalculatableValues as total } from '../../../../utils/percentComplete';
+import {
+  returnPercentComplete,
+  completed,
+} from '../../../../utils/percentComplete';
 
 import Checkbox from 'antd/lib/checkbox/Checkbox';
 const ContactInfo = ({
@@ -15,29 +18,8 @@ const ContactInfo = ({
   const pages = steps.length;
   const percent = (pageNumber / pages) * 100;
 
-  Object.filter = (obj, predicate) =>
-    Object.assign(
-      ...Object.keys(obj)
-        .filter(key => predicate(obj[key]))
-        .map(key => ({ [key]: obj[key] }))
-    );
-
   const { next, previous } = navigation;
   const { familyInfo } = formData;
-  // const onProgress = () => {
-  //   const phone1 =
-  //     Object.filter(familyInfo.phone_one, item => item != null) || {};
-  //   const phone2 =
-  //     Object.filter(familyInfo.phone_two, item => item != null) || {};
-  //   const emerg =
-  //     Object.filter(familyInfo.emergencyContact, item => item != null) || {};
-  //   const sum =
-  //     Object.keys(phone1).length +
-  //     Object.keys(phone2).length +
-  //     Object.keys(emerg).length;
-  //   console.log(`${sum}/${total}`);
-  //   next();
-  // };
 
   return (
     <div style={tempFormStyle}>

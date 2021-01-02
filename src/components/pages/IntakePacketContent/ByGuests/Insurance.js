@@ -1,5 +1,9 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox, Card, Progress } from 'antd';
+import {
+  returnPercentComplete,
+  completed,
+} from '../../../../utils/percentComplete';
 
 const Insurance = ({
   navigation,

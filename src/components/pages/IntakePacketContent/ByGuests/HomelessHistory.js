@@ -1,5 +1,9 @@
 import React from 'react';
 import { Form, Input, Button, Card, Progress } from 'antd';
+import {
+  returnPercentComplete,
+  completed,
+} from '../../../../utils/percentComplete';
 const HomelessHistory = ({
   navigation,
   formData,
@@ -13,6 +17,7 @@ const HomelessHistory = ({
   const percent = (pageNumber / pages) * 100;
   const { previous, next } = navigation;
   const { familyInfo } = formData;
+
   return (
     <div style={tempFormStyle}>
       <Progress percent={percent} status="active" showInfo={false} />
