@@ -101,9 +101,7 @@ function percentage(partialValue, totalValue) {
 }
 // function that returns a percent complete
 // pass in data
-export const returnPercentComplete = data => {
-  console.log(data);
-  console.log(allValues);
+function returnPercentComplete(data) {
   // get an array of all complete values
   getAllValues(data);
   // get number of complete values
@@ -118,18 +116,9 @@ export const returnPercentComplete = data => {
   console.log(percent_complete + '% complete');
   // return a percentage
   return percent_complete;
-};
-
-export const completed = (obj, predicate) =>
-  !obj || !predicate
-    ? {}
-    : Object.assign(
-        ...Object.keys(obj)
-          .filter(key => predicate(obj[key]))
-          .map(key => ({ [key]: obj[key] }))
-      );
+}
 // testing data from above should return 85% because:
 // there are 7 null values and 41 complete values in example above
 // there are are 53 total values minus values to exclude is 48
 // 41 out of 48 is about 85%
-// console.log(returnPercentComplete(family));
+returnPercentComplete(family);
