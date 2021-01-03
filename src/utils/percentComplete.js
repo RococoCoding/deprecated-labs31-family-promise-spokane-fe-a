@@ -121,4 +121,16 @@ function returnPercentComplete(data) {
 // there are 7 null values and 41 complete values in example above
 // there are are 53 total values minus values to exclude is 48
 // 41 out of 48 is about 85%
-returnPercentComplete(family);
+export const filterNotNull = obj => {
+  return Object.entries(obj).reduce(
+    (a, [key, value]) => (value === null ? a : ((a[key] = value), a)),
+    {}
+  );
+};
+export const sumOfObj = obj => {
+  return Object.keys(obj).length;
+};
+
+export const filterNulls = obj => {
+  return obj;
+};

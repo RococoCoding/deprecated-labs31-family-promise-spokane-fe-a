@@ -4,7 +4,8 @@ import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 import { useHistory } from 'react-router-dom';
 import {
   returnPercentComplete,
-  completed,
+  filterNotNull,
+  sumOfObj,
 } from '../../../../utils/percentComplete';
 
 const AdditionalInfo = ({
@@ -25,83 +26,61 @@ const AdditionalInfo = ({
   const submitHandlder = e => {
     e.preventDefault();
     // Contact Info Page calculation ///
-    const phone1 = Object.entries(familyInfo.phone_one).reduce(
-      (a, [k, v]) => (v ? ((a[k] = v), a) : a),
-      {}
-    );
-    const phone2 = Object.entries(familyInfo.phone_two).reduce(
-      (a, [k, v]) => (v ? ((a[k] = v), a) : a),
-      {}
-    );
-    const emerg = Object.entries(familyInfo.emergencyContact).reduce(
-      (a, [k, v]) => (v ? ((a[k] = v), a) : a),
-      {}
-    );
-    const contactSum =
-      Object.keys(phone1).length +
-      Object.keys(phone2).length +
-      Object.keys(emerg).length;
+    const phone1 = filterNotNull(familyInfo.phone_one);
+    const phone2 = filterNotNull(familyInfo.phone_two);
+    const emerg = filterNotNull(familyInfo.emergencyContact);
+    const contactSum = sumOfObj(phone1) + sumOfObj(phone2) + sumOfObj(emerg);
     console.log(` Contact Info: ${contactSum}/8 fields`);
     // Homeless Info Page calculation ///
     const lastPermanentAddress =
       familyInfo.last_permanent_address != null ? 1 : 0;
-    const homelessInfo = Object.entries(familyInfo.homeless_info).reduce(
-      (a, [k, v]) => (v ? ((a[k] = v), a) : a),
-      {}
-    );
-    const sum = Object.keys(homelessInfo).length + lastPermanentAddress;
+    const homelessInfo = filterNotNull(familyInfo.homeless_info);
+    const sum = sumOfObj(homelessInfo) + lastPermanentAddress;
     console.log(`Homeless Info: ${sum}/8 fields`);
     // Domestic Info Page Calculation ////
-    const domesticVInfo = Object.entries(
-      familyInfo.domestic_violence_info
-    ).reduce((a, [k, v]) => (v ? ((a[k] = v), a) : a), {});
-    const domesticInfoSum = Object.keys(domesticVInfo).length;
+    const domesticVInfo = filterNotNull(familyInfo.domestic_violence_info);
+    const domesticInfoSum = sumOfObj(domesticVInfo);
     console.log(`Domestic Violence: ${domesticInfoSum}/5 fields`);
     // Insurance Info Page Calculation ////
-    const insurance = Object.entries(familyInfo.insurance).reduce(
-      (a, [k, v]) => (v ? ((a[k] = v), a) : a),
-      {}
-    );
-    const insuranceSum = Object.keys(insurance).length;
+    const insurance = filterNotNull(familyInfo.insurance);
+    const insuranceSum = sumOfObj(insurance);
     console.log(`Insurance: ${insuranceSum}/3 fields`);
     // Additonal Info Page Calculation
-    const govtBnfts = Object.entries(familyInfo.gov_benefits).reduce(
-      (a, [k, v]) => (v ? ((a[k] = v), a) : a),
-      {}
-    );
-    const govtBnftSum = Object.keys(govtBnfts).length;
-    const vechileInf = Object.entries(familyInfo.vehicle).reduce(
-      (a, [k, v]) => (v ? ((a[k] = v), a) : a),
-      {}
-    );
-    const vechileInfSum = Object.keys(vechileInf).length;
-    const pregnancyInfo = Object.entries(
-      familyInfo.insurance.pregnancies
-    ).reduce((a, [k, v]) => (v ? ((a[k] = v), a) : a), {});
-    const pregnancyInfoSum = Object.keys(pregnancyInfo).length;
-    console.log(
-      `Additional Info: ${govtBnftSum +
-        vechileInfSum +
-        pregnancyInfoSum}/14 fields `
-    );
+    const govtBnfts = filterNotNull(familyInfo.gov_benefits);
+    const govtBnftSum = sumOfObj(govtBnfts);
+    const vechileInf = filterNotNull(familyInfo.vehicle);
+    const vechileInfSum = sumOfObj(vechileInf);
+    const pregnancyInfo = filterNotNull(familyInfo.insurance.pregnancies);
+    const pregnancyInfoSum = sumOfObj(pregnancyInfo);
+    const addInfoSum = govtBnftSum + vechileInfSum + pregnancyInfoSum;
+    console.log(`Additional Info: ${addInfoSum}/14 fields `);
+    console.log('formdata', formData);
+    console.log('familyInfo', familyInfo);
+    // Object.keys(formData.familyMember).map(mem => {
+    //   const name = familyMember[mem].demographics['first_name'];
+    //   console.log('mem', mem)
+    //   const demographicInfo = filterNotNull(familyMember[mem].demographics);
+    //   const demographicInfoSum = sumOfObj(demographicInfo);
+    //   console.log(` Demogrpahics: ${demographicInfoSum}/8`);
+    // });
 
-    // axiosWithAuth()
-    //   .post(`families`, familyInfo)
-    //   .then(res => {
-    //     console.log(res);
-    //     Object.keys(formData.familyMember).map(mem => {
-    //       axiosWithAuth()
-    //         .post('members', familyMember[mem])
-    //         .then(res => {
-    //           console.log(res);
-    //         })
-    //         .catch(err => {
-    //           console.log('MemberError', err);
-    //         });
-    //       history.push('/me');
-    //     });
-    //   })
-    //   .catch(err => console.log('FamiliesError', err));
+    axiosWithAuth()
+      .post(`families`, familyInfo)
+      .then(res => {
+        console.log(res);
+        Object.keys(formData.familyMember).map(mem => {
+          axiosWithAuth()
+            .post('members', familyMember[mem])
+            .then(res => {
+              console.log(res);
+            })
+            .catch(err => {
+              console.log('MemberError', err);
+            });
+          history.push('/me');
+        });
+      })
+      .catch(err => console.log('FamiliesError', err));
   };
   const familyInfoNameString = (section, value) => {
     return `familyInfo.${section}.${value}`;
