@@ -3,22 +3,23 @@ import React, { useEffect, useState } from 'react';
 // UI
 import { Divider } from 'antd';
 
-// data fetching
-import { axiosWithAuth } from '../../../api/axiosWithAuth';
+//redux
+import actions from '../../../state/actions/families';
+import { connect } from 'react-redux';
 
 // state
 import { useSelector } from 'react-redux';
 
-const GuestDashboard = () => {
+const GuestDashboard = ({ fetchHousehold, fetchFamily }) => {
   const user = useSelector(state => state.CURRENT_USER);
 
   useEffect(() => {
-    console.log('familyid************', user);
-    // axiosWithAuth().get('/getAllHouseholdInfo');
     // this endpoint needs a family id to work
     // todo:
     // need to fetch family first with userID to get family
     // then get household with family id.
+    fetchFamily();
+    // fetchHousehold();
   });
 
   return (
@@ -31,4 +32,10 @@ const GuestDashboard = () => {
   );
 };
 
-export default GuestDashboard;
+const mapStateToProps = () => {};
+const mapDispatchToProps = {
+  fetchHousehold: actions.fetchHousehold,
+  fetchFamily: actions.fetchFamily,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GuestDashboard);
