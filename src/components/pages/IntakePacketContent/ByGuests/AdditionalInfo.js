@@ -1,15 +1,69 @@
 import React from 'react';
-import { Form, Button, Card, Input, Checkbox, Row, Col } from 'antd';
+import { Form, Button, Card, Input, Checkbox, Row, Col, Progress } from 'antd';
 import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 import { useHistory } from 'react-router-dom';
+import {
+  returnPercentComplete,
+  filterNotNull,
+  sumOfObj,
+} from '../../../../utils/percentComplete';
 
-const AdditionalInfo = ({ navigation, tempFormStyle, formData, setForm }) => {
+const AdditionalInfo = ({
+  navigation,
+  tempFormStyle,
+  formData,
+  setForm,
+  steps,
+  step,
+}) => {
+  const pageNumber = steps.findIndex(item => item === step);
+  const pages = steps.length;
+  const percent = (pageNumber / pages) * 100;
   const { previous } = navigation;
   const { familyInfo, familyMember } = formData;
   const history = useHistory();
 
   const submitHandlder = e => {
     e.preventDefault();
+    // Contact Info Page calculation ///
+    const phone1 = filterNotNull(familyInfo.phone_one);
+    const phone2 = filterNotNull(familyInfo.phone_two);
+    const emerg = filterNotNull(familyInfo.emergencyContact);
+    const contactSum = sumOfObj(phone1) + sumOfObj(phone2) + sumOfObj(emerg);
+    console.log(` Contact Info: ${contactSum}/8 fields`);
+    // Homeless Info Page calculation ///
+    const lastPermanentAddress =
+      familyInfo.last_permanent_address != null ? 1 : 0;
+    const homelessInfo = filterNotNull(familyInfo.homeless_info);
+    const sum = sumOfObj(homelessInfo) + lastPermanentAddress;
+    console.log(`Homeless Info: ${sum}/8 fields`);
+    // Domestic Info Page Calculation ////
+    const domesticVInfo = filterNotNull(familyInfo.domestic_violence_info);
+    const domesticInfoSum = sumOfObj(domesticVInfo);
+    console.log(`Domestic Violence: ${domesticInfoSum}/5 fields`);
+    // Insurance Info Page Calculation ////
+    const insurance = filterNotNull(familyInfo.insurance);
+    const insuranceSum = sumOfObj(insurance);
+    console.log(`Insurance: ${insuranceSum}/3 fields`);
+    // Additonal Info Page Calculation
+    const govtBnfts = filterNotNull(familyInfo.gov_benefits);
+    const govtBnftSum = sumOfObj(govtBnfts);
+    const vechileInf = filterNotNull(familyInfo.vehicle);
+    const vechileInfSum = sumOfObj(vechileInf);
+    const pregnancyInfo = filterNotNull(familyInfo.insurance.pregnancies);
+    const pregnancyInfoSum = sumOfObj(pregnancyInfo);
+    const addInfoSum = govtBnftSum + vechileInfSum + pregnancyInfoSum;
+    console.log(`Additional Info: ${addInfoSum}/14 fields `);
+    console.log('formdata', formData);
+    console.log('familyInfo', familyInfo);
+    // Object.keys(formData.familyMember).map(mem => {
+    //   const name = familyMember[mem].demographics['first_name'];
+    //   console.log('mem', mem)
+    //   const demographicInfo = filterNotNull(familyMember[mem].demographics);
+    //   const demographicInfoSum = sumOfObj(demographicInfo);
+    //   console.log(` Demogrpahics: ${demographicInfoSum}/8`);
+    // });
+
     axiosWithAuth()
       .post(`families`, familyInfo)
       .then(res => {
@@ -57,6 +111,7 @@ const AdditionalInfo = ({ navigation, tempFormStyle, formData, setForm }) => {
   };
   return (
     <div style={tempFormStyle}>
+      <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Additional Information" bordered={false}>
         <Form.Item>
           <Button type="primary" htmlType="button" onClick={previous}>

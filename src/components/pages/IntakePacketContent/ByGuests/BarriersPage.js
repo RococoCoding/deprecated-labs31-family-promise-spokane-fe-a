@@ -1,5 +1,15 @@
 import React from 'react';
-import { Form, Input, Button, Space, Checkbox, Row, Col, Card } from 'antd';
+import {
+  Form,
+  Input,
+  Button,
+  Space,
+  Checkbox,
+  Row,
+  Col,
+  Card,
+  Progress,
+} from 'antd';
 
 const BarriersPage = ({
   navigation,
@@ -7,7 +17,12 @@ const BarriersPage = ({
   formData,
   setForm,
   nameString,
+  steps,
+  step,
 }) => {
+  const pageNumber = steps.findIndex(item => item === step);
+  const pages = steps.length;
+  const percent = (pageNumber / pages) * 100;
   const { previous, next } = navigation;
   const { familyMember } = formData;
   const { TextArea } = Input;
@@ -32,6 +47,7 @@ const BarriersPage = ({
 
   return (
     <div style={tempFormStyle}>
+      <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Barriers" bordered={false}>
         <Form.Item>
           <Button type="primary" htmlType="button" onClick={previous}>

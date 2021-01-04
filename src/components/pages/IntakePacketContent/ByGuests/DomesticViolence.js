@@ -1,12 +1,27 @@
 import React from 'react';
-import { Form, Button, Input, Checkbox, Card } from 'antd';
+import { Form, Button, Input, Checkbox, Card, Progress } from 'antd';
+import {
+  returnPercentComplete,
+  completed,
+} from '../../../../utils/percentComplete';
 
-const DomesticViolence = ({ navigation, tempFormStyle, formData, setForm }) => {
+const DomesticViolence = ({
+  navigation,
+  tempFormStyle,
+  formData,
+  setForm,
+  steps,
+  step,
+}) => {
+  const pageNumber = steps.findIndex(item => item === step);
+  const pages = steps.length;
+  const percent = (pageNumber / pages) * 100;
   const { previous, next } = navigation;
   const { familyInfo } = formData;
 
   return (
     <div style={tempFormStyle}>
+      <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Domestic Violence" bordered={false}>
         <Form.Item>
           <Button type="primary" htmlType="button" onClick={previous}>
