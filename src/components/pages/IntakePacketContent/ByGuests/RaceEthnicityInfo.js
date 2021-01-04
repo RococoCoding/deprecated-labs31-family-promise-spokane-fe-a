@@ -10,7 +10,7 @@ const RaceEthnicityInfo = ({
 }) => {
   const pageNumber = steps.findIndex(item => item === step);
   const pages = steps.length;
-  const percent = (pageNumber / pages) * 100;
+  const percent = ((pageNumber + 1) / pages) * 100;
   const { previous, next } = navigation;
   let { familyMember } = formData;
   const options = [
