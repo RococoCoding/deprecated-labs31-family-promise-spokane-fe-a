@@ -15,6 +15,10 @@ const GuestDashboard = () => {
   useEffect(() => {
     console.log('familyid************', user);
     // axiosWithAuth().get('/getAllHouseholdInfo');
+    // this endpoint needs a family id to work
+    // todo:
+    // need to fetch family first with userID to get family
+    // then get household with family id.
   });
 
   return (
