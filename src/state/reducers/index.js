@@ -2,13 +2,17 @@ import {
   LOG_IN,
   SET_LOADING,
   SET_CURRENT_USER,
+  GET_FAMILY_FETCHING,
+  GET_FAMILY_SUCCESS,
+  GET_FAMILY_FAILURE,
   GET_HOUSEHOLD_FETCHING,
-  GET_MEMBERS_FAILURE,
+  GET_HOUSEHOLD_FAILURE,
   GET_HOUSEHOLD_SUCCESS,
 } from '../types';
 
 const INITIAL_STATE = {
   CURRENT_USER: {},
+  FAMILY: {},
   HOUSEHOLD: {},
   LOGGED_IN: false,
   LOADING: false,
@@ -25,12 +29,18 @@ export const rootReducer = (state = INITIAL_STATE, action) => {
       return { ...state, LOGGED_IN: false };
     case SET_LOADING:
       return { ...state, LOADING: action.payload };
+    case GET_FAMILY_FETCHING:
+      return { ...state, LOADING: true };
+    case GET_FAMILY_FAILURE:
+      return { ...state, LOADING: false, ERROR: action.payload };
+    case GET_FAMILY_SUCCESS:
+      return { ...state, LOADING: false, FAMILY: action.payload };
     case GET_HOUSEHOLD_FETCHING:
       return { ...state, LOADING: true };
-    case GET_MEMBERS_FAILURE:
+    case GET_HOUSEHOLD_FAILURE:
       return { ...state, LOADING: false, ERROR: action.payload };
-    case GET_MEMBERS_FAILURE:
-      return { ...state, HOUSEHOLD: action.payload };
+    case GET_HOUSEHOLD_SUCCESS:
+      return { ...state, LOADING: false, HOUSEHOLD: action.payload };
     default:
       return state;
   }

@@ -19,8 +19,8 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily }) => {
     // need to fetch family first with userID to get family
     // then get household with family id.
     fetchFamily();
-    // fetchHousehold();
-  });
+    fetchHousehold();
+  }, []);
 
   return (
     <div className="container">
@@ -32,7 +32,10 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily }) => {
   );
 };
 
-const mapStateToProps = () => {};
+const mapStateToProps = state => {
+  return state;
+};
+
 const mapDispatchToProps = {
   fetchHousehold: actions.fetchHousehold,
   fetchFamily: actions.fetchFamily,

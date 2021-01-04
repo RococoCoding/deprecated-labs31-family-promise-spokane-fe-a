@@ -22,29 +22,31 @@ const fetchFamily = () => (dispatch, getState) => {
   // get family id from family state
   // and then fetch household
   try {
-    let family = axiosWithAuth()
+    axiosWithAuth()
       .get(`/families/user/${user_id}`)
-      .then(() => {
-        dispatch({ type: GET_HOUSEHOLD_SUCCESS, family });
-        return family;
+      .then(res => {
+        dispatch({ type: GET_FAMILY_SUCCESS, payload: res.data });
+      })
+      .catch(error => {
+        dispatch({ GET_FAMILY_FAILURE, payload: error });
       });
   } catch (error) {
-    dispatch({ GET_HOUSEHOLD_FAILURE, payload: error });
+    console.log(error);
   }
 };
 
 const fetchHousehold = () => async (dispatch, getState) => {
   const state = getState();
-  const family = fetchFamily();
-  console.log('family*****', family);
+  console.log('state*****', state);
   // get family id from family state
   // and then fetch household
   dispatch({ type: GET_HOUSEHOLD_FETCHING, payload: true });
   try {
     let household = await axiosWithAuth()
-      .get(`/families/${family.id}/household`)
-      .then(res => res.data.user);
-    dispatch({ type: GET_HOUSEHOLD_SUCCESS, payload: household });
+      .get(`/families/1/household`)
+      .then(household => {
+        dispatch({ type: GET_HOUSEHOLD_SUCCESS, payload: household });
+      });
   } catch (error) {
     console.log(error);
     // dispatch({ GET_HOUSEHOLD_FAILURE, payload: error });
