@@ -39,6 +39,7 @@ import logger from 'redux-logger';
 import GuestDashboard from './components/pages/guest-pages/GuestDashboard';
 import FamilyPage from './components/pages/guest-pages/FamilyPage';
 import Notes from './components/pages/Notes/Notes';
+import Members from './components/pages/guest-pages/Members';
 
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
@@ -80,6 +81,12 @@ function App() {
           path="/family/:id"
           roles={['executive_director', 'supervisor', 'case_manager']}
           component={FamilyMembers}
+        />
+        <PrivateRoute
+          exact
+          path="/members"
+          roles={['guest']}
+          component={Members}
         />
         <PrivateRoute
           path="/me"

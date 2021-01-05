@@ -18,21 +18,25 @@ const { TextArea } = Input;
 const Notes = () => {
   const [formValues, setFormValues] = useState({});
   const [creatingNote, setCreatingNote] = useState(false);
-  const user = useSelector(state => state.CURRENT_USER);
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
   const params = useParams();
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentNote, setCurrentNote] = useState({});
+  const user = useSelector(state => state.CURRENT_USER);
 
   const handleFinish = e => {
+    let shareable;
+    if (!checked) shareable = true;
+    else shareable = false;
+
     e.preventDefault();
     const newNote = {
       subject: formValues.subject,
       content: formValues.content,
-      shareable: !checked,
+      shareable: shareable,
       family_id: params.family_id,
       author_id: user.id,
     };
@@ -46,6 +50,7 @@ const Notes = () => {
         setFormValues({});
       })
       .catch(error => {
+        console.log(error.response);
         alert('Unable to create note');
       })
       .finally(() => {
@@ -90,7 +95,7 @@ const Notes = () => {
 
   return (
     <div className="notes-page-container">
-      {isModalOpen && (
+      {isModalOpen && user.role !== 'guest' && (
         <CaseNote
           setNotes={setNotes}
           setCurrentNote={setCurrentNote}
@@ -114,7 +119,7 @@ const Notes = () => {
                   toggleCaseModal();
                 }}
               >
-                More
+                {user.role !== 'guest' && 'more'}
               </p>
             }
             actions={[
@@ -130,34 +135,36 @@ const Notes = () => {
         );
       })}
       <hr />
-      <form className="notes-form" onSubmit={handleFinish}>
-        <div className="case-notes-switch">
-          <Switch
-            onChange={toggleChecked}
-            checkedChildren="Private"
-            unCheckedChildren="Public"
-          ></Switch>
-        </div>
-        <Input
-          name="subject"
-          onChange={handleChange}
-          value={formValues.subject}
-          size="large"
-          placeholder="Subject"
-        />
-        <TextArea
-          name="content"
-          onChange={handleChange}
-          value={formValues.content}
-          showCount
-          maxLength="256"
-          placeholder="Content"
-          autoSize={{ minRows: 4, maxRows: 10 }}
-        ></TextArea>
-        <Button disabled={creatingNote} htmlType="submit">
-          {creatingNote ? 'Loading...' : 'Submit'}
-        </Button>
-      </form>
+      {user.role !== 'guest' && (
+        <form className="notes-form" onSubmit={handleFinish}>
+          <div className="case-notes-switch">
+            <Switch
+              onChange={toggleChecked}
+              checkedChildren="Private"
+              unCheckedChildren="Public"
+            ></Switch>
+          </div>
+          <Input
+            name="subject"
+            onChange={handleChange}
+            value={formValues.subject}
+            size="large"
+            placeholder="Subject"
+          />
+          <TextArea
+            name="content"
+            onChange={handleChange}
+            value={formValues.content}
+            showCount
+            maxLength="256"
+            placeholder="Content"
+            autoSize={{ minRows: 4, maxRows: 10 }}
+          ></TextArea>
+          <Button disabled={creatingNote} htmlType="submit">
+            {creatingNote ? 'Loading...' : 'Submit'}
+          </Button>
+        </form>
+      )}
     </div>
   );
 };
