@@ -10,6 +10,7 @@ import actions from '../../../state/actions/families';
 // utils
 import { returnPercentComplete } from '../../../utils/percentComplete';
 import { useHistory } from 'react-router-dom';
+import _ from 'underscore';
 
 const GuestAnalytics = ({
   loading,
@@ -36,47 +37,85 @@ const GuestAnalytics = ({
     setMissingFields(percent[1]);
   };
 
+  const formatMissingData = () => {
+    // counts all missing fields using underscore countby library to cound a modified key value
+    // example modified values changes list_indefinite_conditions to "List indefinite conditions"
+    // countBy method return an object of keys and their count
+    const countMissing = _.countBy(missingFields, function(field) {
+      let modified = field;
+      return (
+        field
+          .toString()
+          .charAt(0)
+          .toUpperCase() +
+        modified
+          .slice(1)
+          .split('_')
+          .join(' ')
+      );
+    });
+
+    let modifiedStringValues = [];
+
+    // builds an array of messages to render
+    for (let value in countMissing) {
+      let string = `${value} missing from ${countMissing[value]} family member(s). `;
+      modifiedStringValues.push(string);
+    }
+
+    console.log(modifiedStringValues);
+
+    return modifiedStringValues;
+  };
+
   useEffect(() => {
     fetchFamily();
     fetchHousehold();
   }, []);
 
   return (
-    <div className="dashboard-container">
+    <div className="analytics-container">
       <h1> Guest Analytics</h1>
+      <div className="progess-container">
+        <div className="progress-section">
+          <Progress type="circle" percent={percentComplete} />
+          <p> Doesn't look correct? </p>
+          <Button type="primary" loading={loading} onClick={getPercentComplete}>
+            Refresh
+          </Button>
+          <p>
+            You have completed {percentComplete}% of your household's intake
+            form!
+          </p>
+        </div>
 
-      <div className="progress-section">
-        <Progress type="circle" percent={percentComplete} />
-        <p> Doesn't look correct? </p>
-        <Button type="primary" loading={loading} onClick={getPercentComplete}>
-          Refresh
-        </Button>
-      </div>
-      <div>
-        <p>
-          You have completed {percentComplete}% of your household's intake form!
-        </p>
-        {percentComplete < 100 ? (
-          <div>
-            <p>Click the link below to complete or update your information. </p>
-            <Button onClick={goToProfile}>Go to Profile </Button>
-          </div>
-        ) : (
-          <p>You're all set!</p>
-        )}
-        <div>
-          {missingFields && missingFields.length > 1
+        <div className="missing-info-section">
+          <h4>Missing household information: </h4>
+          {/* {missingFields && missingFields.length > 1
             ? missingFields.map(missing => {
                 return (
                   <div>
-                    <h4>Missing household information: </h4>
                     <p>{missing}</p>
                   </div>
                 );
               })
-            : null}
+            : null} */}
+          {formatMissingData().map(msg => {
+            return <p>{msg}</p>;
+          })}
+          {percentComplete < 100 ? (
+            <div>
+              <p>
+                Click the link below to complete or update your information.{' '}
+              </p>
+              <Button onClick={goToProfile}>Go to Profile </Button>
+            </div>
+          ) : (
+            <p>You're all set!</p>
+          )}
         </div>
       </div>
+      <div />
     </div>
   );
 };
