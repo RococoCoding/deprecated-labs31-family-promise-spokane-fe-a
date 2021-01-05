@@ -9,6 +9,7 @@ import {
   Col,
   Card,
   Progress,
+  Divider,
 } from 'antd';
 
 const BarriersPage = ({
@@ -64,12 +65,22 @@ const BarriersPage = ({
         <Form layout="vertical">
           {Object.keys(formData.familyMember).map((mem, key) => (
             <>
+              <Divider orientation="left" plain>
+                {familyMember[mem].demographics.first_name}
+              </Divider>
+
               <Space key={`${mem}${key}`}>
-                <p>{familyMember[mem].barriers.first_name}</p>
-                <Row>
+                <Row justify={'space-between'} align={'top'}>
                   {options.map(barrier => (
-                    <Col span={3} style={{ display: 'inline-block' }}>
-                      <Form.Item label={barrier}>
+                    <Col span={6}>
+                      <Form.Item
+                        label={barrier}
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'column-reverse',
+                          paddingRight: '20px',
+                        }}
+                      >
                         <Checkbox
                           defaultChecked={
                             familyMember[mem].barriers[optionDataName[barrier]]

@@ -42,7 +42,7 @@ const RaceEthnicityInfo = ({
     <div style={tempFormStyle}>
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Race/Ethnicity Info" bordered={false}>
-        <Form.Item>
+        <Form.Item style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Button type="primary" htmlType="button" onClick={previous}>
             Previous
           </Button>
