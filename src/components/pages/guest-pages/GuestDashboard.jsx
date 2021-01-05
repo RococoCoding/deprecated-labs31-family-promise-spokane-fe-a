@@ -19,7 +19,6 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily }) => {
     // need to fetch family first with userID to get family
     // then get household with family id.
     fetchFamily();
-    fetchHousehold();
   }, []);
 
   return (

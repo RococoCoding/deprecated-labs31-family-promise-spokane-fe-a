@@ -8,16 +8,22 @@ import { connect } from 'react-redux';
 import actions from '../../../state/actions/families';
 
 // utils
-import returnPercentComplete from '../../../utils/percentComplete';
+import { returnPercentComplete } from '../../../utils/percentComplete';
 
-const GuestAnalytics = ({ HOUSEHOLD, fetchHousehold, fetchFamily }) => {
-  console.log('**********************', HOUSEHOLD);
+const GuestAnalytics = ({ household, fetchHousehold, fetchFamily }) => {
+  const [percentComplete, setPercentComplete] = useState(0);
 
-  // const [percentComplete, setPercentComplete] = useState(0);
-  // console.log('percent comp*************', returnPercentComplete(HOUSEHOLD));
-  // // const getPercentComplete = HOUSEHOLD => {
-  // //   return percent;
-  // // };
+  const getPercentComplete = () => {
+    // fetch household data object
+    fetchHousehold();
+    console.log('***************** state ***************', household);
+
+    // calculates a percentage of complete values
+    const percent = returnPercentComplete(household);
+    console.log('***************** percent ***************', percent);
+
+    setPercentComplete(percent);
+  };
 
   useEffect(() => {
     fetchFamily();
@@ -29,21 +35,23 @@ const GuestAnalytics = ({ HOUSEHOLD, fetchHousehold, fetchFamily }) => {
       <h1> Guest Analytics</h1>
       <div className="progress-section">
         <p>
-          You have completed 50% of your household's intake form! Click the link
-          below to complete or update your information.{' '}
+          You have completed {percentComplete}% of your household's intake form!
+          Click the link below to complete or update your information.{' '}
         </p>
         <>
-          <Progress type="circle" percent={'100'} />
+          <Progress type="circle" percent={percentComplete} />
+          <p> Doen't look correct? </p>
+          <button onClick={getPercentComplete}>Refresh </button>
         </>
       </div>
     </div>
   );
 };
 
-const mapStateToProps = state => {
-  const { HOUSEHOLD } = state.HOUSEHOLD;
-  return { HOUSEHOLD };
-};
+function mapStateToProps(state) {
+  return { household: state.HOUSEHOLD };
+}
+
 const mapDispatchToProps = {
   fetchHousehold: actions.fetchHousehold,
   fetchFamily: actions.fetchFamily,

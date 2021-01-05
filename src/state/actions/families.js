@@ -20,30 +20,25 @@ const fetchFamily = () => (dispatch, getState) => {
   const state = getState();
   const user_id = state.CURRENT_USER.id;
 
-  try {
-    axiosWithAuth()
-      .get(`/families/user/${user_id}`)
-      .then(res => {
-        dispatch({ type: GET_FAMILY_SUCCESS, payload: res.data });
-      })
-      .catch(error => {
-        dispatch({ GET_FAMILY_FAILURE, payload: error });
-      });
-  } catch (error) {
-    console.log(error);
-  }
+  return axiosWithAuth()
+    .get(`/families/user/${user_id}`)
+    .then(res => {
+      dispatch({ type: GET_FAMILY_SUCCESS, payload: res.data });
+    })
+    .then(res => {})
+    .catch(error => {
+      dispatch({ GET_FAMILY_FAILURE, payload: error });
+    });
 };
 
-const fetchHousehold = () => async (dispatch, getState) => {
+const fetchHousehold = () => (dispatch, getState) => {
   dispatch({ type: GET_HOUSEHOLD_FETCHING, payload: true });
-  const state = await getState();
-
-  await fetchFamily();
-  console.log('family*****', getState);
   // get family id from family state
   // and then fetch household
+  const state = getState();
+
   axiosWithAuth()
-    .get(`/families/1/household`)
+    .get(`/families/${state.FAMILY.id}/household`)
     .then(res => {
       let household = {};
       if (res && res.data) {

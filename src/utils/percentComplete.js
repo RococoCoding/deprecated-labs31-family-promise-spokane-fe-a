@@ -96,7 +96,7 @@ function percentage(partialValue, totalValue) {
 
 // function that returns a percent complete
 // pass in data
-function returnPercentComplete(data) {
+export function returnPercentComplete(data) {
   // get an array of all complete values
   getAllValues(data);
 
@@ -124,4 +124,3 @@ function returnPercentComplete(data) {
 // there are are 53 total values minus values to exclude is 48
 // 41 out of 48 is about 85%
 // console.log('**********************', returnPercentComplete(family));
-export default { returnPercentComplete };
