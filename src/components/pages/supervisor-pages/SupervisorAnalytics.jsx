@@ -113,21 +113,6 @@ const Analytics = () => {
               columns={columns}
               data={staffMembers}
               actions={[]}
-              editable={
-                {
-                  // onRowRedirect: (newData) =>
-                  //     new Promise((resolve) => {
-                  //         setTimeout(() => {
-                  //             resolve();
-                  //             setState((prevState) => {
-                  //                 const data = [...prevState.data];
-                  //                 data.push(newData);
-                  //                 return { ...prevState, data };
-                  //             });
-                  //         }, 600);
-                  //     }),
-                }
-              }
             />
           </div>
         )}
