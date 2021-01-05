@@ -1,10 +1,9 @@
 import axios from 'axios';
 const environment = process.env.ENV || 'development';
-console.log('env', environment);
 
 const ApiUrl =
   environment !== 'development'
-    ? 'https://family-pomise-spokane.herokuapp.com'
+    ? process.env.REACT_APP_API_URI
     : 'http://localhost:8000/';
 
 export const axiosWithAuth = () => {
@@ -14,6 +13,6 @@ export const axiosWithAuth = () => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    baseURL: 'https://family-pomise-spokane.herokuapp.com',
+    baseURL: ApiUrl,
   });
 };
