@@ -19,9 +19,7 @@ const fetchFamily = () => (dispatch, getState) => {
   dispatch({ type: GET_FAMILY_FETCHING, payload: true });
   const state = getState();
   const user_id = state.CURRENT_USER.id;
-  console.log('userID*********', user_id);
-  // get family id from family state
-  // and then fetch household
+
   try {
     axiosWithAuth()
       .get(`/families/user/${user_id}`)
@@ -36,12 +34,14 @@ const fetchFamily = () => (dispatch, getState) => {
   }
 };
 
-const fetchHousehold = () => (dispatch, getState) => {
-  const state = getState();
-  console.log('state*****', state);
+const fetchHousehold = () => async (dispatch, getState) => {
+  dispatch({ type: GET_HOUSEHOLD_FETCHING, payload: true });
+  const state = await getState();
+
+  await fetchFamily();
+  console.log('family*****', getState);
   // get family id from family state
   // and then fetch household
-  dispatch({ type: GET_HOUSEHOLD_FETCHING, payload: true });
   axiosWithAuth()
     .get(`/families/1/household`)
     .then(res => {
@@ -70,7 +70,6 @@ const fetchHousehold = () => (dispatch, getState) => {
         let members = [];
         // loops through members and pics member specifics for members array
         for (let i = 0; i < household_obj.length; i++) {
-          console.log(household_obj[i]);
           let member = _.pick(
             household_obj[i],
             'date_of_enrollment',
@@ -88,7 +87,6 @@ const fetchHousehold = () => (dispatch, getState) => {
       }
     })
     .catch(error => {
-      console.log(error);
       dispatch({ GET_HOUSEHOLD_FAILURE, payload: error.message });
     });
 };

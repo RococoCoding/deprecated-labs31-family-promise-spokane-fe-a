@@ -63,18 +63,6 @@ const family = {
   },
 };
 
-// in effort to keep this percentage dynamic for future code changes this list should be updated with any values that are added that do not need to be calculated for percentage complete
-// for example if we ever add message_id or something like that to the families table we dont need to count that value in total percent complete
-const valuesToExclude = [
-  'id',
-  'familiy_id',
-  'predicted_exit_destination',
-  'flag',
-  'percent_complete',
-  'table_data',
-  // TODO include any values to exclude from members data
-];
-
 // array to hold all values
 const allValues = [];
 
@@ -113,7 +101,7 @@ function returnPercentComplete(data) {
   getAllValues(data);
 
   // get number of complete values
-  const total = allValues.length - valuesToExclude.length;
+  const total = allValues.length;
 
   // subtract nullCount from allValues.length and get number of complete values
   const totalComplete = total - nullCount;
@@ -135,5 +123,5 @@ function returnPercentComplete(data) {
 // there are 7 null values and 41 complete values in example above
 // there are are 53 total values minus values to exclude is 48
 // 41 out of 48 is about 85%
-
-returnPercentComplete(family);
+// console.log('**********************', returnPercentComplete(family));
+export default { returnPercentComplete };
