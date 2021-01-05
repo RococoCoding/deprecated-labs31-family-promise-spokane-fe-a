@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Avatar, Descriptions, Card, Typography } from 'antd';
 //redux
 import { connect } from 'react-redux';
+import actions from '../../state/actions/families';
 
 const { Text } = Typography;
 const tabListNoTitle = [
@@ -20,7 +21,10 @@ const tabListNoTitle = [
   },
 ];
 
-const UserProfile = ({ familyInfo }) => {
+const UserProfile = ({ familyInfo, fetchFamily }) => {
+  useEffect(() => {
+    fetchFamily();
+  }, []);
   console.log(familyInfo);
   const [tab, setTab] = useState({ key: 'tab1', noTitleKey: 'Contact Info' });
 
@@ -160,5 +164,7 @@ const UserProfile = ({ familyInfo }) => {
 function mapStateToProps(state) {
   return { familyInfo: state.FAMILY };
 }
-
-export default connect(mapStateToProps, {})(UserProfile);
+const mapDispatchToProps = {
+  fetchFamily: actions.fetchFamily,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
