@@ -12,17 +12,16 @@ import { returnPercentComplete } from '../../../utils/percentComplete';
 
 const GuestAnalytics = ({ household, fetchHousehold, fetchFamily }) => {
   const [percentComplete, setPercentComplete] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const getPercentComplete = () => {
     // fetch household data object
     fetchHousehold();
-    console.log('***************** state ***************', household);
 
     // calculates a percentage of complete values
     const percent = returnPercentComplete(household);
-    console.log('***************** percent ***************', percent);
 
-    setPercentComplete(percent);
+    setPercentComplete(percent[0]);
   };
 
   useEffect(() => {
@@ -33,23 +32,21 @@ const GuestAnalytics = ({ household, fetchHousehold, fetchFamily }) => {
   return (
     <div className="dashboard-container">
       <h1> Guest Analytics</h1>
+      <p>
+        You have completed {percentComplete}% of your household's intake form!
+        Click the link below to complete or update your information.{' '}
+      </p>
       <div className="progress-section">
-        <p>
-          You have completed {percentComplete}% of your household's intake form!
-          Click the link below to complete or update your information.{' '}
-        </p>
-        <>
-          <Progress type="circle" percent={percentComplete} />
-          <p> Doen't look correct? </p>
-          <button onClick={getPercentComplete}>Refresh </button>
-        </>
+        <Progress type="circle" percent={percentComplete} />
+        <p> Doen't look correct? </p>
+        <button onClick={getPercentComplete}>Refresh </button>
       </div>
     </div>
   );
 };
 
 function mapStateToProps(state) {
-  return { household: state.HOUSEHOLD };
+  return { household: state.HOUSEHOLD, loading: state.LOADING };
 }
 
 const mapDispatchToProps = {
