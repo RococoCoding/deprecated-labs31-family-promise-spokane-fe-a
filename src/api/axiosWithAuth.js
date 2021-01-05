@@ -1,11 +1,10 @@
 import axios from 'axios';
-// const environment = process.env.ENV || 'development';
-// console.log('env', environment);
+const environment = process.env.ENV || 'development';
 
-// const ApiUrl =
-//   environment !== 'development'
-//     ? 'https://family-pomise-spokane.herokuapp.com'
-//     : 'http://localhost:8000/';
+const ApiUrl =
+  environment !== 'development'
+    ? process.env.REACT_APP_API_URI
+    : 'http://localhost:8000/';
 
 export const axiosWithAuth = () => {
   const token = JSON.parse(localStorage.getItem('okta-token-storage'))?.idToken

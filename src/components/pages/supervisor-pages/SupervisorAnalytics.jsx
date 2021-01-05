@@ -148,6 +148,7 @@ const Analytics = () => {
               columns={columns}
               data={staffMembers}
               actions={[]}
+              cellEditable={true}
             />
           </div>
         )}

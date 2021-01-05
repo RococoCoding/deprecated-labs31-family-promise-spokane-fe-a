@@ -1,6 +1,7 @@
 import { Card } from 'antd';
 import React from 'react';
 import CardShadow from '../CardShadow';
+import { axiosWithAuth } from '../../api/axiosWithAuth';
 
 const FlagGuest = ({ state, setState, setIsFlagOpen, guestId }) => {
   const handleModalClose = e => {
@@ -10,6 +11,9 @@ const FlagGuest = ({ state, setState, setIsFlagOpen, guestId }) => {
   const handleChildClick = e => {
     e.persist();
     e.stopPropagation();
+
+    axiosWithAuth().put();
+
     setState(prevState => {
       const data = prevState.data;
 
