@@ -57,10 +57,10 @@ const UserProfile = ({ familyInfo, fetchFamily }) => {
           <Text type="secondary">Alternative Contact:</Text>
           <Descriptions>
             <Descriptions.Item label="name">
-              {familyInfo.safe_alternitive.name}
+              {familyInfo.safe_alternate.name}
             </Descriptions.Item>
             <Descriptions.Item label="number">
-              {familyInfo.safe_alternitive.number}
+              {familyInfo.safe_alternate.number}
             </Descriptions.Item>
           </Descriptions>
           <br></br>
