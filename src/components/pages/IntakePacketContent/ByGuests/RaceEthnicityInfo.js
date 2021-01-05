@@ -1,6 +1,16 @@
 import React from 'react';
-import { Form, Button, Space, Checkbox, Row, Col, Card, Progress } from 'antd';
-
+import {
+  Form,
+  Button,
+  Space,
+  Checkbox,
+  Row,
+  Col,
+  Card,
+  Progress,
+  Typography,
+  Divider,
+} from 'antd';
 const RaceEthnicityInfo = ({
   navigation,
   formData,
@@ -17,8 +27,8 @@ const RaceEthnicityInfo = ({
     'Hispanic/Latino',
     'American Indian or Alaska Native',
     'Asian',
-    'Black orAfricanAmerican',
-    'NativeHawaiianOr PacificIslander',
+    'Black or African American',
+    'Native HawaiianOr Pacific Islander',
     'White',
     'Unknown',
     'Refuse',
@@ -47,17 +57,25 @@ const RaceEthnicityInfo = ({
             apply for EACH family member.
           </h3>
           {Object.keys(formData.familyMember).map((mem, key) => (
-            <>
-              <p>{familyMember[mem].demographics.first_name}</p>
-
+            <div>
+              <Divider orientation="left" plain>
+                {familyMember[mem].demographics.first_name}
+              </Divider>
               <Space>
                 <Checkbox.Group
                   defaultValue={familyMember[mem].demographics.race}
                 >
-                  <Row>
+                  <Row justify={'space-between'} align={'top'}>
                     {options.map(race => (
-                      <Col span={3} style={{ display: 'inline-block' }}>
-                        <Form.Item label={race}>
+                      <Col span={6}>
+                        <Form.Item
+                          label={race}
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column-reverse',
+                            paddingRight: '20px',
+                          }}
+                        >
                           <Checkbox
                             onChange={setFormRace(mem)}
                             defaultChecked={true}
@@ -69,7 +87,7 @@ const RaceEthnicityInfo = ({
                   </Row>
                 </Checkbox.Group>
               </Space>
-            </>
+            </div>
           ))}
         </Form>
       </Card>
