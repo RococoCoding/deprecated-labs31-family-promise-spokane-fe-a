@@ -1,8 +1,8 @@
 import { Divider } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { axiosWithAuth } from '../../api/axiosWithAuth';
 import { Avatar, Descriptions, Card, Typography } from 'antd';
-import LoadingComponent from '../common/LoadingComponent';
+//redux
+import { connect } from 'react-redux';
 
 const { Text } = Typography;
 const tabListNoTitle = [
@@ -20,34 +20,10 @@ const tabListNoTitle = [
   },
 ];
 
-const UserProfile = () => {
-  const [familyInfo, setFamilyInfo] = useState({});
-  const [loading, setLoading] = useState(true);
+const UserProfile = ({ familyInfo }) => {
+  console.log(familyInfo);
   const [tab, setTab] = useState({ key: 'tab1', noTitleKey: 'Contact Info' });
-  const fetchFamilyInfo = async () => {
-    try {
-      const info = await axiosWithAuth()
-        .get(`/families/1`)
-        .then(res => res.data);
-      setFamilyInfo(info);
-    } catch (error) {
-      alert(error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
-  useEffect(() => {
-    fetchFamilyInfo();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="guest-table-container">
-        <LoadingComponent />
-      </div>
-    );
-  }
   const onTabChange = (key, type) => {
     setTab({ [type]: key });
   };
@@ -181,5 +157,8 @@ const UserProfile = () => {
     </div>
   );
 };
+function mapStateToProps(state) {
+  return { familyInfo: state.FAMILY };
+}
 
-export default UserProfile;
+export default connect(mapStateToProps, {})(UserProfile);
