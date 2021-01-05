@@ -44,6 +44,10 @@ const SideBar = () => {
     history.push('/family');
   };
 
+  const redirectToMembers = () => {
+    history.push('/members');
+  };
+
   return (
     <div>
       {user.role && (
@@ -73,13 +77,22 @@ const SideBar = () => {
               Analytics
             </Menu.Item>
             {user.role == 'guest' && (
-              <Menu.Item
-                onClick={redirectToFamily}
-                key="3"
-                icon={<TeamOutlined />}
-              >
-                Family
-              </Menu.Item>
+              <Menu>
+                <Menu.Item
+                  onClick={redirectToFamily}
+                  key="3"
+                  icon={<TeamOutlined />}
+                >
+                  Family
+                </Menu.Item>
+                <Menu.Item
+                  onClick={redirectToMembers}
+                  key="3"
+                  icon={<TeamOutlined />}
+                >
+                  Members
+                </Menu.Item>
+              </Menu>
             )}
             {['supervisor', 'executive_director', 'case_manager'].includes(
               user.role
