@@ -199,27 +199,22 @@ function getAllValues(data) {
   }
   allValues.push(data);
 }
-
 //function to calculate percentage
 function percentage(partialValue, totalValue) {
   return (100 * partialValue) / totalValue;
 }
-
 // function that returns a percent complete
 // pass in data
 export function returnPercentComplete(data) {
   // get an array of all complete values
   getAllValues(data);
-
   // get number of complete values
   const total = allValues.length;
 
   // subtract nullCount from allValues.length and get number of complete values
   const totalComplete = total - nullCount;
-
   // calculate a percentage
   const percent_complete = percentage(totalComplete, total);
-
   // return a percentage
   return [Math.round(percent_complete), incompleteFields];
 }

@@ -1,5 +1,14 @@
 import React from 'react';
-import { Form, Input, Button, Space, Select, Checkbox, Card } from 'antd';
+import {
+  Form,
+  Input,
+  Button,
+  Space,
+  Select,
+  Checkbox,
+  Card,
+  Progress,
+} from 'antd';
 
 const ChildSchoolInfo = ({
   navigation,
@@ -7,7 +16,12 @@ const ChildSchoolInfo = ({
   setForm,
   formData,
   nameString,
+  steps,
+  step,
 }) => {
+  const pageNumber = steps.findIndex(item => item === step);
+  const pages = steps.length;
+  const percent = ((pageNumber + 1) / pages) * 100;
   let x = 0;
   const gradeOptions = [
     '1',
@@ -55,6 +69,7 @@ const ChildSchoolInfo = ({
 
   return (
     <div style={tempFormStyle}>
+      <Progress percent={percent} status="active" showInfo={false} />
       <Card title="School Verification" bordered={false}>
         <Form.Item>
           <Button type="primary" htmlType="button" onClick={previous}>
