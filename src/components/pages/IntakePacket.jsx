@@ -108,6 +108,7 @@ const IntakePacket = () => {
   const [userId, setUserId] = useState(null);
   const [formData, setForm] = useForm(defaultData);
   const { step, navigation } = useStep({ initialStep: 0, steps });
+
   const { id } = step;
   const props = {
     navigation,
@@ -118,6 +119,8 @@ const IntakePacket = () => {
     setCount,
     nameString,
     userId,
+    steps,
+    step,
   };
 
   if (!userId) {

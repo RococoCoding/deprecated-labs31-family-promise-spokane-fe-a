@@ -34,8 +34,9 @@ const CaseNote = ({ note, setNotes, setCurrentNote, toggleModal }) => {
     const newNote = {
       content: formValues.content,
       subject: formValues.subject,
-      shareable: checked,
+      shareable: !checked,
     };
+
     setCurrentNote({ ...note, newNote });
     axiosWithAuth()
       .put(`/notes/${note.id}`, newNote)
@@ -43,7 +44,7 @@ const CaseNote = ({ note, setNotes, setCurrentNote, toggleModal }) => {
         setNotes(prevState =>
           prevState.map(el => {
             if (el.id == note.id) {
-              return res.data.notes;
+              return res.data.note;
             }
             return el;
           })

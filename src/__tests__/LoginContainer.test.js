@@ -1,11 +1,16 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { NotFoundPage } from '../components/pages/NotFound';
 
-import LoginContainer from '../components/pages/Login/LoginContainer';
-
-describe('<LoginContainer /> test suite', () => {
-  test('signin widget mounts successfully', () => {
-    const { container } = render(<LoginContainer />);
-    expect(container.querySelector('#sign-in-widget')).toBeTruthy();
+describe('Loading Common Component', () => {
+  test('it should mount a div based on props', () => {
+    const { getByText } = render(
+      <Router>
+        <NotFoundPage />
+      </Router>
+    );
+    const h1 = getByText(/404 page not found/i);
+    expect(h1.textContent).toBe('404 Page Not Found');
   });
 });

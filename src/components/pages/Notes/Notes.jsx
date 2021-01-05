@@ -19,7 +19,7 @@ const Notes = () => {
   const [formValues, setFormValues] = useState({});
   const [creatingNote, setCreatingNote] = useState(false);
   const user = useSelector(state => state.CURRENT_USER);
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
   const params = useParams();
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -32,7 +32,7 @@ const Notes = () => {
     const newNote = {
       subject: formValues.subject,
       content: formValues.content,
-      shareable: formValues.shareable,
+      shareable: !checked,
       family_id: params.family_id,
       author_id: user.id,
     };
@@ -42,7 +42,7 @@ const Notes = () => {
     axiosWithAuth()
       .post(`/notes`, newNote)
       .then(res => {
-        setNotes([...notes, res.data.notes]);
+        setNotes([...notes, res.data.note]);
         setFormValues({});
       })
       .catch(error => {

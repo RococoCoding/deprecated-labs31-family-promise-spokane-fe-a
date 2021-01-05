@@ -98,9 +98,7 @@ const FamilyMembers = () => {
                 <MTableToolbar {...props} />
                 <div style={{ padding: '0px 10px' }}>
                   <Button
-                    onClick={() =>
-                      history.push(`/families/${familyInfo.id}/notes`)
-                    }
+                    onClick={() => history.push(`/families/${params.id}/notes`)}
                   >
                     Notes
                   </Button>
