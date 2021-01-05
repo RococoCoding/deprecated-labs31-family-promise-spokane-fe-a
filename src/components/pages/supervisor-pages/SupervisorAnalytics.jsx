@@ -16,6 +16,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import Circle from 'react-circle';
 import { useSelector } from 'react-redux';
+import { axiosWithAuth } from '../../../api/axiosWithAuth';
 
 // utils
 import { tableIcons } from '../../../utils/tableIcons';
@@ -57,10 +58,23 @@ const rows = [
 ];
 
 const Analytics = () => {
+  const [logs, setLogs] = useState([]);
+  const [card, setCard] = useState(false);
   const [staffMembers, setStaffMembers] = useState([]);
   const classes = useStyles();
   const history = useHistory();
   const user = useSelector(state => state.CURRENT_USER);
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`/logs`)
+      .then(res => console.log(setLogs(res.data)));
+  }, [logs]);
+
+  const fetchLogs = e => {
+    e.preventDefault();
+    setCard(!card);
+  };
 
   return (
     <div className="cards-container">
@@ -72,9 +86,30 @@ const Analytics = () => {
               color="textPrimary"
               gutterBottom
             >
-              Clocked in
+              Logs
             </Typography>
-            <Typography>22</Typography>
+            <button
+              onClick={e => {
+                fetchLogs(e);
+              }}
+            >
+              Fetch Logs
+            </button>
+            {card
+              ? logs.map(log => (
+                  <Card key={log.id}>
+                    <CardContent>
+                      <p> Checked in: {log.checked_in ? 'Yes' : 'No'}</p>
+                      <p>Date: {new Date(log.date).toString()}</p>
+                      <p>Family Id: {log.family_id}</p>
+                      <p> On-Site: {log.on_sight ? 'Yes' : 'No'}</p>
+                      <p>Supervisor Id: {log.supervisor_id}</p>
+                      <p> Time: {new Date(logs.time).toLocaleTimeString()}</p>
+                    </CardContent>
+                  </Card>
+                ))
+              : ''}
+            {/* <Typography>22</Typography> */}
           </CardContent>
         </Card>
         <Card className={classes.root} variant="outlined">

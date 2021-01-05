@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { axiosWithAuth } from '../../../api/axiosWithAuth';
 
 // ant design
 import { Progress, Button } from 'antd';
@@ -12,12 +13,20 @@ import { returnPercentComplete } from '../../../utils/percentComplete';
 import { useHistory } from 'react-router-dom';
 import _ from 'underscore';
 
+//UI
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+
 const GuestAnalytics = ({
   loading,
   household,
   fetchHousehold,
   fetchFamily,
+  family,
 }) => {
+  const [card, setCard] = useState(false);
+  const [logs, setLogs] = useState(null);
   const [percentComplete, setPercentComplete] = useState(0);
   const [missingFields, setMissingFields] = useState([]);
   const history = useHistory();
@@ -35,6 +44,13 @@ const GuestAnalytics = ({
     const percent = returnPercentComplete(household);
     setPercentComplete(percent[0]);
     setMissingFields(percent[1]);
+  };
+  const fetchLogs = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .get(`/logs/${family.id}`)
+      .then(res => setLogs(res.data));
+    setCard(!card);
   };
 
   const formatMissingData = () => {
@@ -75,6 +91,34 @@ const GuestAnalytics = ({
 
   return (
     <div className="analytics-container">
+      <Card variant="outlined">
+        <CardContent>
+          <Typography color="textPrimary" gutterBottom>
+            Logs
+          </Typography>
+          <button
+            onClick={e => {
+              fetchLogs(e);
+            }}
+          >
+            Fetch Logs
+          </button>
+          {logs && card ? (
+            <Card>
+              <CardContent>
+                <p> Checked in: {logs.checked_in ? 'Yes' : 'No'}</p>
+                <p>Date: {new Date(logs.date).toString()}</p>
+                <p>Family Id: {logs.family_id}</p>
+                <p> On Sight: {logs.on_sight ? 'Yes' : 'No'}</p>
+                <p> Time: {new Date(logs.time).toLocaleTimeString()}</p>
+              </CardContent>
+            </Card>
+          ) : (
+            ''
+          )}
+          {/* <Typography>22</Typography> */}
+        </CardContent>
+      </Card>
       <h1> Guest Analytics</h1>
       <div className="progess-container">
         <div className="progress-section">
@@ -112,7 +156,12 @@ const GuestAnalytics = ({
 };
 
 function mapStateToProps(state) {
-  return { household: state.HOUSEHOLD, loading: state.LOADING };
+  console.log(state);
+  return {
+    household: state.HOUSEHOLD,
+    loading: state.LOADING,
+    family: state.FAMILY,
+  };
 }
 
 const mapDispatchToProps = {
