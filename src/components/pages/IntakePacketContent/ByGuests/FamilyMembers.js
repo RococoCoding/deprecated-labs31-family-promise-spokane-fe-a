@@ -17,7 +17,7 @@ const FamilyMembers = ({
   const percent = ((pageNumber + 1) / pages) * 100;
   const addMember = key => {
     formData.familyMember[key] = {
-      family_id: userId,
+      family_id: 1,
       date_of_enrollment: null,
       demographics: {
         first_name: null,
@@ -69,7 +69,12 @@ const FamilyMembers = ({
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Family Members" bordered={false}>
         <Form.Item style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Button type="primary" htmlType="button" onClick={previous}>
+          <Button
+            type="primary"
+            htmlType="button"
+            onClick={previous}
+            style={{ marginRight: '40px' }}
+          >
             Previous
           </Button>
           <Button type="primary" htmlType="button" onClick={next}>

@@ -30,7 +30,7 @@ const BarriersPage = ({
   const options = [
     'Alcohol Abuse',
     'Developmental Disability',
-    'Chronis Health Issues',
+    'Chronic Health Issues',
     'Drug Abuse',
     'HIV/AIDS',
     'Mental Illness',
@@ -51,7 +51,12 @@ const BarriersPage = ({
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Barriers" bordered={false}>
         <Form.Item>
-          <Button type="primary" htmlType="button" onClick={previous}>
+          <Button
+            type="primary"
+            htmlType="button"
+            onClick={previous}
+            style={{ marginRight: '40px' }}
+          >
             Previous
           </Button>
           <Button type="primary" htmlType="button" onClick={next}>
@@ -105,7 +110,7 @@ const BarriersPage = ({
                   autoSize={{ minRows: 3, maxRows: 5 }}
                 ></TextArea>
               </Form.Item>
-              <Form.Item label="Please list Indefinite Conditions for each family member (Alcohol Abuse, Developmental Disability, Chronic Health Issue, Mental Illness, ....)">
+              <Form.Item label="Please list Indefinite Conditions for each family member (Alcohol Abuse, Developmental Disability, Chronic Health Issue, Mental Illness, etc.)">
                 <TextArea
                   name={nameString(mem, 'barriers.list_indefinite_conditions')}
                   onChange={setForm}

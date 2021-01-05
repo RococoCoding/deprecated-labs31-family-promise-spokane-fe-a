@@ -36,40 +36,40 @@ const UserProfile = ({ familyInfo, fetchFamily }) => {
     contentListNoTitle = {
       'Contact Info': (
         <div className="contact_info">
-          <Text type="secondary">Main Contact(s):</Text>
+          <Text strong>Main Contact(s):</Text>
           <Descriptions>
-            <Descriptions.Item label="name">
+            <Descriptions.Item label="Name">
               {familyInfo.phone_one.name}
             </Descriptions.Item>
-            <Descriptions.Item label="number">
+            <Descriptions.Item label="Number">
               {familyInfo.phone_one.number}
             </Descriptions.Item>
           </Descriptions>
           <Descriptions>
-            <Descriptions.Item label="name">
+            <Descriptions.Item label="Name">
               {familyInfo.phone_two.name}
             </Descriptions.Item>
-            <Descriptions.Item label="number">
+            <Descriptions.Item label="Number">
               {familyInfo.phone_two.number}
             </Descriptions.Item>
           </Descriptions>
           <br></br>
-          <Text type="secondary">Alternative Contact:</Text>
+          <Text strong>Alternative Contact:</Text>
           <Descriptions>
-            <Descriptions.Item label="name">
+            <Descriptions.Item label="Name">
               {familyInfo.safe_alternate.name}
             </Descriptions.Item>
-            <Descriptions.Item label="number">
+            <Descriptions.Item label="Number">
               {familyInfo.safe_alternate.number}
             </Descriptions.Item>
           </Descriptions>
           <br></br>
-          <Text type="secondary">Emergancy Contact:</Text>
+          <Text strong>Emergency Contact:</Text>
           <Descriptions>
-            <Descriptions.Item label="name">
+            <Descriptions.Item label="Name">
               {familyInfo.emergencyContact.name}
             </Descriptions.Item>
-            <Descriptions.Item label="number">
+            <Descriptions.Item label="Number">
               {familyInfo.emergencyContact.number}
             </Descriptions.Item>
           </Descriptions>
@@ -77,24 +77,24 @@ const UserProfile = ({ familyInfo, fetchFamily }) => {
       ),
       History: (
         <div className="history">
-          <Text type="secondary">Last permanent address:</Text>
+          <Text strong>Last Permanent Address:</Text>
           <p>{familyInfo.last_permanent_address}</p>
           <br></br>
 
-          <Text type="secondary">Current location:</Text>
+          <Text strong>Current Location:</Text>
           <p>{familyInfo.homeless_info.current_location}</p>
-          <Text type="secondary">Time at current location:</Text>
+          <Text strong>Length of time at current location:</Text>
           <p>{familyInfo.homeless_info.length_at_current_location}</p>
           <br></br>
 
-          <Text type="secondary">Prior location:</Text>
+          <Text strong>Prior Location:</Text>
           <p>{familyInfo.homeless_info.prior_location}</p>
-          <Text type="secondary">Time at prior location:</Text>
+          <Text strong>Length of time at prior location:</Text>
           <p>{familyInfo.homeless_info.length_at_prior_location}</p>
           <br></br>
 
           <Text>
-            Times homeless in the last three years:{' '}
+            Number of times homeless in the last three years:{' '}
             {familyInfo.homeless_info.num_times_homeless}
           </Text>
           <br></br>
@@ -117,7 +117,7 @@ const UserProfile = ({ familyInfo, fetchFamily }) => {
               {familyInfo.insurance.pregnancies == true ? 'yes' : 'no'}
             </Descriptions.Item>
           </Descriptions>
-          <Descriptions title="Goverment benifits">
+          <Descriptions title="Goverment Benefits">
             <Descriptions.Item label="RRH">
               {familyInfo.gov_benefits.RRH == true ? 'yes' : 'no'}
             </Descriptions.Item>
@@ -130,7 +130,7 @@ const UserProfile = ({ familyInfo, fetchFamily }) => {
             <Descriptions.Item label="Housing Voucher">
               {familyInfo.gov_benefits.housing_voucher == true ? 'yes' : 'no'}
             </Descriptions.Item>
-            <Descriptions.Item label="Snap">
+            <Descriptions.Item label="SNAP">
               {familyInfo.gov_benefits.snap == true ? 'yes' : 'no'}
             </Descriptions.Item>
             <Descriptions.Item label="Veteran Services">
@@ -154,8 +154,8 @@ const UserProfile = ({ familyInfo, fetchFamily }) => {
               {familyInfo.vehicle.license_plate}
             </Descriptions.Item>
           </Descriptions>
-          <Descriptions title="Domestic violence">
-            <Descriptions.Item label="Date of last Incident">
+          <Descriptions title="Domestic Violence">
+            <Descriptions.Item label="Date of last incident">
               {familyInfo.domestic_violence_info.date_last_incident}
             </Descriptions.Item>
             <Descriptions.Item label="YWCA has been contacted">
@@ -163,7 +163,7 @@ const UserProfile = ({ familyInfo, fetchFamily }) => {
                 ? 'yes'
                 : 'no'}
             </Descriptions.Item>
-            <Descriptions.Item label="Anonymity preferred">
+            <Descriptions.Item label="Anonymity Preferred">
               {familyInfo.domestic_violence_info.anonymity_preferred == true
                 ? 'yes'
                 : 'no'}

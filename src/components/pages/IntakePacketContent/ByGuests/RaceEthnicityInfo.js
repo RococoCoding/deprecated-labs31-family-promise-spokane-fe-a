@@ -28,10 +28,10 @@ const RaceEthnicityInfo = ({
     'American Indian or Alaska Native',
     'Asian',
     'Black or African American',
-    'Native HawaiianOr Pacific Islander',
+    'Native Hawaiian or Pacific Islander',
     'White',
     'Unknown',
-    'Refuse',
+    'Decline to Answer',
   ];
 
   const setFormRace = mem => e => {
@@ -42,8 +42,13 @@ const RaceEthnicityInfo = ({
     <div style={tempFormStyle}>
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Race/Ethnicity Info" bordered={false}>
-        <Form.Item style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Button type="primary" htmlType="button" onClick={previous}>
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="button"
+            onClick={previous}
+            style={{ marginRight: '40px' }}
+          >
             Previous
           </Button>
           <Button type="primary" htmlType="button" onClick={next}>
