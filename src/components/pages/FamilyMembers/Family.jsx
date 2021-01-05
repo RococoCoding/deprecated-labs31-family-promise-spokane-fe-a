@@ -39,11 +39,6 @@ const FamilyMembers = () => {
         .then(res => res.data);
 
       setFamilyInfo(info);
-      console.log('info', info);
-
-      const allFamiles = await axiosWithAuth()
-        .get(`/families`)
-        .then(res => console.log('allfamilies', res.data));
 
       const data = await axiosWithAuth()
         .get(`/families/${params.id}/members`)
