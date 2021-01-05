@@ -187,13 +187,13 @@ function getAllValues(data) {
     for (const key in data) {
       if (data[key] === null || data[key] === undefined) {
         nullCount += 1;
-        console.log('incomplete value found:', key);
+        // console.log('incomplete value found:', key);
+        // if incomplete value is found push to array to return
         incompleteFields.push(key);
       }
     }
   } else {
     if (data) {
-      console.log(data);
       completeCount += 1;
     }
   }
@@ -219,12 +219,6 @@ export function returnPercentComplete(data) {
 
   // calculate a percentage
   const percent_complete = percentage(totalComplete, total);
-
-  console.log('total', total);
-  console.log('incomplete', nullCount);
-  console.log('complete', totalComplete);
-
-  console.log(percent_complete + '% complete');
 
   // return a percentage
   return [Math.round(percent_complete), incompleteFields];

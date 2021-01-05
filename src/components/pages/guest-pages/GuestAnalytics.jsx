@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 // ant design
-import { Progress } from 'antd';
+import { Progress, Button } from 'antd';
 
 //redux
 import { connect } from 'react-redux';
@@ -9,19 +9,31 @@ import actions from '../../../state/actions/families';
 
 // utils
 import { returnPercentComplete } from '../../../utils/percentComplete';
+import { useHistory } from 'react-router-dom';
 
-const GuestAnalytics = ({ household, fetchHousehold, fetchFamily }) => {
+const GuestAnalytics = ({
+  loading,
+  household,
+  fetchHousehold,
+  fetchFamily,
+}) => {
   const [percentComplete, setPercentComplete] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [missingFields, setMissingFields] = useState([]);
+  const history = useHistory();
 
+  const goToProfile = () => {
+    // We pass this to our <Security /> component that wraps our routes.
+    // It'll automatically check if userToken is available and push back to login if not :)
+    history.push('/me');
+  };
   const getPercentComplete = () => {
     // fetch household data object
     fetchHousehold();
 
     // calculates a percentage of complete values
     const percent = returnPercentComplete(household);
-
     setPercentComplete(percent[0]);
+    setMissingFields(percent[1]);
   };
 
   useEffect(() => {
@@ -32,14 +44,38 @@ const GuestAnalytics = ({ household, fetchHousehold, fetchFamily }) => {
   return (
     <div className="dashboard-container">
       <h1> Guest Analytics</h1>
-      <p>
-        You have completed {percentComplete}% of your household's intake form!
-        Click the link below to complete or update your information.{' '}
-      </p>
+
       <div className="progress-section">
         <Progress type="circle" percent={percentComplete} />
-        <p> Doen't look correct? </p>
-        <button onClick={getPercentComplete}>Refresh </button>
+        <p> Doesn't look correct? </p>
+        <Button type="primary" loading={loading} onClick={getPercentComplete}>
+          Refresh
+        </Button>
+      </div>
+      <div>
+        <p>
+          You have completed {percentComplete}% of your household's intake form!
+        </p>
+        {percentComplete < 100 ? (
+          <div>
+            <p>Click the link below to complete or update your information. </p>
+            <Button onClick={goToProfile}>Go to Profile </Button>
+          </div>
+        ) : (
+          <p>You're all set!</p>
+        )}
+        <div>
+          {missingFields && missingFields.length > 1
+            ? missingFields.map(missing => {
+                return (
+                  <div>
+                    <h4>Missing household information: </h4>
+                    <p>{missing}</p>
+                  </div>
+                );
+              })
+            : null}
+        </div>
       </div>
     </div>
   );
