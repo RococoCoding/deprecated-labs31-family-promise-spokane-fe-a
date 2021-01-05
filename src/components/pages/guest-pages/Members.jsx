@@ -16,12 +16,16 @@ import { CopyrightOutlined } from '@material-ui/icons';
 import Chip from '@material-ui/core/Chip';
 import { Button } from '@material-ui/core';
 
-const FamilyMembers = () => {
+import { useSelector } from 'react-redux';
+
+const MembersPage = () => {
+  const user = useSelector(state => state.CURRENT_USER);
   const history = useHistory();
   const params = useParams();
   const [isNotesOpen, setIsNotesOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [familyInfo, setFamilyInfo] = useState({});
+  const [familyId, setFamilyId] = useState();
   const [state, setState] = useState({
     columns: [
       { title: 'First', field: 'first_name', type: 'hidden' },
@@ -34,24 +38,25 @@ const FamilyMembers = () => {
 
   const fetchFamilyInfo = async () => {
     try {
-      const info = await axiosWithAuth()
-        .get(`/families/${params.id}`)
-        .then(res => res.data);
+      const family = await axiosWithAuth().get(`/families/user/${user.id}`);
 
-      setFamilyInfo(info);
+      const famId = family.data.id;
+
+      setFamilyId(famId);
 
       const data = await axiosWithAuth()
-        .get(`/families/${params.id}/members`)
+        .get(`/families/${famId}/members`)
         .then(res => res.data);
       const formattedData = data.map(member => {
         return { ...member.demographics };
       });
+
       let copy = { ...state };
       copy.data.push(...formattedData);
 
       setState(copy);
     } catch (error) {
-      alert(error);
+      alert('failure');
     } finally {
       setLoading(false);
     }
@@ -60,10 +65,6 @@ const FamilyMembers = () => {
   useEffect(() => {
     fetchFamilyInfo();
   }, []);
-
-  useEffect(() => {
-    console.log(familyInfo);
-  }, [familyInfo]);
 
   if (loading) {
     return (
@@ -98,11 +99,10 @@ const FamilyMembers = () => {
                 <MTableToolbar {...props} />
                 <div style={{ padding: '0px 10px' }}>
                   <Button
-                    onClick={() => history.push(`/families/${params.id}/notes`)}
+                    onClick={() => history.push(`/families/${familyId}/notes`)}
                   >
                     Notes
                   </Button>
-                  <Button>Additional Information</Button>
                 </div>
               </div>
             ),
@@ -113,4 +113,4 @@ const FamilyMembers = () => {
   );
 };
 
-export default FamilyMembers;
+export default MembersPage;
