@@ -1,13 +1,29 @@
 import React from 'react';
-import { Form, Input, Space, Button, Card } from 'antd';
+import { Form, Input, Space, Button, Card, Progress } from 'antd';
+import {
+  returnPercentComplete,
+  completed,
+} from '../../../../utils/percentComplete';
 
 import Checkbox from 'antd/lib/checkbox/Checkbox';
-const ContactInfo = ({ navigation, formData, setForm, tempFormStyle }) => {
+const ContactInfo = ({
+  navigation,
+  formData,
+  setForm,
+  tempFormStyle,
+  step,
+  steps,
+}) => {
+  const pageNumber = steps.findIndex(item => item === step);
+  const pages = steps.length;
+  const percent = ((pageNumber + 1) / pages) * 100;
+
   const { next, previous } = navigation;
   const { familyInfo } = formData;
 
   return (
     <div style={tempFormStyle}>
+      <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Contact Info" bordered={false}>
         <Form layout="vertical" name="control-hooks" span={18}>
           <Form.Item>

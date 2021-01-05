@@ -1,7 +1,16 @@
 import React from 'react';
-import { Form, Button, Space, Checkbox, Row, Col, Card } from 'antd';
+import { Form, Button, Space, Checkbox, Row, Col, Card, Progress } from 'antd';
 
-const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
+const RaceEthnicityInfo = ({
+  navigation,
+  formData,
+  tempFormStyle,
+  steps,
+  step,
+}) => {
+  const pageNumber = steps.findIndex(item => item === step);
+  const pages = steps.length;
+  const percent = ((pageNumber + 1) / pages) * 100;
   const { previous, next } = navigation;
   let { familyMember } = formData;
   const options = [
@@ -21,6 +30,7 @@ const RaceEthnicityInfo = ({ navigation, formData, tempFormStyle }) => {
 
   return (
     <div style={tempFormStyle}>
+      <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Race/Ethnicity Info" bordered={false}>
         <Form.Item>
           <Button type="primary" htmlType="button" onClick={previous}>

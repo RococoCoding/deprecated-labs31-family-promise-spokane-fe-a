@@ -67,20 +67,17 @@ const family = {
 // for example if we ever add message_id or something like that to the families table we dont need to count that value in total percent complete
 const valuesToExclude = [
   'id',
-  'familiy_id',
+  'family_id',
   'predicted_exit_destination',
   'flag',
   'percent_complete',
   'table_data',
   // TODO include any values to exclude from members data
 ];
-
 // array to hold all values
 const allValues = [];
-
 // counter to hold null count
 let nullCount = 0;
-
 // get all the values from the any object
 function getAllValues(data) {
   if (typeof data === 'object') {
@@ -96,44 +93,45 @@ function getAllValues(data) {
     }
     // all values get pushed to array even NA or string value of 'null'
     // exception is I couldn't find a way to count actual null types so will get with team to make sure no null types get saved unless they are in a string format or use "NA" or "Incomplete"
-
     allValues.push(data);
   }
 }
-
 //function to calculate percentage
 function percentage(partialValue, totalValue) {
   return (100 * partialValue) / totalValue;
 }
-
 // function that returns a percent complete
 // pass in data
 function returnPercentComplete(data) {
   // get an array of all complete values
   getAllValues(data);
-
   // get number of complete values
   const total = allValues.length - valuesToExclude.length;
-
   // subtract nullCount from allValues.length and get number of complete values
   const totalComplete = total - nullCount;
-
   // calculate a percentage
   const percent_complete = percentage(totalComplete, total);
-
   console.log('total', total);
   console.log('incomplete', nullCount);
   console.log('complete', totalComplete);
-
   console.log(percent_complete + '% complete');
-
   // return a percentage
   return percent_complete;
 }
-
 // testing data from above should return 85% because:
 // there are 7 null values and 41 complete values in example above
 // there are are 53 total values minus values to exclude is 48
 // 41 out of 48 is about 85%
+export const filterNotNull = obj => {
+  return Object.entries(obj).reduce(
+    (a, [key, value]) => (value === null ? a : ((a[key] = value), a)),
+    {}
+  );
+};
+export const sumOfObj = obj => {
+  return Object.keys(obj).length;
+};
 
-returnPercentComplete(family);
+export const filterNulls = obj => {
+  return obj;
+};
