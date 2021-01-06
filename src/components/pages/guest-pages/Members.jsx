@@ -41,6 +41,10 @@ const MembersPage = () => {
       const family = await axiosWithAuth().get(`/families/user/${user.id}`);
 
       const famId = family.data.id;
+      // const members = await axiosWithAuth().get(`/families/${famId}/household`)
+
+      // const member = members.data
+      // console.log(member)
 
       setFamilyId(famId);
 

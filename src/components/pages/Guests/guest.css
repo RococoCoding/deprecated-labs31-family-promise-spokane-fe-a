@@ -11,6 +11,11 @@
     outline: none;
     padding: 20px;
   }
+
+  .addInfoText{
+    display: flex;
+    justify-content: space-between;
+  }
   
   .myoverlay {
     position: fixed;
