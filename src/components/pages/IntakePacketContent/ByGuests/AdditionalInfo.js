@@ -88,25 +88,35 @@ const AdditionalInfo = ({
     <div style={tempFormStyle}>
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Additional Information" bordered={false}>
-        <Form.Item style={{ backgroundColor: 'blue' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginBottom: '30px',
+          }}
+        >
           <Button
             type="primary"
             htmlType="button"
             onClick={previous}
-            style={{ marginRight: '40px' }}
+            style={{ width: '100px' }}
           >
             Previous
           </Button>
 
           <Button
             type="primary"
-            style={{ backgroundColor: 'green', border: '3px solid black' }}
+            style={{
+              backgroundColor: 'green',
+              border: '1px solid green',
+              width: '100px',
+            }}
             htmlType="Submit"
             onClick={submitHandlder}
           >
             Submit
           </Button>
-        </Form.Item>
+        </div>
 
         <Form layout="vertical">
           <Form.Item

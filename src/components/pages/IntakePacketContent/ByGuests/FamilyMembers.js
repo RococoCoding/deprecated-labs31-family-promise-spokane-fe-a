@@ -1,4 +1,6 @@
 import React from 'react';
+import IntakeButton from '../IntakeButtons';
+
 import { Form, Input, Button, Space, Card, Progress } from 'antd';
 const FamilyMembers = ({
   navigation,
@@ -67,19 +69,8 @@ const FamilyMembers = ({
     <div style={tempFormStyle}>
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Family Members" bordered={false}>
-        <Form.Item style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Button
-            type="primary"
-            htmlType="button"
-            onClick={previous}
-            style={{ marginRight: '40px' }}
-          >
-            Previous
-          </Button>
-          <Button type="primary" htmlType="button" onClick={next}>
-            Next
-          </Button>
-        </Form.Item>
+        <IntakeButton navigation={navigation} />
+
         <Form layout="vertical">
           {/*Displays family members currently in formData */}
           {Object.keys(formData.familyMember).map((mem, key) => (

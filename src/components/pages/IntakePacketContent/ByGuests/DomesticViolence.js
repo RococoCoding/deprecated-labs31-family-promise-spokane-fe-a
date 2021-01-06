@@ -1,4 +1,6 @@
 import React from 'react';
+import IntakeButton from '../IntakeButtons';
+
 import { Form, Button, Input, Checkbox, Card, Progress } from 'antd';
 import {
   returnPercentComplete,
@@ -23,19 +25,8 @@ const DomesticViolence = ({
     <div style={tempFormStyle}>
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Domestic Violence" bordered={false}>
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="button"
-            onClick={previous}
-            style={{ marginRight: '40px' }}
-          >
-            Previous
-          </Button>
-          <Button type="primary" htmlType="button" onClick={next}>
-            Next
-          </Button>
-        </Form.Item>
+        <IntakeButton navigation={navigation} />
+
         <Form layout="vertical">
           <Form.Item>
             <Checkbox

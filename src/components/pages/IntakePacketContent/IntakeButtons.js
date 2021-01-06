@@ -1,14 +1,34 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Button } from 'antd';
 
 const IntakeButton = props => {
+  const { next, previous } = props.navigation;
+
   return (
-    <button
-      disabled={props.isDisabled}
-      className={props.classType || 'primary'}
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        marginBottom: '30px',
+      }}
     >
-      {props.buttonText}
-    </button>
+      <Button
+        type="primary"
+        htmlType="button"
+        onClick={previous}
+        style={{ width: '100px' }}
+      >
+        Previous
+      </Button>
+      <Button
+        type="primary"
+        htmlType="button"
+        onClick={next}
+        style={{ width: '100px' }}
+      >
+        Next
+      </Button>
+    </div>
   );
 };
 

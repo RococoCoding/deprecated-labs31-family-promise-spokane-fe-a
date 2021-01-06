@@ -1,4 +1,6 @@
 import React from 'react';
+import IntakeButton from '../IntakeButtons';
+
 import {
   Form,
   Input,
@@ -50,19 +52,8 @@ const BarriersPage = ({
     <div style={tempFormStyle}>
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Barriers" bordered={false}>
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="button"
-            onClick={previous}
-            style={{ marginRight: '40px' }}
-          >
-            Previous
-          </Button>
-          <Button type="primary" htmlType="button" onClick={next}>
-            Next
-          </Button>
-        </Form.Item>
+        <IntakeButton navigation={navigation} />
+
         <h3>
           Please answer the following questions about barriers. Check all that
           apply for EACH family member.

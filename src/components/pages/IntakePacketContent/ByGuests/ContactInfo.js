@@ -1,4 +1,5 @@
 import React from 'react';
+import IntakeButton from '../IntakeButtons';
 import { Form, Input, Space, Button, Card, Progress } from 'antd';
 import {
   returnPercentComplete,
@@ -18,27 +19,13 @@ const ContactInfo = ({
   const pages = steps.length;
   const percent = ((pageNumber + 1) / pages) * 100;
 
-  const { next, previous } = navigation;
   const { familyInfo } = formData;
-
   return (
     <div style={tempFormStyle}>
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Contact Info" bordered={false}>
         <Form layout="vertical" name="control-hooks" span={18}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Button
-              type="primary"
-              htmlType="button"
-              onClick={previous}
-              style={{ marginRight: '40px' }}
-            >
-              Previous
-            </Button>
-            <Button type="primary" htmlType="button" onClick={next}>
-              Next
-            </Button>
-          </div>
+          <IntakeButton navigation={navigation} />
 
           <h3>Please included both adults personal phone numbers:</h3>
           <Space style={{ display: 'flex' }}>
