@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Card, Input, Checkbox, Row, Col, Progress } from 'antd';
 import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 import { useHistory } from 'react-router-dom';
@@ -16,6 +16,7 @@ const AdditionalInfo = ({
   steps,
   step,
 }) => {
+  const [familyId, setFamilyId] = useState(null);
   const pageNumber = steps.findIndex(item => item === step);
   const pages = steps.length;
   const percent = ((pageNumber + 1) / pages) * 100;
@@ -28,18 +29,21 @@ const AdditionalInfo = ({
     axiosWithAuth()
       .post(`families`, familyInfo)
       .then(res => {
-        console.log(res);
-        Object.keys(formData.familyMember).map(mem => {
-          axiosWithAuth()
-            .post('members', familyMember[mem])
-            .then(res => {
-              console.log(res);
-            })
-            .catch(err => {
-              console.log('MemberError', err);
-            });
-          history.push('/me');
-        });
+        setFamilyId(res.data.families.id);
+        if (familyId) {
+          Object.keys(formData.familyMember).map(mem => {
+            familyMember[mem].family_id = familyId;
+            axiosWithAuth()
+              .post('members', familyMember[mem])
+              .then(res => {
+                console.log(res);
+              })
+              .catch(err => {
+                console.log('MemberError', err);
+              });
+            history.push('/me');
+          });
+        }
       })
       .catch(err => console.log('FamiliesError', err));
   };

@@ -17,7 +17,7 @@ const FamilyMembers = ({
   const percent = ((pageNumber + 1) / pages) * 100;
   const addMember = key => {
     formData.familyMember[key] = {
-      family_id: userId,
+      // family_id: null,
       date_of_enrollment: null,
       demographics: {
         first_name: null,
