@@ -31,7 +31,7 @@ const MembersPage = () => {
       { title: 'First', field: 'first_name', type: 'hidden' },
       { title: 'Last ', field: 'last_name' },
       { title: 'DOB', field: 'DOB', type: 'date' },
-      { title: 'relationship', field: 'relationship' },
+      { title: 'Relationship', field: 'relationship' },
     ],
     data: [],
   });
