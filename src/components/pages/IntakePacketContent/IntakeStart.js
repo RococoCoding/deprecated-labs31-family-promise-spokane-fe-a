@@ -27,7 +27,12 @@ const Insurance = ({ navigation, tempFormStyle, formData, setForm }) => {
         </Form.Item>
 
         <Form.Item style={{ textAlign: 'center' }}>
-          <Button type="primary" htmlType="button" onClick={next}>
+          <Button
+            type="primary"
+            htmlType="button"
+            onClick={next}
+            style={{ width: '100px' }}
+          >
             Start
           </Button>
         </Form.Item>
