@@ -26,7 +26,7 @@ const ContactInfo = ({
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Contact Info" bordered={false}>
         <Form layout="vertical" name="control-hooks" span={18}>
-          <Form.Item>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Button
               type="primary"
               htmlType="button"
@@ -38,7 +38,7 @@ const ContactInfo = ({
             <Button type="primary" htmlType="button" onClick={next}>
               Next
             </Button>
-          </Form.Item>
+          </div>
 
           <h3>Please included both adults personal phone numbers:</h3>
           <Space style={{ display: 'flex' }}>
