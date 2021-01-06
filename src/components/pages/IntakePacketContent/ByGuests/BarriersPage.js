@@ -66,9 +66,14 @@ const BarriersPage = ({
               </Divider>
 
               <Space key={`${mem}${key}`}>
-                <Row justify={'space-between'} align={'top'}>
+                <Row
+                  justify={'space-between'}
+                  align={'top'}
+                  gutter={[16, 0]}
+                  wrap={false}
+                >
                   {options.map(barrier => (
-                    <Col span={6}>
+                    <Col span={3.7}>
                       <Form.Item
                         label={barrier}
                         style={{
