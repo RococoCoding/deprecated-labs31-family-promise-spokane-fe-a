@@ -12,11 +12,6 @@ import {
 } from 'antd';
 import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 import { useHistory } from 'react-router-dom';
-import {
-  returnPercentComplete,
-  filterNotNull,
-  sumOfObj,
-} from '../../../../utils/percentComplete';
 
 const AdditionalInfo = ({
   navigation,

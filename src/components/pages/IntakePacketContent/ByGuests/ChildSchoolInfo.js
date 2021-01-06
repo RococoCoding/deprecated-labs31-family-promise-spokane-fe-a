@@ -1,16 +1,7 @@
 import React from 'react';
 import IntakeButton from '../IntakeButtons';
 
-import {
-  Form,
-  Input,
-  Button,
-  Space,
-  Select,
-  Checkbox,
-  Card,
-  Progress,
-} from 'antd';
+import { Form, Input, Space, Select, Checkbox, Card, Progress } from 'antd';
 
 const ChildSchoolInfo = ({
   navigation,
@@ -48,7 +39,6 @@ const ChildSchoolInfo = ({
   ];
   const schoolTypeOptions = ['Public', 'Private'];
   const { familyMember } = formData;
-  const { previous, next } = navigation;
   const { TextArea } = Input;
   const setFormAttend = mem => value => {
     familyMember[mem] = Object.assign(familyMember[mem], {
@@ -128,7 +118,6 @@ const ChildSchoolInfo = ({
                   />
                 </Form.Item>
               </Space>
-
               <Form.Item label="Currently Enrolled?">
                 <Checkbox
                   name={nameString(mem, 'schools.enrolled_status')}

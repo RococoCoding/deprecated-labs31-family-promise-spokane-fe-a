@@ -1,18 +1,7 @@
 import React from 'react';
 import IntakeButton from '../IntakeButtons';
 
-import {
-  Form,
-  Button,
-  Space,
-  Checkbox,
-  Row,
-  Col,
-  Card,
-  Progress,
-  Typography,
-  Divider,
-} from 'antd';
+import { Form, Space, Checkbox, Row, Col, Card, Progress, Divider } from 'antd';
 const RaceEthnicityInfo = ({
   navigation,
   formData,
@@ -23,7 +12,6 @@ const RaceEthnicityInfo = ({
   const pageNumber = steps.findIndex(item => item === step);
   const pages = steps.length;
   const percent = ((pageNumber + 1) / pages) * 100;
-  const { previous, next } = navigation;
   let { familyMember } = formData;
   const options = [
     'Hispanic/Latino',

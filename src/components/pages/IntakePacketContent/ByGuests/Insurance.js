@@ -1,11 +1,7 @@
 import React from 'react';
 import IntakeButton from '../IntakeButtons';
 
-import { Form, Input, Button, Checkbox, Card, Progress } from 'antd';
-import {
-  returnPercentComplete,
-  completed,
-} from '../../../../utils/percentComplete';
+import { Form, Input, Checkbox, Card, Progress } from 'antd';
 
 const Insurance = ({
   navigation,
@@ -18,7 +14,6 @@ const Insurance = ({
   const pageNumber = steps.findIndex(item => item === step);
   const pages = steps.length;
   const percent = ((pageNumber + 1) / pages) * 100;
-  const { previous, next } = navigation;
   const { familyInfo } = formData;
 
   return (

@@ -1,10 +1,6 @@
 import React from 'react';
 import IntakeButton from '../IntakeButtons';
 import { Form, Input, Space, Button, Card, Progress } from 'antd';
-import {
-  returnPercentComplete,
-  completed,
-} from '../../../../utils/percentComplete';
 
 import Checkbox from 'antd/lib/checkbox/Checkbox';
 const ContactInfo = ({

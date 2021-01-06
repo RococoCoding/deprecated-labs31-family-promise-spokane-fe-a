@@ -4,7 +4,6 @@ import IntakeButton from '../IntakeButtons';
 import {
   Form,
   Input,
-  Button,
   Space,
   Checkbox,
   Row,
@@ -26,7 +25,6 @@ const BarriersPage = ({
   const pageNumber = steps.findIndex(item => item === step);
   const pages = steps.length;
   const percent = ((pageNumber + 1) / pages) * 100;
-  const { previous, next } = navigation;
   const { familyMember } = formData;
   const { TextArea } = Input;
   const options = [
