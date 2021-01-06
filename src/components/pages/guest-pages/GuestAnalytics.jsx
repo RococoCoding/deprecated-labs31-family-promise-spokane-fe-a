@@ -91,15 +91,6 @@ const GuestAnalytics = ({
 
         <div className="missing-info-section">
           <h4>Missing household information: </h4>
-          {/* {missingFields && missingFields.length > 1
-            ? missingFields.map(missing => {
-                return (
-                  <div>
-                    <p>{missing}</p>
-                  </div>
-                );
-              })
-            : null} */}
           {formatMissingData().map(msg => {
             return <p>{msg}</p>;
           })}

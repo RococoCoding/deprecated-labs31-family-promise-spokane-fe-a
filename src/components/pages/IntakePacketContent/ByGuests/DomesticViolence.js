@@ -24,7 +24,12 @@ const DomesticViolence = ({
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Domestic Violence" bordered={false}>
         <Form.Item>
-          <Button type="primary" htmlType="button" onClick={previous}>
+          <Button
+            type="primary"
+            htmlType="button"
+            onClick={previous}
+            style={{ marginRight: '40px' }}
+          >
             Previous
           </Button>
           <Button type="primary" htmlType="button" onClick={next}>
@@ -38,7 +43,7 @@ const DomesticViolence = ({
               defaultChecked={familyInfo.domestic_violence_info.fleeing_dv}
               onChange={setForm}
             >
-              Are you Currently fleeing a DV situation?
+              Are you currently fleeing a DV situation?
             </Checkbox>
           </Form.Item>
           <Form.Item>
@@ -84,7 +89,7 @@ const DomesticViolence = ({
           <p style={{ maxWidth: '800px' }}>
             If you wish to be anonymous AND you have registered with the HFCA,
             we will need your HMIS # - This number is assigned to you by the
-            HFCA - If you have not registered with the HFCA we can assign you an
+            HFCA - if you have not registered with the HFCA we can assign you an
             anonymous HMIS.
           </p>
         </Form>

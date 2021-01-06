@@ -25,7 +25,7 @@ const FamilyDemographics = ({
   const percent = ((pageNumber + 1) / pages) * 100;
   const { previous, next } = navigation;
   const { familyMember } = formData;
-  const genderOptions = ['Male', 'Female', 'Other'];
+  const genderOptions = ['Male', 'Female', 'Decline to Answer'];
 
   /*Issues with setForm on inputs other than Input and Checkbox. 
   The following functions manually update the entire form. */
@@ -58,7 +58,12 @@ const FamilyDemographics = ({
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Family Demographics" bordered={false}>
         <Form.Item>
-          <Button type="primary" htmlType="button" onClick={previous}>
+          <Button
+            type="primary"
+            htmlType="button"
+            onClick={previous}
+            style={{ marginRight: '40px' }}
+          >
             Previous
           </Button>
           <Button type="primary" htmlType="button" onClick={next}>
@@ -108,7 +113,7 @@ const FamilyDemographics = ({
                 </Form.Item>
                 <Form.Item
                   label="Income Source (monthly)"
-                  tooltip="An income source can be a Job, TANF, SSI, SSDI, ChildSupport, etc..."
+                  tooltip="An income source can be a job, TANF, SSI, SSDI, Child Support, etc."
                 >
                   <Input.Group compact>
                     <Form.Item>

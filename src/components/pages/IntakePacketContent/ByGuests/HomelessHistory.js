@@ -23,7 +23,12 @@ const HomelessHistory = ({
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="History" bordered={false}>
         <Form.Item>
-          <Button type="primary" htmlType="button" onClick={previous}>
+          <Button
+            type="primary"
+            htmlType="button"
+            onClick={previous}
+            style={{ marginRight: '40px' }}
+          >
             Previous
           </Button>
           <Button type="primary" htmlType="button" onClick={next}>
@@ -31,7 +36,7 @@ const HomelessHistory = ({
           </Button>
         </Form.Item>
         <Form layout="vertical">
-          <Form.Item label="Last permanent address (last address you lived where you did not consider yourself to be homeless">
+          <Form.Item label="Last permanent address (last address you lived where you did not consider yourself to be homeless)">
             <Input
               name={'familyInfo.last_permanent_address'}
               value={familyInfo.last_permanent_address}
@@ -46,13 +51,11 @@ const HomelessHistory = ({
             />
           </Form.Item>
           <Form.Item label="How long were you at this location?">
-            <Form.Item>
-              <Input
-                name={'familyInfo.homeless_info.length_at_current_location'}
-                value={familyInfo.homeless_info.length_at_current_location}
-                onChange={setForm}
-              />
-            </Form.Item>
+            <Input
+              name={'familyInfo.homeless_info.length_at_current_location'}
+              value={familyInfo.homeless_info.length_at_current_location}
+              onChange={setForm}
+            />
           </Form.Item>
           <Form.Item label="If less than 7 nights, where did you stay immediately prior to that?">
             <Input
@@ -62,13 +65,11 @@ const HomelessHistory = ({
             />
           </Form.Item>
           <Form.Item label="How long were you at this location?">
-            <Form.Item>
-              <Input
-                name={'familyInfo.homeless_info.length_at_prior_location'}
-                value={familyInfo.homeless_info.length_at_prior_location}
-                onChange={setForm}
-              />
-            </Form.Item>
+            <Input
+              name={'familyInfo.homeless_info.length_at_prior_location'}
+              value={familyInfo.homeless_info.length_at_prior_location}
+              onChange={setForm}
+            />
           </Form.Item>
           <Form.Item label="Aprroximately when did you become homeless?">
             <Input
