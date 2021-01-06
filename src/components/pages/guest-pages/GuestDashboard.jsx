@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import { axiosWithAuth } from '../../../api/axiosWithAuth';
+
 // UI
 import { Divider } from 'antd';
 
@@ -13,12 +15,25 @@ import { useSelector } from 'react-redux';
 const GuestDashboard = ({ fetchHousehold, fetchFamily }) => {
   const user = useSelector(state => state.CURRENT_USER);
 
+  const fetchFamilyInformation = async () => {
+    try {
+      const res = await axiosWithAuth().get(`/users/${user.id}/family`);
+
+      const family = res.data.family;
+
+      fetchFamily(family.id);
+    } catch (error) {
+      alert('error');
+    }
+  };
+
   useEffect(() => {
     // this endpoint needs a family id to work
     // todo:
     // need to fetch family first with userID to get family
     // then get household with family id.
-    fetchFamily();
+    // fetchFamily();
+    fetchFamilyInformation();
   }, []);
 
   return (

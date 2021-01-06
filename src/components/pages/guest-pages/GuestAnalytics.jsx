@@ -5,7 +5,7 @@ import { axiosWithAuth } from '../../../api/axiosWithAuth';
 import { Progress, Button } from 'antd';
 
 //redux
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import actions from '../../../state/actions/families';
 
 // utils
@@ -25,8 +25,33 @@ const GuestAnalytics = ({
   fetchFamily,
   family,
 }) => {
-  const [card, setCard] = useState(false);
-  const [logs, setLogs] = useState(null);
+  const user = useSelector(state => state.CURRENT_USER);
+
+  const fetchFamilyInformation = async () => {
+    try {
+      const res = await axiosWithAuth().get(`/users/${user.id}/family`);
+
+      const family = res.data.family;
+
+      fetchFamily(family.id);
+      fetchHousehold(family.id);
+    } catch (error) {
+      alert('error');
+    }
+  };
+
+  const fetchFamilyHousehold = async () => {
+    try {
+      const res = await axiosWithAuth().get(`/users/${user.id}/family`);
+
+      const family = res.data.family;
+
+      fetchHousehold(family.id);
+    } catch (error) {
+      alert('error');
+    }
+  };
+
   const [percentComplete, setPercentComplete] = useState(0);
   const [missingFields, setMissingFields] = useState([]);
   const history = useHistory();
@@ -38,19 +63,12 @@ const GuestAnalytics = ({
   };
   const getPercentComplete = () => {
     // fetch household data object
-    fetchHousehold();
+    fetchFamilyHousehold();
 
     // calculates a percentage of complete values
     const percent = returnPercentComplete(household);
     setPercentComplete(percent[0]);
     setMissingFields(percent[1]);
-  };
-  const fetchLogs = e => {
-    e.preventDefault();
-    axiosWithAuth()
-      .get(`/logs/${family.id}`)
-      .then(res => setLogs(res.data));
-    setCard(!card);
   };
 
   const formatMissingData = () => {
@@ -79,46 +97,15 @@ const GuestAnalytics = ({
       modifiedStringValues.push(string);
     }
 
-    console.log(modifiedStringValues);
-
     return modifiedStringValues;
   };
 
   useEffect(() => {
-    fetchFamily();
-    fetchHousehold();
+    fetchFamilyInformation();
   }, []);
 
   return (
     <div className="analytics-container">
-      <Card variant="outlined">
-        <CardContent>
-          <Typography color="textPrimary" gutterBottom>
-            Logs
-          </Typography>
-          <button
-            onClick={e => {
-              fetchLogs(e);
-            }}
-          >
-            Fetch Logs
-          </button>
-          {logs && card ? (
-            <Card>
-              <CardContent>
-                <p> Checked in: {logs.checked_in ? 'Yes' : 'No'}</p>
-                <p>Date: {new Date(logs.date).toString()}</p>
-                <p>Family Id: {logs.family_id}</p>
-                <p> On Sight: {logs.on_sight ? 'Yes' : 'No'}</p>
-                <p> Time: {new Date(logs.time).toLocaleTimeString()}</p>
-              </CardContent>
-            </Card>
-          ) : (
-            ''
-          )}
-          {/* <Typography>22</Typography> */}
-        </CardContent>
-      </Card>
       <h1> Guest Analytics</h1>
       <div className="progess-container">
         <div className="progress-section">

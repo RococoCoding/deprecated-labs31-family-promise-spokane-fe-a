@@ -36,11 +36,11 @@ body {
   text-align: center;
 }
 
-.notes-form{
-    display: flex;
-    flex-direction: column;
-    grid-gap: 1rem;
-    width: 60%;
+.notes-form {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 1rem;
+  width: 60%;
 }
 
 @import './case-notes-modal';

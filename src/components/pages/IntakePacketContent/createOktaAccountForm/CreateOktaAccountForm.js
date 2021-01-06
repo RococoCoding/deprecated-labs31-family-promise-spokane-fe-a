@@ -41,8 +41,8 @@ const CreateOktaAccountForm = ({ setUserId }) => {
 
       await axiosWithAuth().post('/users', profile);
       setUserId(userId);
+      console.log(userId);
     } catch (error) {
-      alert('error');
       setErrors(error.response?.data?.errorCauses[0]?.errorSummary);
     } finally {
       setLoading(false);

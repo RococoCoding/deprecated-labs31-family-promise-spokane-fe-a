@@ -61,13 +61,6 @@ const SideBar = () => {
           <div className="logo" />
 
           <Menu theme="light" mode="inline">
-            <Menu.Item
-              onClick={redirectToUserProfile}
-              key="1"
-              icon={<UserOutlined />}
-            >
-              Profile
-            </Menu.Item>
             <br />
             <Menu.Item
               onClick={redirectToAnalytics}
@@ -78,13 +71,6 @@ const SideBar = () => {
             </Menu.Item>
             {user.role == 'guest' && (
               <Menu>
-                <Menu.Item
-                  onClick={redirectToFamily}
-                  key="3"
-                  icon={<TeamOutlined />}
-                >
-                  Family
-                </Menu.Item>
                 <Menu.Item
                   onClick={redirectToMembers}
                   key="3"

@@ -31,37 +31,37 @@ const steps = [
 let defaultData = {
   familyInfo: {
     user_id: null,
-    case_number: null,
+    case_number: 1234,
     phone_one: {
-      name: null,
-      number: null,
-      safeToLeaveMssg: null,
+      name: 'Mary Jane',
+      number: '111222333',
+      safeToLeaveMssg: true,
     },
     phone_two: {
-      name: null,
-      number: null,
-      safeToLeaveMssg: null,
+      name: 'Peter Parker',
+      number: '111222333',
+      safeToLeaveMssg: false,
     },
     emergencyContact: {
-      name: null,
-      number: null,
+      name: '',
+      number: '111222333',
     },
     vehicle: {
-      make: null,
-      year: null,
-      color: null,
-      model: null,
-      license_plate: null,
+      make: 'Honda',
+      year: '1990',
+      color: 'black',
+      model: 'x',
+      license_plate: '1123',
     },
-    last_permanent_address: null,
+    last_permanent_address: '3211 East Ave',
     homeless_info: {
-      prior_location: null,
-      current_location: null,
-      num_times_homeless: null,
-      total_len_homeless: null,
-      homeless_start_date: null,
-      length_at_prior_location: null,
-      length_at_current_location: null,
+      prior_location: '3211 East Ave',
+      current_location: 'nowhere',
+      num_times_homeless: 5,
+      total_len_homeless: '3 months',
+      homeless_start_date: '3/5/2018',
+      length_at_prior_location: '2 years',
+      length_at_current_location: '1 year',
     },
     gov_benefits: {
       RRH: null,
@@ -77,19 +77,19 @@ let defaultData = {
         if_yes_who: null,
         due_date: null,
       },
-      has_insurance: null,
-      members_covered: null,
-      health_insurance_type: null,
+      has_insurance: true,
+      members_covered: 2,
+      health_insurance_type: 'medicaid',
     },
     domestic_violence_info: {
-      fleeing_dv: null,
+      fleeing_dv: false,
       YWCA_contacted: null,
       has_court_order: null,
       date_last_incident: null,
       anonymity_preferred: null,
     },
     avatar_url: null,
-    pets: 0,
+    pets: 1,
     percent_complete: 0,
   },
   familyMember: {},
@@ -126,7 +126,8 @@ const IntakePacket = () => {
   if (!userId) {
     return <CreateOktaAccountForm setUserId={setUserId} />;
   }
-  formData.familyInfo.user_id = '00u2lhigtb8N47Jii5d6';
+
+  formData.familyInfo.user_id = userId;
 
   switch (id) {
     case 'IntakeStart':

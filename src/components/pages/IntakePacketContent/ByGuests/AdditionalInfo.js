@@ -34,21 +34,18 @@ const AdditionalInfo = ({
     axiosWithAuth()
       .post(`families`, familyInfo)
       .then(res => {
-        setFamilyId(res.data.families.id);
-        if (familyId) {
-          Object.keys(formData.familyMember).map(mem => {
-            familyMember[mem].family_id = familyId;
-            axiosWithAuth()
-              .post('members', familyMember[mem])
-              .then(res => {
-                console.log(res);
-              })
-              .catch(err => {
-                console.log('MemberError', err);
-              });
-            history.push('/me');
-          });
-        }
+        const familyId = res.data.families.id;
+        Object.keys(formData.familyMember).map(mem => {
+          familyMember[mem]['family_id'] = familyId;
+          axiosWithAuth()
+            .post('members', familyMember[mem])
+            .then(res => {
+              history.push(`/familyprofile/${familyId}`);
+            })
+            .catch(err => {
+              console.log('MemberError', err.response);
+            });
+        });
       })
       .catch(err => console.log('FamiliesError', err));
   };
