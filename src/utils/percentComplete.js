@@ -1,4 +1,3 @@
-// example household object can be viewed by making a GET request to http://localhost:8000/families/{family_id}/household
 
 // array to hold all values
 const allValues = [];
