@@ -114,10 +114,10 @@ const AdditionalInfo = ({
         </div>
 
         <Form layout="vertical">
-          <Form.Item
-            label="Vehicle Information:"
-            style={{ marginBottom: '40px' }}
-          >
+          <Divider orientation="left" plain>
+            Vehicle Information
+          </Divider>
+          <Form.Item style={{ marginBottom: '40px' }}>
             <Input.Group>
               {VehicleInfo.map((label, key) => (
                 <Form.Item label={label} key={key}>
@@ -133,7 +133,9 @@ const AdditionalInfo = ({
               ))}
             </Input.Group>
           </Form.Item>
-          <Divider />
+          <Divider orientation="left" plain>
+            Goverment Benefits
+          </Divider>
           <Form.Item label="Please check all that you currently receive:">
             <Row justify={'space-between'} align={'top'}>
               {GOVBenifits.map(benifit => (
@@ -161,8 +163,9 @@ const AdditionalInfo = ({
               ))}
             </Row>
           </Form.Item>
-          <Divider />
-
+          <Divider orientation="left" plain>
+            Pregnancy Information
+          </Divider>
           <Form.Item>
             <Checkbox
               style={{ marginBottom: '10px' }}
