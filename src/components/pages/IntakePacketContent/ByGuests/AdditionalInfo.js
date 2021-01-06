@@ -38,17 +38,17 @@ const AdditionalInfo = ({
     axiosWithAuth()
       .post(`families`, familyInfo)
       .then(res => {
-        console.log(res);
+        const familyId = res.data.families.id;
         Object.keys(formData.familyMember).map(mem => {
+          familyMember[mem]['family_id'] = familyId;
           axiosWithAuth()
             .post('members', familyMember[mem])
             .then(res => {
               console.log(res);
             })
             .catch(err => {
-              console.log('MemberError', err);
+              console.log('MemberError', err.response);
             });
-          history.push('/me');
         });
       })
       .catch(err => console.log('FamiliesError', err));

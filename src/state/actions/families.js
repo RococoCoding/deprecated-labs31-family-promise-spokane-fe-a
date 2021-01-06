@@ -15,13 +15,11 @@ import {
   GET_HOUSEHOLD_FAILURE,
 } from '../types';
 
-const fetchFamily = () => (dispatch, getState) => {
+const fetchFamily = familyId => (dispatch, getState) => {
   dispatch({ type: GET_FAMILY_FETCHING, payload: true });
-  const state = getState();
-  const user_id = state.CURRENT_USER.id;
 
   return axiosWithAuth()
-    .get(`/families/user/${user_id}`)
+    .get(`/families/${familyId}`)
     .then(res => {
       dispatch({ type: GET_FAMILY_SUCCESS, payload: res.data });
     })

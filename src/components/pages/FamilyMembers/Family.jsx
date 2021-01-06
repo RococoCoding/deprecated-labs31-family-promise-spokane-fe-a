@@ -102,7 +102,11 @@ const FamilyMembers = () => {
                   >
                     Notes
                   </Button>
-                  <Button>Additional Information</Button>
+                  <Button
+                    onClick={() => history.push(`/familyprofile/${params.id}`)}
+                  >
+                    Additional Information
+                  </Button>
                 </div>
               </div>
             ),

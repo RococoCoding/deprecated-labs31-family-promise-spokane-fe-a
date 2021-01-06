@@ -14,17 +14,15 @@ import PrivateRoute from './utils/auth/PrivateRoute';
 import 'antd/dist/antd.less';
 
 import { NotFoundPage } from './components/pages/NotFound';
-import { ExampleListPage } from './components/pages/ExampleList';
-import { ProfileListPage } from './components/pages/ProfileList';
+
 import { LoginPage } from './components/pages/Login';
 import { HomePage } from './components/pages/Home';
 import { LandingPage } from './components/pages/Landing';
-import { ExampleDataViz } from './components/pages/ExampleDataViz';
 import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
 import NavBar from './components/NavBar';
 import SideBar from './components/SideBar';
-import UserProfile from './components/pages/UserProfile';
+import FamilyProfile from './components/pages/FamilyProfile';
 import IntakePacket from './components/pages/IntakePacket';
 import Analytics from './components/pages/Analytics';
 import Guests from './components/pages/Guests/Guests';
@@ -88,11 +86,11 @@ function App() {
           roles={['guest']}
           component={Members}
         />
-        <PrivateRoute
+        {/* <PrivateRoute
           path="/me"
           roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
           component={UserProfile}
-        />
+        /> */}
         <Route
           path="/families/:family_id/notes/"
           // roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
@@ -118,6 +116,12 @@ function App() {
           roles={['guest']}
           component={GuestDashboard}
         />
+        <PrivateRoute
+          path="/familyprofile/:familyId"
+          roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
+          component={FamilyProfile}
+        />
+
         <PrivateRoute path="/family" roles={['guest']} component={FamilyPage} />
 
         <SecureRoute
@@ -125,9 +129,6 @@ function App() {
           exact
           component={() => <HomePage LoadingComponent={LoadingComponent} />}
         />
-        <SecureRoute path="/example-list" component={ExampleListPage} />
-        <SecureRoute path="/profile-list" component={ProfileListPage} />
-        <SecureRoute path="/datavis" component={ExampleDataViz} />
         <Route component={NotFoundPage} />
       </Switch>
     </Security>
