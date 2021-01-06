@@ -82,7 +82,7 @@ const fetchHousehold = () => (dispatch, getState) => {
       }
     })
     .catch(error => {
-      dispatch({ GET_HOUSEHOLD_FAILURE, payload: error.message });
+      dispatch({ type: GET_HOUSEHOLD_FAILURE, payload: error.message });
     });
 };
 

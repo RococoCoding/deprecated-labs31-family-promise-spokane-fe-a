@@ -9,6 +9,7 @@ import {
   Col,
   Card,
   Progress,
+  Divider,
 } from 'antd';
 
 const BarriersPage = ({
@@ -29,7 +30,7 @@ const BarriersPage = ({
   const options = [
     'Alcohol Abuse',
     'Developmental Disability',
-    'Chronis Health Issues',
+    'Chronic Health Issues',
     'Drug Abuse',
     'HIV/AIDS',
     'Mental Illness',
@@ -50,7 +51,12 @@ const BarriersPage = ({
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Barriers" bordered={false}>
         <Form.Item>
-          <Button type="primary" htmlType="button" onClick={previous}>
+          <Button
+            type="primary"
+            htmlType="button"
+            onClick={previous}
+            style={{ marginRight: '40px' }}
+          >
             Previous
           </Button>
           <Button type="primary" htmlType="button" onClick={next}>
@@ -64,12 +70,22 @@ const BarriersPage = ({
         <Form layout="vertical">
           {Object.keys(formData.familyMember).map((mem, key) => (
             <>
+              <Divider orientation="left" plain>
+                {familyMember[mem].demographics.first_name}
+              </Divider>
+
               <Space key={`${mem}${key}`}>
-                <p>{familyMember[mem].barriers.first_name}</p>
-                <Row>
+                <Row justify={'space-between'} align={'top'}>
                   {options.map(barrier => (
-                    <Col span={3} style={{ display: 'inline-block' }}>
-                      <Form.Item label={barrier}>
+                    <Col span={6}>
+                      <Form.Item
+                        label={barrier}
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'column-reverse',
+                          paddingRight: '20px',
+                        }}
+                      >
                         <Checkbox
                           defaultChecked={
                             familyMember[mem].barriers[optionDataName[barrier]]
@@ -94,7 +110,7 @@ const BarriersPage = ({
                   autoSize={{ minRows: 3, maxRows: 5 }}
                 ></TextArea>
               </Form.Item>
-              <Form.Item label="Please list Indefinite Conditions for each family member (Alcohol Abuse, Developmental Disability, Chronic Health Issue, Mental Illness, ....)">
+              <Form.Item label="Please list Indefinite Conditions for each family member (Alcohol Abuse, Developmental Disability, Chronic Health Issue, Mental Illness, etc.)">
                 <TextArea
                   name={nameString(mem, 'barriers.list_indefinite_conditions')}
                   onChange={setForm}
