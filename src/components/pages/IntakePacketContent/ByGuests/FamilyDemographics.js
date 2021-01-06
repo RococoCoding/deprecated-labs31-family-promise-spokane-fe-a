@@ -1,14 +1,16 @@
 import React from 'react';
+import IntakeButton from '../IntakeButtons';
+
 import {
   Form,
   Input,
-  Button,
   Space,
   DatePicker,
   InputNumber,
   Card,
   Select,
   Progress,
+  Divider,
 } from 'antd';
 import moment from 'moment';
 const FamilyDemographics = ({
@@ -23,7 +25,6 @@ const FamilyDemographics = ({
   const pageNumber = steps.findIndex(item => item === step);
   const pages = steps.length;
   const percent = ((pageNumber + 1) / pages) * 100;
-  const { previous, next } = navigation;
   const { familyMember } = formData;
   const genderOptions = ['Male', 'Female', 'Decline to Answer'];
 
@@ -57,29 +58,20 @@ const FamilyDemographics = ({
     <div style={tempFormStyle}>
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Family Demographics" bordered={false}>
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="button"
-            onClick={previous}
-            style={{ marginRight: '40px' }}
-          >
-            Previous
-          </Button>
-          <Button type="primary" htmlType="button" onClick={next}>
-            Next
-          </Button>
-        </Form.Item>
+        <IntakeButton navigation={navigation} />
+
         <Form layout="vertical">
           {/*Displays family members currently in formData */}
           {Object.keys(formData.familyMember).map((mem, key) => (
             <div key={key}>
-              <p>{familyMember[mem].demographics.first_name}</p>
+              <Divider orientation="left" plain>
+                {familyMember[mem].demographics.first_name}
+              </Divider>
               <Space
                 style={{ display: 'flex', marginBottom: 8 }}
                 align="baseline"
               >
-                <Form.Item label="Gender">
+                <Form.Item label="Gender" style={{ width: '200px' }}>
                   <Select
                     placeholder="Please select an option"
                     defaultValue={familyMember[mem].demographics.gender}
@@ -116,7 +108,7 @@ const FamilyDemographics = ({
                   tooltip="An income source can be a job, TANF, SSI, SSDI, Child Support, etc."
                 >
                   <Input.Group compact>
-                    <Form.Item>
+                    <Form.Item style={{ width: '200px' }}>
                       <Input
                         placeholder="Income source"
                         name={nameString(mem, 'demographics.income')}

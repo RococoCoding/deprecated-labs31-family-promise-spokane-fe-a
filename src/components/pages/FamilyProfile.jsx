@@ -2,6 +2,7 @@ import { Divider } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Avatar, Descriptions, Card, Typography } from 'antd';
+import user from '../../assets/user.svg';
 //redux
 import { connect } from 'react-redux';
 import actions from '../../state/actions/families';

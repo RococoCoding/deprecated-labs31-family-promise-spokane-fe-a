@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { axiosWithAuth } from '../../../api/axiosWithAuth';
 
 // ant design
 import { Progress, Button } from 'antd';
@@ -12,13 +13,17 @@ import { returnPercentComplete } from '../../../utils/percentComplete';
 import { useHistory } from 'react-router-dom';
 import _ from 'underscore';
 
-import { axiosWithAuth } from '../../../api/axiosWithAuth';
+//UI
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 
 const GuestAnalytics = ({
   loading,
   household,
   fetchHousehold,
   fetchFamily,
+  family,
 }) => {
   const user = useSelector(state => state.CURRENT_USER);
 
@@ -138,7 +143,12 @@ const GuestAnalytics = ({
 };
 
 function mapStateToProps(state) {
-  return { household: state.HOUSEHOLD, loading: state.LOADING };
+  console.log(state);
+  return {
+    household: state.HOUSEHOLD,
+    loading: state.LOADING,
+    family: state.FAMILY,
+  };
 }
 
 const mapDispatchToProps = {

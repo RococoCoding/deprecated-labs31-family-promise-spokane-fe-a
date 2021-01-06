@@ -25,7 +25,7 @@ const fetchFamily = familyId => (dispatch, getState) => {
     })
     .then(res => {})
     .catch(error => {
-      dispatch({ GET_FAMILY_FAILURE, payload: error });
+      dispatch({ type: GET_FAMILY_FAILURE, payload: error });
     });
 };
 

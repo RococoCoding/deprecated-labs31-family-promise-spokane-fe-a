@@ -1,8 +1,9 @@
 import React from 'react';
+import IntakeButton from '../IntakeButtons';
+
 import {
   Form,
   Input,
-  Button,
   Space,
   Checkbox,
   Row,
@@ -24,7 +25,6 @@ const BarriersPage = ({
   const pageNumber = steps.findIndex(item => item === step);
   const pages = steps.length;
   const percent = ((pageNumber + 1) / pages) * 100;
-  const { previous, next } = navigation;
   const { familyMember } = formData;
   const { TextArea } = Input;
   const options = [
@@ -50,19 +50,8 @@ const BarriersPage = ({
     <div style={tempFormStyle}>
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Barriers" bordered={false}>
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="button"
-            onClick={previous}
-            style={{ marginRight: '40px' }}
-          >
-            Previous
-          </Button>
-          <Button type="primary" htmlType="button" onClick={next}>
-            Next
-          </Button>
-        </Form.Item>
+        <IntakeButton navigation={navigation} />
+
         <h3>
           Please answer the following questions about barriers. Check all that
           apply for EACH family member.
@@ -75,9 +64,14 @@ const BarriersPage = ({
               </Divider>
 
               <Space key={`${mem}${key}`}>
-                <Row justify={'space-between'} align={'top'}>
+                <Row
+                  justify={'space-between'}
+                  align={'top'}
+                  gutter={[16, 0]}
+                  wrap={false}
+                >
                   {options.map(barrier => (
-                    <Col span={6}>
+                    <Col span={3.7}>
                       <Form.Item
                         label={barrier}
                         style={{

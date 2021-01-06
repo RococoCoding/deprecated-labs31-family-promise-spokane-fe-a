@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Form,
   Button,
@@ -12,11 +12,6 @@ import {
 } from 'antd';
 import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 import { useHistory } from 'react-router-dom';
-import {
-  returnPercentComplete,
-  filterNotNull,
-  sumOfObj,
-} from '../../../../utils/percentComplete';
 
 const AdditionalInfo = ({
   navigation,
@@ -26,6 +21,7 @@ const AdditionalInfo = ({
   steps,
   step,
 }) => {
+  const [familyId, setFamilyId] = useState(null);
   const pageNumber = steps.findIndex(item => item === step);
   const pages = steps.length;
   const percent = ((pageNumber + 1) / pages) * 100;
@@ -57,7 +53,7 @@ const AdditionalInfo = ({
     return `familyInfo.${section}.${value}`;
   };
   const GOVBenifits = [
-    'Foodstamps',
+    'Food Stamps',
     'CPS/FPS (Open case)',
     'RRH (Rapid Rehousing) ',
     'Housing Voucher (Current)',
@@ -65,7 +61,7 @@ const AdditionalInfo = ({
     'SNAP assistance',
   ];
   const GOVBenifitsDataName = {
-    Foodstamps: 'foodstamps',
+    'Food Stamps': 'foodstamps',
     'CPS/FPS (Open case)': 'cps_fps',
     'RRH (Rapid Rehousing) ': 'RRH',
     'Housing Voucher (Current)': 'housing_voucher',
@@ -84,31 +80,41 @@ const AdditionalInfo = ({
     <div style={tempFormStyle}>
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Additional Information" bordered={false}>
-        <Form.Item style={{ backgroundColor: 'blue' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginBottom: '30px',
+          }}
+        >
           <Button
             type="primary"
             htmlType="button"
             onClick={previous}
-            style={{ marginRight: '40px' }}
+            style={{ width: '100px' }}
           >
             Previous
           </Button>
 
           <Button
             type="primary"
-            style={{ backgroundColor: 'green', border: '3px solid black' }}
+            style={{
+              backgroundColor: 'green',
+              border: '1px solid green',
+              width: '100px',
+            }}
             htmlType="Submit"
             onClick={submitHandlder}
           >
             Submit
           </Button>
-        </Form.Item>
+        </div>
 
         <Form layout="vertical">
-          <Form.Item
-            label="Vehicle Information:"
-            style={{ marginBottom: '40px' }}
-          >
+          <Divider orientation="left" plain>
+            Vehicle Information
+          </Divider>
+          <Form.Item style={{ marginBottom: '40px' }}>
             <Input.Group>
               {VehicleInfo.map((label, key) => (
                 <Form.Item label={label} key={key}>
@@ -124,7 +130,9 @@ const AdditionalInfo = ({
               ))}
             </Input.Group>
           </Form.Item>
-          <Divider />
+          <Divider orientation="left" plain>
+            Government Benefits
+          </Divider>
           <Form.Item label="Please check all that you currently receive:">
             <Row justify={'space-between'} align={'top'}>
               {GOVBenifits.map(benifit => (
@@ -152,8 +160,9 @@ const AdditionalInfo = ({
               ))}
             </Row>
           </Form.Item>
-          <Divider />
-
+          <Divider orientation="left" plain>
+            Pregnancy Information
+          </Divider>
           <Form.Item>
             <Checkbox
               style={{ marginBottom: '10px' }}
