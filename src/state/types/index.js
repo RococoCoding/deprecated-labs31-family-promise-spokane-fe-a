@@ -1,0 +1,19 @@
+// user types
+export const LOG_IN = 'LOG_IN';
+export const SET_LOADING = 'SET_LOADING';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+
+// family types
+export const GET_FAMILY_FETCHING = 'GET_FAMILY_FETCHING';
+export const GET_FAMILY_SUCCESS = 'GET_FAMILY_SUCCESS';
+export const GET_FAMILY_FAILURE = 'GET_FAMILY_FAILURE';
+
+// members types
+export const GET_MEMBERS_FETCHING = 'GET_MEMBERS_FETCHING';
+export const GET_MEMBERS_SUCCESS = 'GET_MEMBERS_SUCCESS';
+export const GET_MEMBERS_FAILURE = 'GET_MEMBERS_FAILURE';
+
+// household types
+export const GET_HOUSEHOLD_FETCHING = 'GET_HOUSEHOLD_FETCHING';
+export const GET_HOUSEHOLD_SUCCESS = 'GET_HOUSEHOLD_SUCCESS';
+export const GET_HOUSEHOLD_FAILURE = 'GET_HOUSEHOLD_FAILURE';

@@ -14,7 +14,7 @@ const FamilyMembers = ({
 }) => {
   const pageNumber = steps.findIndex(item => item === step);
   const pages = steps.length;
-  const percent = (pageNumber / pages) * 100;
+  const percent = ((pageNumber + 1) / pages) * 100;
   const addMember = key => {
     formData.familyMember[key] = {
       family_id: userId,

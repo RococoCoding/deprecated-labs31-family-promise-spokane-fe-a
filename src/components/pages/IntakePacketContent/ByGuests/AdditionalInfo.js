@@ -4,7 +4,8 @@ import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 import { useHistory } from 'react-router-dom';
 import {
   returnPercentComplete,
-  completed,
+  filterNotNull,
+  sumOfObj,
 } from '../../../../utils/percentComplete';
 
 const AdditionalInfo = ({
@@ -17,91 +18,30 @@ const AdditionalInfo = ({
 }) => {
   const pageNumber = steps.findIndex(item => item === step);
   const pages = steps.length;
-  const percent = (pageNumber / pages) * 100;
+  const percent = ((pageNumber + 1) / pages) * 100;
   const { previous } = navigation;
   const { familyInfo, familyMember } = formData;
   const history = useHistory();
 
   const submitHandlder = e => {
     e.preventDefault();
-    // Contact Info Page calculation ///
-    const phone1 = Object.entries(familyInfo.phone_one).reduce(
-      (a, [k, v]) => (v ? ((a[k] = v), a) : a),
-      {}
-    );
-    const phone2 = Object.entries(familyInfo.phone_two).reduce(
-      (a, [k, v]) => (v ? ((a[k] = v), a) : a),
-      {}
-    );
-    const emerg = Object.entries(familyInfo.emergencyContact).reduce(
-      (a, [k, v]) => (v ? ((a[k] = v), a) : a),
-      {}
-    );
-    const contactSum =
-      Object.keys(phone1).length +
-      Object.keys(phone2).length +
-      Object.keys(emerg).length;
-    console.log(` Contact Info: ${contactSum}/8 fields`);
-    // Homeless Info Page calculation ///
-    const lastPermanentAddress =
-      familyInfo.last_permanent_address != null ? 1 : 0;
-    const homelessInfo = Object.entries(familyInfo.homeless_info).reduce(
-      (a, [k, v]) => (v ? ((a[k] = v), a) : a),
-      {}
-    );
-    const sum = Object.keys(homelessInfo).length + lastPermanentAddress;
-    console.log(`Homeless Info: ${sum}/8 fields`);
-    // Domestic Info Page Calculation ////
-    const domesticVInfo = Object.entries(
-      familyInfo.domestic_violence_info
-    ).reduce((a, [k, v]) => (v ? ((a[k] = v), a) : a), {});
-    const domesticInfoSum = Object.keys(domesticVInfo).length;
-    console.log(`Domestic Violence: ${domesticInfoSum}/5 fields`);
-    // Insurance Info Page Calculation ////
-    const insurance = Object.entries(familyInfo.insurance).reduce(
-      (a, [k, v]) => (v ? ((a[k] = v), a) : a),
-      {}
-    );
-    const insuranceSum = Object.keys(insurance).length;
-    console.log(`Insurance: ${insuranceSum}/3 fields`);
-    // Additonal Info Page Calculation
-    const govtBnfts = Object.entries(familyInfo.gov_benefits).reduce(
-      (a, [k, v]) => (v ? ((a[k] = v), a) : a),
-      {}
-    );
-    const govtBnftSum = Object.keys(govtBnfts).length;
-    const vechileInf = Object.entries(familyInfo.vehicle).reduce(
-      (a, [k, v]) => (v ? ((a[k] = v), a) : a),
-      {}
-    );
-    const vechileInfSum = Object.keys(vechileInf).length;
-    const pregnancyInfo = Object.entries(
-      familyInfo.insurance.pregnancies
-    ).reduce((a, [k, v]) => (v ? ((a[k] = v), a) : a), {});
-    const pregnancyInfoSum = Object.keys(pregnancyInfo).length;
-    console.log(
-      `Additional Info: ${govtBnftSum +
-        vechileInfSum +
-        pregnancyInfoSum}/14 fields `
-    );
-
-    // axiosWithAuth()
-    //   .post(`families`, familyInfo)
-    //   .then(res => {
-    //     console.log(res);
-    //     Object.keys(formData.familyMember).map(mem => {
-    //       axiosWithAuth()
-    //         .post('members', familyMember[mem])
-    //         .then(res => {
-    //           console.log(res);
-    //         })
-    //         .catch(err => {
-    //           console.log('MemberError', err);
-    //         });
-    //       history.push('/me');
-    //     });
-    //   })
-    //   .catch(err => console.log('FamiliesError', err));
+    axiosWithAuth()
+      .post(`families`, familyInfo)
+      .then(res => {
+        console.log(res);
+        Object.keys(formData.familyMember).map(mem => {
+          axiosWithAuth()
+            .post('members', familyMember[mem])
+            .then(res => {
+              console.log(res);
+            })
+            .catch(err => {
+              console.log('MemberError', err);
+            });
+          history.push('/me');
+        });
+      })
+      .catch(err => console.log('FamiliesError', err));
   };
   const familyInfoNameString = (section, value) => {
     return `familyInfo.${section}.${value}`;
