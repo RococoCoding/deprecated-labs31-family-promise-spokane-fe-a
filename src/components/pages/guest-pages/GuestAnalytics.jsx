@@ -26,13 +26,14 @@ const GuestAnalytics = ({
   family,
 }) => {
   const user = useSelector(state => state.CURRENT_USER);
+  const [idRoute, setIdRoute] = useState(null);
 
   const fetchFamilyInformation = async () => {
     try {
       const res = await axiosWithAuth().get(`/users/${user.id}/family`);
 
       const family = res.data.family;
-
+      setIdRoute(family.id);
       fetchFamily(family.id);
       fetchHousehold(family.id);
     } catch (error) {
@@ -59,7 +60,7 @@ const GuestAnalytics = ({
   const goToProfile = () => {
     // We pass this to our <Security /> component that wraps our routes.
     // It'll automatically check if userToken is available and push back to login if not :)
-    history.push('/me');
+    history.push(`/familyprofile/${idRoute}`);
   };
   const getPercentComplete = () => {
     // fetch household data object
