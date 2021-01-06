@@ -38,6 +38,7 @@ import GuestDashboard from './components/pages/guest-pages/GuestDashboard';
 import FamilyPage from './components/pages/guest-pages/FamilyPage';
 import Notes from './components/pages/Notes/Notes';
 import Members from './components/pages/guest-pages/Members';
+import UserProfile from './components/UserProfile';
 
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
@@ -86,11 +87,6 @@ function App() {
           roles={['guest']}
           component={Members}
         />
-        {/* <PrivateRoute
-          path="/me"
-          roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
-          component={UserProfile}
-        /> */}
         <Route
           path="/families/:family_id/notes/"
           // roles={['executive_director', 'supervisor', 'case_manager', 'guest']}

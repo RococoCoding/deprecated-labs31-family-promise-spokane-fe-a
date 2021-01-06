@@ -44,7 +44,7 @@ const AdditionalInfo = ({
           axiosWithAuth()
             .post('members', familyMember[mem])
             .then(res => {
-              console.log(res);
+              history.push(`/familyprofile/${familyId}`);
             })
             .catch(err => {
               console.log('MemberError', err.response);

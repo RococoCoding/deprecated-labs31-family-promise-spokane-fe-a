@@ -43,7 +43,7 @@ let defaultData = {
       safeToLeaveMssg: false,
     },
     emergencyContact: {
-      name: 'Bob Smurda',
+      name: '',
       number: '111222333',
     },
     vehicle: {
@@ -105,7 +105,7 @@ const IntakePacket = () => {
     maxWidth: '900px',
   };
 
-  const [userId, setUserId] = useState('00u3e8qhdukPGPewQ5d6');
+  const [userId, setUserId] = useState(null);
   const [formData, setForm] = useForm(defaultData);
   const { step, navigation } = useStep({ initialStep: 0, steps });
 
@@ -123,9 +123,9 @@ const IntakePacket = () => {
     step,
   };
 
-  // if (!userId) {
-  //   return <CreateOktaAccountForm setUserId={setUserId} />;
-  // }
+  if (!userId) {
+    return <CreateOktaAccountForm setUserId={setUserId} />;
+  }
 
   formData.familyInfo.user_id = userId;
 

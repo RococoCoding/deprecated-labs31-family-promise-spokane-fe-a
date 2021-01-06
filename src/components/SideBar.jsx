@@ -61,13 +61,6 @@ const SideBar = () => {
           <div className="logo" />
 
           <Menu theme="light" mode="inline">
-            <Menu.Item
-              onClick={redirectToUserProfile}
-              key="1"
-              icon={<UserOutlined />}
-            >
-              Profile
-            </Menu.Item>
             <br />
             <Menu.Item
               onClick={redirectToAnalytics}
