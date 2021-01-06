@@ -1,7 +1,7 @@
 import React from 'react';
 import IntakeButton from '../IntakeButtons';
 
-import { Form, Input, Button, Space, Card, Progress } from 'antd';
+import { Form, Input, Button, Space, Card, Progress, Select } from 'antd';
 const FamilyMembers = ({
   navigation,
   formData,
@@ -10,7 +10,6 @@ const FamilyMembers = ({
   count,
   setCount,
   nameString,
-  userId,
   steps,
   step,
 }) => {
@@ -57,14 +56,27 @@ const FamilyMembers = ({
       percent_complete: 0,
     };
   };
-  const { previous, next } = navigation;
   const { familyMember } = formData;
-
+  const relationshipOptions = [
+    'Partner',
+    'Parent',
+    'Grandparent',
+    'Sibling',
+    'Child',
+    'Grandchild',
+    'Other Family',
+    'Non-Family',
+  ];
   const onChangeHandlder = () => {
     addMember(count);
     setCount(count + 1);
   };
-
+  const setRelationship = mem => value => {
+    familyMember[mem] = Object.assign(familyMember[mem], {
+      ...familyMember[mem],
+      demographics: { ...familyMember[mem].demographics, relationship: value },
+    });
+  };
   return (
     <div style={tempFormStyle}>
       <Progress percent={percent} status="active" showInfo={false} />
@@ -97,11 +109,15 @@ const FamilyMembers = ({
                 ></Input>
               </Form.Item>
               <Form.Item label="Relationship">
-                <Input
-                  name={nameString(mem, 'demographics.relationship')}
-                  value={familyMember[mem].demographics.relationship}
-                  onChange={setForm}
-                />
+                <Select
+                  placeholder="Please select an option"
+                  defaultValue={familyMember[mem].demographics.relationship}
+                  onChange={setRelationship(mem)}
+                >
+                  {relationshipOptions.map(op => (
+                    <option value={op}>{op}</option>
+                  ))}
+                </Select>
               </Form.Item>
             </Space>
           ))}
