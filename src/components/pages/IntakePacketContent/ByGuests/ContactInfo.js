@@ -78,7 +78,7 @@ const ContactInfo = ({
               Safe to leave message
             </Checkbox>
           </Form.Item>
-          <h3>Emergancy Contact</h3>
+          <h3>Emergency Contact</h3>
           <Space style={{ display: 'flex', marginBottom: 8 }} align="baseline">
             <Form.Item>
               <Input

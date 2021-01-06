@@ -147,6 +147,7 @@ const Guests = ({}) => {
                 tooltip: 'More Info',
                 onClick: (event, rowData) => {
                   setResult(state.data[rowData.id]);
+                  console.log(result);
                   toggleModal(event);
                   // Do save operation
                 },
