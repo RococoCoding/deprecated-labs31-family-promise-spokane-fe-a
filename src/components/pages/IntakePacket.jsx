@@ -126,7 +126,7 @@ const IntakePacket = () => {
   if (!userId) {
     return <CreateOktaAccountForm setUserId={setUserId} />;
   }
-  formData.familyInfo.user_id = userId;
+  formData.familyInfo.user_id = '00u2lhigtb8N47Jii5d6';
 
   switch (id) {
     case 'IntakeStart':
