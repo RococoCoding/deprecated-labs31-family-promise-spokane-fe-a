@@ -1,5 +1,7 @@
 import React from 'react';
-import { Form, Input, Button, Space, Card, Progress } from 'antd';
+import IntakeButton from '../IntakeButtons';
+
+import { Form, Input, Button, Space, Card, Progress, Select } from 'antd';
 const FamilyMembers = ({
   navigation,
   formData,
@@ -8,7 +10,6 @@ const FamilyMembers = ({
   count,
   setCount,
   nameString,
-  userId,
   steps,
   step,
 }) => {
@@ -55,31 +56,34 @@ const FamilyMembers = ({
       percent_complete: 0,
     };
   };
-  const { previous, next } = navigation;
   const { familyMember } = formData;
-
+  const relationshipOptions = [
+    'Self',
+    'Partner',
+    'Parent',
+    'Grandparent',
+    'Sibling',
+    'Child',
+    'Grandchild',
+    'Other Family',
+    'Non-Family',
+  ];
   const onChangeHandlder = () => {
     addMember(count);
     setCount(count + 1);
   };
-
+  const setRelationship = mem => value => {
+    familyMember[mem] = Object.assign(familyMember[mem], {
+      ...familyMember[mem],
+      demographics: { ...familyMember[mem].demographics, relationship: value },
+    });
+  };
   return (
     <div style={tempFormStyle}>
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Family Members" bordered={false}>
-        <Form.Item style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Button
-            type="primary"
-            htmlType="button"
-            onClick={previous}
-            style={{ marginRight: '40px' }}
-          >
-            Previous
-          </Button>
-          <Button type="primary" htmlType="button" onClick={next}>
-            Next
-          </Button>
-        </Form.Item>
+        <IntakeButton navigation={navigation} />
+
         <Form layout="vertical">
           {/*Displays family members currently in formData */}
           {Object.keys(formData.familyMember).map((mem, key) => (
@@ -91,26 +95,30 @@ const FamilyMembers = ({
                 align: 'baseline',
               }}
             >
-              <Form.Item label="First Name">
+              <Form.Item label="First Name" style={{ width: '200px' }}>
                 <Input
                   name={nameString(mem, 'demographics.first_name')}
                   value={familyMember[mem].demographics.first_name}
                   onChange={setForm}
                 ></Input>
               </Form.Item>
-              <Form.Item label="Last Name">
+              <Form.Item label="Last Name" style={{ width: '200px' }}>
                 <Input
                   name={nameString(mem, 'demographics.last_name')}
                   value={familyMember[mem].demographics.last_name}
                   onChange={setForm}
                 ></Input>
               </Form.Item>
-              <Form.Item label="Relationship">
-                <Input
-                  name={nameString(mem, 'demographics.relationship')}
-                  value={familyMember[mem].demographics.relationship}
-                  onChange={setForm}
-                />
+              <Form.Item label="Relationship" style={{ width: '200px' }}>
+                <Select
+                  placeholder="Please select an option"
+                  defaultValue={familyMember[mem].demographics.relationship}
+                  onChange={setRelationship(mem)}
+                >
+                  {relationshipOptions.map(op => (
+                    <option value={op}>{op}</option>
+                  ))}
+                </Select>
               </Form.Item>
             </Space>
           ))}

@@ -1,9 +1,7 @@
 import React from 'react';
-import { Form, Input, Button, Card, Progress } from 'antd';
-import {
-  returnPercentComplete,
-  completed,
-} from '../../../../utils/percentComplete';
+import IntakeButton from '../IntakeButtons';
+
+import { Form, Input, Card, Progress } from 'antd';
 const HomelessHistory = ({
   navigation,
   formData,
@@ -15,26 +13,14 @@ const HomelessHistory = ({
   const pageNumber = steps.findIndex(item => item === step);
   const pages = steps.length;
   const percent = ((pageNumber + 1) / pages) * 100;
-  const { previous, next } = navigation;
   const { familyInfo } = formData;
 
   return (
     <div style={tempFormStyle}>
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="History" bordered={false}>
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="button"
-            onClick={previous}
-            style={{ marginRight: '40px' }}
-          >
-            Previous
-          </Button>
-          <Button type="primary" htmlType="button" onClick={next}>
-            Next
-          </Button>
-        </Form.Item>
+        <IntakeButton navigation={navigation} />
+
         <Form layout="vertical">
           <Form.Item label="Last permanent address (last address you lived where you did not consider yourself to be homeless)">
             <Input
