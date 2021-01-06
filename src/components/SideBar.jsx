@@ -79,13 +79,6 @@ const SideBar = () => {
             {user.role == 'guest' && (
               <Menu>
                 <Menu.Item
-                  onClick={redirectToFamily}
-                  key="3"
-                  icon={<TeamOutlined />}
-                >
-                  Family
-                </Menu.Item>
-                <Menu.Item
                   onClick={redirectToMembers}
                   key="3"
                   icon={<TeamOutlined />}
