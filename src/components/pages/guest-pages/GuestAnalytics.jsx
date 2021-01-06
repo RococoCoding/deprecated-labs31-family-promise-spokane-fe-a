@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Progress, Button } from 'antd';
 
 //redux
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import actions from '../../../state/actions/families';
 
 // utils
@@ -12,12 +12,41 @@ import { returnPercentComplete } from '../../../utils/percentComplete';
 import { useHistory } from 'react-router-dom';
 import _ from 'underscore';
 
+import { axiosWithAuth } from '../../../api/axiosWithAuth';
+
 const GuestAnalytics = ({
   loading,
   household,
   fetchHousehold,
   fetchFamily,
 }) => {
+  const user = useSelector(state => state.CURRENT_USER);
+
+  const fetchFamilyInformation = async () => {
+    try {
+      const res = await axiosWithAuth().get(`/users/${user.id}/family`);
+
+      const family = res.data.family;
+
+      fetchFamily(family.id);
+      fetchHousehold(family.id);
+    } catch (error) {
+      alert('error');
+    }
+  };
+
+  const fetchFamilyHousehold = async () => {
+    try {
+      const res = await axiosWithAuth().get(`/users/${user.id}/family`);
+
+      const family = res.data.family;
+
+      fetchHousehold(family.id);
+    } catch (error) {
+      alert('error');
+    }
+  };
+
   const [percentComplete, setPercentComplete] = useState(0);
   const [missingFields, setMissingFields] = useState([]);
   const history = useHistory();
@@ -29,7 +58,7 @@ const GuestAnalytics = ({
   };
   const getPercentComplete = () => {
     // fetch household data object
-    fetchHousehold();
+    fetchFamilyHousehold();
 
     // calculates a percentage of complete values
     const percent = returnPercentComplete(household);
@@ -63,14 +92,11 @@ const GuestAnalytics = ({
       modifiedStringValues.push(string);
     }
 
-    console.log(modifiedStringValues);
-
     return modifiedStringValues;
   };
 
   useEffect(() => {
-    fetchFamily();
-    fetchHousehold();
+    fetchFamilyInformation();
   }, []);
 
   return (

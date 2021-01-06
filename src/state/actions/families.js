@@ -29,14 +29,14 @@ const fetchFamily = familyId => (dispatch, getState) => {
     });
 };
 
-const fetchHousehold = () => (dispatch, getState) => {
+const fetchHousehold = family_id => (dispatch, getState) => {
   dispatch({ type: GET_HOUSEHOLD_FETCHING, payload: true });
   // get family id from family state
   // and then fetch household
   const state = getState();
 
   axiosWithAuth()
-    .get(`/families/${state.FAMILY.id}/household`)
+    .get(`/families/${family_id}/household`)
     .then(res => {
       let household = {};
       if (res && res.data) {
