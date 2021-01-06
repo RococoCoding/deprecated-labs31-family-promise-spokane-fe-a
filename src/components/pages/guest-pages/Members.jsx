@@ -31,7 +31,7 @@ const MembersPage = () => {
       { title: 'First', field: 'first_name', type: 'hidden' },
       { title: 'Last ', field: 'last_name' },
       { title: 'DOB', field: 'DOB', type: 'date' },
-      { title: 'relationship', field: 'relationship' },
+      { title: 'Relationship', field: 'relationship' },
     ],
     data: [],
   });
@@ -41,6 +41,10 @@ const MembersPage = () => {
       const family = await axiosWithAuth().get(`/families/user/${user.id}`);
 
       const famId = family.data.id;
+      // const members = await axiosWithAuth().get(`/families/${famId}/household`)
+
+      // const member = members.data
+      // console.log(member)
 
       setFamilyId(famId);
 

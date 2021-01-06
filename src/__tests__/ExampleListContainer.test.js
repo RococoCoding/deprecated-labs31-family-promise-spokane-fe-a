@@ -1,21 +1,20 @@
 import React from 'react';
-import { render, act, cleanup, waitForElement } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
-import ExampleListContainer from '../components/pages/ExampleList/ExampleListContainer';
+import { LoadingComponent } from '../components/common';
 
-afterEach(() => {
-  cleanup();
-  jest.clearAllMocks();
-});
+describe('Loading Common Component', () => {
+  test('it should mount a div based on props', () => {
+    const { getByTestId } = render(
+      <LoadingComponent message="Loading Content" />
+    );
+    const loader = getByTestId('loading');
+    expect(loader).toBeInTheDocument();
 
-jest.mock('../api', () => ({
-  getExampleData: jest.fn(() => Promise.resolve([])),
-}));
-
-describe('<ExampleListContainer /> test suite', () => {
-  test('container renders without crashing', async () => {
-    await act(async () => {
-      await render(<ExampleListContainer />);
-    });
+    // const message = getByText(/loading content/i);
+    // expect(message.textContent).toBe('Loading Content');
+    // rerender(<LoadingComponent message="Loading User Profile" />);
+    // const newMessage = getByText(/loading user profile/i);
+    // expect(newMessage.textContent).toBe('Loading User Profile');
   });
 });
