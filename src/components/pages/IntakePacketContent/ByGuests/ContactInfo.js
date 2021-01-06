@@ -27,7 +27,12 @@ const ContactInfo = ({
       <Card title="Contact Info" bordered={false}>
         <Form layout="vertical" name="control-hooks" span={18}>
           <Form.Item>
-            <Button type="primary" htmlType="button" onClick={previous}>
+            <Button
+              type="primary"
+              htmlType="button"
+              onClick={previous}
+              style={{ marginRight: '40px' }}
+            >
               Previous
             </Button>
             <Button type="primary" htmlType="button" onClick={next}>

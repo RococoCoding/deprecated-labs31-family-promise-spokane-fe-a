@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { Form, Button, Card, Input, Checkbox, Row, Col, Progress } from 'antd';
+import {
+  Form,
+  Button,
+  Card,
+  Input,
+  Checkbox,
+  Row,
+  Col,
+  Progress,
+  Divider,
+} from 'antd';
 import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 import { useHistory } from 'react-router-dom';
 import {
@@ -66,7 +76,7 @@ const AdditionalInfo = ({
     'Veteran Services': 'veteran_services',
     'SNAP assistance': 'snap',
   };
-  const VehicleInfo = ['Vehicle Make', 'Model', 'Year', 'Color', 'Lic #'];
+  const VehicleInfo = ['Vehicle Make', 'Model', 'Year', 'Color', 'License #'];
   const VehicleInfoDataNames = {
     'Vehicle Make': 'make',
     Model: 'model',
@@ -78,17 +88,31 @@ const AdditionalInfo = ({
     <div style={tempFormStyle}>
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Additional Information" bordered={false}>
-        <Form.Item>
-          <Button type="primary" htmlType="button" onClick={previous}>
+        <Form.Item style={{ backgroundColor: 'blue' }}>
+          <Button
+            type="primary"
+            htmlType="button"
+            onClick={previous}
+            style={{ marginRight: '40px' }}
+          >
             Previous
           </Button>
-          <Button type="button" htmlType="Submit" onClick={submitHandlder}>
+
+          <Button
+            type="primary"
+            style={{ backgroundColor: 'green', border: '3px solid black' }}
+            htmlType="Submit"
+            onClick={submitHandlder}
+          >
             Submit
           </Button>
         </Form.Item>
 
         <Form layout="vertical">
-          <Form.Item label="Vehicle Information:">
+          <Form.Item
+            label="Vehicle Information:"
+            style={{ marginBottom: '40px' }}
+          >
             <Input.Group>
               {VehicleInfo.map((label, key) => (
                 <Form.Item label={label} key={key}>
@@ -104,12 +128,19 @@ const AdditionalInfo = ({
               ))}
             </Input.Group>
           </Form.Item>
-
+          <Divider />
           <Form.Item label="Please check all that you currently receive:">
-            <Row>
+            <Row justify={'space-between'} align={'top'}>
               {GOVBenifits.map(benifit => (
                 <Col span={4}>
-                  <Form.Item label={benifit}>
+                  <Form.Item
+                    label={benifit}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column-reverse',
+                      paddingRight: '20px',
+                    }}
+                  >
                     <Checkbox
                       defaultChecked={
                         familyInfo.gov_benefits[GOVBenifitsDataName[benifit]]
@@ -125,6 +156,7 @@ const AdditionalInfo = ({
               ))}
             </Row>
           </Form.Item>
+          <Divider />
 
           <Form.Item>
             <Checkbox
@@ -133,7 +165,7 @@ const AdditionalInfo = ({
               onChange={setForm}
               defaultChecked={familyInfo.insurance.pregnancies.is_pregnant}
             >
-              Is any one in your Household pregnant?
+              Is any one in your household pregnant?
             </Checkbox>
             <Form.Item label="If yes, who?">
               <Input

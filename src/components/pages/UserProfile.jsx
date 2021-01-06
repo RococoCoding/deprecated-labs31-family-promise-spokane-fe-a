@@ -37,7 +37,7 @@ const UserProfile = ({ familyInfo, fetchFamily }) => {
     contentListNoTitle = {
       'Contact Info': (
         <div className="contact_info">
-          <Text type="secondary">Main Contact(s):</Text>
+          <Text strong>Main Contact(s):</Text>
           <Descriptions>
             <Descriptions.Item label="name">
               {familyInfo.phone_one.name ? familyInfo.phone_one.name : ''}
@@ -55,7 +55,7 @@ const UserProfile = ({ familyInfo, fetchFamily }) => {
             </Descriptions.Item>
           </Descriptions>
           <br></br>
-          <Text type="secondary">Alternative Contact:</Text>
+          <Text strong>Alternative Contact:</Text>
           <Descriptions>
             <Descriptions.Item label="name">
               {familyInfo.safe_alternate.name
@@ -69,7 +69,7 @@ const UserProfile = ({ familyInfo, fetchFamily }) => {
             </Descriptions.Item>
           </Descriptions>
           <br></br>
-          <Text type="secondary">Emergancy Contact:</Text>
+          <Text strong>Emergency Contact:</Text>
           <Descriptions>
             <Descriptions.Item label="name">
               {familyInfo.emergencyContact.name
@@ -158,7 +158,7 @@ const UserProfile = ({ familyInfo, fetchFamily }) => {
                 : ''}
             </Descriptions.Item>
           </Descriptions>
-          <Descriptions title="Goverment benifits">
+          <Descriptions title="Goverment Benefits">
             <Descriptions.Item label="RRH">
               {familyInfo.gov_benefits.RRH
                 ? familyInfo.gov_benefits.RRH == true
