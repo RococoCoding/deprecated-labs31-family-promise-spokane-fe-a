@@ -56,7 +56,7 @@ const AdditionalInfo = ({
     return `familyInfo.${section}.${value}`;
   };
   const GOVBenifits = [
-    'Foodstamps',
+    'Food Stamps',
     'CPS/FPS (Open case)',
     'RRH (Rapid Rehousing) ',
     'Housing Voucher (Current)',
@@ -64,7 +64,7 @@ const AdditionalInfo = ({
     'SNAP assistance',
   ];
   const GOVBenifitsDataName = {
-    Foodstamps: 'foodstamps',
+    'Food Stamps': 'foodstamps',
     'CPS/FPS (Open case)': 'cps_fps',
     'RRH (Rapid Rehousing) ': 'RRH',
     'Housing Voucher (Current)': 'housing_voucher',
@@ -134,7 +134,7 @@ const AdditionalInfo = ({
             </Input.Group>
           </Form.Item>
           <Divider orientation="left" plain>
-            Goverment Benefits
+            Government Benefits
           </Divider>
           <Form.Item label="Please check all that you currently receive:">
             <Row justify={'space-between'} align={'top'}>

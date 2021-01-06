@@ -10,6 +10,7 @@ import {
   Card,
   Select,
   Progress,
+  Divider,
 } from 'antd';
 import moment from 'moment';
 const FamilyDemographics = ({
@@ -63,12 +64,14 @@ const FamilyDemographics = ({
           {/*Displays family members currently in formData */}
           {Object.keys(formData.familyMember).map((mem, key) => (
             <div key={key}>
-              <p>{familyMember[mem].demographics.first_name}</p>
+              <Divider orientation="left" plain>
+                {familyMember[mem].demographics.first_name}
+              </Divider>
               <Space
                 style={{ display: 'flex', marginBottom: 8 }}
                 align="baseline"
               >
-                <Form.Item label="Gender">
+                <Form.Item label="Gender" style={{ width: '200px' }}>
                   <Select
                     placeholder="Please select an option"
                     defaultValue={familyMember[mem].demographics.gender}
@@ -105,7 +108,7 @@ const FamilyDemographics = ({
                   tooltip="An income source can be a job, TANF, SSI, SSDI, Child Support, etc."
                 >
                   <Input.Group compact>
-                    <Form.Item>
+                    <Form.Item style={{ width: '200px' }}>
                       <Input
                         placeholder="Income source"
                         name={nameString(mem, 'demographics.income')}

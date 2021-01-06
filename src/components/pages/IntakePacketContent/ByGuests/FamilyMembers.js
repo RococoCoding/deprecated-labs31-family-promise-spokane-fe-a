@@ -58,6 +58,7 @@ const FamilyMembers = ({
   };
   const { familyMember } = formData;
   const relationshipOptions = [
+    'Self',
     'Partner',
     'Parent',
     'Grandparent',
@@ -94,21 +95,21 @@ const FamilyMembers = ({
                 align: 'baseline',
               }}
             >
-              <Form.Item label="First Name">
+              <Form.Item label="First Name" style={{ width: '200px' }}>
                 <Input
                   name={nameString(mem, 'demographics.first_name')}
                   value={familyMember[mem].demographics.first_name}
                   onChange={setForm}
                 ></Input>
               </Form.Item>
-              <Form.Item label="Last Name">
+              <Form.Item label="Last Name" style={{ width: '200px' }}>
                 <Input
                   name={nameString(mem, 'demographics.last_name')}
                   value={familyMember[mem].demographics.last_name}
                   onChange={setForm}
                 ></Input>
               </Form.Item>
-              <Form.Item label="Relationship">
+              <Form.Item label="Relationship" style={{ width: '200px' }}>
                 <Select
                   placeholder="Please select an option"
                   defaultValue={familyMember[mem].demographics.relationship}
