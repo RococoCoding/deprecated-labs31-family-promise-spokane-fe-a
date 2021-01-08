@@ -1,22 +1,27 @@
-# Basic SPA
+# Family Promise of Spokane
 
-For steps on how to work with this repository [please see here](https://docs.labs.lambdaschool.com/labs-spa-starter/)
+You can find the deployed project at [Family Promise of Spokane](https://family-profile-styling-emily.d3hmwb1bmjh3u1.amplifyapp.com//).
 
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your first Pull-Request is merged. This is intended to be a guideline. Feel free to add your own flare to it.
+# Description
 
-#   Family Promise Intake System
+The Family Promise of Spokane  Organization is a US-based nonprofit organization based in Spokane, WA. They are an organization that helps homeless families as well as preventing families from becoming homeless. They provide shelter for families as well as rental assitance. For the full description visit their website [Family Promise of Spokane](https://www.familypromiseofspokane.org/)
+# Contributors
 
-You can find the deployed project at https://user-intake-familypromise.herokuapp.com/
+| [Kristine Wang](https://github.com/KristineYW) | [Tyler Etheridge](https://github.com/tyleretheridge) | [Santiago Berniz](https://github.com/sberniz/) | [Leslie Rodriguez](https://github.com/thereactgirl) |
+| :---: | :---: | :---: | :---: | 
+| [<img src="https://avatars0.githubusercontent.com/u/63246056?s=400&u=a10524916b756eb26132d0803bec3cbe62ede1ef&v=4" width = "200" />](https://github.com/KristineYW) | [<img src="https://avatars3.githubusercontent.com/u/61953470?s=400&u=8f8538f4d10dcb45b9179eb6990d1ef9c1aadc8d&v=4" width = "200" />](https://github.com/tyleretheridge) | [<img src="https://avatars3.githubusercontent.com/u/6207914?s=460&u=8bfaa068f7942170423371ff10e8f04f09f41e81&v=4" width = "200" />](https://github.com/sberniz/) | [<img src="https://avatars3.githubusercontent.com/u/46256764?s=400&u=337301ad07625f6977ed520ff7092ae54bb0852f&v=4" width = "200" />](https://github.com/thereactgirl) |
+| TPL | Data Scientist | Data Scientist | Web Developer | Web Developer | 
+|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/KristineYW) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/tyleretheridge) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/sberniz/) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/thereactgirl) |
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/kristine-wang-ds/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/tylerjetheridge/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/santiago-berniz/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/thereactgirl/) |          
 
-## Contributors
+| [Emily Huntwork](https://github.com/Ehuntwork) | [Abdi Mo](https://github.com/abdimohamud) | [Isaiah Fowler](https://github.com/idongessien) |
+| :---: | :---: | :---: |  
+| [<img src="https://avatars1.githubusercontent.com/u/27293120?s=400&u=e6c0fc75189b75dea5233e02562784ed1cfa2faf&v=4" width = "200" />](https://github.com/Ehuntwork) | [<img src="https://avatars1.githubusercontent.com/u/65041807?s=400&u=2ff3514545d906fe2b734fed79c7f8d640b58ae6&v=4" width = "200" />](https://github.com/abdimohamud) | [<img src="https://avatars1.githubusercontent.com/u/66272034?s=400&u=db133631ead14125bb0d5e9515932985c6293448&v=4" width = "200" />](https://github.com/isaiah-j) | 
+| Web Developer | Web Developer | Web Developer | 
+|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Ehuntwork) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/abdimohamud) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/isaiah-j) | 
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/emily-huntwork/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/abdinajib-mohamud/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/isaiah-fowler/) |              
 
-🚫Add contributor info below, make sure add images and edit the social links for each member. Add to or delete these place-holders as needed
-
-|                                                      [Student 1](https://github.com/)                                                       |                                                       [Student 2](https://github.com/)                                                        |                                                      [Student 3](https://github.com/)                                                       |                                                       [Student 4](https://github.com/)                                                        |                                                      [Student 5](https://github.com/)                                                       |
-| :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: |
-| [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/) |
-|                                [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/)                                |                            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/honda0306)                             |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Mister-Corn)                           |                          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/NandoTheessen)                           |                           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/wvandolah)                            |
-|                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                 |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |                 [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                 |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/)                |
+<br>          
 
 <br>
 <br>
@@ -38,11 +43,16 @@ You can find the deployed project at https://user-intake-familypromise.herokuapp
 
 ### Key Features
 
-- Supervisors can create a profile for a guest
+- Supervisors can Create guest profile 
+- Case Manager can view guest profile 
+- Case Manager can view the exit destination prediction
+- Guest can be flagged for mis conduct
+- notes can be added to guest's profile. 
+- Guest can view their own profile. 
 
-#### Front end deployed to `🚫insert service here`
+#### [Front end deployed link](https://family-profile-styling-emily.d3hmwb1bmjh3u1.amplifyapp.com/)
 
-#### [Back end](🚫link to back end repo here) built using:
+#### [Family Promise of Spokane back end](https://github.com/Lambda-School-Labs/family-promise-spokane-be-a) |
 
 #### 🚫 back end framework goes here
 
@@ -116,6 +126,14 @@ Remember that this project is licensed under the MIT license, and by submitting 
 - Include the relevant issue number, if applicable.
 - You may merge the Pull Request in once you have the sign-off of two other developers, or if you do not have permission to do that, you may request the second reviewer to merge it for you.
 
+### Attribution
+
+These contribution guidelines have been adapted from [this good-Contributing.md-template](https://gist.github.com/PurpleBooth/b24679402957c63ec426).
+
 ## Documentation
 
-See [Backend Documentation](🚫*link to your backend API SWAGGER DOCS here*) for details on the backend of our project.
+[Front End](https://github.com/Lambda-School-Labs/family-promise-spokane-fe-a/blob/main/README.md)
+
+[Back End](https://github.com/Lambda-School-Labs/family-promise-spokane-be-a/blob/main/README.md)
+
+[Data Science](https://github.com/Lambda-School-Labs/family-promise-spokane-ds-a/blob/main/README.md)
