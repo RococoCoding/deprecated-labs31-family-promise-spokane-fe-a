@@ -28,8 +28,6 @@ The Family Promise of Spokane  Organization is a US-based nonprofit organization
 <br>
 <br>
 
-
-
 # Deployed Product
 [Front End Dashboard](https://family-profile-styling-emily.d3hmwb1bmjh3u1.amplifyapp.com/) |
 [Data Science API](http://a-labs29-family-promise.eba-syir5yx3.us-east-1.elasticbeanstalk.com/) |
