@@ -130,6 +130,8 @@ function App() {
     </Security>
   );
 }
+
+// if the react environment is in production, it will remove all warnings, errors, and messages from the console.
 if (process.env.NODE_ENV !== 'development') {
   const noop = () => {};
   [
