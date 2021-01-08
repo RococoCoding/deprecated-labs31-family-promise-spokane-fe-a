@@ -1,10 +1,12 @@
+
+
 # Family Promise of Spokane
 
 You can find the deployed project at [Family Promise of Spokane](https://family-profile-styling-emily.d3hmwb1bmjh3u1.amplifyapp.com//).
 
 # Description
 
-The Family Promise of Spokane  Organization is a US-based nonprofit organization based in Spokane, WA. They are an organization that helps homeless families as well as preventing families from becoming homeless. They provide shelter for families as well as rental assitance. For the full description visit their website [Family Promise of Spokane](https://www.familypromiseofspokane.org/)
+The Family Promise of Spokane  Organization is a US-based nonprofit organization based in Spokane, WA. They are an organization that helps homeless families as well as preventing families from becoming homeless. They provide shelter for families as well as rental assistance. For the full description visit their website [Family Promise of Spokane](https://www.familypromiseofspokane.org/)
 # Contributors
 
 | [Kristine Wang](https://github.com/KristineYW) | [Tyler Etheridge](https://github.com/tyleretheridge) | [Santiago Berniz](https://github.com/sberniz/) | [Leslie Rodriguez](https://github.com/thereactgirl) |
@@ -26,24 +28,38 @@ The Family Promise of Spokane  Organization is a US-based nonprofit organization
 <br>
 <br>
 
-🚫 Optional examples of using images with links for your tech stack, make sure to change these to fit your project
+# Deployed Product
+[Front End Dashboard](https://family-profile-styling-emily.d3hmwb1bmjh3u1.amplifyapp.com/) |
+[Data Science API](http://a-labs29-family-promise.eba-syir5yx3.us-east-1.elasticbeanstalk.com/) |
+[Back End API](https://family-pomise-spokane.herokuapp.com/) |
 
-![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
-![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
-![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)
+# Linked Repositories
+[Family Promise of Spokane Back End](https://github.com/Lambda-School-Labs/family-promise-spokane-be-a) |
+[Family Promise of Spokane Data Science](https://github.com/Lambda-School-Labs/family-promise-spokane-ds-a) |
+[Family Promise of Spokane Front end](https://github.com/Lambda-School-Labs/family-promise-spokane-fe-a) 
 
-🚫 more info on using badges [here](https://github.com/badges/shields)
-
-- Fork and clone the repo to install it as your own remote.
-  - **note** please [be sure to set your remote](https://help.github.jp/enterprise/2.11/user/articles/changing-a-remote-s-url/) for this repo to point to your Labs Team Front End Repository.
-- run: `npm install` to download all dependencies.
-- run: `npm start` to start your local development server.
-
-> When using Okta for authentication, the app will need to run locally on port 3000.
+# Getting Started
 
 ### User Flows
 
 [Trello Board](https://trello.com/b/FyWvcZzY/family-promise-of-spokane)
+
+Each user should have one associated role determining which features are available to them. Flows should be designed to accommodate the addition of more user roles in the future.
+
+Our product supported the following user roles:
+
+- Executive Director
+- Supervisor: Responsible for handling the day-to-day needs of the guests at the shelter, including conducting intakes of new families.
+- Case Manager: Writes case notes on guests the shelter is serving as they work with them.
+- Guest : A "head of household" arriving to or checked into the shelter as part of a family unit of some kind.
+
+and the following user stories:
+- All users should be able to view and update a user profile.
+- Guests should be able to check in to the shelter using a form. This form should be as simple and user-friendly as possible. We need to distinguish new guests from returning guests and log the check-in accordingly. 
+- New guests should have a profile created for them.
+- Supervisors should be able to view all guests currently checked into the shelter.
+- Case Managers should be able to look up guests and log notes associated with ongoing case management. 
+- Case Managers should be able to view and edit and Guests should be able to view those notes. Entries should be confidential between the case manager and the guest.
 
 ### Key Features
 
@@ -54,54 +70,30 @@ The Family Promise of Spokane  Organization is a US-based nonprofit organization
 - notes can be added to guest's profile. 
 - Guest can view their own profile. 
 
-# Deployed Product
-[Front End Dashboard](https://family-profile-styling-emily.d3hmwb1bmjh3u1.amplifyapp.com/) |
-[Data Science API](http://a-labs29-family-promise.eba-syir5yx3.us-east-1.elasticbeanstalk.com/) |
-[Back End API](https://family-pomise-spokane.herokuapp.com/) |
+# Tech Stack
 
-#### [Family Promise of Spokane back end repo](https://github.com/Lambda-School-Labs/family-promise-spokane-be-a) 
+###  Front-End:
 
-#### 🚫 back end framework goes here
+- Styling/Design : ANT Design
+- State Management : Redux
+- React Modals
+- PostgreSQL
+- Testing: React Testing Library
 
-- point one
-- point two
-- point three
+###  Back-End:
+- Database : PostgreSQL
+ - Auth: Okta JSON Web Token Verifiyer
+ - Testing: Jest SuperTest
+ - Migrations/Seeding: Knex
+ - Express
+- CORS
+- Helmet
 
-🚫 List the rest of the back end end features and libraries in the same format as the framework above
 
-# APIs
 
-## Authentication API here
+# User Flow
 
-🚫Replace text below with a description of the API
-
-Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
-
-## Misc API here
-
-🚫Replace text below with a description of the API
-
-You can do anything your heart can imagine. In life you need colors. This is where you take out all your hostilities and frustrations. It's better than kicking the puppy dog around and all that so. I'm sort of a softy, I couldn't shoot Bambi except with a camera. Trees get lonely too, so we'll give him a little friend. We'll lay all these little funky little things in there.
-
-# Installation Instructions
-
-🚫explain how to install the required dependencies to get this project up and running with yarn and NPM
-
-## Other Scripts
-
-🚫replace these examples with your own
-
-    * build - creates a build of the application
-    * start - starts the production server after a build is created
-    * test - runs tests in **tests** directory \* eject - copy the configuration files and dependencies into the project so you have full control over them
-
-# Contributing
-
-When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
-
-Please note we have a [code of conduct](./CODE_OF_CONDUCT.md). Please follow it in all your interactions with the project.
-
-## Issue/Bug Request
+![Architecture](https://github.com/Lambda-School-Labs/family-promise-spokane-fe-a/tree/main/src/assets/user-flow.png)
 
 **If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
 
@@ -109,6 +101,17 @@ Please note we have a [code of conduct](./CODE_OF_CONDUCT.md). Please follow it 
 - Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
 - Create a live example of the problem.
 - Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes, where you believe the issue is originating from, and any potential solutions you have considered.
+
+
+# Support
+Please reach out to [Abdi](https://github.com/abdimohamud/), [Isaiah](https://github.com/isaiah-j), [Leslie](https://github.com/thereactgirl) or [Emily](https://github.com/Ehuntwork) for any support or questions.
+
+### Contributing
+
+When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
+
+Describe what you have changed in this repo as a team
+Provide examples and descriptions of components, how props are handled, where to find these changes, database tables, models, etc.
 
 ### Feature Requests
 
@@ -122,6 +125,7 @@ Remember that this project is licensed under the MIT license, and by submitting 
 
 #### Pull Request Guidelines
 
+- Ensure any install or build dependencies are removed before the end of the layer when doing a build.
 - Update the README.md with details of changes to the interface, including new plist variables, exposed ports, useful file locations and container parameters.
 - Ensure that your code conforms to our existing code conventions and test coverage.
 - Include the relevant issue number, if applicable.
@@ -131,8 +135,7 @@ Remember that this project is licensed under the MIT license, and by submitting 
 
 These contribution guidelines have been adapted from [this good-Contributing.md-template](https://gist.github.com/PurpleBooth/b24679402957c63ec426).
 
-## Documentation
-
+### Documentation
 [Front End](https://github.com/Lambda-School-Labs/family-promise-spokane-fe-a/blob/main/README.md)
 
 [Back End](https://github.com/Lambda-School-Labs/family-promise-spokane-be-a/blob/main/README.md)
