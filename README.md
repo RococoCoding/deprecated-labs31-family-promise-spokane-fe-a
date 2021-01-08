@@ -41,6 +41,10 @@ The Family Promise of Spokane  Organization is a US-based nonprofit organization
 
 > When using Okta for authentication, the app will need to run locally on port 3000.
 
+### User Flows
+
+[Trello Board](https://trello.com/b/FyWvcZzY/family-promise-of-spokane)
+
 ### Key Features
 
 - Supervisors can Create guest profile 
@@ -50,9 +54,12 @@ The Family Promise of Spokane  Organization is a US-based nonprofit organization
 - notes can be added to guest's profile. 
 - Guest can view their own profile. 
 
-#### [Front end deployed link](https://family-profile-styling-emily.d3hmwb1bmjh3u1.amplifyapp.com/)
+# Deployed Product
+[Front End Dashboard](https://family-profile-styling-emily.d3hmwb1bmjh3u1.amplifyapp.com/) |
+[Data Science API](http://a-labs29-family-promise.eba-syir5yx3.us-east-1.elasticbeanstalk.com/) |
+[Back End API](https://family-pomise-spokane.herokuapp.com/) |
 
-#### [Family Promise of Spokane back end](https://github.com/Lambda-School-Labs/family-promise-spokane-be-a) |
+#### [Family Promise of Spokane back end repo](https://github.com/Lambda-School-Labs/family-promise-spokane-be-a) 
 
 #### 🚫 back end framework goes here
 
@@ -69,12 +76,6 @@ The Family Promise of Spokane  Organization is a US-based nonprofit organization
 🚫Replace text below with a description of the API
 
 Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
-
-## Payment API here
-
-🚫Replace text below with a description of the API
-
-This is the way you take out your flustrations. Get away from those little Christmas tree things we used to make in school. Isn't it fantastic that you can change your mind and create all these happy things? Everything's not great in life, but we can still find beauty in it.
 
 ## Misc API here
 
