@@ -150,12 +150,13 @@ const FamilyDemographics = ({
                     defaultValue={familyMember[mem].demographics.employer}
                   />
                 </Form.Item>
+              </Space>
 
-                <Form.Item
-                  label="Income Source (monthly)"
-                  tooltip="An income source can be a job, TANF, SSI, SSDI, Child Support, etc."
-                >
-                  {/* <Input.Group compact>
+              <Form.Item
+                label="Income Source"
+                tooltip="An income source can be a job, TANF, SSI, SSDI, Child Support, etc."
+              >
+                {/* <Input.Group compact>
                     <Form.Item style={{ width: '200px' }}>
                       <Input
                         placeholder="Income source"
@@ -174,42 +175,49 @@ const FamilyDemographics = ({
                     </Form.Item>
                   </Input.Group> */}
 
-                  <Space key={`${mem}${key}`}>
-                    <Row
-                      justify={'space-between'}
-                      align={'top'}
-                      gutter={[16, 0]}
-                      wrap={false}
-                    >
-                      {options.map(source => (
-                        <Col span={3.7}>
-                          <Form.Item
-                            label={source}
-                            style={{
-                              display: 'flex',
-                              flexDirection: 'column-reverse',
-                              paddingRight: '20px',
-                            }}
-                          >
-                            <Checkbox
-                              defaultChecked={
-                                familyMember[mem].demographics.income_source[
-                                  optionDataName[source]
-                                ]
-                              }
-                              name={nameString(
-                                mem,
-                                `demographics.income_source.${optionDataName[source]}`
-                              )}
-                              onChange={setForm}
-                            />
-                          </Form.Item>
-                        </Col>
-                      ))}
-                    </Row>
-                  </Space>
-                </Form.Item>
-              </Space>
+                <Space key={`${mem}${key}`}>
+                  <Row
+                    justify={'space-between'}
+                    align={'top'}
+                    gutter={[16, 0]}
+                    wrap={false}
+                  >
+                    {options.map(source => (
+                      <Col span={3.7}>
+                        <Form.Item
+                          label={source}
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column-reverse',
+                            paddingRight: '20px',
+                          }}
+                        >
+                          <Checkbox
+                            defaultChecked={
+                              familyMember[mem].demographics.income_source[
+                                optionDataName[source]
+                              ]
+                            }
+                            name={nameString(
+                              mem,
+                              `demographics.income_source.${optionDataName[source]}`
+                            )}
+                            onChange={setForm}
+                          />
+                        </Form.Item>
+                      </Col>
+                    ))}
+                  </Row>
+                </Space>
+              </Form.Item>
+              <Form.Item label="Income Monthly">
+                <InputNumber
+                  onChange={setFormNumber(mem)}
+                  formatter={value => `$ ${value}`}
+                  defaultValue={familyMember[mem].demographics.employer}
+                />
+              </Form.Item>
+              {/* </Space> */}
             </div>
           ))}
         </Form>
