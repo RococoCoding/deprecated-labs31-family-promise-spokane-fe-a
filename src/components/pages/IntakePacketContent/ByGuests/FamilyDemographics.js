@@ -117,13 +117,13 @@ const FamilyDemographics = ({
 
                 <Form.Item label="Birthdate">
                   <DatePicker
-                    format="DD/MM/YYYY"
+                    format="MM/DD/YYYY"
                     name={nameString(mem, 'demographics.DOB')}
                     defaultValue={moment(
                       familyMember[mem].demographics.DOB != null
                         ? familyMember[mem].demographics.DOB
                         : '01/01/2020',
-                      'DD/MM/YYYY'
+                      'MM/DD/YYYY'
                     )}
                     onChange={setFormDate(mem)}
                   />
