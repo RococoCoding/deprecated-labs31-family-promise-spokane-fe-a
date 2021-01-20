@@ -27,10 +27,24 @@ import {
   Select,
   Progress,
   Divider,
+  Row,
+  Col,
+  Checkbox,
 } from 'antd';
 
 //moment is for the date picker (learn more: https://devhints.io/moment)
 import moment from 'moment';
+
+const options = ['Job', 'TANF', 'SSI', 'SSDI', 'Child Support', 'Other'];
+
+const optionDataName = {
+  Job: 'job',
+  TANF: 'TANF',
+  SSI: 'SSI',
+  SSDI: 'SSDI',
+  'Child Support': 'child_support',
+  Other: 'other',
+};
 
 const FamilyDemographics = ({
   navigation,
@@ -141,7 +155,7 @@ const FamilyDemographics = ({
                   label="Income Source (monthly)"
                   tooltip="An income source can be a job, TANF, SSI, SSDI, Child Support, etc."
                 >
-                  <Input.Group compact>
+                  {/* <Input.Group compact>
                     <Form.Item style={{ width: '200px' }}>
                       <Input
                         placeholder="Income source"
@@ -150,6 +164,7 @@ const FamilyDemographics = ({
                         onChange={setForm}
                       />
                     </Form.Item>
+
                     <Form.Item>
                       <InputNumber
                         onChange={setFormNumber(mem)}
@@ -157,7 +172,42 @@ const FamilyDemographics = ({
                         defaultValue={familyMember[mem].demographics.employer}
                       />
                     </Form.Item>
-                  </Input.Group>
+                  </Input.Group> */}
+
+                  <Space key={`${mem}${key}`}>
+                    <Row
+                      justify={'space-between'}
+                      align={'top'}
+                      gutter={[16, 0]}
+                      wrap={false}
+                    >
+                      {options.map(source => (
+                        <Col span={3.7}>
+                          <Form.Item
+                            label={source}
+                            style={{
+                              display: 'flex',
+                              flexDirection: 'column-reverse',
+                              paddingRight: '20px',
+                            }}
+                          >
+                            <Checkbox
+                              defaultChecked={
+                                familyMember[mem].demographics.income_source[
+                                  optionDataName[source]
+                                ]
+                              }
+                              name={nameString(
+                                mem,
+                                `demographics.income_source.${optionDataName[source]}`
+                              )}
+                              onChange={setForm}
+                            />
+                          </Form.Item>
+                        </Col>
+                      ))}
+                    </Row>
+                  </Space>
                 </Form.Item>
               </Space>
             </div>
