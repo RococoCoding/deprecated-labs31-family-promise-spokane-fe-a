@@ -30,16 +30,18 @@ const ClientReleaseSignature = ({
   steps,
   step,
 }) => {
-  //Progress bar
+  // //Progress bar
   const pageNumber = steps.findIndex(item => item === step);
   const pages = steps.length;
   const percent = ((pageNumber + 1) / pages) * 100;
 
+  // //FamilyMember Data Structure from ../../intakePacket.jsx (props)
+  const { familyMember } = formData;
+
   return (
     <div style={tempFormStyle}>
-      {/*Progress bar*/}
+      Progress bar
       <Progress percent={percent} status="active" showInfo={false} />
-
       <Card title="Client Release Guest Signature" bordered={false}>
         <IntakeButton navigation={navigation} />
         <Form>
