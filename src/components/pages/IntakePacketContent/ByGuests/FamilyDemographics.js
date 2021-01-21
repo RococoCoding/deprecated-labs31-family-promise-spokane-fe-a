@@ -164,9 +164,6 @@ const FamilyDemographics = ({
                 </Form.Item>
               </Space>
 
-              {/* <Space key={`${mem}${key}`} style={{ display: 'flex', justifyContent: 'center', marginBottom: 8 }}
-                align="baseline"
-              > */}
               <Form.Item label="Income Source (Choose all that apply)">
                 <Row
                   justify={'space-between'}
@@ -202,9 +199,6 @@ const FamilyDemographics = ({
                   ))}
                 </Row>
               </Form.Item>
-              {/* </Space> */}
-
-              {/* </Space> */}
             </div>
           ))}
         </Form>
