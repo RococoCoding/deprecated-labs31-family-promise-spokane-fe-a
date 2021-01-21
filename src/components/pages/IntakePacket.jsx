@@ -30,6 +30,7 @@ import Expectations from './IntakePacketContent/ByGuests/Expectations/Expectatio
 import Decorum from './IntakePacketContent/ByGuests/Expectations/Decorum';
 import AbideBy from './IntakePacketContent/ByGuests/Expectations/AbideBy';
 import SuspensionAgreement from './IntakePacketContent/ByGuests/SuspensionAgreement/SuspensionAgreement';
+import GrievanceAppeal from './IntakePacketContent/ByGuests/GrievanceAppeal/GrievanceAppeal';
 /* Data structure for familyInfo. Each familyMember is pushed to the familyMember array here but 
 the data structure is in ./IntakePacketContent/ByGuests/FamilyMembers.js*/
 
@@ -136,6 +137,7 @@ const steps = [
   { id: 'Decorum' },
   { id: 'AbideBy' },
   { id: 'SuspensionAgreement' },
+  { id: 'GrievanceAppeal' },
 ];
 
 const IntakePacket = () => {
@@ -220,6 +222,8 @@ const IntakePacket = () => {
       return <AbideBy {...props} />;
     case 'SuspensionAgreement':
       return <SuspensionAgreement {...props} />;
+    case 'GrievanceAppeal':
+      return <GrievanceAppeal {...props} />;
     default:
       return null;
   }
