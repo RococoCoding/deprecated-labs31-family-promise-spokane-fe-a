@@ -20,6 +20,7 @@ import Insurance from './IntakePacketContent/ByGuests/Insurance';
 import ClientRelease from './IntakePacketContent/ByGuests/ClientRelease/ClientRelease';
 import ClientReleaseSignature from './IntakePacketContent/ByGuests/ClientRelease/ClientReleaseSignature';
 import ClientReleaseStaffSig from './IntakePacketContent/ByGuests/ClientRelease/ClientReleaseStaffSig';
+import ThirdPartyConsent from './IntakePacketContent/ByGuests/ThirdPartyConsent/ThirdPartyConsent';
 import FamilyDemographics from './IntakePacketContent/ByGuests/FamilyDemographics';
 import AdditionalInfo from './IntakePacketContent/ByGuests/AdditionalInfo';
 import IntakeStart from './IntakePacketContent/IntakeStart';
@@ -128,6 +129,7 @@ const steps = [
   { id: 'ClientRelease' },
   { id: 'ClientReleaseSignature' },
   { id: 'ClientReleaseStaffSig' },
+  { id: 'ThirdPartyConsent' },
   { id: 'Expectations' },
   { id: 'Decorum' },
   { id: 'AbideBy' },
@@ -203,6 +205,8 @@ const IntakePacket = () => {
       return <ClientReleaseSignature {...props} />;
     case 'ClientReleaseStaffSig':
       return <ClientReleaseStaffSig {...props} />;
+    case 'ThirdPartyConsent':
+      return <ThirdPartyConsent {...props} />
     case 'Expectations':
       return <Expectations {...props} />;
     case 'Decorum':
