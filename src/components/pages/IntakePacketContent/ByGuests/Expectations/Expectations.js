@@ -5,7 +5,7 @@ Requires Signatures from Client for clause in Guest Expectations and Decorum Agr
 import React from 'react';
 
 //Previous/Next buttons
-import IntakeButton from '../IntakeButtons';
+import IntakeButton from '../../IntakeButtons';
 
 //Ant Design imports (https://ant.design/components/overview/)
 import { Form, Input, Button, Space, Card, Progress, Select } from 'antd';
@@ -47,7 +47,9 @@ const Expectations = ({
         <h3>I will be expected NOT to: </h3>
         <Form.Item>
           <Input className="initials" />
-          Be Violent or Aggresive:
+          <strong>
+            <u>Be Violent or Aggresive:</u>
+          </strong>
           <li>
             I understand that Open Doors staff has the right to ask me to leave
             immediately if I am believed to be a threat to another guest,
@@ -59,7 +61,9 @@ const Expectations = ({
 
         <Form.Item>
           <Input className="initials" />
-          Have Drugs, Alcohol, or Weapons:
+          <strong>
+            <u>Have Drugs, Alcohol, or Weapons:</u>
+          </strong>
           <li>
             I understand that the use, possession, or sale of drugs or alcohol
             is NOT permitted on the Open Doors premises. I agree that I will not
@@ -75,7 +79,9 @@ const Expectations = ({
         </Form.Item>
         <Form.Item>
           <Input className="initials" />
-          Leave Children Unattended Out of My Line of Sight:
+          <strong>
+            <u>Leave Children Unattended Out of My Line of Sight:</u>
+          </strong>
           <li>
             I agree to supervise my children at all times. Parents are
             responsible for care and “line of sight” supervision of children at
@@ -88,6 +94,15 @@ const Expectations = ({
             </strong>
           </li>
         </Form.Item>
+        <p>
+          <strong>
+            {' '}
+            ***I understand that if I Do any of the above mentioned things I may
+            be written up, suspended or terminated from the shelter. I also
+            understand that after 3 write-ups (whether I signed them or not), I
+            may be suspended or terminated from using this shelter.***
+          </strong>
+        </p>
       </Card>
     </div>
   );
