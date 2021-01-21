@@ -27,10 +27,24 @@ import {
   Select,
   Progress,
   Divider,
+  Row,
+  Col,
+  Checkbox,
 } from 'antd';
 
 //moment is for the date picker (learn more: https://devhints.io/moment)
 import moment from 'moment';
+
+const options = ['Job', 'TANF', 'SSI', 'SSDI', 'Child Support', 'Other'];
+
+const optionDataName = {
+  Job: 'job',
+  TANF: 'TANF',
+  SSI: 'SSI',
+  SSDI: 'SSDI',
+  'Child Support': 'child_support',
+  Other: 'other',
+};
 
 const FamilyDemographics = ({
   navigation,
@@ -100,7 +114,11 @@ const FamilyDemographics = ({
 
               {/*Space aligns Form.item(s) vertically*/}
               <Space
-                style={{ display: 'flex', marginBottom: 8 }}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  marginBottom: 8,
+                }}
                 align="baseline"
               >
                 <Form.Item label="Gender" style={{ width: '200px' }}>
@@ -117,13 +135,13 @@ const FamilyDemographics = ({
 
                 <Form.Item label="Birthdate">
                   <DatePicker
-                    format="DD/MM/YYYY"
+                    format="MM/DD/YYYY"
                     name={nameString(mem, 'demographics.DOB')}
                     defaultValue={moment(
                       familyMember[mem].demographics.DOB != null
                         ? familyMember[mem].demographics.DOB
                         : '01/01/2020',
-                      'DD/MM/YYYY'
+                      'MM/DD/YYYY'
                     )}
                     onChange={setFormDate(mem)}
                   />
@@ -137,29 +155,50 @@ const FamilyDemographics = ({
                   />
                 </Form.Item>
 
-                <Form.Item
-                  label="Income Source (monthly)"
-                  tooltip="An income source can be a job, TANF, SSI, SSDI, Child Support, etc."
-                >
-                  <Input.Group compact>
-                    <Form.Item style={{ width: '200px' }}>
-                      <Input
-                        placeholder="Income source"
-                        name={nameString(mem, 'demographics.income')}
-                        value={familyMember[mem].demographics.income}
-                        onChange={setForm}
-                      />
-                    </Form.Item>
-                    <Form.Item>
-                      <InputNumber
-                        onChange={setFormNumber(mem)}
-                        formatter={value => `$ ${value}`}
-                        defaultValue={familyMember[mem].demographics.employer}
-                      />
-                    </Form.Item>
-                  </Input.Group>
+                <Form.Item label="Monthly Income">
+                  <InputNumber
+                    onChange={setFormNumber(mem)}
+                    formatter={value => `$ ${value}`}
+                    defaultValue={familyMember[mem].demographics.employer}
+                  />
                 </Form.Item>
               </Space>
+
+              <Form.Item label="Income Source (Choose all that apply)">
+                <Row
+                  justify={'space-between'}
+                  align={'top'}
+                  gutter={[16, 0]}
+                  wrap={false}
+                >
+                  {options.map(source => (
+                    <Col span={5.7}>
+                      <Form.Item
+                        label={source}
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-around',
+                          flexDirection: 'column-reverse',
+                          paddingRight: '20px',
+                        }}
+                      >
+                        <Checkbox
+                          defaultChecked={
+                            familyMember[mem].demographics.income_source[
+                              optionDataName[source]
+                            ]
+                          }
+                          name={nameString(
+                            mem,
+                            `demographics.income_source.${optionDataName[source]}`
+                          )}
+                          onChange={setForm}
+                        />
+                      </Form.Item>
+                    </Col>
+                  ))}
+                </Row>
+              </Form.Item>
             </div>
           ))}
         </Form>
