@@ -26,7 +26,9 @@ import AdditionalInfo from './IntakePacketContent/ByGuests/AdditionalInfo';
 import IntakeStart from './IntakePacketContent/IntakeStart';
 import CreateOktaAccountForm from './IntakePacketContent/createOktaAccountForm/CreateOktaAccountForm';
 import Pets from './IntakePacketContent/ByGuests/Pets';
-import Expectations from './IntakePacketContent/ByGuests/Expectations';
+import Expectations from './IntakePacketContent/ByGuests/Expectations/Expectations';
+import Decorum from './IntakePacketContent/ByGuests/Expectations/Decorum';
+import AbideBy from './IntakePacketContent/ByGuests/Expectations/AbideBy';
 import SuspensionAgreement from './IntakePacketContent/ByGuests/SuspensionAgreement/SuspensionAgreement';
 /* Data structure for familyInfo. Each familyMember is pushed to the familyMember array here but 
 the data structure is in ./IntakePacketContent/ByGuests/FamilyMembers.js*/
@@ -198,18 +200,18 @@ const IntakePacket = () => {
       return <HomelessHistory {...props} />;
     case 'Insurance':
       return <Insurance {...props} />;
+    case 'AdditionalInfo':
+      return <AdditionalInfo {...props} />;
+    case 'Pets':
+      return <Pets {...props} />;
     case 'ClientRelease':
       return <ClientRelease {...props} />;
     case 'ClientReleaseSignature':
       return <ClientReleaseSignature {...props} />;
     case 'ClientReleaseStaffSig':
-      return <ClientReleaseStaffSig {...props} />;    
-    case 'AdditionalInfo':
-      return <AdditionalInfo {...props} />;
-    case 'Pets':
-      return <Pets {...props} />;
+      return <ClientReleaseStaffSig {...props} />;
     case 'ThirdPartyConsent':
-      return <ThirdPartyConsent {...props} />
+      return <ThirdPartyConsent {...props} />;
     case 'Expectations':
       return <Expectations {...props} />;
     case 'Decorum':
