@@ -29,7 +29,9 @@ import Pets from './IntakePacketContent/ByGuests/Pets';
 import Expectations from './IntakePacketContent/ByGuests/Expectations/Expectations';
 import Decorum from './IntakePacketContent/ByGuests/Expectations/Decorum';
 import AbideBy from './IntakePacketContent/ByGuests/Expectations/AbideBy';
+import PhotoRelease from './IntakePacketContent/ByGuests/PhotoRelease';
 import SuspensionAgreement from './IntakePacketContent/ByGuests/SuspensionAgreement/SuspensionAgreement';
+
 /* Data structure for familyInfo. Each familyMember is pushed to the familyMember array here but 
 the data structure is in ./IntakePacketContent/ByGuests/FamilyMembers.js*/
 
@@ -119,7 +121,6 @@ const steps = [
   { id: 'ContactInfo' },
   { id: 'FamilyMembers' },
   { id: 'FamilyDemographics' },
-  { id: 'Expectations' },
   { id: 'RaceEthnicityInfo' },
   { id: 'BarriersPage' },
   { id: 'ChildSchoolInfo' },
@@ -135,6 +136,7 @@ const steps = [
   { id: 'Expectations' },
   { id: 'Decorum' },
   { id: 'AbideBy' },
+  { id: 'PhotoRelease' },
   { id: 'SuspensionAgreement' },
 ];
 
@@ -218,6 +220,8 @@ const IntakePacket = () => {
       return <Decorum {...props} />;
     case 'AbideBy':
       return <AbideBy {...props} />;
+    case 'PhotoRelease':
+      return <PhotoRelease {...props} />;
     case 'SuspensionAgreement':
       return <SuspensionAgreement {...props} />;
     default:
