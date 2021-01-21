@@ -20,13 +20,14 @@ import Insurance from './IntakePacketContent/ByGuests/Insurance';
 import ClientRelease from './IntakePacketContent/ByGuests/ClientRelease/ClientRelease';
 import ClientReleaseSignature from './IntakePacketContent/ByGuests/ClientRelease/ClientReleaseSignature';
 import ClientReleaseStaffSig from './IntakePacketContent/ByGuests/ClientRelease/ClientReleaseStaffSig';
-import SuspensionAgreement from './IntakePacketContent/ByGuests/SuspensionAgreement/SuspensionAgreement';
+import ThirdPartyConsent from './IntakePacketContent/ByGuests/ThirdPartyConsent/ThirdPartyConsent';
 import FamilyDemographics from './IntakePacketContent/ByGuests/FamilyDemographics';
 import AdditionalInfo from './IntakePacketContent/ByGuests/AdditionalInfo';
 import IntakeStart from './IntakePacketContent/IntakeStart';
 import CreateOktaAccountForm from './IntakePacketContent/createOktaAccountForm/CreateOktaAccountForm';
 import Pets from './IntakePacketContent/ByGuests/Pets';
 import Expectations from './IntakePacketContent/ByGuests/Expectations';
+import SuspensionAgreement from './IntakePacketContent/ByGuests/SuspensionAgreement/SuspensionAgreement';
 /* Data structure for familyInfo. Each familyMember is pushed to the familyMember array here but 
 the data structure is in ./IntakePacketContent/ByGuests/FamilyMembers.js*/
 
@@ -122,14 +123,17 @@ const steps = [
   { id: 'ChildSchoolInfo' },
   { id: 'DomesticViolence' },
   { id: 'HomelessHistory' },
-  { id: 'ClientRelease' },
-  { id: 'ClientReleaseSignature' },
-  { id: 'ClientReleaseStaffSig' },
   { id: 'Insurance' },
   { id: 'AdditionalInfo' },
   { id: 'Pets' },
+  { id: 'ClientRelease' },
+  { id: 'ClientReleaseSignature' },
+  { id: 'ClientReleaseStaffSig' },
+  { id: 'ThirdPartyConsent' },
+  { id: 'Expectations' },
+  { id: 'Decorum' },
+  { id: 'AbideBy' },
   { id: 'SuspensionAgreement' },
-  // { id: Expectations}
 ];
 
 const IntakePacket = () => {
@@ -199,13 +203,21 @@ const IntakePacket = () => {
     case 'ClientReleaseSignature':
       return <ClientReleaseSignature {...props} />;
     case 'ClientReleaseStaffSig':
-      return <ClientReleaseStaffSig {...props} />;
-    case 'SuspensionAgreement':
-      return <SuspensionAgreement {...props} />;
+      return <ClientReleaseStaffSig {...props} />;    
     case 'AdditionalInfo':
       return <AdditionalInfo {...props} />;
     case 'Pets':
       return <Pets {...props} />;
+    case 'ThirdPartyConsent':
+      return <ThirdPartyConsent {...props} />
+    case 'Expectations':
+      return <Expectations {...props} />;
+    case 'Decorum':
+      return <Decorum {...props} />;
+    case 'AbideBy':
+      return <AbideBy {...props} />;
+    case 'SuspensionAgreement':
+      return <SuspensionAgreement {...props} />;
     default:
       return null;
   }
