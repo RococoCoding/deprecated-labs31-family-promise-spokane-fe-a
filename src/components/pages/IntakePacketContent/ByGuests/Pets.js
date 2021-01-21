@@ -42,8 +42,8 @@ const Pets = ({
         <Form layout="vertical">
           <Form.Item>
             <Checkbox
-              name="familyInfo.domestic_violence_info.has_court_order"
-              defaultChecked={false}
+              name="familyInfo.pets.shelter"
+              defaultChecked={familyInfo.pets.shelter}
               onChange={setForm}
             >
               Is your family bringing an animal with you into the shelter at the
@@ -55,15 +55,17 @@ const Pets = ({
             How many pets will you be bringing:
             <Checkbox
               name="familyInfo.pets.amount"
-              defaultChecked={familyInfo.pets.amount}
+              defaultChecked={familyInfo.pets.amount.value1}
               onChange={setForm}
+              value1={1}
             >
               1
             </Checkbox>
             <Checkbox
               name="familyInfo.pets.amount"
-              defaultChecked={familyInfo.pets.amount}
+              defaultChecked={familyInfo.pets.amount.value2}
               onChange={setForm}
+              value2={2}
             >
               2
             </Checkbox>

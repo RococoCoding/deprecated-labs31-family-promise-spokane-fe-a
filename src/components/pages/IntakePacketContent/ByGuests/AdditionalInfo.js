@@ -10,6 +10,7 @@ Suggestions:
 
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import IntakeButton from '../IntakeButtons';
 
 //Ant Design imports (https://ant.design/components/overview/)
 import {
@@ -113,16 +114,17 @@ const AdditionalInfo = ({
           }}
         >
           {/*Not using intakeButtons component because of submitHandler*/}
-          <Button
+          <IntakeButton navigation={navigation} />
+          {/* <Button
             type="primary"
             htmlType="button"
             onClick={previous}
             style={{ width: '100px' }}
           >
             Previous
-          </Button>
+          </Button> */}
 
-          <Button
+          {/* <Button
             type="primary"
             style={{
               backgroundColor: 'green',
@@ -133,7 +135,7 @@ const AdditionalInfo = ({
             onClick={submitHandlder}
           >
             Submit
-          </Button>
+          </Button> */}
         </div>
 
         <Form layout="vertical">

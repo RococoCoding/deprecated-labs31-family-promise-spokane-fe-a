@@ -21,7 +21,7 @@ import FamilyDemographics from './IntakePacketContent/ByGuests/FamilyDemographic
 import AdditionalInfo from './IntakePacketContent/ByGuests/AdditionalInfo';
 import IntakeStart from './IntakePacketContent/IntakeStart';
 import CreateOktaAccountForm from './IntakePacketContent/createOktaAccountForm/CreateOktaAccountForm';
-
+import Pets from './IntakePacketContent/ByGuests/Pets';
 /* Data structure for familyInfo. Each familyMember is pushed to the familyMember array here but 
 the data structure is in ./IntakePacketContent/ByGuests/FamilyMembers.js*/
 
@@ -85,8 +85,21 @@ let defaultData = {
       date_last_incident: null,
       anonymity_preferred: null,
     },
+    pets: {
+      shelter: true,
+      amount: {
+        value1: true,
+        value2: false,
+      },
+      dog: true,
+      cat: false,
+      service_animal: false,
+      support_animal: false,
+      name_one: '',
+      name_two: '',
+    },
     avatar_url: null,
-    pets: 1,
+    //pets: 1,
     percent_complete: 0,
   },
   familyMember: {},
@@ -105,6 +118,7 @@ const steps = [
   { id: 'HomelessHistory' },
   { id: 'Insurance' },
   { id: 'AdditionalInfo' },
+  { id: 'Pets' },
 ];
 
 const IntakePacket = () => {
@@ -169,6 +183,8 @@ const IntakePacket = () => {
       return <Insurance {...props} />;
     case 'AdditionalInfo':
       return <AdditionalInfo {...props} />;
+    case 'Pets':
+      return <Pets {...props} />;
     default:
       return null;
   }
