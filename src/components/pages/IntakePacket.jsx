@@ -20,6 +20,7 @@ import Insurance from './IntakePacketContent/ByGuests/Insurance';
 import ClientRelease from './IntakePacketContent/ByGuests/ClientRelease/ClientRelease';
 import ClientReleaseSignature from './IntakePacketContent/ByGuests/ClientRelease/ClientReleaseSignature';
 import ClientReleaseStaffSig from './IntakePacketContent/ByGuests/ClientRelease/ClientReleaseStaffSig';
+import ThirdPartyConsent from './IntakePacketContent/ByGuests/ThirdPartyConsent/ThirdPartyConsent';
 import FamilyDemographics from './IntakePacketContent/ByGuests/FamilyDemographics';
 import AdditionalInfo from './IntakePacketContent/ByGuests/AdditionalInfo';
 import IntakeStart from './IntakePacketContent/IntakeStart';
@@ -121,12 +122,13 @@ const steps = [
   { id: 'ChildSchoolInfo' },
   { id: 'DomesticViolence' },
   { id: 'HomelessHistory' },
-  { id: 'ClientRelease' },
-  { id: 'ClientReleaseSignature' },
-  { id: 'ClientReleaseStaffSig' },
   { id: 'Insurance' },
   { id: 'AdditionalInfo' },
   { id: 'Pets' },
+  { id: 'ClientRelease' },
+  { id: 'ClientReleaseSignature' },
+  { id: 'ClientReleaseStaffSig' },
+  { id: 'ThirdPartyConsent' },
   // { id: Expectations}
 ];
 
@@ -192,16 +194,18 @@ const IntakePacket = () => {
       return <HomelessHistory {...props} />;
     case 'Insurance':
       return <Insurance {...props} />;
+    case 'Pets':
+      return <Pets {...props} />;
     case 'ClientRelease':
       return <ClientRelease {...props} />;
     case 'ClientReleaseSignature':
       return <ClientReleaseSignature {...props} />;
     case 'ClientReleaseStaffSig':
       return <ClientReleaseStaffSig {...props} />;
+    case 'ThirdPartyConsent':
+      return <ThirdPartyConsent {...props} />;
     case 'AdditionalInfo':
       return <AdditionalInfo {...props} />;
-    case 'Pets':
-      return <Pets {...props} />;
     default:
       return null;
   }
