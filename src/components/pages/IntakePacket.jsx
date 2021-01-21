@@ -20,14 +20,13 @@ import Insurance from './IntakePacketContent/ByGuests/Insurance';
 import ClientRelease from './IntakePacketContent/ByGuests/ClientRelease/ClientRelease';
 import ClientReleaseSignature from './IntakePacketContent/ByGuests/ClientRelease/ClientReleaseSignature';
 import ClientReleaseStaffSig from './IntakePacketContent/ByGuests/ClientRelease/ClientReleaseStaffSig';
+import SuspensionAgreement from './IntakePacketContent/ByGuests/SuspensionAgreement/SuspensionAgreement';
 import FamilyDemographics from './IntakePacketContent/ByGuests/FamilyDemographics';
 import AdditionalInfo from './IntakePacketContent/ByGuests/AdditionalInfo';
 import IntakeStart from './IntakePacketContent/IntakeStart';
 import CreateOktaAccountForm from './IntakePacketContent/createOktaAccountForm/CreateOktaAccountForm';
 import Pets from './IntakePacketContent/ByGuests/Pets';
-import Expectations from './IntakePacketContent/ByGuests/Expectations/Expectations';
-import Decorum from './IntakePacketContent/ByGuests/Expectations/Decorum';
-import AbideBy from './IntakePacketContent/ByGuests/Expectations/AbideBy';
+import Expectations from './IntakePacketContent/ByGuests/Expectations';
 /* Data structure for familyInfo. Each familyMember is pushed to the familyMember array here but 
 the data structure is in ./IntakePacketContent/ByGuests/FamilyMembers.js*/
 
@@ -117,20 +116,20 @@ const steps = [
   { id: 'ContactInfo' },
   { id: 'FamilyMembers' },
   { id: 'FamilyDemographics' },
+  { id: 'Expectations' },
   { id: 'RaceEthnicityInfo' },
   { id: 'BarriersPage' },
   { id: 'ChildSchoolInfo' },
   { id: 'DomesticViolence' },
   { id: 'HomelessHistory' },
-  { id: 'Insurance' },
-  { id: 'AdditionalInfo' },
-  { id: 'Pets' },
   { id: 'ClientRelease' },
   { id: 'ClientReleaseSignature' },
   { id: 'ClientReleaseStaffSig' },
-  { id: 'Expectations' },
-  { id: 'Decorum' },
-  { id: 'AbideBy' },
+  { id: 'Insurance' },
+  { id: 'AdditionalInfo' },
+  { id: 'Pets' },
+  { id: 'SuspensionAgreement' },
+  // { id: Expectations}
 ];
 
 const IntakePacket = () => {
@@ -181,6 +180,8 @@ const IntakePacket = () => {
       return <FamilyMembers {...props} />;
     case 'FamilyDemographics':
       return <FamilyDemographics {...props} />;
+    case 'Expectations':
+      return <Expectations {...props} />;
     case 'RaceEthnicityInfo':
       return <RaceEthnicityInfo {...props} />;
     case 'BarriersPage':
@@ -193,22 +194,18 @@ const IntakePacket = () => {
       return <HomelessHistory {...props} />;
     case 'Insurance':
       return <Insurance {...props} />;
-    case 'AdditionalInfo':
-      return <AdditionalInfo {...props} />;
-    case 'Pets':
-      return <Pets {...props} />;
     case 'ClientRelease':
       return <ClientRelease {...props} />;
     case 'ClientReleaseSignature':
       return <ClientReleaseSignature {...props} />;
     case 'ClientReleaseStaffSig':
       return <ClientReleaseStaffSig {...props} />;
-    case 'Expectations':
-      return <Expectations {...props} />;
-    case 'Decorum':
-      return <Decorum {...props} />;
-    case 'AbideBy':
-      return <AbideBy {...props} />;
+    case 'SuspensionAgreement':
+      return <SuspensionAgreement {...props} />;
+    case 'AdditionalInfo':
+      return <AdditionalInfo {...props} />;
+    case 'Pets':
+      return <Pets {...props} />;
     default:
       return null;
   }
