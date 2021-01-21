@@ -114,7 +114,11 @@ const FamilyDemographics = ({
 
               {/*Space aligns Form.item(s) vertically*/}
               <Space
-                style={{ display: 'flex', marginBottom: 8 }}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  marginBottom: 8,
+                }}
                 align="baseline"
               >
                 <Form.Item label="Gender" style={{ width: '200px' }}>
@@ -150,73 +154,56 @@ const FamilyDemographics = ({
                     defaultValue={familyMember[mem].demographics.employer}
                   />
                 </Form.Item>
+
+                <Form.Item label="Monthly Income">
+                  <InputNumber
+                    onChange={setFormNumber(mem)}
+                    formatter={value => `$ ${value}`}
+                    defaultValue={familyMember[mem].demographics.employer}
+                  />
+                </Form.Item>
               </Space>
 
-              <Form.Item
-                label="Income Source"
-                tooltip="An income source can be a job, TANF, SSI, SSDI, Child Support, etc."
-              >
-                {/* <Input.Group compact>
-                    <Form.Item style={{ width: '200px' }}>
-                      <Input
-                        placeholder="Income source"
-                        name={nameString(mem, 'demographics.income')}
-                        value={familyMember[mem].demographics.income}
-                        onChange={setForm}
-                      />
-                    </Form.Item>
-
-                    <Form.Item>
-                      <InputNumber
-                        onChange={setFormNumber(mem)}
-                        formatter={value => `$ ${value}`}
-                        defaultValue={familyMember[mem].demographics.employer}
-                      />
-                    </Form.Item>
-                  </Input.Group> */}
-
-                <Space key={`${mem}${key}`}>
-                  <Row
-                    justify={'space-between'}
-                    align={'top'}
-                    gutter={[16, 0]}
-                    wrap={false}
-                  >
-                    {options.map(source => (
-                      <Col span={3.7}>
-                        <Form.Item
-                          label={source}
-                          style={{
-                            display: 'flex',
-                            flexDirection: 'column-reverse',
-                            paddingRight: '20px',
-                          }}
-                        >
-                          <Checkbox
-                            defaultChecked={
-                              familyMember[mem].demographics.income_source[
-                                optionDataName[source]
-                              ]
-                            }
-                            name={nameString(
-                              mem,
-                              `demographics.income_source.${optionDataName[source]}`
-                            )}
-                            onChange={setForm}
-                          />
-                        </Form.Item>
-                      </Col>
-                    ))}
-                  </Row>
-                </Space>
+              {/* <Space key={`${mem}${key}`} style={{ display: 'flex', justifyContent: 'center', marginBottom: 8 }}
+                align="baseline"
+              > */}
+              <Form.Item label="Income Source (Choose all that apply)">
+                <Row
+                  justify={'space-between'}
+                  align={'top'}
+                  gutter={[16, 0]}
+                  wrap={false}
+                >
+                  {options.map(source => (
+                    <Col span={5.7}>
+                      <Form.Item
+                        label={source}
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-around',
+                          flexDirection: 'column-reverse',
+                          paddingRight: '20px',
+                        }}
+                      >
+                        <Checkbox
+                          defaultChecked={
+                            familyMember[mem].demographics.income_source[
+                              optionDataName[source]
+                            ]
+                          }
+                          name={nameString(
+                            mem,
+                            `demographics.income_source.${optionDataName[source]}`
+                          )}
+                          onChange={setForm}
+                        />
+                      </Form.Item>
+                    </Col>
+                  ))}
+                </Row>
               </Form.Item>
-              <Form.Item label="Income Monthly">
-                <InputNumber
-                  onChange={setFormNumber(mem)}
-                  formatter={value => `$ ${value}`}
-                  defaultValue={familyMember[mem].demographics.employer}
-                />
-              </Form.Item>
+              {/* </Space> */}
+
               {/* </Space> */}
             </div>
           ))}
