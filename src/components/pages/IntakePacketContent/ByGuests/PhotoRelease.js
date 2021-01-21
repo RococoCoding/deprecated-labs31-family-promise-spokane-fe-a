@@ -1,5 +1,5 @@
 /*
-Signatures for Client Release form from Guests
+Signatures for Photo Release
 */
 
 import React from 'react';
