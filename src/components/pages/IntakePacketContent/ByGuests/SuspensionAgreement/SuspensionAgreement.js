@@ -127,6 +127,3 @@ const SuspensionAgreement = ({
 };
 
 export default SuspensionAgreement;
-/*
-Signatures for Client Release form from Guests
-*/
