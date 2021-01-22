@@ -29,8 +29,8 @@ import Pets from './IntakePacketContent/ByGuests/Pets';
 import Expectations from './IntakePacketContent/ByGuests/Expectations/Expectations';
 import Decorum from './IntakePacketContent/ByGuests/Expectations/Decorum';
 import AbideBy from './IntakePacketContent/ByGuests/Expectations/AbideBy';
-import SuspensionAgreement from './IntakePacketContent/ByGuests/SuspensionAgreement/SuspensionAgreement';
 import GrievanceAppeal from './IntakePacketContent/ByGuests/GrievanceAppeal/GrievanceAppeal';
+import SuspensionAgreement from './IntakePacketContent/ByGuests/SuspensionAgreement/SuspensionAgreement';
 /* Data structure for familyInfo. Each familyMember is pushed to the familyMember array here but 
 the data structure is in ./IntakePacketContent/ByGuests/FamilyMembers.js*/
 
