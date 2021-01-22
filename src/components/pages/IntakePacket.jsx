@@ -29,8 +29,11 @@ import Pets from './IntakePacketContent/ByGuests/Pets';
 import Expectations from './IntakePacketContent/ByGuests/Expectations/Expectations';
 import Decorum from './IntakePacketContent/ByGuests/Expectations/Decorum';
 import AbideBy from './IntakePacketContent/ByGuests/Expectations/AbideBy';
-import GrievanceAppeal from './IntakePacketContent/ByGuests/GrievanceAppeal/GrievanceAppeal';
+import PhotoRelease from './IntakePacketContent/ByGuests/PhotoRelease';
+import CoreValues from './IntakePacketContent/ByGuests/CoreValues';
 import SuspensionAgreement from './IntakePacketContent/ByGuests/SuspensionAgreement/SuspensionAgreement';
+import GrievanceAppeal from './IntakePacketContent/ByGuests/GrievanceAppeal/GrievanceAppeal';
+
 /* Data structure for familyInfo. Each familyMember is pushed to the familyMember array here but 
 the data structure is in ./IntakePacketContent/ByGuests/FamilyMembers.js*/
 
@@ -120,7 +123,6 @@ const steps = [
   { id: 'ContactInfo' },
   { id: 'FamilyMembers' },
   { id: 'FamilyDemographics' },
-  { id: 'Expectations' },
   { id: 'RaceEthnicityInfo' },
   { id: 'BarriersPage' },
   { id: 'ChildSchoolInfo' },
@@ -136,6 +138,8 @@ const steps = [
   { id: 'Expectations' },
   { id: 'Decorum' },
   { id: 'AbideBy' },
+  { id: 'PhotoRelease' },
+  { id: 'CoreValues' },
   { id: 'SuspensionAgreement' },
   { id: 'GrievanceAppeal' },
 ];
@@ -220,6 +224,10 @@ const IntakePacket = () => {
       return <Decorum {...props} />;
     case 'AbideBy':
       return <AbideBy {...props} />;
+    case 'PhotoRelease':
+      return <PhotoRelease {...props} />;
+    case 'CoreValues':
+      return <CoreValues {...props} />;
     case 'SuspensionAgreement':
       return <SuspensionAgreement {...props} />;
     case 'GrievanceAppeal':
