@@ -40,6 +40,7 @@ const Guests = ({}) => {
     axiosWithAuth()
       .get('/members')
       .then(res => {
+        console.log(res.data);
         let copy = { ...state };
 
         let formattedData = res.data.map(member => {
@@ -53,6 +54,7 @@ const Guests = ({}) => {
         });
 
         copy.data.push(...formattedData);
+        console.log(copy);
 
         setState(copy);
       })
