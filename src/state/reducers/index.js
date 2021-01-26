@@ -22,6 +22,29 @@ const INITIAL_STATE = {
   ERROR: '',
 };
 
+//Guest Login
+const date = new Date();
+const time = date.getTime();
+// const LOGIN_STATE = {
+//   ACTUAL_BEDS_RESERVED: '',
+//   CHEKCED_IN: false,
+//   DATE: '',
+//   FAMILY_ID: '',
+//   RESERVATION_ID: '',
+//   TIME: ''
+
+// //data - actual_beds_reserved: 5
+// //data -  beds_reserved: 5
+// //data - checked_in: true
+// //data - date: "2020-10-09T00:00:00.000Z"
+// //data - family_id: 1
+// //data - on_site_7pm: true
+// //data - on_site_10pm: true
+// //data - reservation_id: 1
+// //data - supervisor_id: "00u2lh0bsAliwLEe75d6"
+// //data - time: "2020-12-09T17:38:31.123
+// };
+
 export const rootReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_CURRENT_USER:
