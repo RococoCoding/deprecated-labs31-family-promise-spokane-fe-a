@@ -4,6 +4,9 @@ import MaterialTable from 'material-table';
 import LoadingComponent from '../../common/LoadingComponent';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
 import { tableIcons } from '../../../utils/tableIcons';
+import PeopleIcon from '@material-ui/icons/People';
+import FlagIcon from '@material-ui/icons/Flag';
+import { template, templateSettings } from 'underscore';
 
 Modal.setAppElement('#root');
 
@@ -46,7 +49,7 @@ export default function SupervisorCheckIn() {
                 return { ...item, last_name: res.data.demographics.last_name };
               }),
             };
-
+            console.log('copy', copy);
             setState(copy);
             setLoading(false);
           })
@@ -56,6 +59,36 @@ export default function SupervisorCheckIn() {
         alert('error');
       });
   }, []);
+
+  const toggleCheckedIn = rowData => {
+    let temp = { ...rowData, checked_in: !rowData.checked_in };
+
+    setState({
+      ...state,
+      data: state.data.map(item => {
+        return { ...item, checked_in: !item.checked_in };
+      }),
+    });
+  };
+
+  const toggle7pm = () => {
+    //on_site_7pm
+    setState({
+      ...state,
+      data: state.data.map(item => {
+        return { ...item, on_site_7pm: !item.on_site_7pm };
+      }),
+    });
+  };
+  const toggle10pm = () => {
+    //on_site_10pm
+    setState({
+      ...state,
+      data: state.data.map(item => {
+        return { ...item, on_site_10pm: !item.on_site_10pm };
+      }),
+    });
+  };
 
   if (loading) {
     return (
@@ -84,6 +117,29 @@ export default function SupervisorCheckIn() {
           title="Guests Check-in for 2020-12-12"
           columns={state.columns}
           data={state.data}
+          actions={[
+            {
+              icon: PeopleIcon,
+              tooltip: 'Checked-in',
+              onClick: (event, rowData) => {
+                toggleCheckedIn(rowData);
+              },
+            },
+            {
+              icon: FlagIcon,
+              tooltip: '7PM Check-in',
+              onClick: (event, rowData) => {
+                toggle7pm();
+              },
+            },
+            {
+              icon: FlagIcon,
+              tooltip: '10PM Check-in',
+              onClick: (event, rowData) => {
+                toggle10pm();
+              },
+            },
+          ]}
         />
       </div>
     </div>
