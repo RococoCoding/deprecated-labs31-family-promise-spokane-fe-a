@@ -106,6 +106,7 @@ const AdditionalInfo = ({
       {/*Progress bar*/}
       <Progress percent={percent} status="active" showInfo={false} />
       <Card title="Additional Information" bordered={false}>
+        <IntakeButton navigation={navigation} />
         <div
           style={{
             display: 'flex',
@@ -114,7 +115,6 @@ const AdditionalInfo = ({
           }}
         >
           {/*Not using intakeButtons component because of submitHandler*/}
-          <IntakeButton navigation={navigation} />
           {/* <Button
             type="primary"
             htmlType="button"
