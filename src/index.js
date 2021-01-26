@@ -39,7 +39,7 @@ import FamilyPage from './components/pages/guest-pages/FamilyPage';
 import Notes from './components/pages/Notes/Notes';
 import Members from './components/pages/guest-pages/Members';
 import UserProfile from './components/UserProfile';
-
+import CaseAnalytics from './components/pages/casemanager-pages/CaseManagerAnalytics';
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
@@ -96,6 +96,11 @@ function App() {
           path="/analytics"
           roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
           component={Analytics}
+        />
+        <PrivateRoute
+          path="/caseAnalytics"
+          roles={['executive_director', 'case_manager']}
+          component={CaseAnalytics}
         />
         <PrivateRoute
           path="/intake"

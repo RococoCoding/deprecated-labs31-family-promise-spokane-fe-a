@@ -11,7 +11,9 @@ import { useHistory } from 'react-router-dom';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import BarChartOutlined from '@ant-design/icons/BarChartOutlined';
 import MonitorOutlined from '@ant-design/icons/MonitorOutlined';
+import PieChartOutlinedIcon from '@material-ui/icons/PieChartOutlined';
 import { useSelector } from 'react-redux';
+import { HistoryOutlined } from '@material-ui/icons';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -46,6 +48,10 @@ const SideBar = () => {
 
   const redirectToMembers = () => {
     history.push('/members');
+  };
+
+  const redirectToCaseManagerAnalytics = () => {
+    history.push('/caseAnalytics');
   };
 
   return (
@@ -98,6 +104,15 @@ const SideBar = () => {
                 >
                   Register Family
                 </Menu.Item>
+                {user.role == 'case_manager' && (
+                  <Menu.Item
+                    onClick={redirectToCaseManagerAnalytics}
+                    key="5"
+                    icon={<PieChartOutlinedIcon />}
+                  >
+                    Case Manager Analytics
+                  </Menu.Item>
+                )}
               </Menu>
             )}
           </Menu>
