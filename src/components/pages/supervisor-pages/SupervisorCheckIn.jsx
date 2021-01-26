@@ -6,10 +6,13 @@ import { axiosWithAuth } from '../../../api/axiosWithAuth';
 import { tableIcons } from '../../../utils/tableIcons';
 import PeopleIcon from '@material-ui/icons/People';
 import FlagIcon from '@material-ui/icons/Flag';
+import HotelIcon from '@material-ui/icons/Hotel';
+import Brightness2Icon from '@material-ui/icons/Brightness2';
+import Brightness3Icon from '@material-ui/icons/Brightness3';
 import { template, templateSettings } from 'underscore';
 
 Modal.setAppElement('#root');
-
+//add new icons
 export default function SupervisorCheckIn() {
   const [loading, setLoading] = useState(true);
 
@@ -114,27 +117,27 @@ export default function SupervisorCheckIn() {
             }),
           }}
           icons={tableIcons}
-          title="Guests Check-in for 2020-12-12"
+          title="Guests Check-in"
           columns={state.columns}
           data={state.data}
           actions={[
             {
-              icon: PeopleIcon,
+              icon: HotelIcon,
               tooltip: 'Checked-in',
               onClick: (event, rowData) => {
                 toggleCheckedIn(rowData);
               },
             },
             {
-              icon: FlagIcon,
-              tooltip: '7PM Check-in',
+              icon: Brightness2Icon,
+              tooltip: '7PM On-site',
               onClick: (event, rowData) => {
                 toggle7pm();
               },
             },
             {
-              icon: FlagIcon,
-              tooltip: '10PM Check-in',
+              icon: Brightness3Icon,
+              tooltip: '10PM On-site',
               onClick: (event, rowData) => {
                 toggle10pm();
               },
