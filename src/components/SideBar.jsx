@@ -54,6 +54,10 @@ const SideBar = () => {
     history.push('/caseAnalytics');
   };
 
+  const redirectToCheckIn = () => {
+    history.push('/supervisor-checkin');
+  };
+
   return (
     <div>
       {user.role && (
@@ -86,6 +90,7 @@ const SideBar = () => {
                 </Menu.Item>
               </Menu>
             )}
+
             {['supervisor', 'executive_director', 'case_manager'].includes(
               user.role
             ) && (
@@ -113,6 +118,18 @@ const SideBar = () => {
                     Case Manager Analytics
                   </Menu.Item>
                 )}
+              </Menu>
+            )}
+
+            {user.role == 'supervisor' && (
+              <Menu>
+                <Menu.Item
+                  onClick={redirectToCheckIn}
+                  key="5"
+                  icon={<TeamOutlined />}
+                >
+                  Check-in Guests
+                </Menu.Item>
               </Menu>
             )}
           </Menu>

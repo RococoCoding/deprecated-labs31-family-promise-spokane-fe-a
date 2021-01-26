@@ -26,6 +26,7 @@ import FamilyProfile from './components/pages/FamilyProfile';
 import IntakePacket from './components/pages/IntakePacket';
 import Analytics from './components/pages/Analytics';
 import Guests from './components/pages/Guests/Guests';
+import SupervisorCheckIn from './components/pages/supervisor-pages/SupervisorCheckIn';
 import FamilyMembers from './components/pages/FamilyMembers/Family';
 import Logout from './utils/logout';
 import './styles/app.scss';
@@ -111,6 +112,11 @@ function App() {
           path="/guests"
           roles={['executive_director', 'supervisor', 'case_manager']}
           component={Guests}
+        />
+        <PrivateRoute
+          path="/supervisor-checkin"
+          roles={['supervisor']}
+          component={SupervisorCheckIn}
         />
         <PrivateRoute
           path="/guest-dashboard"
