@@ -3,31 +3,34 @@ import React, { useEffect, useState } from 'react';
 import MaterialTable from 'material-table';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
 import { useHistory } from 'react-router-dom';
-import NoteIcon from '@material-ui/icons/Note';
-import PeopleIcon from '@material-ui/icons/People';
-import InfoIcon from '@material-ui/icons/Info';
 import { tableIcons } from '../../../utils/tableIcons';
-import FlagIcon from '@material-ui/icons/Flag';
+import PeopleIcon from '@material-ui/icons/People';
 // import CardShadow from '../../CardShadow';
 import FlagGuest from '../../modals/FlagGuest';
 import GuestNotes from '../../modals/GuestNotes';
 // import { CopyrightOutlined } from '@material-ui/icons';
 import LoadingComponent from '../../common/LoadingComponent';
 import Modal from 'react-modal';
-import './guest.css';
+import '../Guests/guest.css';
 // import { CardContent, Card } from '@material-ui/core';
-import GuestMoreInfo from './GuestMoreInfo';
+import GuestMoreInfo from '../Guests/GuestMoreInfo';
+import { Checkbox } from '@material-ui/core';
+import axios from 'axios';
+import Visuals from './Visuals';
 Modal.setAppElement('#root');
 
-const Guests = ({}) => {
+const CaseAnalytics = ({}) => {
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
+  //const [guestId, setGuestId] = useState();
+  const [visualization, setVisualization] = useState({});
   const [state, setState] = useState({
     columns: [
       { title: 'First', field: 'first_name', type: 'hidden' },
       { title: 'Last ', field: 'last_name' },
       { title: 'DOB', field: 'DOB', type: 'date' },
       { title: 'Relationship', field: 'relationship' },
+      { title: 'Guest Id', field: 'id' },
     ],
     data: [],
   });
@@ -40,11 +43,11 @@ const Guests = ({}) => {
     axiosWithAuth()
       .get('/members')
       .then(res => {
-        console.log(res.data);
         let copy = { ...state };
 
         let formattedData = res.data.map(member => {
           return {
+            ...member.id,
             ...member.demographics,
             ...member.bearers,
             ...member.schools,
@@ -54,7 +57,6 @@ const Guests = ({}) => {
         });
 
         copy.data.push(...formattedData);
-        console.log(copy);
 
         setState(copy);
       })
@@ -65,6 +67,20 @@ const Guests = ({}) => {
         setLoading(false);
       });
   }, []);
+
+  const runVisualization = guestId => {
+    axiosWithAuth()
+      .get(
+        `http://omar-zaffar.eba-rpnihjrj.us-east-1.elasticbeanstalk.com/Visualizations/${guestId}`
+      )
+      .then(response => {
+        console.log(response.data);
+        //setVisualization(response.data)
+      })
+      .catch(err => {
+        alert('error');
+      });
+  };
 
   const [isFlagOpen, setIsFlagOpen] = useState(false);
   const [isNotesOpen, setIsNotesOpen] = useState(false);
@@ -93,14 +109,6 @@ const Guests = ({}) => {
         {result ? <GuestMoreInfo familyInfo={result} /> : ''}
       </Modal>
       <div className="guest-table-container">
-        {isNotesOpen && <GuestNotes setIsNotesOpen={setIsNotesOpen} />}
-        {isFlagOpen && (
-          <FlagGuest
-            setIsFlagOpen={setIsFlagOpen}
-            setState={setState}
-            guestId={guestId}
-          />
-        )}
         <div className="guest-table">
           <MaterialTable
             options={{
@@ -115,51 +123,34 @@ const Guests = ({}) => {
               }),
             }}
             icons={tableIcons}
-            title="Guests"
+            title="Case Analytics"
             columns={state.columns}
             data={state.data}
             actions={[
               {
-                icon: PeopleIcon,
-                tooltip: 'Family Members',
-                onClick: (event, rowData) => {
-                  // Do save operation
-                  console.log(rowData);
-                  history.push(`/family/${rowData.family_id}`);
-                },
-              },
-              {
-                icon: NoteIcon,
-                tooltip: 'Notes',
-                onClick: (event, rowData) => {
-                  // Do save operation
-                  setIsNotesOpen(true);
-                },
-              },
-              {
-                icon: FlagIcon,
-                tooltip: 'Flag Guest',
-                onClick: (event, rowData) => {
-                  setIsFlagOpen(true);
-                  setGuestId(rowData.id);
-                },
-              },
-              {
-                icon: InfoIcon,
-                tooltip: 'More Info',
-                onClick: (event, rowData) => {
-                  setResult(state.data[rowData.id - 1]);
-                  console.log(result);
-                  toggleModal(event);
-                  // Do save operation
+                icon: Checkbox,
+                tooltip: 'Select Guest',
+                onClick: (event, rowsData) => {
+                  setGuestId(state.data[rowsData.id - 1].id);
+                  {
+                    /* console.log(guestId); */
+                  }
                 },
               },
             ]}
           />
+          <div>
+            <button key={guestId} onSubmit={runVisualization(guestId)}>
+              Run Visualization
+            </button>
+          </div>
+          <div>
+            <Visuals visuals={visualization} />
+          </div>
         </div>
       </div>
     </>
   );
 };
 
-export default Guests;
+export default CaseAnalytics;

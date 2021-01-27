@@ -26,6 +26,7 @@ import FamilyProfile from './components/pages/FamilyProfile';
 import IntakePacket from './components/pages/IntakePacket';
 import Analytics from './components/pages/Analytics';
 import Guests from './components/pages/Guests/Guests';
+import SupervisorCheckIn from './components/pages/supervisor-pages/SupervisorCheckIn';
 import FamilyMembers from './components/pages/FamilyMembers/Family';
 import Logout from './utils/logout';
 import './styles/app.scss';
@@ -39,7 +40,7 @@ import FamilyPage from './components/pages/guest-pages/FamilyPage';
 import Notes from './components/pages/Notes/Notes';
 import Members from './components/pages/guest-pages/Members';
 import UserProfile from './components/UserProfile';
-
+import CaseAnalytics from './components/pages/casemanager-pages/CaseManagerAnalytics';
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
@@ -98,6 +99,11 @@ function App() {
           component={Analytics}
         />
         <PrivateRoute
+          path="/caseAnalytics"
+          roles={['executive_director', 'case_manager']}
+          component={CaseAnalytics}
+        />
+        <PrivateRoute
           path="/intake"
           roles={['executive_director', 'supervisor', 'case_manager']}
           component={IntakePacket}
@@ -106,6 +112,11 @@ function App() {
           path="/guests"
           roles={['executive_director', 'supervisor', 'case_manager']}
           component={Guests}
+        />
+        <PrivateRoute
+          path="/supervisor-checkin"
+          roles={['supervisor']}
+          component={SupervisorCheckIn}
         />
         <PrivateRoute
           path="/guest-dashboard"

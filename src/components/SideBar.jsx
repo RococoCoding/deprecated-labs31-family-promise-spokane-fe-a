@@ -11,7 +11,9 @@ import { useHistory } from 'react-router-dom';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import BarChartOutlined from '@ant-design/icons/BarChartOutlined';
 import MonitorOutlined from '@ant-design/icons/MonitorOutlined';
+import PieChartOutlinedIcon from '@material-ui/icons/PieChartOutlined';
 import { useSelector } from 'react-redux';
+import { HistoryOutlined } from '@material-ui/icons';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -48,6 +50,14 @@ const SideBar = () => {
     history.push('/members');
   };
 
+  const redirectToCaseManagerAnalytics = () => {
+    history.push('/caseAnalytics');
+  };
+
+  const redirectToCheckIn = () => {
+    history.push('/supervisor-checkin');
+  };
+
   return (
     <div>
       {user.role && (
@@ -80,6 +90,7 @@ const SideBar = () => {
                 </Menu.Item>
               </Menu>
             )}
+
             {['supervisor', 'executive_director', 'case_manager'].includes(
               user.role
             ) && (
@@ -97,6 +108,27 @@ const SideBar = () => {
                   icon={<FileOutlined />}
                 >
                   Register Family
+                </Menu.Item>
+                {user.role == 'case_manager' && (
+                  <Menu.Item
+                    onClick={redirectToCaseManagerAnalytics}
+                    key="5"
+                    icon={<PieChartOutlinedIcon />}
+                  >
+                    Case Manager Analytics
+                  </Menu.Item>
+                )}
+              </Menu>
+            )}
+
+            {user.role == 'supervisor' && (
+              <Menu>
+                <Menu.Item
+                  onClick={redirectToCheckIn}
+                  key="5"
+                  icon={<TeamOutlined />}
+                >
+                  Check-in Guests
                 </Menu.Item>
               </Menu>
             )}
