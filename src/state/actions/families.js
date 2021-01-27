@@ -13,8 +13,14 @@ import {
   GET_MEMBERS_FAILURE,
   GET_HOUSEHOLD_SUCCESS,
   GET_HOUSEHOLD_FAILURE,
+  TOTAL_BEDS_FETCHING,
+  TOTAL_BEDS_SUCCESS,
+  TOTAL_BEDS_FAILURE,
+  GET_MEMBERS_FETCHING,
+  GET_MEMBERS_SUCCESS,
 } from '../types';
 
+//FETCH FAMILY
 const fetchFamily = familyId => (dispatch, getState) => {
   dispatch({ type: GET_FAMILY_FETCHING, payload: true });
 
@@ -29,6 +35,7 @@ const fetchFamily = familyId => (dispatch, getState) => {
     });
 };
 
+//FETCH HOUSEHOLD
 const fetchHousehold = family_id => dispatch => {
   dispatch({ type: GET_HOUSEHOLD_FETCHING, payload: true });
 
@@ -58,7 +65,7 @@ const fetchHousehold = family_id => dispatch => {
           'case_members'
         );
         let members = [];
-        // loops through members and pics member specifics for members array
+        // loops through members and picks member specific for members array.
         for (let i = 0; i < household_obj.length; i++) {
           let member = _.pick(
             household_obj[i],
@@ -81,7 +88,37 @@ const fetchHousehold = family_id => dispatch => {
     });
 };
 
+//This is for Guest Check-in (Reservations)
+//FETCH BEDS
+const fetchBeds = id => (dispatch, getState) => {
+  dispatch({ type: TOTAL_BEDS_FETCHING, payload: true });
+  //api will change once recieved
+  return axiosWithAuth()
+    .get(`/family/{id}/members`)
+    .then(res => {
+      dispatch({ type: TOTAL_BEDS_SUCCESS, payload: res.data });
+    })
+    .catch(error => {
+      dispatch({ type: TOTAL_BEDS_FAILURE, payload: error });
+    });
+};
+
+//FETCH ALL MEMBERS IN A FAMILY
+const fetchMembers = id => dispatch => {
+  dispatch({ type: GET_MEMBERS_FETCHING, payload: true });
+
+  return axiosWithAuth()
+    .get(`/family/{id}/members`)
+    .then(res => {
+      dispatch({ type: GET_MEMBERS_SUCCESS, payload: res.data }).catch(err => {
+        dispatch({ type: GET_MEMBERS_FAILURE, payload: err });
+      });
+    });
+};
+
 export default {
   fetchHousehold,
   fetchFamily,
+  fetchBeds,
+  fetchMembers,
 };
