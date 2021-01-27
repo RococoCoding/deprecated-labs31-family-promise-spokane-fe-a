@@ -11,39 +11,25 @@ import {
   GET_HOUSEHOLD_FETCHING,
   GET_HOUSEHOLD_FAILURE,
   GET_HOUSEHOLD_SUCCESS,
+  GET_MEMBERS_FETCHING,
+  GET_MEMBERS_SUCCESS,
+  GET_MEMBERS_FAILURE,
+  TOTAL_BEDS_FAILURE,
+  TOTAL_BEDS_FETCHING,
+  TOTAL_BEDS_SUCCESS,
+  // Total beds at shelter
 } from '../types';
 
 const INITIAL_STATE = {
   CURRENT_USER: {},
   FAMILY: {},
+  MEMBER: {},
   HOUSEHOLD: {},
   LOGGED_IN: false,
   LOADING: false,
   ERROR: '',
+  TOTAL_BEDS: 60,
 };
-
-//Guest Login
-const date = new Date();
-const time = date.getTime();
-// const LOGIN_STATE = {
-//   ACTUAL_BEDS_RESERVED: '',
-//   CHEKCED_IN: false,
-//   DATE: '',
-//   FAMILY_ID: '',
-//   RESERVATION_ID: '',
-//   TIME: ''
-
-// //data - actual_beds_reserved: 5
-// //data -  beds_reserved: 5
-// //data - checked_in: true
-// //data - date: "2020-10-09T00:00:00.000Z"
-// //data - family_id: 1
-// //data - on_site_7pm: true
-// //data - on_site_10pm: true
-// //data - reservation_id: 1
-// //data - supervisor_id: "00u2lh0bsAliwLEe75d6"
-// //data - time: "2020-12-09T17:38:31.123
-// };
 
 export const rootReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -67,6 +53,18 @@ export const rootReducer = (state = INITIAL_STATE, action) => {
       return { ...state, LOADING: false, ERROR: action.payload };
     case GET_HOUSEHOLD_SUCCESS:
       return { ...state, LOADING: false, HOUSEHOLD: action.payload };
+    case GET_MEMBERS_FETCHING:
+      return { ...state, LOADING: true };
+    case GET_MEMBERS_SUCCESS:
+      return { ...state, LOADING: false, MEMBER: action.payload };
+    case GET_MEMBERS_FAILURE:
+      return { ...state, LOADING: false, ERROR: action.payload };
+    case TOTAL_BEDS_FETCHING:
+      return { ...state, LOADING: true };
+    case TOTAL_BEDS_SUCCESS:
+      return { ...state, LOADING: false, TOTAL_BEDS: action.payload };
+    case TOTAL_BEDS_FAILURE:
+      return { ...state, LOADING: false, ERROR: action.payload };
     default:
       return state;
   }
