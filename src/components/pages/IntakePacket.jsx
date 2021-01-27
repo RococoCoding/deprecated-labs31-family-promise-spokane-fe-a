@@ -33,7 +33,7 @@ import PhotoRelease from './IntakePacketContent/ByGuests/PhotoRelease';
 import CoreValues from './IntakePacketContent/ByGuests/CoreValues';
 import SuspensionAgreement from './IntakePacketContent/ByGuests/SuspensionAgreement/SuspensionAgreement';
 import GrievanceAppeal from './IntakePacketContent/ByGuests/GrievanceAppeal/GrievanceAppeal';
-
+import GuestWaiver from './IntakePacketContent/ByGuests/GuestWaiver';
 /* Data structure for familyInfo. Each familyMember is pushed to the familyMember array here but 
 the data structure is in ./IntakePacketContent/ByGuests/FamilyMembers.js*/
 
@@ -98,12 +98,12 @@ let defaultData = {
       anonymity_preferred: null,
     },
     pets: {
-      shelter: true,
+      shelter: false,
       amount: {
-        value1: true,
+        value1: false,
         value2: false,
       },
-      dog: true,
+      dog: false,
       cat: false,
       service_animal: false,
       support_animal: false,
@@ -111,7 +111,6 @@ let defaultData = {
       name_two: '',
     },
     avatar_url: null,
-    //pets: 1,
     percent_complete: 0,
   },
   familyMember: {},
@@ -142,6 +141,7 @@ const steps = [
   { id: 'CoreValues' },
   { id: 'SuspensionAgreement' },
   { id: 'GrievanceAppeal' },
+  { id: 'GuestWaiver' },
 ];
 
 const IntakePacket = () => {
@@ -232,6 +232,8 @@ const IntakePacket = () => {
       return <SuspensionAgreement {...props} />;
     case 'GrievanceAppeal':
       return <GrievanceAppeal {...props} />;
+    case 'GuestWaiver':
+      return <GuestWaiver {...props} />;
     default:
       return null;
   }
