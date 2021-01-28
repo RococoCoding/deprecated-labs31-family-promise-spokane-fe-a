@@ -53,7 +53,7 @@ const AnimalNo = ({
               shelter. Pets that are allowed are limited to <u>CATS AND DOGS</u>{' '}
               at this time as our shelter does not have accommodations set up
               for other types of animals. No new animals may be brought in after
-              the initial intake.
+              the initial intake.***
             </strong>
           </Form.Item>
           Is your family bringing an animal with you into the shelter at the

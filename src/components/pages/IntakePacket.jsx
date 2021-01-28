@@ -40,6 +40,7 @@ import Belongings from './IntakePacketContent/ByGuests/Belongings';
 import Schedule from './IntakePacketContent/ByGuests/ScheduleSafety/Schedule';
 import Safety from './IntakePacketContent/ByGuests/ScheduleSafety/Safety';
 import AnimalNo from './IntakePacketContent/ByGuests/AnimalAgreement/AnimalNo';
+import AnimalYes from './IntakePacketContent/ByGuests/AnimalAgreement/AnimalYes';
 /* Data structure for familyInfo. Each familyMember is pushed to the familyMember array here but 
 the data structure is in ./IntakePacketContent/ByGuests/FamilyMembers.js*/
 
@@ -127,6 +128,7 @@ const steps = [
   { id: 'IntakeStart' },
   { id: 'ContactInfo' },
   { id: 'AnimalNo' },
+  { id: 'AnimalYes' },
   { id: 'FamilyMembers' },
   { id: 'FamilyDemographics' },
   { id: 'RaceEthnicityInfo' },
@@ -155,6 +157,7 @@ const steps = [
   { id: 'Schedule' },
   { id: 'Safety' },
   { id: 'AnimalNo' },
+  { id: 'AnimalYes' },
 
   //{ id: 'CmAcknowledgement'},
 ];
@@ -261,7 +264,8 @@ const IntakePacket = () => {
       return <Safety {...props} />;
     case 'AnimalNo':
       return <AnimalNo {...props} />;
-
+    case 'AnimalYes':
+      return <AnimalYes {...props} />;
     default:
       return null;
   }
