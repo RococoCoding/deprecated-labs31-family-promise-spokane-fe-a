@@ -33,8 +33,11 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   //   .then(res => {
   //     console.log('beds', res.data);
   //   });
-
+  // For Members Staying
   const [membersStaying, setMembersStaying] = useState([]);
+
+  // For Waitlist
+  const [waitList, setWaitList] = useState([]);
 
   //logs user state of reservation status
   const [isReserved, setIsReserved] = useState(false);
@@ -43,31 +46,37 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
       .get('/logs')
       .then(res => {
         // console.log("Logs",res.data);
-        console.log(membersStaying);
-        setIsReserved(
-          res.data.forEach((checkStatus, id) => {
-            console.log(
-              'id, checked, members staying',
-              id,
-              checkStatus.reservation_status,
-              membersStaying[id]
-            );
-            return checkStatus;
-          })
-        );
-        //This array looks different in the console.log but normal in the React Dev tool's state.
+        // console.log(membersStaying);
+        // setIsReserved(
+        //   res.data.forEach((checkStatus, id) => {
+        //     console.log(
+        //       'id, checked, members staying',
+        //       id,
+        //       checkStatus.reservation_status,
+        //       membersStaying[id]
+        //     );
+        //     return checkStatus;
+        //   })
+        // );
+
+        //a.) This array looks different in the console.log but normal in the React Dev tool's state.
         setMembersStaying(
           res.data.map(stay => {
             return stay.member_staying;
             // console.log('stay',stay.members_staying); //a. Need to ask if the hard-coded names can be removed.
           })
         );
+        setWaitList(
+          res.data.map(wait => {
+            return wait.waitlist;
+          })
+        );
       });
   }, []);
 
   // console.log('Is Reserved', isReserved);
-
-  // This will target the checked members and add or take them away from the holding array or state. It will also update the state of the count for total beds.
+  //THIS COULD BE A FUNCTION BECAUSE IT IS BEING USED TWICE:
+  // This will target the checked members and add or take them away from the holding array or state of the membersStaying list. It will also update the state of the count for total beds.
   const familyStaying = e => {
     if (e.target.checked === true) {
       if (count > 0) {
@@ -86,6 +95,22 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
         else return;
       });
       setMembersStaying(temp);
+    }
+  };
+
+  // This will target the checked members and add or take them away from the holding array or state of the waitlist.
+  const waitListMembers = e => {
+    if (e.target.checked === true) {
+      if (waitList.indexOf(e.target.value) === -1);
+      setWaitList([...waitList, e.target.value]);
+      console.log('waitlist', waitList);
+    } else if (e.target.checked === false) {
+      let temp = waitList;
+      temp = temp.filter(item => {
+        if (item !== e.target.value) return item;
+        else return;
+      });
+      setWaitList(temp);
     }
   };
 
@@ -118,18 +143,39 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   //Reserve button
   const reserveButton = () => {
     /*
-    1. This button will have a post request to the logs api to set the families check in as true : Find the 
+    1. This button will have a post request to the logs api to set the families check in as true in the members staying array
     2. Number of beds will be updated
-    3. Each member will be added to a queue for reservation list..
-    4
-    4. Message will pop ups stating: Congratulations, you have reserved XX amount of beds at 904 E Hartson Ave, Spokane, WA 99202 for MM/DD/YYY. Please be sure to have at least ONED ADULT available at the shelter before 7pm to check in with the supervisor.
+    3. Message will pop ups stating: Congratulations, you have reserved XX amount of beds at 904 E Hartson Ave, Spokane, WA 99202 for MM/DD/YYY. Please be sure to have at least ONED ADULT available at the shelter before 7pm to check in with the supervisor.
     <inSmallerText>If you do not show ip with your total amont of family members, those beds will be reserved for other guests.</inSmallerText>
+    4. condition that onClick, currentReservation component will show.
+    */
+  };
+
+  // the cancel button
+  const cancelButton = () => {
+    /*
+    1. This button will change the membersStaying array length to 0
+    2. Number of beds will be updated
+    3. Message will pop ups stating: You have canceled your reservation, if you want to reserve, please refresh this page and make another reservation.
     */
   };
 
   //For Date and time
-  const date = Date();
+  const date = new Date();
+  const fullDate = date.toDateString();
   const hours = new Date().getHours();
+  const getMinutes = new Date().getMinutes();
+  const minutes = (getMinutes < 10 ? '0' : '') + getMinutes;
+  //This seconds will not be seen, but this will allow the clock to rerender accordingly.
+  const [seconds, setSeconds] = useState();
+  let sec = new Date().getSeconds();
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(sec);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [seconds]);
+
   const standard = hours => {
     if (hours > 12) {
       return hours - 12;
@@ -138,22 +184,44 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
 
   return 7 < hours < 21 ? (
     <div className="container">
-      {date}
+      {`Today is ${fullDate} ${hours}:${minutes}`}
 
       <h1>Guest dashboard</h1>
       <h1>Welcome To Family Promise of Spokane</h1>
       <h2>
         There are currently {count} number of beds remaining at the shelter
       </h2>
+      {
+        // CurrentReservation === True ?
+        //<CurrentReservation/>
+        //:
+      }
 
       {count === 0 ? (
+        //WAITLIST ________________________________
         <>
           <p>To join the waitlist, please click below</p>
-          <Button>Join Waitlist</Button>
-          Message: Please be sure to arrive at the shelter by 7pm. The
-          supervisor will announce if there are any more beds available.
+          {users.map(member => {
+            return (
+              <div>
+                <Checkbox
+                  value={`${member.demographics.first_name} ${member.demographics.last_name}`}
+                  onChange={waitListMembers}
+                >
+                  {member.demographics.first_name}{' '}
+                  {member.demographics.last_name}
+                </Checkbox>
+              </div>
+            );
+          })}
+          <Button className="button">Reserve Beds</Button>
+          <p>
+            Message: Please be sure to arrive at the shelter by 7pm. The
+            supervisor will announce if there are any more beds available
+          </p>
         </>
       ) : (
+        //MEMBERS STAYING ___________________________
         <>
           <p>
             {' '}
@@ -174,21 +242,9 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
               </div>
             );
           })}
+          <Button className="button">Reserve Beds</Button>
         </>
       )}
-
-      {/* If the current number of beds == 0, 
-      return <p>To join the waitlist, please click below</p> <button>Join Waitlist</button>
-      Message: Please be sure to arrive at the shelter by 7pm. 
-      The supervisor will announce if there are any more beds available.
-      */}
-
-      {/*
-      Will need make a ternary statement here that will pull in the data determining if the member has already made a reservation. 
-      if member has a reservation
-        This will render a component containing a box that shows the guest's reservation.
-      */}
-      <Button className="button">Reserve Beds</Button>
     </div>
   ) : (
     <OffHours />
