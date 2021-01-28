@@ -39,6 +39,7 @@ import AntiDiscrimination from './IntakePacketContent/ByGuests/AntiDiscriminatio
 import Belongings from './IntakePacketContent/ByGuests/Belongings';
 import Schedule from './IntakePacketContent/ByGuests/ScheduleSafety/Schedule';
 import Safety from './IntakePacketContent/ByGuests/ScheduleSafety/Safety';
+import AnimalNo from './IntakePacketContent/ByGuests/AnimalAgreement/AnimalNo';
 /* Data structure for familyInfo. Each familyMember is pushed to the familyMember array here but 
 the data structure is in ./IntakePacketContent/ByGuests/FamilyMembers.js*/
 
@@ -125,6 +126,7 @@ let defaultData = {
 const steps = [
   { id: 'IntakeStart' },
   { id: 'ContactInfo' },
+  { id: 'AnimalNo' },
   { id: 'FamilyMembers' },
   { id: 'FamilyDemographics' },
   { id: 'RaceEthnicityInfo' },
@@ -152,6 +154,7 @@ const steps = [
   { id: 'Belongings' },
   { id: 'Schedule' },
   { id: 'Safety' },
+  { id: 'AnimalNo' },
 
   //{ id: 'CmAcknowledgement'},
 ];
@@ -256,6 +259,8 @@ const IntakePacket = () => {
       return <Schedule {...props} />;
     case 'Safety':
       return <Safety {...props} />;
+    case 'AnimalNo':
+      return <AnimalNo {...props} />;
 
     default:
       return null;
