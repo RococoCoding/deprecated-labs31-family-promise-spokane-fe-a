@@ -92,11 +92,11 @@ const fetchHousehold = family_id => dispatch => {
 //FETCH BEDS
 const fetchBeds = id => (dispatch, getState) => {
   dispatch({ type: TOTAL_BEDS_FETCHING, payload: true });
-  //api will change once recieved
+
   return axiosWithAuth()
-    .get(`/family/{id}/members`)
+    .get(`/logs`)
     .then(res => {
-      dispatch({ type: TOTAL_BEDS_SUCCESS, payload: res.data });
+      dispatch({ type: TOTAL_BEDS_SUCCESS, payload: res.data.total_beds });
     })
     .catch(error => {
       dispatch({ type: TOTAL_BEDS_FAILURE, payload: error });
@@ -104,15 +104,17 @@ const fetchBeds = id => (dispatch, getState) => {
 };
 
 //FETCH ALL MEMBERS IN A FAMILY
+
 const fetchMembers = id => dispatch => {
   dispatch({ type: GET_MEMBERS_FETCHING, payload: true });
-
   return axiosWithAuth()
-    .get(`/family/{id}/members`)
+    .get(`/families/${id}/members`)
     .then(res => {
-      dispatch({ type: GET_MEMBERS_SUCCESS, payload: res.data }).catch(err => {
-        dispatch({ type: GET_MEMBERS_FAILURE, payload: err });
-      });
+      console.log('members', res.data);
+      dispatch({ type: GET_MEMBERS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_MEMBERS_FAILURE, payload: err });
     });
 };
 
