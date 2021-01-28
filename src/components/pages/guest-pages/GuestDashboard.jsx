@@ -15,11 +15,9 @@ import { connect } from 'react-redux';
 import { useSelector } from 'react-redux';
 
 //mock Data
-import { familyMembers } from './mockGuest';
 import { AddBoxOutlined } from '@material-ui/icons';
 import CurrentReservation from './CurrentReservation';
 import axios from 'axios';
-console.table('mockData', familyMembers);
 
 const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   // The current user
@@ -30,11 +28,11 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
 
   //Mock beds counter
   const [count, setCount] = useState(60);
-  axiosWithAuth()
-    .get('/beds')
-    .then(res => {
-      console.log('beds', res.data);
-    });
+  // axiosWithAuth()
+  //   .get('/beds')
+  //   .then(res => {
+  //     console.log('beds', res.data);
+  //   });
 
   const [membersStaying, setMembersStaying] = useState([]);
 
@@ -72,7 +70,9 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   // This will target the checked members and add or take them away from the holding array or state. It will also update the state of the count for total beds.
   const familyStaying = e => {
     if (e.target.checked === true) {
-      setCount(count - 1);
+      if (count > 0) {
+        setCount(count - 1);
+      }
 
       if (membersStaying.indexOf(e.target.value) === -1)
         setMembersStaying([...membersStaying, e.target.value]);
@@ -111,6 +111,9 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
       alert('error');
     }
   };
+  useEffect(() => {
+    console.log('fetch', fetchFamilyInformation());
+  }, [count]);
 
   //Reserve button
   const reserveButton = () => {
@@ -142,29 +145,43 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
       <h2>
         There are currently {count} number of beds remaining at the shelter
       </h2>
+
+      {count === 0 ? (
+        <>
+          <p>To join the waitlist, please click below</p>
+          <Button>Join Waitlist</Button>
+          Message: Please be sure to arrive at the shelter by 7pm. The
+          supervisor will announce if there are any more beds available.
+        </>
+      ) : (
+        <>
+          <p>
+            {' '}
+            If you would like to reserve {membersStaying.length} beds, please
+            click the button below:{' '}
+          </p>
+
+          {users.map(member => {
+            return (
+              <div>
+                <Checkbox
+                  value={`${member.demographics.first_name} ${member.demographics.last_name}`}
+                  onChange={familyStaying}
+                >
+                  {member.demographics.first_name}{' '}
+                  {member.demographics.last_name}
+                </Checkbox>
+              </div>
+            );
+          })}
+        </>
+      )}
+
       {/* If the current number of beds == 0, 
       return <p>To join the waitlist, please click below</p> <button>Join Waitlist</button>
       Message: Please be sure to arrive at the shelter by 7pm. 
       The supervisor will announce if there are any more beds available.
       */}
-      <p>
-        {' '}
-        If you would like to reserve {membersStaying.length} beds, please click
-        the button below:{' '}
-      </p>
-
-      {familyMembers.map(member => {
-        return (
-          <div>
-            <Checkbox
-              value={`${member.demographics.first_name} ${member.demographics.last_name}`}
-              onChange={familyStaying}
-            >
-              {member.demographics.first_name} {member.demographics.last_name}
-            </Checkbox>
-          </div>
-        );
-      })}
 
       {/*
       Will need make a ternary statement here that will pull in the data determining if the member has already made a reservation. 
