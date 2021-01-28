@@ -35,6 +35,7 @@ import SuspensionAgreement from './IntakePacketContent/ByGuests/SuspensionAgreem
 import GrievanceAppeal from './IntakePacketContent/ByGuests/GrievanceAppeal/GrievanceAppeal';
 import GuestWaiver from './IntakePacketContent/ByGuests/GuestWaiver';
 import CaseManagement from './IntakePacketContent/ByGuests/CaseManagement';
+import AntiDiscrimination from './IntakePacketContent/ByGuests/AntiDiscrimination';
 
 /* Data structure for familyInfo. Each familyMember is pushed to the familyMember array here but 
 the data structure is in ./IntakePacketContent/ByGuests/FamilyMembers.js*/
@@ -138,11 +139,12 @@ const steps = [
   { id: 'ThirdPartyConsent' },
   { id: 'GuestWaiver' },
   { id: 'CaseMangement' },
+  { id: 'PhotoRelease' },
+  { id: 'CoreValues' },
+  { id: 'AntiDiscrimination' },
   { id: 'Expectations' },
   { id: 'Decorum' },
   { id: 'AbideBy' },
-  { id: 'PhotoRelease' },
-  { id: 'CoreValues' },
   { id: 'SuspensionAgreement' },
   { id: 'GrievanceAppeal' },
 
@@ -227,16 +229,18 @@ const IntakePacket = () => {
       return <GuestWaiver {...props} />;
     case 'CaseManagement':
       return <CaseManagement {...props} />;
+    case 'PhotoRelease':
+      return <PhotoRelease {...props} />;
+    case 'CoreValues':
+      return <CoreValues {...props} />;
+    case 'AntiDiscrimination':
+      return <AntiDiscrimination {...props} />;
     case 'Expectations':
       return <Expectations {...props} />;
     case 'Decorum':
       return <Decorum {...props} />;
     case 'AbideBy':
       return <AbideBy {...props} />;
-    case 'PhotoRelease':
-      return <PhotoRelease {...props} />;
-    case 'CoreValues':
-      return <CoreValues {...props} />;
     case 'SuspensionAgreement':
       return <SuspensionAgreement {...props} />;
     case 'GrievanceAppeal':
