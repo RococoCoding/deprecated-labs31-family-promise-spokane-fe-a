@@ -36,7 +36,7 @@ import GrievanceAppeal from './IntakePacketContent/ByGuests/GrievanceAppeal/Grie
 import GuestWaiver from './IntakePacketContent/ByGuests/GuestWaiver';
 import CaseManagement from './IntakePacketContent/ByGuests/CaseManagement';
 import AntiDiscrimination from './IntakePacketContent/ByGuests/AntiDiscrimination';
-
+import Belongings from './IntakePacketContent/ByGuests/Belongings';
 /* Data structure for familyInfo. Each familyMember is pushed to the familyMember array here but 
 the data structure is in ./IntakePacketContent/ByGuests/FamilyMembers.js*/
 
@@ -147,6 +147,7 @@ const steps = [
   { id: 'AbideBy' },
   { id: 'SuspensionAgreement' },
   { id: 'GrievanceAppeal' },
+  { id: 'Belongings' },
 
   //{ id: 'CmAcknowledgement'},
 ];
@@ -245,6 +246,8 @@ const IntakePacket = () => {
       return <SuspensionAgreement {...props} />;
     case 'GrievanceAppeal':
       return <GrievanceAppeal {...props} />;
+    case 'Belongings':
+      return <Belongings {...props} />;
 
     default:
       return null;
