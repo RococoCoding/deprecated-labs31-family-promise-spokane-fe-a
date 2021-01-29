@@ -33,7 +33,14 @@ import PhotoRelease from './IntakePacketContent/ByGuests/PhotoRelease';
 import CoreValues from './IntakePacketContent/ByGuests/CoreValues';
 import SuspensionAgreement from './IntakePacketContent/ByGuests/SuspensionAgreement/SuspensionAgreement';
 import GrievanceAppeal from './IntakePacketContent/ByGuests/GrievanceAppeal/GrievanceAppeal';
-
+import GuestWaiver from './IntakePacketContent/ByGuests/GuestWaiver';
+import CaseManagement from './IntakePacketContent/ByGuests/CaseManagement';
+import AntiDiscrimination from './IntakePacketContent/ByGuests/AntiDiscrimination';
+import Belongings from './IntakePacketContent/ByGuests/Belongings';
+import Schedule from './IntakePacketContent/ByGuests/ScheduleSafety/Schedule';
+import Safety from './IntakePacketContent/ByGuests/ScheduleSafety/Safety';
+import AnimalNo from './IntakePacketContent/ByGuests/AnimalAgreement/AnimalNo';
+import AnimalYes from './IntakePacketContent/ByGuests/AnimalAgreement/AnimalYes';
 /* Data structure for familyInfo. Each familyMember is pushed to the familyMember array here but 
 the data structure is in ./IntakePacketContent/ByGuests/FamilyMembers.js*/
 
@@ -98,12 +105,12 @@ let defaultData = {
       anonymity_preferred: null,
     },
     pets: {
-      shelter: true,
+      shelter: false,
       amount: {
-        value1: true,
+        value1: false,
         value2: false,
       },
-      dog: true,
+      dog: false,
       cat: false,
       service_animal: false,
       support_animal: false,
@@ -111,7 +118,6 @@ let defaultData = {
       name_two: '',
     },
     avatar_url: null,
-    //pets: 1,
     percent_complete: 0,
   },
   familyMember: {},
@@ -121,6 +127,8 @@ let defaultData = {
 const steps = [
   { id: 'IntakeStart' },
   { id: 'ContactInfo' },
+  { id: 'AnimalNo' },
+  { id: 'AnimalYes' },
   { id: 'FamilyMembers' },
   { id: 'FamilyDemographics' },
   { id: 'RaceEthnicityInfo' },
@@ -135,13 +143,23 @@ const steps = [
   { id: 'ClientReleaseSignature' },
   { id: 'ClientReleaseStaffSig' },
   { id: 'ThirdPartyConsent' },
+  { id: 'GuestWaiver' },
+  { id: 'CaseMangement' },
+  { id: 'PhotoRelease' },
+  { id: 'CoreValues' },
+  { id: 'AntiDiscrimination' },
   { id: 'Expectations' },
   { id: 'Decorum' },
   { id: 'AbideBy' },
-  { id: 'PhotoRelease' },
-  { id: 'CoreValues' },
   { id: 'SuspensionAgreement' },
   { id: 'GrievanceAppeal' },
+  { id: 'Belongings' },
+  { id: 'Schedule' },
+  { id: 'Safety' },
+  { id: 'AnimalNo' },
+  { id: 'AnimalYes' },
+
+  //{ id: 'CmAcknowledgement'},
 ];
 
 const IntakePacket = () => {
@@ -218,20 +236,36 @@ const IntakePacket = () => {
       return <ClientReleaseStaffSig {...props} />;
     case 'ThirdPartyConsent':
       return <ThirdPartyConsent {...props} />;
+    case 'GuestWaiver':
+      return <GuestWaiver {...props} />;
+    case 'CaseManagement':
+      return <CaseManagement {...props} />;
+    case 'PhotoRelease':
+      return <PhotoRelease {...props} />;
+    case 'CoreValues':
+      return <CoreValues {...props} />;
+    case 'AntiDiscrimination':
+      return <AntiDiscrimination {...props} />;
     case 'Expectations':
       return <Expectations {...props} />;
     case 'Decorum':
       return <Decorum {...props} />;
     case 'AbideBy':
       return <AbideBy {...props} />;
-    case 'PhotoRelease':
-      return <PhotoRelease {...props} />;
-    case 'CoreValues':
-      return <CoreValues {...props} />;
     case 'SuspensionAgreement':
       return <SuspensionAgreement {...props} />;
     case 'GrievanceAppeal':
       return <GrievanceAppeal {...props} />;
+    case 'Belongings':
+      return <Belongings {...props} />;
+    case 'Schedule':
+      return <Schedule {...props} />;
+    case 'Safety':
+      return <Safety {...props} />;
+    case 'AnimalNo':
+      return <AnimalNo {...props} />;
+    case 'AnimalYes':
+      return <AnimalYes {...props} />;
     default:
       return null;
   }
