@@ -41,6 +41,8 @@ import Schedule from './IntakePacketContent/ByGuests/ScheduleSafety/Schedule';
 import Safety from './IntakePacketContent/ByGuests/ScheduleSafety/Safety';
 import AnimalNo from './IntakePacketContent/ByGuests/AnimalAgreement/AnimalNo';
 import AnimalYes from './IntakePacketContent/ByGuests/AnimalAgreement/AnimalYes';
+import Neighborhood from './IntakePacketContent/ByGuests/Neighborhood/Neighborhood';
+import NeighborhoodExpectations from './IntakePacketContent/ByGuests/Neighborhood/NeighborhoodExpectations';
 /* Data structure for familyInfo. Each familyMember is pushed to the familyMember array here but 
 the data structure is in ./IntakePacketContent/ByGuests/FamilyMembers.js*/
 
@@ -127,8 +129,7 @@ let defaultData = {
 const steps = [
   { id: 'IntakeStart' },
   { id: 'ContactInfo' },
-  { id: 'AnimalNo' },
-  { id: 'AnimalYes' },
+
   { id: 'FamilyMembers' },
   { id: 'FamilyDemographics' },
   { id: 'RaceEthnicityInfo' },
@@ -158,6 +159,8 @@ const steps = [
   { id: 'Safety' },
   { id: 'AnimalNo' },
   { id: 'AnimalYes' },
+  { id: 'Neighborhood' },
+  { id: 'NeighborhoodExpectations' },
 
   //{ id: 'CmAcknowledgement'},
 ];
@@ -266,6 +269,10 @@ const IntakePacket = () => {
       return <AnimalNo {...props} />;
     case 'AnimalYes':
       return <AnimalYes {...props} />;
+    case 'Neighborhood':
+      return <Neighborhood {...props} />;
+    case 'NeighborhoodExpectations':
+      return <NeighborhoodExpectations {...props} />;
     default:
       return null;
   }
