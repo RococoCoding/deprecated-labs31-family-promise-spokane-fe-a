@@ -1,18 +1,15 @@
 import React from 'react';
 
-const CurrentReservation = () => {
+const CurrentReservation = ({ membersStaying, cancelButton }) => {
   return (
     <div className="container">
       <h3>Your Current Reservation</h3>
 
       <p>
-        You currently have XX number of beds reserved
-        <span>
-          If you would like to cancel, please click the cancel button below
-        </span>
+        You currently have {membersStaying.length} beds reserved. If you would
+        like to cancel, please click the cancel button below
       </p>
-      {/* Button should cancel reservation(change guest reservation from true to false) and restore number of beds open */}
-      <button>Cancel Reservation</button>
+      <button onClick={cancelButton}>Cancel Reservation</button>
     </div>
   );
 };

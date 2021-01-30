@@ -47,6 +47,15 @@ body {
   width: 8%
 }
 
+
+// Guest Dashboard
+
+.isReserved{
+  display: none
+}
+
+
+
 @import './case-notes-modal';
 @import './notes-page';
 @import './guest-notes';
