@@ -52,7 +52,6 @@ const ShelterInfo = () => {
   //console.log(info[1].id)
 
   const showModal = () => {
-    //console.log('im index', index)
     setIsModalVisible(true);
   };
 
@@ -78,7 +77,7 @@ const ShelterInfo = () => {
 
   return (
     <div style={tempFormStyle}>
-      <Card title="Card Title">
+      <Card title="Shelter Information & Additional Resources">
         {pages.map((page, index) => (
           <Card.Grid
             key={page.id}
