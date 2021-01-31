@@ -161,8 +161,6 @@ const steps = [
   { id: 'AnimalYes' },
   { id: 'Neighborhood' },
   { id: 'NeighborhoodExpectations' },
-
-  //{ id: 'CmAcknowledgement'},
 ];
 
 const IntakePacket = () => {

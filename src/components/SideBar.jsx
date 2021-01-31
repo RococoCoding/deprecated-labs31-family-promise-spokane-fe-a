@@ -6,6 +6,8 @@ import {
   FileOutlined,
   TeamOutlined,
   UserOutlined,
+  InfoCircleOutlined,
+  InfoCircleFilled,
 } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import AssessmentIcon from '@material-ui/icons/Assessment';
@@ -58,6 +60,10 @@ const SideBar = () => {
     history.push('/supervisor-checkin');
   };
 
+  const redirectToShelterInfo = () => {
+    history.push('/shelterInfo');
+  };
+
   return (
     <div>
       {user.role && (
@@ -87,6 +93,13 @@ const SideBar = () => {
                   icon={<TeamOutlined />}
                 >
                   Members
+                </Menu.Item>
+                <Menu.Item
+                  onClick={redirectToShelterInfo} //redirectToShelterInfo
+                  key="4"
+                  icon={<InfoCircleOutlined />}
+                >
+                  Shelter Info
                 </Menu.Item>
               </Menu>
             )}
