@@ -24,10 +24,14 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
 
   //Mock beds counter
   const [count, setCount] = useState(60);
-  // axiosWithAuth()
-  //   .get('/beds')
-  //   .then(res => {
-  //   });
+  useEffect(() => {
+    axiosWithAuth()
+      .get('/beds')
+      .then(res => {
+        console.log('Beds', res.data[0].total_beds);
+        // setCount(res.data[0].total_beds);
+      });
+  }, [count]);
 
   const { Text } = Typography;
 
