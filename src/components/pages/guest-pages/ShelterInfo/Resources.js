@@ -22,8 +22,9 @@ const Resources = ({ tempFormStyle }) => {
       <Card title="Important Resources and Phone Numbers" bordered={false}>
         <p>
           <strong>
-            This is not an EXHAUSTIVE list however it should help you get
-            started. Ask your Case Manager for suggestions if you need help.
+            This is NOT an exhaustive list however it should help you get
+            started. Ask your Case Manager for more resource suggestions if you
+            need help.
           </strong>
         </p>
         <Form>

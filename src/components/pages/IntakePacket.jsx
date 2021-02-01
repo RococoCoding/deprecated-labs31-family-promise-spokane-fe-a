@@ -43,6 +43,7 @@ import AnimalNo from './IntakePacketContent/ByGuests/AnimalAgreement/AnimalNo';
 import AnimalYes from './IntakePacketContent/ByGuests/AnimalAgreement/AnimalYes';
 import Neighborhood from './IntakePacketContent/ByGuests/Neighborhood/Neighborhood';
 import NeighborhoodExpectations from './IntakePacketContent/ByGuests/Neighborhood/NeighborhoodExpectations';
+import ThirdPartySigs from './IntakePacketContent/ByGuests/ThirdPartyConsent/ThirdPartySigs';
 /* Data structure for familyInfo. Each familyMember is pushed to the familyMember array here but 
 the data structure is in ./IntakePacketContent/ByGuests/FamilyMembers.js*/
 
@@ -128,9 +129,8 @@ let defaultData = {
 // Navigation path for intake form. Each name coresponds with the switch statement id.
 const steps = [
   { id: 'IntakeStart' },
-  { id: 'ContactInfo' },
-
   { id: 'FamilyMembers' },
+  { id: 'ContactInfo' },
   { id: 'FamilyDemographics' },
   { id: 'RaceEthnicityInfo' },
   { id: 'BarriersPage' },
@@ -144,6 +144,7 @@ const steps = [
   { id: 'ClientReleaseSignature' },
   { id: 'ClientReleaseStaffSig' },
   { id: 'ThirdPartyConsent' },
+  { id: 'ThirdPartySigs' },
   { id: 'GuestWaiver' },
   { id: 'CaseMangement' },
   { id: 'PhotoRelease' },
@@ -237,6 +238,8 @@ const IntakePacket = () => {
       return <ClientReleaseStaffSig {...props} />;
     case 'ThirdPartyConsent':
       return <ThirdPartyConsent {...props} />;
+    case 'ThirdPartySigs':
+      return <ThirdPartySigs {...props} />;
     case 'GuestWaiver':
       return <GuestWaiver {...props} />;
     case 'CaseManagement':

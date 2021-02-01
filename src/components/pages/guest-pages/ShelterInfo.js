@@ -12,35 +12,36 @@ import Important from './ShelterInfo/Important';
 import Resources from './ShelterInfo/Resources';
 //Shelter info components(originally from Intake Form)
 import { Card, Modal } from 'antd';
+import { CodeSharp } from '@material-ui/icons';
 
 //Navigation path for Shelter info. Each name correspons with the switch statement id
 const pages = [
   {
-    id: 'Welcome',
+    id: <Welcome />,
     name: 'Welcome to Open Doors',
   },
   {
-    id: 'ShelterSchedule',
+    id: <ShelterSchedule />,
     name: 'Shelter Schedule',
   },
   {
-    id: 'NightShelter',
+    id: <NightShelter />,
     name: 'Night Shelter Expectations & Safety',
   },
   {
-    id: 'Inside',
+    id: <Inside />,
     name: 'Inside the Shelter',
   },
   {
-    id: 'Outside',
+    id: <Outside />,
     name: 'Outside the Shelter',
   },
   {
-    id: 'Reminders',
+    id: <Important />,
     name: 'Important Reminders',
   },
   {
-    id: 'Resources',
+    id: <Resources />,
     name: 'Important Resources & Phone Numbers',
   },
 ];
@@ -49,10 +50,9 @@ const ShelterInfo = () => {
   const [info, setInfo] = useState(pages);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [pageId, setPageId] = useState();
-  //console.log(info[1].id)
 
-  const showModal = () => {
-    //console.log('im index', index)
+  const showModal = async pageId => {
+    await setPageId(pageId);
     setIsModalVisible(true);
   };
 
@@ -78,15 +78,13 @@ const ShelterInfo = () => {
 
   return (
     <div style={tempFormStyle}>
-      <Card title="Card Title">
+      <Card title="Shelter Information & Additional Resources">
         {pages.map((page, index) => (
           <Card.Grid
             key={page.id}
             style={gridStyle}
             onClick={() => {
-              setPageId(page.id);
-              console.log(pageId);
-              showModal();
+              showModal(page.id);
             }}
           >
             {page.name}
@@ -99,7 +97,7 @@ const ShelterInfo = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        {<Resources />}
+        {pageId}
       </Modal>
     </div>
   ); //ends return

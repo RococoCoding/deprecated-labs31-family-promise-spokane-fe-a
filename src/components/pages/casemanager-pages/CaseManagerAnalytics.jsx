@@ -4,10 +4,7 @@ import MaterialTable from 'material-table';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
 import { useHistory } from 'react-router-dom';
 import { tableIcons } from '../../../utils/tableIcons';
-import PeopleIcon from '@material-ui/icons/People';
-// import CardShadow from '../../CardShadow';
-import FlagGuest from '../../modals/FlagGuest';
-import GuestNotes from '../../modals/GuestNotes';
+
 // import { CopyrightOutlined } from '@material-ui/icons';
 import LoadingComponent from '../../common/LoadingComponent';
 import Modal from 'react-modal';
@@ -15,19 +12,19 @@ import '../Guests/guest.css';
 // import { CardContent, Card } from '@material-ui/core';
 import GuestMoreInfo from '../Guests/GuestMoreInfo';
 import { Checkbox } from '@material-ui/core';
-import axios from 'axios';
+
 import Visuals from './Visuals';
 Modal.setAppElement('#root');
 
 const CaseAnalytics = ({}) => {
-  const [isFlagOpen, setIsFlagOpen] = useState(false);
-  const [isNotesOpen, setIsNotesOpen] = useState(false);
   const [guestId, setGuestId] = useState(null);
   const [result, setResult] = useState(null);
   const history = useHistory();
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
-  const [visualization, setVisualization] = useState({});
+  const [enrolled, setEnrolled] = useState({});
+  const [age, setAge] = useState({});
+  const [members, setMembers] = useState({});
   const [state, setState] = useState({
     columns: [
       { title: 'First', field: 'first_name', type: 'hidden' },
@@ -66,9 +63,6 @@ const CaseAnalytics = ({}) => {
       })
       .catch(err => {
         alert('error in fetch for members');
-      })
-      .finally(() => {
-        setLoading(false);
       });
   }, []);
 
@@ -79,37 +73,21 @@ const CaseAnalytics = ({}) => {
     }
     axiosWithAuth()
       .get(
-        `https://cors-anywhere.herokuapp.com/http://omar-zaffar.eba-rpnihjrj.us-east-1.elasticbeanstalk.com/#/Visualization/show_viz_Visualizations_post/${guestId}`
+        `http://omar-zaffar.eba-rpnihjrj.us-east-1.elasticbeanstalk.com/Visualizations/${guestId}`
       )
       .then(response => {
-        console.log(response.data);
-        //setVisualization(response.data)
+        console.log('im parsed', JSON.parse(response.data[0]));
+        setEnrolled(JSON.parse(response.data[0]));
+        setAge(JSON.parse(response.data[1]));
+        setMembers(JSON.parse(response.data[2]));
       })
       .catch(err => {
         alert('error in DS API ');
       });
   };
 
-  if (loading) {
-    return (
-      <div className="guest-table-container">
-        <LoadingComponent />
-      </div>
-    );
-  }
-
   return (
     <>
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={toggleModal}
-        contentLabel="My dialog"
-        className="mymodal"
-        overlayClassName="myoverlay"
-        closeTimeoutMS={500}
-      >
-        {result ? <GuestMoreInfo familyInfo={result} /> : ''}
-      </Modal>
       <div className="guest-table-container">
         <div className="guest-table">
           <MaterialTable
@@ -145,8 +123,10 @@ const CaseAnalytics = ({}) => {
             </button>
           </div>
           <div>
-            {/* uncomment this when ready to use visuals */}
-            {/* <Visuals visuals={visualization} /> */}
+            {!(
+              Object.keys(members).length === 0 &&
+              members.constructor === Object
+            ) && <Visuals days={enrolled} current={age} family={members} />}
           </div>
         </div>
       </div>
