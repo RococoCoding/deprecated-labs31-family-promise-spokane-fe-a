@@ -9,59 +9,130 @@ import FlagIcon from '@material-ui/icons/Flag';
 import HotelIcon from '@material-ui/icons/Hotel';
 import Brightness2Icon from '@material-ui/icons/Brightness2';
 import Brightness3Icon from '@material-ui/icons/Brightness3';
+import { Switch } from 'antd';
 import { template, templateSettings } from 'underscore';
 
 Modal.setAppElement('#root');
 //add new icons
+
+let dummy = [
+  {
+    actual_beds_reserved: 5,
+    beds_reserved: 5,
+    date: '2020-12-12T17:38:31.123Z',
+    family_id: 1,
+    members_staying: ['Thomas Shelby', 'Laura Shelby', 'Tim Shelby'],
+    on_site_7pm: true,
+    on_site_10pm: true,
+    reservation_id: 4,
+    reservation_status: true,
+    supervisor_id: '00u2lh0bsAliwLEe75d6',
+    time: '2020-12-12T17:38:31.123Z',
+    waitlist: false,
+  },
+  {
+    actual_beds_reserved: 5,
+    beds_reserved: 3,
+    date: '2020-12-12T17:38:31.123Z',
+    family_id: 2,
+    members_staying: ['frodo baggins', 'bilbo baggins'],
+    on_site_7pm: true,
+    on_site_10pm: true,
+    reservation_id: 4,
+    reservation_status: true,
+    supervisor_id: '00u2lh0bsAliwLEe75d6',
+    time: '2020-12-12T17:38:31.123Z',
+    waitlist: false,
+  },
+];
+
 export default function SupervisorCheckIn() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const [state, setState] = useState({
     columns: [
-      { title: 'Family Name', field: 'last_name' },
-      { title: 'Checked-in', field: 'checked_in' },
+      { title: 'Name', field: 'name' },
+      { title: 'Reservation', field: 'reservation_status' },
       { title: 'Onsite (7pm)', field: 'on_site_7pm' },
       { title: 'Onsite (10pm)', field: 'on_site_10pm' },
-      { title: 'Beds Reserved', field: 'actual_beds_reserved' },
+      { title: 'Beds Reserved', field: 'beds_reserved' },
     ],
     data: [],
   });
+
+  const clickHandler = item => {
+    console.log('clicked', item);
+  };
 
   useEffect(() => {
     axiosWithAuth()
       .get('/logs')
       .then(res => {
-        console.log('logs', res.data);
-        let date = '2020-12-12T17:38:31.123Z';
-        let copy = { ...state };
-
-        let formattedData = res.data.filter(item => {
-          if (item.time === date) return item;
-          else return;
-        });
-
-        copy.data.push(...formattedData);
-        console.log(copy);
-
-        axiosWithAuth()
-          .get('/members/1')
-          .then(res => {
-            copy = {
-              ...copy,
-              data: copy.data.map(item => {
-                return { ...item, last_name: res.data.demographics.last_name };
-              }),
-            };
-            console.log('copy', copy);
-            setState(copy);
-            setLoading(false);
-          })
-          .catch(err => console.log(err));
+        console.log(res);
       })
       .catch(err => {
-        alert('error');
+        console.log(err);
       });
+
+    // let temp = dummy.members_staying.map(item => {
+    //   return {
+    //     'name': item,
+    //     'reservation_status': dummy.reservation_status,
+    //     'on_site_7pm': dummy.on_site_7pm,
+    //     'on_site_10pm': dummy.on_site_10pm,
+    //     'beds_reserved': <Switch />,
+
+    //   }
+    // })
+    let temp = [];
+    for (let i = 0; i < dummy.length; i++) {
+      dummy[i].members_staying.map(item => {
+        temp.push({
+          name: item,
+          reservation_status: <Switch defaultChecked={true} />,
+          on_site_7pm: <Switch />,
+          on_site_10pm: <Switch onClick={() => clickHandler(item)} />,
+          beds_reserved: dummy[i].beds_reserved,
+        });
+      });
+    }
+
+    console.log('temp', temp);
+    setState({ ...state, data: temp });
   }, []);
+
+  // let date = '2020-10-09T00:00:00.000Z';
+  // let copy = { ...state };
+
+  // axiosWithAuth()
+  //   .get('/logs')
+  //   .then(res => {
+  //     console.log('logs', res.data);
+
+  //     console.log(res.data)
+  //   })
+  //   .catch(err => { console.log(err) })
+
+  // copy.data.push(...formattedData);
+  // console.log(copy);
+  //   axiosWithAuth()
+  //     .post('/logs', {
+  //       "supervisor_id": "00u2lh0bsAliwLEe75d6",
+  //       "family_id": 1,
+  //       "reservation_status": true,
+  //       "waitlist": false,
+  //       "on_site_7pm": true,
+  //       "on_site_10pm": true,
+  //       "date": "2020-10-09T04:00:00.000Z",
+  //       "time": "2020-12-09T17:38:31.123Z",
+  //       "beds_reserved": 5,
+  //       "actual_beds_reserved": 5,
+  //       "members_staying": ["membersStaying"]
+  //     })
+  //     .then(res => { console.log(res.data) })
+  //     .catch(err => { console.log(err) })
+
+  // }, []);
 
   const toggleCheckedIn = rowData => {
     let temp = { ...rowData, checked_in: !rowData.checked_in };
@@ -120,29 +191,6 @@ export default function SupervisorCheckIn() {
           title="Guests Check-in"
           columns={state.columns}
           data={state.data}
-          actions={[
-            {
-              icon: HotelIcon,
-              tooltip: 'Checked-in',
-              onClick: (event, rowData) => {
-                toggleCheckedIn(rowData);
-              },
-            },
-            {
-              icon: Brightness2Icon,
-              tooltip: '7PM On-site',
-              onClick: (event, rowData) => {
-                toggle7pm();
-              },
-            },
-            {
-              icon: Brightness3Icon,
-              tooltip: '10PM On-site',
-              onClick: (event, rowData) => {
-                toggle10pm();
-              },
-            },
-          ]}
         />
       </div>
     </div>
