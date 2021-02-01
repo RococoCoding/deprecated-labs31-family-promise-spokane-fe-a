@@ -20,9 +20,13 @@ import Visuals from './Visuals';
 Modal.setAppElement('#root');
 
 const CaseAnalytics = ({}) => {
+  const [isFlagOpen, setIsFlagOpen] = useState(false);
+  const [isNotesOpen, setIsNotesOpen] = useState(false);
+  const [guestId, setGuestId] = useState(null);
+  const [result, setResult] = useState(null);
+  const history = useHistory();
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
-  //const [guestId, setGuestId] = useState();
   const [visualization, setVisualization] = useState({});
   const [state, setState] = useState({
     columns: [
@@ -61,7 +65,7 @@ const CaseAnalytics = ({}) => {
         setState(copy);
       })
       .catch(err => {
-        alert('error');
+        alert('error in fetch for members');
       })
       .finally(() => {
         setLoading(false);
@@ -69,24 +73,21 @@ const CaseAnalytics = ({}) => {
   }, []);
 
   const runVisualization = guestId => {
+    console.log(guestId);
+    //condidtional, if guestID is null, alert user to click on ONE row
+    //guest id is not coming through, for now it is hardcoded
     axiosWithAuth()
       .get(
-        `http://omar-zaffar.eba-rpnihjrj.us-east-1.elasticbeanstalk.com/Visualizations/${guestId}`
+        `http://omar-zaffar.eba-rpnihjrj.us-east-1.elasticbeanstalk.com/Visualizations/1`
       )
       .then(response => {
         console.log(response.data);
         //setVisualization(response.data)
       })
       .catch(err => {
-        alert('error');
+        alert('error in DS API ');
       });
   };
-
-  const [isFlagOpen, setIsFlagOpen] = useState(false);
-  const [isNotesOpen, setIsNotesOpen] = useState(false);
-  const [guestId, setGuestId] = useState(null);
-  const [result, setResult] = useState(null);
-  const history = useHistory();
 
   if (loading) {
     return (
@@ -132,20 +133,18 @@ const CaseAnalytics = ({}) => {
                 tooltip: 'Select Guest',
                 onClick: (event, rowsData) => {
                   setGuestId(state.data[rowsData.id - 1].id);
-                  {
-                    /* console.log(guestId); */
-                  }
                 },
               },
             ]}
           />
           <div>
-            <button key={guestId} onSubmit={runVisualization(guestId)}>
+            <button key={guestId} onClick={() => runVisualization(guestId)}>
               Run Visualization
             </button>
           </div>
           <div>
-            <Visuals visuals={visualization} />
+            {/* uncomment this when ready to use visuals */}
+            {/* <Visuals visuals={visualization} /> */}
           </div>
         </div>
       </div>
