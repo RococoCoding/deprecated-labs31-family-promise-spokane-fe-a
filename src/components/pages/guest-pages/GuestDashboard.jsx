@@ -5,8 +5,8 @@ import CurrentReservation from './CurrentReservation';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
 
 // UI
-import { Divider, Button, Checkbox } from 'antd';
-// import '../../../styles/app.scss'
+import { Divider, Button, Checkbox, Typography, Space } from 'antd';
+import '../../../styles/app.scss';
 
 //redux
 import actions from '../../../state/actions/families';
@@ -28,6 +28,8 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   //   .get('/beds')
   //   .then(res => {
   //   });
+
+  const { Text } = Typography;
 
   // For Members Staying
   const [membersStaying, setMembersStaying] = useState([]);
@@ -139,7 +141,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
         members_staying: membersStaying,
       })
       .then(res => {
-        console.log('resID', res.data.logs.reservation_id);
+        console.log('resID', res.data);
         const resId = res.data.logs.reservation_id;
         setResID(resId);
         setIsReserved(true);
@@ -169,9 +171,8 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
     e.preventDefault();
 
     setCount(count + membersStaying.length);
-    membersStaying.length = 0;
 
-    console.log(resID);
+    membersStaying.length = 0;
 
     axiosWithAuth()
       .put(`/logs/${resID}`, {
@@ -215,7 +216,6 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   const minutes = (getMinutes < 10 ? '0' : '') + getMinutes;
   const getTime = fullDate + hours + '-' + minutes;
   // This seconds will not be seen, but this will allow the clock to rerender accordingly.
-
   const [seconds, setSeconds] = useState();
   let sec = new Date().getSeconds();
   useEffect(() => {
@@ -225,15 +225,24 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
     return () => clearInterval(interval);
   }, [seconds]);
 
+  //-----------------------------------------------------------------
+  // --------------------------START OF RENDER-----------------------
+  //-----------------------------------------------------------------
+
   return 7 < hours < 21 ? (
     <div className="container">
-      {`Today is ${fullDate} ${hours}:${minutes}`}
+      <h2>{`Today is ${fullDate} ${hours}:${minutes}`}</h2>
 
       <h1>Guest dashboard</h1>
-      <h1>Welcome To Family Promise of Spokane</h1>
+      <h1 className="welcome-guest-dashboard">
+        Welcome To Family Promise of Spokane
+      </h1>
       <h2>
-        There are currently {count} number of beds remaining at the shelter
+        There are currently <span className="number-of-beds">{count}</span> beds
+        remaining at the shelter
       </h2>
+
+      <Divider />
 
       {/* When the user logs back in or when the user makes a reservation, they will need to have their session stored locally so they can see that they have already made a reservation and can cancel. */}
 
@@ -254,7 +263,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
           <p>To join the waitlist, please click below</p>
           {users.map(member => {
             return (
-              <div>
+              <div className="members">
                 <Checkbox
                   value={`${member.demographics.first_name} ${member.demographics.last_name}`}
                   onChange={waitListMembers}
@@ -265,7 +274,11 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
               </div>
             );
           })}
-          <Button className="button">Reserve Beds</Button>
+
+          <Button shape="round" className="reservation-button">
+            Reserve Beds
+          </Button>
+
           <p>
             Message: Please be sure to arrive at the shelter by 7pm. The
             supervisor will announce if there are any more beds available
@@ -274,11 +287,11 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
       ) : (
         //MEMBERS STAYING ___________________________
         <div className={isReserved === true ? 'isReserved' : ''}>
-          <p>
+          <Text strong>
             {' '}
             If you would like to reserve {membersStaying.length} beds, please
             click the button below:{' '}
-          </p>
+          </Text>
 
           {users.map(member => {
             return (
@@ -293,7 +306,9 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
               </div>
             );
           })}
-          <Button onClick={reserveButton}>Reserve Beds</Button>
+          <Button className="reserve-button" onClick={reserveButton}>
+            Reserve Beds
+          </Button>
         </div>
       )}
     </div>
