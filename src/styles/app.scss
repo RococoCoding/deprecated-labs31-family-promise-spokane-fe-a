@@ -47,8 +47,31 @@ body {
   width: 8%
 }
 
+
+// Guest Dashboard
+.isReserved{
+  display: none
+}
+.members{
+  margin: 15%;
+  padding-bottom: 25%;
+}
+.welcome-guest-dashboard{
+  color: purple;
+}
+.number-of-beds{
+  color: blue;
+}
+.reservation-button{
+  margin-top: 3%;
+}
+
+.btn-container{
+  max-width: 10%;
+  padding-left: 45%;
+}
 .printName{
-  width: 40%
+  width: 40%;
 }
 
 @import './case-notes-modal';

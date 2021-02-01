@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import OffHours from './OffHours';
+import CurrentReservation from './CurrentReservation';
 
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
 
 // UI
-import { Divider, Button, Checkbox } from 'antd';
-// import '../../../styles/app.scss'
+import { Divider, Button, Checkbox, Typography, Space } from 'antd';
+import '../../../styles/app.scss';
 
 //redux
 import actions from '../../../state/actions/families';
@@ -13,11 +14,6 @@ import { connect } from 'react-redux';
 
 // state
 import { useSelector } from 'react-redux';
-
-//mock Data
-import { AddBoxOutlined } from '@material-ui/icons';
-import CurrentReservation from './CurrentReservation';
-import axios from 'axios';
 
 const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   // The current user
@@ -31,8 +27,10 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   // axiosWithAuth()
   //   .get('/beds')
   //   .then(res => {
-  //     console.log('beds', res.data);
   //   });
+
+  const { Text } = Typography;
+
   // For Members Staying
   const [membersStaying, setMembersStaying] = useState([]);
 
@@ -41,41 +39,21 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
 
   //logs user state of reservation status
   const [isReserved, setIsReserved] = useState(false);
+
+  //Sets state for members staying and waitlist members
   useEffect(() => {
     axiosWithAuth()
-      .get('/logs')
+      //This can persist if you useParams to pull in the id of the api and change the hard coded 7 to ${id}
+      .get('/logs/7')
       .then(res => {
-        // console.log("Logs",res.data);
-        // console.log(membersStaying);
-        // setIsReserved(
-        //   res.data.forEach((checkStatus, id) => {
-        //     console.log(
-        //       'id, checked, members staying',
-        //       id,
-        //       checkStatus.reservation_status,
-        //       membersStaying[id]
-        //     );
-        //     return checkStatus;
-        //   })
-        // );
-
-        //a.) This array looks different in the console.log but normal in the React Dev tool's state.
-        setMembersStaying(
-          res.data.map(stay => {
-            return stay.member_staying;
-            // console.log('stay',stay.members_staying); //a. Need to ask if the hard-coded names can be removed.
-          })
-        );
-        setWaitList(
-          res.data.map(wait => {
-            return wait.waitlist;
-          })
-        );
+        console.log('Logs', res.data);
+        setMembersStaying(res.data.members_staying);
+        setWaitList(res.data.waitlist);
       });
   }, []);
 
   // console.log('Is Reserved', isReserved);
-  //THIS COULD BE A FUNCTION BECAUSE IT IS BEING USED TWICE:
+  //************THIS COULD BE A FUNCTION BECAUSE IT IS BEING USED TWICE:******************
   // This will target the checked members and add or take them away from the holding array or state of the membersStaying list. It will also update the state of the count for total beds.
   const familyStaying = e => {
     if (e.target.checked === true) {
@@ -125,7 +103,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
       axiosWithAuth()
         .get(`/families/${family.id}/members`)
         .then(res => {
-          console.log('res', res);
+          console.log('families/family.id/members', res.data);
           setUsers(res.data);
         })
         .then(members => {
@@ -140,19 +118,89 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
     console.log('fetch', fetchFamilyInformation());
   }, [count]);
 
-  //Reserve button
-  const reserveButton = () => {
-    /*
-    1. This button will have a post request to the logs api to set the families check in as true in the members staying array
-    2. Number of beds will be updated
-    3. Message will pop ups stating: Congratulations, you have reserved XX amount of beds at 904 E Hartson Ave, Spokane, WA 99202 for MM/DD/YYY. Please be sure to have at least ONED ADULT available at the shelter before 7pm to check in with the supervisor.
-    <inSmallerText>If you do not show ip with your total amont of family members, those beds will be reserved for other guests.</inSmallerText>
-    4. condition that onClick, currentReservation component will show.
-    */
+  let userId = users.map(user => {
+    return user.family_id;
+  });
+
+  //Reserve button - Will post to the logs endpoint with the membersStaying , will set isReserved to true, will return the reservation ID for put requeset, Confirm that the user has made a reservation.
+  const reserveButton = e => {
+    e.preventDefault();
+
+    axiosWithAuth()
+      .post('/logs', {
+        supervisor_id: '00u2lh0bsAliwLEe75d6',
+        family_id: 1,
+        reservation_status: true,
+        waitlist: false,
+        on_site_7pm: false,
+        on_site_10pm: false,
+        date: null, //api does not accept these any format for date and time. Anything other than null will result in a bad api request
+        time: null,
+        beds_reserved: membersStaying.length,
+        actual_beds_reserved: membersStaying.length,
+        members_staying: membersStaying,
+      })
+      .then(res => {
+        console.log('resID', res.data);
+        const resId = res.data.logs.reservation_id;
+        setResID(resId);
+        setIsReserved(true);
+        return (
+          <div>
+            <p>
+              Congratulations, you have reserved {membersStaying.length} amount
+              of beds at 904 E Hartson Ave, Spokane, WA 99202 for MM/DD/YYY.
+              Please be sure to have at least ONED ADULT available at the
+              shelter before 7pm to check in with the supervisor.
+            </p>
+            <p>
+              If you do not show ip with your total amont of family members,
+              those beds will be reserved for other guests.
+            </p>
+          </div>
+        );
+      })
+      .catch(err => {
+        console.log('Nope', err);
+      });
   };
 
   // the cancel button
-  const cancelButton = () => {
+  const [resID, setResID] = useState(); // This is set in the post request to retrieve the reservation ID which is needed in order to edit the reservation.
+  const cancelButton = (e, resId) => {
+    e.preventDefault();
+
+    setCount(count + membersStaying.length);
+
+    membersStaying.length = 0;
+
+    axiosWithAuth()
+      .put(`/logs/${resID}`, {
+        supervisor_id: '00u2lh0bsAliwLEe75d6',
+        family_id: 1,
+        reservation_status: false,
+        waitlist: false,
+        on_site_7pm: true,
+        on_site_10pm: true,
+        date: null,
+        time: null,
+        beds_reserved: 0,
+        actual_beds_reserved: 0,
+        members_staying: membersStaying,
+      })
+      .then(res => {
+        setIsReserved(false);
+        alert(
+          'You have canceled your reservation. If you canceled by mistake you will be able to make a reservation per available beds.'
+        );
+        window.location.reload();
+        // console.log("put res", res.data);
+      })
+      .catch(err => {
+        console.log('Nope', err);
+      });
+
+    // setIsReserved(false);
     /*
     1. This button will change the membersStaying array length to 0
     2. Number of beds will be updated
@@ -166,7 +214,8 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   const hours = new Date().getHours();
   const getMinutes = new Date().getMinutes();
   const minutes = (getMinutes < 10 ? '0' : '') + getMinutes;
-  //This seconds will not be seen, but this will allow the clock to rerender accordingly.
+  const getTime = fullDate + hours + '-' + minutes;
+  // This seconds will not be seen, but this will allow the clock to rerender accordingly.
   const [seconds, setSeconds] = useState();
   let sec = new Date().getSeconds();
   useEffect(() => {
@@ -176,34 +225,45 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
     return () => clearInterval(interval);
   }, [seconds]);
 
-  const standard = hours => {
-    if (hours > 12) {
-      return hours - 12;
-    }
-  };
+  //-----------------------------------------------------------------
+  // --------------------------START OF RENDER-----------------------
+  //-----------------------------------------------------------------
 
   return 7 < hours < 21 ? (
     <div className="container">
-      {`Today is ${fullDate} ${hours}:${minutes}`}
+      <h2>{`Today is ${fullDate} ${hours}:${minutes}`}</h2>
 
       <h1>Guest dashboard</h1>
-      <h1>Welcome To Family Promise of Spokane</h1>
+      <h1 className="welcome-guest-dashboard">
+        Welcome To Family Promise of Spokane
+      </h1>
       <h2>
-        There are currently {count} number of beds remaining at the shelter
+        There are currently <span className="number-of-beds">{count}</span> beds
+        remaining at the shelter
       </h2>
-      {
-        // CurrentReservation === True ?
-        //<CurrentReservation/>
-        //:
-      }
 
-      {count === 0 ? (
+      <Divider />
+
+      {/* When the user logs back in or when the user makes a reservation, they will need to have their session stored locally so they can see that they have already made a reservation and can cancel. */}
+
+      {isReserved === true ? (
+        <>
+          <CurrentReservation
+            membersStaying={membersStaying}
+            cancelButton={cancelButton}
+          />
+        </>
+      ) : (
+        ''
+      )}
+
+      {count === 0 && isReserved === false ? (
         //WAITLIST ________________________________
         <>
           <p>To join the waitlist, please click below</p>
           {users.map(member => {
             return (
-              <div>
+              <div className="members">
                 <Checkbox
                   value={`${member.demographics.first_name} ${member.demographics.last_name}`}
                   onChange={waitListMembers}
@@ -214,7 +274,11 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
               </div>
             );
           })}
-          <Button className="button">Reserve Beds</Button>
+
+          <Button shape="round" className="reservation-button">
+            Reserve Beds
+          </Button>
+
           <p>
             Message: Please be sure to arrive at the shelter by 7pm. The
             supervisor will announce if there are any more beds available
@@ -222,12 +286,12 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
         </>
       ) : (
         //MEMBERS STAYING ___________________________
-        <>
-          <p>
+        <div className={isReserved === true ? 'isReserved' : ''}>
+          <Text strong>
             {' '}
             If you would like to reserve {membersStaying.length} beds, please
             click the button below:{' '}
-          </p>
+          </Text>
 
           {users.map(member => {
             return (
@@ -242,8 +306,10 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
               </div>
             );
           })}
-          <Button className="button">Reserve Beds</Button>
-        </>
+          <Button className="reserve-button" onClick={reserveButton}>
+            Reserve Beds
+          </Button>
+        </div>
       )}
     </div>
   ) : (
