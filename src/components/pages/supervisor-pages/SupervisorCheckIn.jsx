@@ -24,7 +24,7 @@ let dummy = [
     members_staying: ['Thomas Shelby', 'Laura Shelby', 'Tim Shelby'],
     on_site_7pm: true,
     on_site_10pm: true,
-    reservation_id: 4,
+    reservation_id: 1,
     reservation_status: true,
     supervisor_id: '00u2lh0bsAliwLEe75d6',
     time: '2020-12-12T17:38:31.123Z',
@@ -38,7 +38,7 @@ let dummy = [
     members_staying: ['frodo baggins', 'bilbo baggins'],
     on_site_7pm: true,
     on_site_10pm: true,
-    reservation_id: 4,
+    reservation_id: 2,
     reservation_status: true,
     supervisor_id: '00u2lh0bsAliwLEe75d6',
     time: '2020-12-12T17:38:31.123Z',
@@ -53,6 +53,7 @@ export default function SupervisorCheckIn() {
     columns: [
       { title: 'Name', field: 'name' },
       { title: 'Reservation', field: 'reservation_status' },
+      { title: 'Reservation ID', field: 'reservation_id' },
       { title: 'Onsite (7pm)', field: 'on_site_7pm' },
       { title: 'Onsite (10pm)', field: 'on_site_10pm' },
       { title: 'Beds Reserved', field: 'beds_reserved' },
@@ -60,38 +61,39 @@ export default function SupervisorCheckIn() {
     data: [],
   });
 
-  const clickHandler = item => {
-    console.log('clicked', item);
+  const clickHandler = (e, item) => {
+    console.log('clicked', e, item);
+  };
+
+  const cancelReservation = e => {
+    console.log('reserve');
   };
 
   useEffect(() => {
-    axiosWithAuth()
-      .get('/logs')
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    //
 
-    // let temp = dummy.members_staying.map(item => {
-    //   return {
-    //     'name': item,
-    //     'reservation_status': dummy.reservation_status,
-    //     'on_site_7pm': dummy.on_site_7pm,
-    //     'on_site_10pm': dummy.on_site_10pm,
-    //     'beds_reserved': <Switch />,
-
-    //   }
-    // })
     let temp = [];
     for (let i = 0; i < dummy.length; i++) {
       dummy[i].members_staying.map(item => {
         temp.push({
           name: item,
-          reservation_status: <Switch defaultChecked={true} />,
+          reservation_status: (
+            <Switch
+              defaultChecked={true}
+              onChange={e => {
+                cancelReservation(e);
+              }}
+            />
+          ),
+          reservation_id: dummy[i].reservation_id,
           on_site_7pm: <Switch />,
-          on_site_10pm: <Switch onClick={() => clickHandler(item)} />,
+          on_site_10pm: (
+            <Switch
+              onChange={e => {
+                clickHandler(e, item);
+              }}
+            />
+          ),
           beds_reserved: dummy[i].beds_reserved,
         });
       });
@@ -100,69 +102,6 @@ export default function SupervisorCheckIn() {
     console.log('temp', temp);
     setState({ ...state, data: temp });
   }, []);
-
-  // let date = '2020-10-09T00:00:00.000Z';
-  // let copy = { ...state };
-
-  // axiosWithAuth()
-  //   .get('/logs')
-  //   .then(res => {
-  //     console.log('logs', res.data);
-
-  //     console.log(res.data)
-  //   })
-  //   .catch(err => { console.log(err) })
-
-  // copy.data.push(...formattedData);
-  // console.log(copy);
-  //   axiosWithAuth()
-  //     .post('/logs', {
-  //       "supervisor_id": "00u2lh0bsAliwLEe75d6",
-  //       "family_id": 1,
-  //       "reservation_status": true,
-  //       "waitlist": false,
-  //       "on_site_7pm": true,
-  //       "on_site_10pm": true,
-  //       "date": "2020-10-09T04:00:00.000Z",
-  //       "time": "2020-12-09T17:38:31.123Z",
-  //       "beds_reserved": 5,
-  //       "actual_beds_reserved": 5,
-  //       "members_staying": ["membersStaying"]
-  //     })
-  //     .then(res => { console.log(res.data) })
-  //     .catch(err => { console.log(err) })
-
-  // }, []);
-
-  const toggleCheckedIn = rowData => {
-    let temp = { ...rowData, checked_in: !rowData.checked_in };
-
-    setState({
-      ...state,
-      data: state.data.map(item => {
-        return { ...item, checked_in: !item.checked_in };
-      }),
-    });
-  };
-
-  const toggle7pm = () => {
-    //on_site_7pm
-    setState({
-      ...state,
-      data: state.data.map(item => {
-        return { ...item, on_site_7pm: !item.on_site_7pm };
-      }),
-    });
-  };
-  const toggle10pm = () => {
-    //on_site_10pm
-    setState({
-      ...state,
-      data: state.data.map(item => {
-        return { ...item, on_site_10pm: !item.on_site_10pm };
-      }),
-    });
-  };
 
   if (loading) {
     return (
