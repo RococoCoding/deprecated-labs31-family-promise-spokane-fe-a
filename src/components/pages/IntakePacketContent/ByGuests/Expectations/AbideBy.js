@@ -59,7 +59,7 @@ const AbideBy = ({
         <h3>I WILL be expected to: </h3>
 
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>Have My Kids In School:</u>
           </strong>
@@ -73,7 +73,7 @@ const AbideBy = ({
         </Form.Item>
 
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>Keep Pets on a Leash or in Kennel and will Not get New Pets:</u>
           </strong>
@@ -92,7 +92,7 @@ const AbideBy = ({
         </Form.Item>
 
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>Participate in keeping the shelter clean and sanitary:</u>
           </strong>
@@ -114,7 +114,7 @@ const AbideBy = ({
         </Form.Item>
 
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>Limit the amount of personal belongings:</u>
           </strong>
@@ -128,7 +128,7 @@ const AbideBy = ({
         </Form.Item>
 
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>Keep my food storage area clean and sanitary:</u>
           </strong>
@@ -144,7 +144,7 @@ const AbideBy = ({
         </Form.Item>
 
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>Only eat in the dining area or kitchen:</u>
           </strong>
@@ -156,7 +156,7 @@ const AbideBy = ({
         </Form.Item>
 
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>Wear shoes and shirts at all times while in the shelter:</u>
           </strong>
@@ -171,13 +171,13 @@ const AbideBy = ({
           necessarily exclude me from a bed in Open Doors Shelter
         </p>
         <Form.Item>
-          <Input bordered={false} />
+          <Input bordered={false} placeholder="First & Last Name" />
           <hr />
-          CLIENT SIGNATURE(adult)
+          CLIENT SIGNATURE (adult)
           <DatePicker />
-          <Input bordered={false} />
+          <Input bordered={false} placeholder="First & Last Name" />
           <hr />
-          CLIENT SIGNATURE(adult)
+          CLIENT SIGNATURE (adult)
           <DatePicker />
         </Form.Item>
       </Card>

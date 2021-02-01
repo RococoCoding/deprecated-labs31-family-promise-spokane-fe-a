@@ -66,7 +66,7 @@ const CoreValues = ({
           </Form.Item>
 
           <Form.Item>
-            <Input className="initials" />
+            <Input className="initials" placeholder="initials" />
             <strong>
               <u>Be Non-Judgmental:</u>
             </strong>
@@ -74,7 +74,7 @@ const CoreValues = ({
           </Form.Item>
 
           <Form.Item>
-            <Input className="initials" />
+            <Input className="initials" placeholder="initials" />
             <strong>
               <u>Be Respectful/ Compassionate:</u>
             </strong>
@@ -82,7 +82,7 @@ const CoreValues = ({
           </Form.Item>
 
           <Form.Item>
-            <Input className="initials" />
+            <Input className="initials" placeholder="initials" />
             <strong>
               <u>Be Present:</u>
             </strong>
@@ -92,7 +92,7 @@ const CoreValues = ({
           </Form.Item>
 
           <Form.Item>
-            <Input className="initials" />
+            <Input className="initials" placeholder="initials" />
             <strong>
               <u>Be Competent:</u>
             </strong>
@@ -102,7 +102,7 @@ const CoreValues = ({
           </Form.Item>
 
           <Form.Item>
-            <Input className="initials" />
+            <Input className="initials" placeholder="initials" />
             <strong>
               <u>Be Empowered:</u>
             </strong>
@@ -112,7 +112,7 @@ const CoreValues = ({
           </Form.Item>
 
           <Form.Item>
-            <Input className="initials" />
+            <Input className="initials" placeholder="initials" />
             <strong>
               <u>Be a Great Neighbor:</u>
             </strong>
@@ -132,11 +132,11 @@ const CoreValues = ({
           </Form.Item>
 
           <Form.Item>
-            <Input bordered={false} />
+            <Input bordered={false} placeholder="First & Last Name" />
             <hr />
             CLIENT SIGNATURE(adult)
             <DatePicker />
-            <Input bordered={false} />
+            <Input bordered={false} placeholder="First & Last Name" />
             <hr />
             CLIENT SIGNATURE(adult)
             <DatePicker />

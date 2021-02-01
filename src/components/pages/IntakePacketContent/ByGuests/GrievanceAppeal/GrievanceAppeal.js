@@ -106,21 +106,14 @@ const SuspensionAgreement = ({
           </strong>
         </p>
         <Form.Item>
-          <Input bordered={false} />
+          <Input bordered={false} placeholder="First & Last Name" />
           <hr />
-          Guest Name
-          <Input bordered={false} />
+          CLIENT SIGNATURE (adult)
+          <DatePicker />
+          <Input bordered={false} placeholder="First & Last Name" />
           <hr />
-          Signature
-          <Input bordered={false} />
-          <hr />
-          Guest Name
-          <Input bordered={false} />
-          <hr />
-          Signature
-          <Input bordered={false} />
-          <hr />
-          Date
+          CLIENT SIGNATURE (adult)
+          <DatePicker />
         </Form.Item>
       </Card>
     </div>
