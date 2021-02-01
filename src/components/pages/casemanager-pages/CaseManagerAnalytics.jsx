@@ -124,8 +124,8 @@ const CaseAnalytics = ({}) => {
           </div>
           <div>
             {!(
-              Object.keys(enrolled).length == 0 &&
-              enrolled.constructor === Object
+              Object.keys(members).length === 0 &&
+              members.constructor === Object
             ) && <Visuals days={enrolled} current={age} family={members} />}
           </div>
         </div>

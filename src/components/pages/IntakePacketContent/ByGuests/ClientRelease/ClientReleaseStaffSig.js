@@ -45,11 +45,11 @@ const ClientReleaseStaffSignature = ({
         <IntakeButton navigation={navigation} />
         <Form>
           <Form.Item>
-            <Input bordered={false} />
+            <Input bordered={false} placeholder="First & Last Name" />
             <hr />
             STAFF SIGNATURE
             <DatePicker />
-            <Input bordered={false} />
+            <Input bordered={false} placeholder="Agency Name" />
             <hr />
             Agency
           </Form.Item>
@@ -58,7 +58,7 @@ const ClientReleaseStaffSignature = ({
             <Checkbox />
             Client did NOT consent to the inclusion of personal information in
             CMIS for themselves or any dependents.
-            <Input bordered={false} />
+            <Input bordered={false} placeholder="First & Last Name" />
             <hr />
             STAFF SIGNATURE
             <DatePicker />
@@ -70,11 +70,11 @@ const ClientReleaseStaffSignature = ({
             18 as listed above. Note: Written consent must be obtained at the
             first time the client is physically present at an organization with
             access to the HMIS system.
-            <Input bordered={false} />
+            <Input bordered={false} placeholder="First & Last Name" />
             <hr />
             STAFF SIGNATURE
             <DatePicker />
-            <Input bordered={false} />
+            <Input bordered={false} placeholder="Agency Name" />
             <hr />
             Agency
           </Form.Item>
