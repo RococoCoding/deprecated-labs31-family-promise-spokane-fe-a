@@ -74,11 +74,12 @@ const CaseAnalytics = ({}) => {
 
   const runVisualization = guestId => {
     console.log(guestId);
-    //condidtional, if guestID is null, alert user to click on ONE row
-    //guest id is not coming through, for now it is hardcoded
+    if (guestId === null) {
+      alert('You must choose ONE family member by clicking checkbox');
+    }
     axiosWithAuth()
       .get(
-        `http://omar-zaffar.eba-rpnihjrj.us-east-1.elasticbeanstalk.com/Visualizations/1`
+        `https://cors-anywhere.herokuapp.com/http://omar-zaffar.eba-rpnihjrj.us-east-1.elasticbeanstalk.com/#/Visualization/show_viz_Visualizations_post/${guestId}`
       )
       .then(response => {
         console.log(response.data);
@@ -130,15 +131,16 @@ const CaseAnalytics = ({}) => {
             actions={[
               {
                 icon: Checkbox,
-                tooltip: 'Select Guest',
+                tooltip: 'Select One Guest',
                 onClick: (event, rowsData) => {
                   setGuestId(state.data[rowsData.id - 1].id);
                 },
               },
+              //console.log(guestId)
             ]}
           />
           <div>
-            <button key={guestId} onClick={() => runVisualization(guestId)}>
+            <button onClick={() => runVisualization(guestId)}>
               Run Visualization
             </button>
           </div>
