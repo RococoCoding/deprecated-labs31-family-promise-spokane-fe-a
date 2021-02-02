@@ -102,9 +102,9 @@ const GuestAnalytics = ({
     return modifiedStringValues;
   };
 
-  useEffect(() => {
-    fetchFamilyInformation();
-  }, []);
+  // useEffect(() => {
+  //   fetchFamilyInformation();
+  // }, []);
 
   return (
     <div className="analytics-container">

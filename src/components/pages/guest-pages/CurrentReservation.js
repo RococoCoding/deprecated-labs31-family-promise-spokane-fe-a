@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Typography, Popover } from 'antd';
+import { Button, Typography } from 'antd';
 import '../../../styles/app.scss';
 const CurrentReservation = ({ membersStaying, cancelButton }) => {
   const { Text } = Typography;

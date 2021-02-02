@@ -6,21 +6,18 @@ import { useHistory } from 'react-router-dom';
 import { tableIcons } from '../../../utils/tableIcons';
 
 // import { CopyrightOutlined } from '@material-ui/icons';
-import LoadingComponent from '../../common/LoadingComponent';
 import Modal from 'react-modal';
 import '../Guests/guest.css';
 // import { CardContent, Card } from '@material-ui/core';
-import GuestMoreInfo from '../Guests/GuestMoreInfo';
 import { Checkbox } from '@material-ui/core';
 
 import Visuals from './Visuals';
 Modal.setAppElement('#root');
 
-const CaseAnalytics = ({}) => {
+const CaseAnalytics = () => {
   const [guestId, setGuestId] = useState(null);
-  const [result, setResult] = useState(null);
-  const history = useHistory();
-  const [loading, setLoading] = useState(true);
+  // const [result, setResult] = useState(null);
+  // const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [enrolled, setEnrolled] = useState({});
   const [age, setAge] = useState({});
@@ -35,10 +32,10 @@ const CaseAnalytics = ({}) => {
     ],
     data: [],
   });
-  function toggleModal(e) {
-    e.preventDefault();
-    setIsOpen(!isOpen);
-  }
+  // function toggleModal(e) {
+  //   e.preventDefault();
+  //   setIsOpen(!isOpen);
+  // }
 
   useEffect(() => {
     axiosWithAuth()

@@ -3,18 +3,7 @@ import React from 'react';
 //Previous/Next buttons
 
 //Ant Design imports (https://ant.design/components/overview/)
-import {
-  Form,
-  Input,
-  Button,
-  Space,
-  Card,
-  Progress,
-  Select,
-  DatePicker,
-  Row,
-  Col,
-} from 'antd';
+import { Form, Card, Row, Col } from 'antd';
 
 const ShelterSchedule = ({ tempFormStyle }) => {
   return (

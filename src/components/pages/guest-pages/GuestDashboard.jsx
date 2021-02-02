@@ -5,7 +5,7 @@ import CurrentReservation from './CurrentReservation';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
 
 // UI
-import { Divider, Button, Checkbox, Typography, Space } from 'antd';
+import { Divider, Button, Checkbox, Typography } from 'antd';
 import '../../../styles/app.scss';
 
 //redux
@@ -23,13 +23,14 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   const [users, setUsers] = useState([]);
 
   //Mock beds counter
-  const [count, setCount] = useState(60);
+  const [totalBeds, setTotalBeds] = useState(60);
+  const [count, setCount] = useState(totalBeds);
   useEffect(() => {
     axiosWithAuth()
       .get('/beds')
       .then(res => {
         console.log('Beds', res.data[0].total_beds);
-        // setCount(res.data[0].total_beds);
+        setTotalBeds(res.data[0].total_beds);
       });
   }, [count]);
 
@@ -118,13 +119,15 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
       alert('error');
     }
   };
+
+  //Warning shows for this but it is needed in order to render the checkboxes
   useEffect(() => {
     console.log('fetch', fetchFamilyInformation());
   }, [count]);
 
-  let userId = users.map(user => {
-    return user.family_id;
-  });
+  // let userId = users.map(user => {
+  //   return user.family_id;
+  // });
 
   //Reserve button - Will post to the logs endpoint with the membersStaying , will set isReserved to true, will return the reservation ID for put requeset, Confirm that the user has made a reservation.
   const reserveButton = e => {
@@ -218,7 +221,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   const hours = new Date().getHours();
   const getMinutes = new Date().getMinutes();
   const minutes = (getMinutes < 10 ? '0' : '') + getMinutes;
-  const getTime = fullDate + hours + '-' + minutes;
+  // const getTime = fullDate + hours + '-' + minutes;
   // This seconds will not be seen, but this will allow the clock to rerender accordingly.
   const [seconds, setSeconds] = useState();
   let sec = new Date().getSeconds();

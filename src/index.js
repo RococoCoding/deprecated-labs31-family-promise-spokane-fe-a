@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import ReactDOM from 'react-dom';
 import {
@@ -28,7 +28,6 @@ import Analytics from './components/pages/Analytics';
 import Guests from './components/pages/Guests/Guests';
 import SupervisorCheckIn from './components/pages/supervisor-pages/SupervisorCheckIn';
 import FamilyMembers from './components/pages/FamilyMembers/Family';
-import Logout from './utils/logout';
 import './styles/app.scss';
 import { rootReducer } from './state/reducers/index';
 import { createStore, applyMiddleware } from 'redux';
@@ -39,7 +38,6 @@ import GuestDashboard from './components/pages/guest-pages/GuestDashboard';
 import FamilyPage from './components/pages/guest-pages/FamilyPage';
 import Notes from './components/pages/Notes/Notes';
 import Members from './components/pages/guest-pages/Members';
-import UserProfile from './components/UserProfile';
 import CaseAnalytics from './components/pages/casemanager-pages/CaseManagerAnalytics';
 import ShelterInfo from './components/pages/guest-pages/ShelterInfo';
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
