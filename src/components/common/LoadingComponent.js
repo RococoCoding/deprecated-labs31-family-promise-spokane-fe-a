@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import { Space, Spin } from 'antd';
 
-function LoadingComponent(props) {
-  const { message } = props;
+function LoadingComponent() {
+  // const { message } = props;
 
   return (
     <Space size="middle" data-testid="loading">
