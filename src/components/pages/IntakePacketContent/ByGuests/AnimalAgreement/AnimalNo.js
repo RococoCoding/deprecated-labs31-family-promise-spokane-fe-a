@@ -8,17 +8,7 @@ import React from 'react';
 import IntakeButton from '../../IntakeButtons';
 
 //Ant Design imports (https://ant.design/components/overview/)
-import {
-  Form,
-  Input,
-  Button,
-  Space,
-  Card,
-  Progress,
-  Select,
-  DatePicker,
-  Checkbox,
-} from 'antd';
+import { Form, Input, Card, Progress, DatePicker, Checkbox } from 'antd';
 // import { Checkbox } from '@material-ui/core';
 
 const AnimalNo = ({
@@ -38,7 +28,6 @@ const AnimalNo = ({
   const percent = ((pageNumber + 1) / pages) * 100;
 
   // //FamilyMember Data Structure from ../../intakePacket.jsx (props)
-  const { familyMember } = formData;
 
   return (
     <div style={tempFormStyle}>

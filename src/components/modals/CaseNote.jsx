@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import CardShadow from '../../components/CardShadow';
-import { Input, Form, Button, Switch } from 'antd';
-import UserOutlined from '@ant-design/icons/UserOutlined';
+import { Input, Button, Switch } from 'antd';
 import { axiosWithAuth } from '../../api/axiosWithAuth';
 
 const { TextArea } = Input;
@@ -16,7 +15,7 @@ const CaseNote = ({ note, setNotes, setCurrentNote, toggleModal }) => {
       await axiosWithAuth().delete(`/notes/${note.id}`);
       setNotes(prevState =>
         prevState.filter(el => {
-          if (!(el.id == note.id)) return el;
+          if (!(el.id === note.id)) return el;
         })
       );
       toggleModal();
@@ -43,7 +42,7 @@ const CaseNote = ({ note, setNotes, setCurrentNote, toggleModal }) => {
       .then(res => {
         setNotes(prevState =>
           prevState.map(el => {
-            if (el.id == note.id) {
+            if (el.id === note.id) {
               return res.data.note;
             }
             return el;

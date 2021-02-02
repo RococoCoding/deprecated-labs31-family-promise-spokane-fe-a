@@ -2,15 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import MaterialTable from 'material-table';
 import LoadingComponent from '../../common/LoadingComponent';
-import { axiosWithAuth } from '../../../api/axiosWithAuth';
 import { tableIcons } from '../../../utils/tableIcons';
-import PeopleIcon from '@material-ui/icons/People';
-import FlagIcon from '@material-ui/icons/Flag';
-import HotelIcon from '@material-ui/icons/Hotel';
-import Brightness2Icon from '@material-ui/icons/Brightness2';
-import Brightness3Icon from '@material-ui/icons/Brightness3';
 import { Switch } from 'antd';
-import { template, templateSettings } from 'underscore';
 
 Modal.setAppElement('#root');
 //add new icons
