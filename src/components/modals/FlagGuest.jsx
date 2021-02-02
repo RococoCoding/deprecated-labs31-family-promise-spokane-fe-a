@@ -1,4 +1,3 @@
-import { Card } from 'antd';
 import React from 'react';
 import CardShadow from '../CardShadow';
 import { axiosWithAuth } from '../../api/axiosWithAuth';
@@ -18,7 +17,7 @@ const FlagGuest = ({ state, setState, setIsFlagOpen, guestId }) => {
       const data = prevState.data;
 
       data.map(el => {
-        if (el.id == guestId) {
+        if (el.id === guestId) {
           el.flag_level = e.target.value;
         }
         return el;

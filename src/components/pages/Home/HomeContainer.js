@@ -1,10 +1,7 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { useOktaAuth } from '@okta/okta-react';
+import React, { useEffect } from 'react';
 import RenderHomePage from './RenderHomePage';
-import { axiosWithAuth } from '../../../api/axiosWithAuth';
 import { setCurrentUser } from '../../../state/actions/index';
 import { useDispatch, useSelector } from 'react-redux';
-import { useRadioGroup } from '@material-ui/core';
 
 function HomeContainer({ LoadingComponent }) {
   const dispatch = useDispatch();

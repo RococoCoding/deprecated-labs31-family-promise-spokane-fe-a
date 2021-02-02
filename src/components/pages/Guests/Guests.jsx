@@ -19,7 +19,7 @@ import './guest.css';
 import GuestMoreInfo from './GuestMoreInfo';
 Modal.setAppElement('#root');
 
-const Guests = ({}) => {
+const Guests = () => {
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [state, setState] = useState({

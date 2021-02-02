@@ -1,6 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '../../common';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 function RenderHomePage(props) {
