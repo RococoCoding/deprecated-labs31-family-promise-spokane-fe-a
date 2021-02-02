@@ -1,6 +1,5 @@
-import { Divider } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { Avatar, Descriptions, Card, Typography } from 'antd';
+import React, { useState } from 'react';
+import { Card, Typography } from 'antd';
 
 const { Text } = Typography;
 const tabListNoTitle = [

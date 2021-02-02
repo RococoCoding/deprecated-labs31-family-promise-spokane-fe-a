@@ -111,7 +111,8 @@ const ChildSchoolInfo = ({
           {/*Displays family member with "Child" relationship currently in formData */}
           {Object.keys(formData.familyMember).map((mem, key) => (
             <>
-              {familyMember[mem].demographics.relationship != 'Child' ? null : (
+              {familyMember[mem].demographics.relationship !==
+              'Child' ? null : (
                 <>
                   <Divider orientation="left" plain>
                     {familyMember[mem].demographics.first_name}

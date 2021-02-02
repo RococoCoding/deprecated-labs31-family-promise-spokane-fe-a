@@ -8,12 +8,11 @@ import React from 'react';
 import IntakeButton from '../../IntakeButtons';
 
 //Ant Design imports (https://ant.design/components/overview/)
-import { Form, Input, Button, Space, Card, Progress, Select } from 'antd';
+import { Card, Progress } from 'antd';
 
 const Neighborhood = ({
   navigation,
   formData,
-  setForm,
   tempFormStyle,
   count,
   setCount,
@@ -27,7 +26,7 @@ const Neighborhood = ({
   const percent = ((pageNumber + 1) / pages) * 100;
 
   //FamilyMember Data Structure from ../../intakePacket.jsx (props)
-  const { familyMember } = formData;
+  // const { familyMember } = formData;
 
   /*Issues with setForm on inputs other than Input and Checkbox. 
   The following functions manually update the entire form. 

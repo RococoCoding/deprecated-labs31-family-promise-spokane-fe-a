@@ -9,6 +9,7 @@ frontend:
       commands:
         - nvm use $VERSION_NODE_12
         - node -v
+        - npx browserslist@latest --update-db
         - npm run-script build
   artifacts:
     baseDirectory: build

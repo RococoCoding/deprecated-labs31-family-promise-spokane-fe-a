@@ -28,8 +28,6 @@ const Pets = ({
 
   //FamilyInfo from ../../intakePacket.jsx (props)
   const { familyInfo } = formData;
-  const { previous } = navigation;
-  const history = useHistory();
 
   return (
     <div style={tempFormStyle}>

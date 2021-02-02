@@ -1,8 +1,5 @@
 //
-import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
-import { useForm, useStep } from 'react-hooks-helper';
-import { axiosWithAuth } from '../../../api/axiosWithAuth';
 import ShelterSchedule from './ShelterInfo/ShelterSchedule';
 import NightShelter from './ShelterInfo/NightShelter';
 import Welcome from './ShelterInfo/Welcome';
@@ -12,7 +9,6 @@ import Important from './ShelterInfo/Important';
 import Resources from './ShelterInfo/Resources';
 //Shelter info components(originally from Intake Form)
 import { Card, Modal } from 'antd';
-import { CodeSharp } from '@material-ui/icons';
 
 //Navigation path for Shelter info. Each name correspons with the switch statement id
 const pages = [
@@ -47,7 +43,7 @@ const pages = [
 ];
 
 const ShelterInfo = () => {
-  const [info, setInfo] = useState(pages);
+  // const [info, setInfo] = useState(pages);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [pageId, setPageId] = useState();
 
