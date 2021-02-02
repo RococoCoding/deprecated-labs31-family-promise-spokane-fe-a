@@ -65,42 +65,59 @@ export default function SupervisorCheckIn() {
     console.log('clicked', e, item);
   };
 
-  const cancelReservation = e => {
-    console.log('reserve');
+  const cancelReservation = (e, name, id) => {
+    console.log(e, name, id);
+    // axiosWithAuth()
+    // .get('/families/')
   };
 
+  //1)get all logs
+  //2)filter by date (using filter by a random reservation ID for now as
+  //no date yet)
+  //3) display all guests with reservation
   useEffect(() => {
-    //
+    axiosWithAuth()
+      .get('/logs')
+      .then(res => {
+        console.log(res.data);
 
-    let temp = [];
-    for (let i = 0; i < dummy.length; i++) {
-      dummy[i].members_staying.map(item => {
-        temp.push({
-          name: item,
-          reservation_status: (
-            <Switch
-              defaultChecked={true}
-              onChange={e => {
-                cancelReservation(e);
-              }}
-            />
-          ),
-          reservation_id: dummy[i].reservation_id,
-          on_site_7pm: <Switch />,
-          on_site_10pm: (
-            <Switch
-              onChange={e => {
-                clickHandler(e, item);
-              }}
-            />
-          ),
-          beds_reserved: dummy[i].beds_reserved,
+        let results = res.data.filter(d => {
+          if (d.reservation_id === 7) return d;
+          else return;
         });
-      });
-    }
 
-    console.log('temp', temp);
-    setState({ ...state, data: temp });
+        let temp = [];
+        for (let i = 0; i < results.length; i++) {
+          results[i].members_staying.map(item => {
+            temp.push({
+              name: item,
+              family_id: results[i].family_id,
+              reservation_status: (
+                <Switch
+                  defaultChecked={true}
+                  onChange={e => {
+                    cancelReservation(e, item, this.family_id);
+                  }}
+                />
+              ),
+              reservation_id: results[i].reservation_id,
+              on_site_7pm: <Switch />,
+              on_site_10pm: (
+                <Switch
+                  onChange={e => {
+                    clickHandler(e, item);
+                  }}
+                />
+              ),
+              beds_reserved: results[i].beds_reserved,
+            });
+          });
+          setState({ ...state, data: temp });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }, []);
 
   if (loading) {
