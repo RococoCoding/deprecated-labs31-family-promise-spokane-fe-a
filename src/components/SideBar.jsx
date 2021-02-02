@@ -4,6 +4,8 @@ import {
   FileOutlined,
   TeamOutlined,
   InfoCircleOutlined,
+  InfoCircleFilled,
+  HomeOutlined,
 } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import BarChartOutlined from '@ant-design/icons/BarChartOutlined';
@@ -57,6 +59,10 @@ const SideBar = () => {
     history.push('/shelterInfo');
   };
 
+  const redirectToDashboard = () => {
+    history.push('/guest-dashboard');
+  };
+
   return (
     <div>
       {user.role && (
@@ -93,6 +99,13 @@ const SideBar = () => {
                   icon={<InfoCircleOutlined />}
                 >
                   Shelter Info
+                </Menu.Item>
+                <Menu.Item
+                  onClick={redirectToDashboard} //redirectToDashboard
+                  key="5"
+                  icon={<HomeOutlined />}
+                >
+                  Dashboard
                 </Menu.Item>
               </Menu>
             )}

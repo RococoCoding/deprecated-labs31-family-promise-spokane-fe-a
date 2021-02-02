@@ -8,6 +8,7 @@ import React from 'react';
 import IntakeButton from '../IntakeButtons';
 
 //Ant Design imports (https://ant.design/components/overview/)
+
 import { Form, Input, Card, Progress, DatePicker } from 'antd';
 
 const GuestWaiver = ({
@@ -38,8 +39,9 @@ const GuestWaiver = ({
         <Form>
           <strong>***Read Carefully Before Signing***</strong>
           <Form.Item>
-            I <Input />, hereby acknowledge and agree to the terms of Family
-            Promise Open Doors Shelter, 2002 E Mission Ave, Spokane, WA. 99202
+            I <Input className="printName" placeholder="First & Last Name" />,
+            hereby acknowledge and agree to the terms of Family Promise Open
+            Doors Shelter, 2002 E Mission Ave, Spokane, WA. 99202
           </Form.Item>
 
           <Form.Item>
@@ -49,13 +51,14 @@ const GuestWaiver = ({
           </Form.Item>
 
           <Form.Item>
-            I <Input />, DO HEREBY EXEMPT AND RELEASE FAMILY PROMISE, ITS
-            OFFICERS, DIRECTORS, EMPLOYEES, VOLUNTEERS, CONTRACTORS, STAFF,
-            AFFILIATES, AGENTS, AND ATTORNEYS (COLLECTIVELY, THE “RELEASED
-            PERSONS”) FROM ANY AND ALL LIABILITY WHATSOEVER FOR PERSONAL INJURY,
-            PROPERTY DAMAGE, OR WRONGFUL DEATH CAUSED BY THE ACTS OR OMISSIONS
-            OF ANY ONE OR MORE OF THE RELEASED PERSONS AND/OR ANY THIRD PARTIES
-            ARISING OUT OF THE PROJECT, WORK ASSOCIATED WITH THE PROJECT, OR MY
+            I <Input className="printName" placeholder="First & Last Name" />,
+            DO HEREBY EXEMPT AND RELEASE FAMILY PROMISE, ITS OFFICERS,
+            DIRECTORS, EMPLOYEES, VOLUNTEERS, CONTRACTORS, STAFF, AFFILIATES,
+            AGENTS, AND ATTORNEYS (COLLECTIVELY, THE “RELEASED PERSONS”) FROM
+            ANY AND ALL LIABILITY WHATSOEVER FOR PERSONAL INJURY, PROPERTY
+            DAMAGE, OR WRONGFUL DEATH CAUSED BY THE ACTS OR OMISSIONS OF ANY ONE
+            OR MORE OF THE RELEASED PERSONS AND/OR ANY THIRD PARTIES ARISING OUT
+            OF THE PROJECT, WORK ASSOCIATED WITH THE PROJECT, OR MY
             PARTICIPATION IN THE PROJECT
           </Form.Item>
 
@@ -99,26 +102,76 @@ const GuestWaiver = ({
           </Form.Item>
 
           <Form.Item>
-            <Input bordered={false} />
+            <Input bordered={false} placeholder="First & Last Name" />
             <hr />
-            CLIENT SIGNATURE(adult)
+            CLIENT SIGNATURE (adult)
             <DatePicker />
-            <Input bordered={false} />
+            <Input bordered={false} placeholder="First & Last Name" />
             <hr />
-            CLIENT SIGNATURE(adult)
+            CLIENT SIGNATURE (adult)
             <DatePicker />
           </Form.Item>
 
           {/* Adding Dependents  */}
 
           <Form.Item>
-            <p>Name(s) and Age(s) of Child(ren) in my household:</p>
-            <Input />
-            <Input />
-            <Input />
-            <Input />
-            <Input />
-            <Input />
+            Dependent children under 18 in household, if any (please{' '}
+            <strong>add first and last</strong> names):
+          </Form.Item>
+
+          <Form.Item>
+            <ol>
+              <Row>
+                <Col span={12}>
+                  <li>
+                    <Input
+                      className="printName"
+                      placeholder="First & Last Name"
+                    />
+                  </li>
+                </Col>
+                <Col span={12}>
+                  <li>
+                    <Input
+                      className="printName"
+                      placeholder="First & Last Name"
+                    />
+                  </li>
+                </Col>
+                <Col span={12}>
+                  <li>
+                    <Input
+                      className="printName"
+                      placeholder="First & Last Name"
+                    />
+                  </li>
+                </Col>
+                <Col span={12}>
+                  <li>
+                    <Input
+                      className="printName"
+                      placeholder="First & Last Name"
+                    />
+                  </li>
+                </Col>
+                <Col span={12}>
+                  <li>
+                    <Input
+                      className="printName"
+                      placeholder="First & Last Name"
+                    />
+                  </li>
+                </Col>
+                <Col span={12}>
+                  <li>
+                    <Input
+                      className="printName"
+                      placeholder="First & Last Name"
+                    />
+                  </li>
+                </Col>
+              </Row>
+            </ol>
           </Form.Item>
         </Form>
       </Card>

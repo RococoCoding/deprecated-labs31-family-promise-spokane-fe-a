@@ -46,7 +46,7 @@ const Expectations = ({
 
         <h3>I will be expected NOT to: </h3>
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>Be Violent or Aggresive:</u>
           </strong>
@@ -60,7 +60,7 @@ const Expectations = ({
         </Form.Item>
 
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>Have Drugs, Alcohol, or Weapons:</u>
           </strong>
@@ -78,7 +78,7 @@ const Expectations = ({
           </li>
         </Form.Item>
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>Leave Children Unattended Out of My Line of Sight:</u>
           </strong>

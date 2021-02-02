@@ -50,7 +50,7 @@ const Decorum = ({
         <h3>I will be expected NOT to: </h3>
 
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>Spank, Yell or Curse:</u>
           </strong>
@@ -65,7 +65,7 @@ const Decorum = ({
         </Form.Item>
 
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>Touch, Pickup or Hold Someone Else’s Child:</u>
           </strong>
@@ -84,7 +84,7 @@ const Decorum = ({
         </Form.Item>
 
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>Babysit or Ask Someone Else to Babysit:</u>
           </strong>
@@ -98,7 +98,7 @@ const Decorum = ({
         </Form.Item>
 
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>Sleep in the Day Shelter:</u>
           </strong>
@@ -114,7 +114,7 @@ const Decorum = ({
         </Form.Item>
 
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>Lend money or items of any value to another guest:</u>
           </strong>
@@ -127,7 +127,7 @@ const Decorum = ({
         </Form.Item>
 
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>I will not:</u>
           </strong>
@@ -139,7 +139,7 @@ const Decorum = ({
         </Form.Item>
 
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>I will NOT use tobacco products:</u>
           </strong>

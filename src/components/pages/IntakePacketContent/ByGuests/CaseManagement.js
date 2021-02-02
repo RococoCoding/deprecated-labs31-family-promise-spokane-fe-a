@@ -104,13 +104,13 @@ const CaseManagement = ({
           </Form.Item>
 
           <Form.Item>
-            <Input bordered={false} />
+            <Input bordered={false} placeholder="First & Last Name" />
             <hr />
-            CLIENT SIGNATURE(adult)
+            CLIENT SIGNATURE (adult)
             <DatePicker />
-            <Input bordered={false} />
+            <Input bordered={false} placeholder="First & Last Name" />
             <hr />
-            CLIENT SIGNATURE(adult)
+            CLIENT SIGNATURE (adult)
             <DatePicker />
           </Form.Item>
         </Form>
