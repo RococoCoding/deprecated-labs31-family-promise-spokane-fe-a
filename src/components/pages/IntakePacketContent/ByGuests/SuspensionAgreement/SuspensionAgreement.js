@@ -8,7 +8,7 @@ import React from 'react';
 import IntakeButton from '../../IntakeButtons';
 
 //Ant Design imports (https://ant.design/components/overview/)
-import { Form, Input, Card, Progress } from 'antd';
+import { Form, Input, Card, Progress, DatePicker } from 'antd';
 
 const SuspensionAgreement = ({
   navigation,

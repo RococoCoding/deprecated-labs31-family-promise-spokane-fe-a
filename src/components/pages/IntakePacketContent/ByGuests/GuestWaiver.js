@@ -9,7 +9,7 @@ import IntakeButton from '../IntakeButtons';
 
 //Ant Design imports (https://ant.design/components/overview/)
 
-import { Form, Input, Card, Progress, DatePicker } from 'antd';
+import { Form, Input, Card, Progress, DatePicker, Row, Col } from 'antd';
 
 const GuestWaiver = ({
   navigation,
