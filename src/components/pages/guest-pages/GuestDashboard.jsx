@@ -49,10 +49,10 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   useEffect(() => {
     axiosWithAuth()
       //This can persist if you useParams to pull in the id of the api and change the hard coded 7 to ${id}
-      .get('/logs/7')
+      .get(`/logs/7`)
       .then(res => {
-        console.log('Logs', res.data);
-        setMembersStaying(res.data.members_staying);
+        console.log('Logs', res.data[0]);
+        setMembersStaying(res.data[0].members_staying);
         setWaitList(res.data.waitlist);
       });
   }, []);
@@ -103,16 +103,13 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
       const res = await axiosWithAuth().get(`/users/${user.id}/family`);
 
       const family = res.data.family;
-      console.log('fetchFamilyInformation', family);
+      // console.log('fetchFamilyInformation', family);
 
       axiosWithAuth()
         .get(`/families/${family.id}/members`)
         .then(res => {
-          console.log('families/family.id/members', res.data);
+          // console.log('families/family.id/members', res.data);
           setUsers(res.data);
-        })
-        .then(members => {
-          console.log('Members', members);
         })
         .catch(err => console.log('get family error'));
     } catch (error) {
@@ -125,9 +122,9 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
     console.log('fetch', fetchFamilyInformation());
   }, [count]);
 
-  // let userId = users.map(user => {
-  //   return user.family_id;
-  // });
+  let userId = users.map(user => {
+    return user.family_id;
+  });
 
   //Reserve button - Will post to the logs endpoint with the membersStaying , will set isReserved to true, will return the reservation ID for put requeset, Confirm that the user has made a reservation.
   const reserveButton = e => {
@@ -141,15 +138,15 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
         waitlist: false,
         on_site_7pm: false,
         on_site_10pm: false,
-        date: null, //api does not accept these any format for date and time. Anything other than null will result in a bad api request
-        time: null,
+        date: fullDate,
+        time: `${hours}:${minutes}`,
         beds_reserved: membersStaying.length,
         actual_beds_reserved: membersStaying.length,
         members_staying: membersStaying,
       })
       .then(res => {
-        console.log('resID', res.data);
         const resId = res.data.logs.reservation_id;
+        console.log('resId', resId);
         setResID(resId);
         setIsReserved(true);
         return (
@@ -173,8 +170,10 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   };
 
   // the cancel button
-  const [resID, setResID] = useState(); // This is set in the post request to retrieve the reservation ID which is needed in order to edit the reservation.
+  const [resID, setResID] = useState(0); // This is set in the post request to retrieve the reservation ID which is needed in order to edit the reservation.
+
   const cancelButton = (e, resId) => {
+    console.log('before put inside cancel function', resID);
     e.preventDefault();
 
     setCount(count + membersStaying.length);
@@ -185,23 +184,24 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
       .put(`/logs/${resID}`, {
         supervisor_id: '00u2lh0bsAliwLEe75d6',
         family_id: 1,
-        reservation_status: false,
+        reservation_status: true,
         waitlist: false,
         on_site_7pm: true,
-        on_site_10pm: true,
-        date: null,
-        time: null,
-        beds_reserved: 0,
+        on_site_10pm: false,
+        date: fullDate,
+        time: `${hours}:${minutes}`,
+        beds_reserved: 1,
         actual_beds_reserved: 0,
         members_staying: membersStaying,
       })
       .then(res => {
+        console.log('Same?', resID);
         setIsReserved(false);
         alert(
           'You have canceled your reservation. If you canceled by mistake you will be able to make a reservation per available beds.'
         );
         window.location.reload();
-        // console.log("put res", res.data);
+        console.log('put res', res.data);
       })
       .catch(err => {
         console.log('Nope', err);
