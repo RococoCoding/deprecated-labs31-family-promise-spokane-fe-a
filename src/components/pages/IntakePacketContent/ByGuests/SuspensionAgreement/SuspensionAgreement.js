@@ -26,9 +26,6 @@ const SuspensionAgreement = ({
   const pages = steps.length;
   const percent = ((pageNumber + 1) / pages) * 100;
 
-  // //FamilyMember Data Structure from ../../intakePacket.jsx (props)
-  // const { familyMember } = formData;
-
   return (
     <div style={tempFormStyle}>
       Progress bar

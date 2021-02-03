@@ -94,14 +94,14 @@ const SideBar = () => {
                   Members
                 </Menu.Item>
                 <Menu.Item
-                  onClick={redirectToShelterInfo} //redirectToShelterInfo
+                  onClick={redirectToShelterInfo}
                   key="4"
                   icon={<InfoCircleOutlined />}
                 >
                   Shelter Info
                 </Menu.Item>
                 <Menu.Item
-                  onClick={redirectToDashboard} //redirectToDashboard
+                  onClick={redirectToDashboard}
                   key="5"
                   icon={<HomeOutlined />}
                 >
