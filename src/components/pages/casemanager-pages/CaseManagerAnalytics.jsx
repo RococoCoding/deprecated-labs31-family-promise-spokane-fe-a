@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import MaterialTable from 'material-table';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
-import { useHistory } from 'react-router-dom';
+//import { useHistory } from 'react-router-dom';
 import { tableIcons } from '../../../utils/tableIcons';
 
 // import { CopyrightOutlined } from '@material-ui/icons';

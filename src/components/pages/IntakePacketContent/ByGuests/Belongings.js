@@ -9,7 +9,6 @@ import IntakeButton from '../IntakeButtons';
 
 //Ant Design imports (https://ant.design/components/overview/)
 import { Form, Input, Card, Progress, DatePicker } from 'antd';
-import AntiDiscrimination from './AntiDiscrimination';
 
 const Belongings = ({
   navigation,
