@@ -1,75 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import Modal from 'react-modal';
 import MaterialTable from 'material-table';
 import LoadingComponent from '../../common/LoadingComponent';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
 import { tableIcons } from '../../../utils/tableIcons';
-import PeopleIcon from '@material-ui/icons/People';
-import FlagIcon from '@material-ui/icons/Flag';
-import HotelIcon from '@material-ui/icons/Hotel';
-import Brightness2Icon from '@material-ui/icons/Brightness2';
-import Brightness3Icon from '@material-ui/icons/Brightness3';
 import { Switch } from 'antd';
-import { template, templateSettings } from 'underscore';
-
-Modal.setAppElement('#root');
-//add new icons
-
-let dummy = [
-  {
-    actual_beds_reserved: 5,
-    beds_reserved: 5,
-    date: '2020-12-12T17:38:31.123Z',
-    family_id: 1,
-    members_staying: ['Thomas Shelby', 'Laura Shelby', 'Tim Shelby'],
-    on_site_7pm: true,
-    on_site_10pm: true,
-    reservation_id: 1,
-    reservation_status: true,
-    supervisor_id: '00u2lh0bsAliwLEe75d6',
-    time: '2020-12-12T17:38:31.123Z',
-    waitlist: false,
-  },
-  {
-    actual_beds_reserved: 5,
-    beds_reserved: 3,
-    date: '2020-12-12T17:38:31.123Z',
-    family_id: 2,
-    members_staying: ['frodo baggins', 'bilbo baggins'],
-    on_site_7pm: true,
-    on_site_10pm: true,
-    reservation_id: 2,
-    reservation_status: true,
-    supervisor_id: '00u2lh0bsAliwLEe75d6',
-    time: '2020-12-12T17:38:31.123Z',
-    waitlist: false,
-  },
-];
 
 export default function SupervisorCheckIn() {
-  const [loading, setLoading] = useState(false);
-
-  const [state, setState] = useState({
+  const [loading, setLoading] = useState(true);
+  //this sets the table so that materiatable can display it
+  //the data[] array is retrieved from the API and represents the row
+  const [table, setTable] = useState({
     columns: [
       { title: 'Name', field: 'name' },
       { title: 'Reservation', field: 'reservation_status' },
       { title: 'Reservation ID', field: 'reservation_id' },
       { title: 'Onsite (7pm)', field: 'on_site_7pm' },
       { title: 'Onsite (10pm)', field: 'on_site_10pm' },
-      { title: 'Beds Reserved', field: 'beds_reserved' },
+      { title: 'Beds Reserved(Family)', field: 'beds_reserved' },
     ],
     data: [],
   });
 
-  const clickHandler = (e, item) => {
-    console.log('clicked', e, item);
-  };
+  const clickHandler = (e, item) => {};
 
-  const cancelReservation = (e, name, id) => {
-    console.log(e, name, id);
-    // axiosWithAuth()
-    // .get('/families/')
-  };
+  //need to find user ID using the name field from logs table. Then use that user ID to update the on-site, reservation fields, etc. in the members table)
+  const cancelReservation = (e, name, resId, famId) => {};
 
   //1)get all logs
   //2)filter by date (using filter by a random reservation ID for now as
@@ -79,10 +34,15 @@ export default function SupervisorCheckIn() {
     axiosWithAuth()
       .get('/logs')
       .then(res => {
-        console.log(res.data);
+        const date = new Date();
+        const fullDate = date.toDateString();
+        const hours = new Date().getHours();
+        const getMinutes = new Date().getMinutes();
+        const minutes = (getMinutes < 10 ? '0' : '') + getMinutes;
 
+        //filter logs by today's date
         let results = res.data.filter(d => {
-          if (d.reservation_id === 7) return d;
+          if (d.date === fullDate) return d;
           else return;
         });
 
@@ -96,7 +56,12 @@ export default function SupervisorCheckIn() {
                 <Switch
                   defaultChecked={true}
                   onChange={e => {
-                    cancelReservation(e, item, this.family_id);
+                    cancelReservation(
+                      e,
+                      item,
+                      results[i].reservation_id,
+                      results[i].family_id
+                    );
                   }}
                 />
               ),
@@ -112,7 +77,9 @@ export default function SupervisorCheckIn() {
               beds_reserved: results[i].beds_reserved,
             });
           });
-          setState({ ...state, data: temp });
+          //create the row for the table
+          setTable({ ...table, data: temp });
+          setLoading(false);
         }
       })
       .catch(err => {
@@ -145,8 +112,8 @@ export default function SupervisorCheckIn() {
           }}
           icons={tableIcons}
           title="Guests Check-in"
-          columns={state.columns}
-          data={state.data}
+          columns={table.columns}
+          data={table.data}
         />
       </div>
     </div>
