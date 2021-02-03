@@ -12,12 +12,7 @@ import { Form, Input, Card, Progress, DatePicker } from 'antd';
 
 const NeighborhoodExpectations = ({
   navigation,
-  formData,
-  setForm,
   tempFormStyle,
-  count,
-  setCount,
-  nameString,
   steps,
   step,
 }) => {
