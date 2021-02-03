@@ -1,99 +1,89 @@
 import React, { useEffect, useState } from 'react';
-import Modal from 'react-modal';
 import MaterialTable from 'material-table';
 import LoadingComponent from '../../common/LoadingComponent';
 import { tableIcons } from '../../../utils/tableIcons';
 import { Switch } from 'antd';
 
-Modal.setAppElement('#root');
-//add new icons
-
-let dummy = [
-  {
-    actual_beds_reserved: 5,
-    beds_reserved: 5,
-    date: '2020-12-12T17:38:31.123Z',
-    family_id: 1,
-    members_staying: ['Thomas Shelby', 'Laura Shelby', 'Tim Shelby'],
-    on_site_7pm: true,
-    on_site_10pm: true,
-    reservation_id: 1,
-    reservation_status: true,
-    supervisor_id: '00u2lh0bsAliwLEe75d6',
-    time: '2020-12-12T17:38:31.123Z',
-    waitlist: false,
-  },
-  {
-    actual_beds_reserved: 5,
-    beds_reserved: 3,
-    date: '2020-12-12T17:38:31.123Z',
-    family_id: 2,
-    members_staying: ['frodo baggins', 'bilbo baggins'],
-    on_site_7pm: true,
-    on_site_10pm: true,
-    reservation_id: 2,
-    reservation_status: true,
-    supervisor_id: '00u2lh0bsAliwLEe75d6',
-    time: '2020-12-12T17:38:31.123Z',
-    waitlist: false,
-  },
-];
-
 export default function SupervisorCheckIn() {
-  const [loading, setLoading] = useState(false);
-
-  const [state, setState] = useState({
+  const [loading, setLoading] = useState(true);
+  //this sets the table so that materiatable can display it
+  //the data[] array is retrieved from the API and represents the row
+  const [table, setTable] = useState({
     columns: [
       { title: 'Name', field: 'name' },
       { title: 'Reservation', field: 'reservation_status' },
       { title: 'Reservation ID', field: 'reservation_id' },
       { title: 'Onsite (7pm)', field: 'on_site_7pm' },
       { title: 'Onsite (10pm)', field: 'on_site_10pm' },
-      { title: 'Beds Reserved', field: 'beds_reserved' },
+      { title: 'Beds Reserved(Family)', field: 'beds_reserved' },
     ],
     data: [],
   });
 
-  const clickHandler = (e, item) => {
-    console.log('clicked', e, item);
-  };
+  const clickHandler = (e, item) => {};
 
-  const cancelReservation = e => {
-    console.log('reserve');
-  };
+  //need to find user ID using the name field from logs table. Then use that user ID to update the on-site, reservation fields, etc. in the members table)
+  const cancelReservation = (e, name, resId, famId) => {};
 
+  //1)get all logs
+  //2)filter by date (using filter by a random reservation ID for now as
+  //no date yet)
+  //3) display all guests with reservation
   useEffect(() => {
-    //
+    axiosWithAuth()
+      .get('/logs')
+      .then(res => {
+        const date = new Date();
+        const fullDate = date.toDateString();
+        const hours = new Date().getHours();
+        const getMinutes = new Date().getMinutes();
+        const minutes = (getMinutes < 10 ? '0' : '') + getMinutes;
 
-    let temp = [];
-    for (let i = 0; i < dummy.length; i++) {
-      dummy[i].members_staying.map(item => {
-        temp.push({
-          name: item,
-          reservation_status: (
-            <Switch
-              defaultChecked={true}
-              onChange={e => {
-                cancelReservation(e);
-              }}
-            />
-          ),
-          reservation_id: dummy[i].reservation_id,
-          on_site_7pm: <Switch />,
-          on_site_10pm: (
-            <Switch
-              onChange={e => {
-                clickHandler(e, item);
-              }}
-            />
-          ),
-          beds_reserved: dummy[i].beds_reserved,
+        //filter logs by today's date
+        let results = res.data.filter(d => {
+          if (d.date === fullDate) return d;
+          else return;
         });
-      });
-    }
 
-    console.log('temp', temp);
-    setState({ ...state, data: temp });
+        let temp = [];
+        for (let i = 0; i < results.length; i++) {
+          results[i].members_staying.map(item => {
+            temp.push({
+              name: item,
+              family_id: results[i].family_id,
+              reservation_status: (
+                <Switch
+                  defaultChecked={true}
+                  onChange={e => {
+                    cancelReservation(
+                      e,
+                      item,
+                      results[i].reservation_id,
+                      results[i].family_id
+                    );
+                  }}
+                />
+              ),
+              reservation_id: results[i].reservation_id,
+              on_site_7pm: <Switch />,
+              on_site_10pm: (
+                <Switch
+                  onChange={e => {
+                    clickHandler(e, item);
+                  }}
+                />
+              ),
+              beds_reserved: results[i].beds_reserved,
+            });
+          });
+          //create the row for the table
+          setTable({ ...table, data: temp });
+          setLoading(false);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }, []);
 
   if (loading) {
@@ -121,8 +111,8 @@ export default function SupervisorCheckIn() {
           }}
           icons={tableIcons}
           title="Guests Check-in"
-          columns={state.columns}
-          data={state.data}
+          columns={table.columns}
+          data={table.data}
         />
       </div>
     </div>
