@@ -49,7 +49,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   useEffect(() => {
     axiosWithAuth()
       //This can persist if you useParams to pull in the id of the api and change the hard coded 7 to ${id}
-      .get(`/logs/7`)
+      .get(`/logs/${resID}`)
       .then(res => {
         console.log('Logs', res.data);
         setMembersStaying(res.data[0].members_staying);

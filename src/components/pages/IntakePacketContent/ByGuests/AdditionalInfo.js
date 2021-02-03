@@ -69,7 +69,7 @@ const AdditionalInfo = ({
   };
 
   //POSTS family info then posts each member with familyId
-  // const submitHandlder = e => {
+  // const submitHandlder = e => {\
   //   e.preventDefault();
   //   axiosWithAuth()
   //     .post(`families`, familyInfo)

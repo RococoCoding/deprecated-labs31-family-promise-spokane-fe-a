@@ -7,17 +7,7 @@ import IntakeButton from '../../IntakeButtons';
 //Ant Design imports (https://ant.design/components/overview/)
 import { Form, Input, Card, Progress, DatePicker } from 'antd';
 
-const SuspensionAgreement = ({
-  navigation,
-  formData,
-  setForm,
-  tempFormStyle,
-  count,
-  setCount,
-  nameString,
-  steps,
-  step,
-}) => {
+const SuspensionAgreement = ({ navigation, tempFormStyle, steps, step }) => {
   // //Progress bar
   const pageNumber = steps.findIndex(item => item === step);
   const pages = steps.length;
