@@ -21,18 +21,17 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
 
   //UserState
   const [users, setUsers] = useState([]);
-
+  // console.log("users", users);
   //Mock beds counter
-  const [totalBeds, setTotalBeds] = useState(60);
-  const [count, setCount] = useState(totalBeds);
+  const [count, setCount] = useState();
   useEffect(() => {
     axiosWithAuth()
       .get('/beds')
       .then(res => {
         console.log('Beds', res.data[0].total_beds);
-        setTotalBeds(res.data[0].total_beds);
+        setCount(res.data[0].total_beds);
       });
-  }, [count]);
+  }, []);
 
   const { Text } = Typography;
 
@@ -44,6 +43,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
 
   //logs user state of reservation status
   const [isReserved, setIsReserved] = useState(false);
+  const [familyID, setFamilyID] = useState(null);
 
   //Sets state for members staying and waitlist members
   useEffect(() => {
@@ -52,10 +52,22 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
       .get(`/logs/${resID}`)
       .then(res => {
         console.log('Logs', res.data);
+        setFamilyID(res.data[0].family_id);
         setMembersStaying(res.data[0].members_staying);
         setWaitList(res.data.waitlist);
       });
   }, []);
+
+  //1> Create another useEffect that will make an axios call to the logs endpoint using the family ID (wait, that doesn't make sense because we will need to go through the family id. So )
+  // console.log("FAMILYID", familyID);
+  useEffect(() => {
+    if (familyID) {
+      axiosWithAuth()
+        .get(`/families/${familyID}/logs`)
+        .then(res => console.log('families/logs', res))
+        .catch(err => console.log(err));
+    }
+  }, [familyID]);
 
   // console.log('Is Reserved', isReserved);
   //************THIS COULD BE A FUNCTION BECAUSE IT IS BEING USED TWICE:******************
@@ -110,6 +122,11 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
         .then(res => {
           // console.log('families/family.id/members', res.data);
           setUsers(res.data);
+          console.log('dub ax out', res.data[0].family_id);
+          axiosWithAuth()
+            .get(`logs/${res.data[0].family_id}`)
+            .then(res => console.log(res.data[0].reservation_status))
+            .catch(err => console.log(err));
         })
         .catch(err => console.log('get family error'));
     } catch (error) {
@@ -119,7 +136,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
 
   //Warning shows for this but it is needed in order to render the checkboxes
   useEffect(() => {
-    console.log('fetch', fetchFamilyInformation());
+    fetchFamilyInformation().then(res => console.log(res));
   }, [count]);
 
   let userId = users.map(user => {
@@ -146,9 +163,14 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
       })
       .then(res => {
         const resId = res.data.logs.reservation_id;
-        console.log('resId', resId);
+        console.log('res data', res.data);
         setResID(resId);
-        setIsReserved(true);
+        setIsReserved(res.data.logs.reservation_status);
+
+        axiosWithAuth().put('/beds', {
+          total_beds: count,
+        });
+
         return (
           <div>
             <p>
@@ -176,15 +198,19 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
     console.log('before put inside cancel function', resID);
     e.preventDefault();
 
-    setCount(count + membersStaying.length);
+    axiosWithAuth().put('/beds', {
+      total_beds: count + membersStaying.length,
+    });
 
     membersStaying.length = 0;
+
+    setCount(count);
 
     axiosWithAuth()
       .put(`/logs/${resID}`, {
         supervisor_id: '00u2lh0bsAliwLEe75d6',
         family_id: 1,
-        reservation_status: true,
+        reservation_status: false,
         waitlist: false,
         on_site_7pm: true,
         on_site_10pm: false,
@@ -195,13 +221,12 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
         members_staying: membersStaying,
       })
       .then(res => {
-        console.log('Same?', resID);
-        setIsReserved(false);
+        setIsReserved(res.data.logs.reservation_status);
         alert(
           'You have canceled your reservation. If you canceled by mistake you will be able to make a reservation per available beds.'
         );
         window.location.reload();
-        console.log('put res', res.data);
+        // console.log('put res', res.data);
       })
       .catch(err => {
         console.log('Nope', err);
