@@ -15,6 +15,7 @@ const NeighborhoodExpectations = ({
   navigation,
   tempFormStyle,
   steps,
+  formData,
   step,
 }) => {
   //Progress bar
@@ -34,13 +35,13 @@ const NeighborhoodExpectations = ({
   const submitHandlder = e => {
     e.preventDefault();
     axiosWithAuth()
-      .post(`families`, familyInfo)
+      .post(`/families`, familyInfo)
       .then(res => {
         const familyId = res.data.families.id;
         Object.keys(formData.familyMember).map(mem => {
           familyMember[mem]['family_id'] = familyId;
           axiosWithAuth()
-            .post('members', familyMember[mem])
+            .post('/members', familyMember[mem])
             .then(res => {
               history.push(`/familyprofile/${familyId}`);
             })
@@ -54,7 +55,6 @@ const NeighborhoodExpectations = ({
 
   /*Issues with setForm on inputs other than Input and Checkbox. 
   The following functions manually update the entire form. 
-
   Unable make keys dynamic in spread (currently not DRY code)
   You must create a new function for each input feild or make keys dynamic.
   */
