@@ -6,7 +6,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import MaterialTable from 'material-table';
-import { useHistory } from 'react-router-dom';
 import Circle from 'react-circle';
 import { useSelector } from 'react-redux';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
