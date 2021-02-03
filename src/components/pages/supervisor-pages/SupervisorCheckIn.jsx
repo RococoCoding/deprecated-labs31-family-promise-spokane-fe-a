@@ -3,6 +3,7 @@ import MaterialTable from 'material-table';
 import LoadingComponent from '../../common/LoadingComponent';
 import { tableIcons } from '../../../utils/tableIcons';
 import { Switch } from 'antd';
+import { axiosWithAuth } from '../../../api/axiosWithAuth';
 
 export default function SupervisorCheckIn() {
   const [loading, setLoading] = useState(true);
