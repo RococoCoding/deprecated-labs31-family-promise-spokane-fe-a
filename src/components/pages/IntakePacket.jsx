@@ -146,7 +146,7 @@ const steps = [
   { id: 'ThirdPartyConsent' },
   { id: 'ThirdPartySigs' },
   { id: 'GuestWaiver' },
-  { id: 'CaseMangement' },
+  { id: 'CaseManagement' },
   { id: 'PhotoRelease' },
   { id: 'CoreValues' },
   { id: 'AntiDiscrimination' },
@@ -212,8 +212,6 @@ const IntakePacket = () => {
       return <FamilyMembers {...props} />;
     case 'FamilyDemographics':
       return <FamilyDemographics {...props} />;
-    case 'Expectations':
-      return <Expectations {...props} />;
     case 'RaceEthnicityInfo':
       return <RaceEthnicityInfo {...props} />;
     case 'BarriersPage':

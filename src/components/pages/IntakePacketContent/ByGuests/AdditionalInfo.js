@@ -103,7 +103,7 @@ const AdditionalInfo = ({
             marginBottom: '30px',
           }}
         >
-          {/*Not using intakeButtons component because of submitHandler*/}
+          {/* Not using intakeButtons component because of submitHandler*/}
           {/* <Button
             type="primary"
             htmlType="button"
@@ -111,9 +111,9 @@ const AdditionalInfo = ({
             style={{ width: '100px' }}
           >
             Previous
-          </Button> */}
+          </Button>
 
-          {/* <Button
+          <Button
             type="primary"
             style={{
               backgroundColor: 'green',

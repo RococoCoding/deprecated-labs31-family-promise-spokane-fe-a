@@ -51,7 +51,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
       //This can persist if you useParams to pull in the id of the api and change the hard coded 7 to ${id}
       .get(`/logs/7`)
       .then(res => {
-        console.log('Logs', res.data[0]);
+        console.log('Logs', res.data);
         setMembersStaying(res.data[0].members_staying);
         setWaitList(res.data.waitlist);
       });
