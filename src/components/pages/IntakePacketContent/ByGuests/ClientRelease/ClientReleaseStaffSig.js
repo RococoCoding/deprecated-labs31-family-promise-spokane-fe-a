@@ -8,17 +8,7 @@ import React from 'react';
 import IntakeButton from '../../IntakeButtons';
 
 //Ant Design imports (https://ant.design/components/overview/)
-import {
-  Form,
-  Input,
-  Button,
-  Space,
-  Checkbox,
-  Card,
-  Progress,
-  Select,
-  DatePicker,
-} from 'antd';
+import { Form, Input, Checkbox, Card, Progress, DatePicker } from 'antd';
 
 const ClientReleaseStaffSignature = ({
   navigation,

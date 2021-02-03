@@ -8,22 +8,12 @@ Suggestions:
   -Change options for gov benefits (stakeholder)
 */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import IntakeButton from '../IntakeButtons';
 
 //Ant Design imports (https://ant.design/components/overview/)
-import {
-  Form,
-  Button,
-  Card,
-  Input,
-  Checkbox,
-  Row,
-  Col,
-  Progress,
-  Divider,
-} from 'antd';
+import { Form, Card, Input, Checkbox, Row, Col, Progress, Divider } from 'antd';
 
 import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 
@@ -43,7 +33,6 @@ const AdditionalInfo = ({
   //FamilyMember Data Structure and FamilyInfo from ../../intakePacket.jsx (props)
   const { familyInfo, familyMember } = formData;
 
-  const { previous } = navigation;
   const history = useHistory();
 
   //Options for Gov Benifits w/dataBase name counterpart
@@ -80,26 +69,26 @@ const AdditionalInfo = ({
   };
 
   //POSTS family info then posts each member with familyId
-  const submitHandlder = e => {
-    e.preventDefault();
-    axiosWithAuth()
-      .post(`families`, familyInfo)
-      .then(res => {
-        const familyId = res.data.families.id;
-        Object.keys(formData.familyMember).map(mem => {
-          familyMember[mem]['family_id'] = familyId;
-          axiosWithAuth()
-            .post('members', familyMember[mem])
-            .then(res => {
-              history.push(`/familyprofile/${familyId}`);
-            })
-            .catch(err => {
-              console.log('MemberError', err.response);
-            });
-        });
-      })
-      .catch(err => console.log('FamiliesError', err));
-  };
+  // const submitHandlder = e => {\
+  //   e.preventDefault();
+  //   axiosWithAuth()
+  //     .post(`families`, familyInfo)
+  //     .then(res => {
+  //       const familyId = res.data.families.id;
+  //       Object.keys(formData.familyMember).map(mem => {
+  //         familyMember[mem]['family_id'] = familyId;
+  //         axiosWithAuth()
+  //           .post('members', familyMember[mem])
+  //           .then(res => {
+  //             history.push(`/familyprofile/${familyId}`);
+  //           })
+  //           .catch(err => {
+  //             console.log('MemberError', err.response);
+  //           });
+  //       });
+  //     })
+  //     .catch(err => console.log('FamiliesError', err));
+  // };
 
   return (
     <div style={tempFormStyle}>
@@ -114,7 +103,7 @@ const AdditionalInfo = ({
             marginBottom: '30px',
           }}
         >
-          {/*Not using intakeButtons component because of submitHandler*/}
+          {/* Not using intakeButtons component because of submitHandler*/}
           {/* <Button
             type="primary"
             htmlType="button"
@@ -122,9 +111,9 @@ const AdditionalInfo = ({
             style={{ width: '100px' }}
           >
             Previous
-          </Button> */}
+          </Button>
 
-          {/* <Button
+          <Button
             type="primary"
             style={{
               backgroundColor: 'green',

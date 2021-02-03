@@ -8,18 +8,7 @@ import React from 'react';
 import IntakeButton from '../../IntakeButtons';
 
 //Ant Design imports (https://ant.design/components/overview/)
-import {
-  Form,
-  Input,
-  Button,
-  Space,
-  Card,
-  Progress,
-  Select,
-  DatePicker,
-  Row,
-  Col,
-} from 'antd';
+import { Form, Card, Progress } from 'antd';
 
 const ThirdPartyConsent = ({
   navigation,

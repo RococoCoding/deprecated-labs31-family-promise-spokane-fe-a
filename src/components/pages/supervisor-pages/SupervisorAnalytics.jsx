@@ -3,17 +3,9 @@ import React, { useState, useEffect } from 'react';
 // UI
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { DataGrid } from '@material-ui/data-grid';
 import MaterialTable from 'material-table';
-import { useHistory } from 'react-router-dom';
-import NoteIcon from '@material-ui/icons/Note';
-import PeopleIcon from '@material-ui/icons/People';
-import InfoIcon from '@material-ui/icons/Info';
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import Circle from 'react-circle';
 import { useSelector } from 'react-redux';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
@@ -62,7 +54,6 @@ const Analytics = () => {
   const [card, setCard] = useState(false);
   const [staffMembers, setStaffMembers] = useState([]);
   const classes = useStyles();
-  const history = useHistory();
   const user = useSelector(state => state.CURRENT_USER);
 
   useEffect(() => {

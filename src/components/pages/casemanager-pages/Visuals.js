@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Plot from 'react-plotly.js';
 import '../Guests/guest.css';
 
@@ -14,7 +14,7 @@ import '../Guests/guest.css';
 
 const Visuals = ({ days, current, family }) => {
   console.log('im days.layout', days.layout);
-  const [enrolled, setEnrolled] = useState(days);
+  // const [enrolled, setEnrolled] = useState(days);
   const [age, setAge] = useState(current);
   const [members, setMembers] = useState(family);
   const [figure, setFigure] = useState(null);

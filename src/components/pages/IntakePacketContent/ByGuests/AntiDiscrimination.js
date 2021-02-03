@@ -8,16 +8,7 @@ import React from 'react';
 import IntakeButton from '../IntakeButtons';
 
 //Ant Design imports (https://ant.design/components/overview/)
-import {
-  Form,
-  Input,
-  Button,
-  Space,
-  Card,
-  Progress,
-  Select,
-  DatePicker,
-} from 'antd';
+import { Form, Input, Card, Progress, DatePicker } from 'antd';
 
 const AntiDiscrimination = ({
   navigation,
@@ -36,7 +27,6 @@ const AntiDiscrimination = ({
   const percent = ((pageNumber + 1) / pages) * 100;
 
   // //FamilyMember Data Structure from ../../intakePacket.jsx (props)
-  const { familyMember } = formData;
 
   return (
     <div style={tempFormStyle}>
@@ -80,11 +70,11 @@ const AntiDiscrimination = ({
           </Form.Item>
 
           <Form.Item>
-            <Input bordered={false} />
+            <Input bordered={false} placeholder="First & Last Name" />
             <hr />
             CLIENT SIGNATURE (adult)
             <DatePicker />
-            <Input bordered={false} />
+            <Input bordered={false} placeholder="First & Last Name" />
             <hr />
             CLIENT SIGNATURE (adult)
             <DatePicker />

@@ -6,7 +6,7 @@ This component contains:
 */
 
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 //Previous/Next buttons
 import IntakeButton from '../IntakeButtons';
 
@@ -28,8 +28,6 @@ const Pets = ({
 
   //FamilyInfo from ../../intakePacket.jsx (props)
   const { familyInfo } = formData;
-  const { previous } = navigation;
-  const history = useHistory();
 
   return (
     <div style={tempFormStyle}>
@@ -47,7 +45,7 @@ const Pets = ({
               onChange={setForm}
             >
               Is your family bringing an animal with you into the shelter at the
-              time of your intake:
+              time of your intake?
             </Checkbox>
           </Form.Item>
 

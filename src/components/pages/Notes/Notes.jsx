@@ -3,12 +3,6 @@ import { useParams, useHistory } from 'react-router-dom';
 import LoadingComponent from '../../common/LoadingComponent';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
 import { Card, Input, Button, Switch } from 'antd';
-import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
-} from '@ant-design/icons';
-import { Link } from 'react-router-dom';
 import ArrowLeftOutlined from '@ant-design/icons/ArrowLeftOutlined';
 import CaseNote from '../../modals/CaseNote';
 import { useSelector } from 'react-redux';
