@@ -45,7 +45,7 @@ const ContactInfo = ({
         <Form layout="vertical" name="control-hooks" span={18}>
           <IntakeButton navigation={navigation} />
 
-          <h3>Please included both adults personal phone numbers:</h3>
+          <h3>Please include phone numbers for every adult in the family:</h3>
 
           <Space style={{ display: 'flex' }}>
             <Form.Item>
