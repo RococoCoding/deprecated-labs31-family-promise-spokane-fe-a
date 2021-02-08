@@ -2,16 +2,6 @@ import React, { useState } from 'react';
 import Plot from 'react-plotly.js';
 import '../Guests/guest.css';
 
-// const initialState = {
-//   data: [],
-//   layout: {},
-//   frames: [],
-//   config: {
-//     displaylog: false,
-//     displayModeBar: false,
-//   },
-// };
-
 const Visuals = ({ days, current, family }) => {
   console.log('im days.layout', days.layout);
   // const [enrolled, setEnrolled] = useState(days);
