@@ -60,6 +60,7 @@ const Insurance = ({
               name="familyInfo.insurance.health_insurance_type"
               value={familyInfo.insurance.health_insurance_type}
               onChange={setForm}
+              placeholder="Medical, medicare, etc."
             />
           </Form.Item>
 

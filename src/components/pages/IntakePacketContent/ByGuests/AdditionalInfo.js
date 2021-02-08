@@ -68,8 +68,8 @@ const AdditionalInfo = ({
     return `familyInfo.${section}.${value}`;
   };
 
-  //POSTS family info then posts each member with familyId
-  // const submitHandlder = e => {\
+  // POSTS family info then posts each member with familyId
+  // const submitHandlder = e => {
   //   e.preventDefault();
   //   axiosWithAuth()
   //     .post(`families`, familyInfo)

@@ -79,7 +79,7 @@ const CaseAnalytics = () => {
         setMembers(JSON.parse(response.data[2]));
       })
       .catch(err => {
-        alert('error in DS API ');
+        alert('error in DS API '); //change this alert to console log error so user doesn't see
       });
   };
 
@@ -92,9 +92,9 @@ const CaseAnalytics = () => {
               exportButton: true,
               rowStyle: rowData => ({
                 backgroundColor:
-                  rowData.flag_level == 2
+                  rowData.flag_level === 2
                     ? 'rgba(255, 255, 0, 0.419)'
-                    : rowData.flag_level == 3
+                    : rowData.flag_level === 3
                     ? 'rgba(255, 0, 0, 0.418)'
                     : 'white',
               }),
@@ -108,10 +108,9 @@ const CaseAnalytics = () => {
                 icon: Checkbox,
                 tooltip: 'Select One Guest',
                 onClick: (event, rowsData) => {
-                  setGuestId(state.data[rowsData.id - 1].id);
+                  setGuestId(state.data[rowsData.id - 1].id); //in production, there seems to be something happening here. Might need to double check that the ID is getting pulled correctly. On local host it works, live it doesnt. May need to rework how to hold the guest ID to get real results
                 },
               },
-              //console.log(guestId)
             ]}
           />
           <div>
@@ -120,6 +119,7 @@ const CaseAnalytics = () => {
             </button>
           </div>
           <div>
+            {/* below checking to make sure that there is data before we render the visuals page */}
             {!(
               Object.keys(members).length === 0 &&
               members.constructor === Object
