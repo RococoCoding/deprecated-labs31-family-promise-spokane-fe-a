@@ -21,7 +21,7 @@ const LoginContainer = () => {
       i18n: {
         en: {
           'primaryauth.title':
-            'Welcome to your Family Promise account Please sign in',
+            'Welcome to your Family Promise account. Please sign in.',
           // change title for your app
         },
       },
