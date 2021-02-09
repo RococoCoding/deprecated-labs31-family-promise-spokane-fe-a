@@ -8,7 +8,7 @@ import React from 'react';
 import IntakeButton from '../../IntakeButtons';
 
 //Ant Design imports (https://ant.design/components/overview/)
-import { Form, Input, Button, Space, Card, Progress, Select } from 'antd';
+import { Form, Input, Card, Progress } from 'antd';
 
 const Expectations = ({
   navigation,
@@ -27,7 +27,7 @@ const Expectations = ({
   const percent = ((pageNumber + 1) / pages) * 100;
 
   //FamilyMember Data Structure from ../../intakePacket.jsx (props)
-  const { familyMember } = formData;
+  // const { familyMember } = formData;
 
   /*Issues with setForm on inputs other than Input and Checkbox. 
   The following functions manually update the entire form. 
@@ -46,7 +46,7 @@ const Expectations = ({
 
         <h3>I will be expected NOT to: </h3>
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>Be Violent or Aggresive:</u>
           </strong>
@@ -60,7 +60,7 @@ const Expectations = ({
         </Form.Item>
 
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>Have Drugs, Alcohol, or Weapons:</u>
           </strong>
@@ -78,7 +78,7 @@ const Expectations = ({
           </li>
         </Form.Item>
         <Form.Item>
-          <Input className="initials" />
+          <Input className="initials" placeholder="Initials" />
           <strong>
             <u>Leave Children Unattended Out of My Line of Sight:</u>
           </strong>

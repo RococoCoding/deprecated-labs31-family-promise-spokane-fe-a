@@ -41,6 +41,9 @@ import Schedule from './IntakePacketContent/ByGuests/ScheduleSafety/Schedule';
 import Safety from './IntakePacketContent/ByGuests/ScheduleSafety/Safety';
 import AnimalNo from './IntakePacketContent/ByGuests/AnimalAgreement/AnimalNo';
 import AnimalYes from './IntakePacketContent/ByGuests/AnimalAgreement/AnimalYes';
+import Neighborhood from './IntakePacketContent/ByGuests/Neighborhood/Neighborhood';
+import NeighborhoodExpectations from './IntakePacketContent/ByGuests/Neighborhood/NeighborhoodExpectations';
+import ThirdPartySigs from './IntakePacketContent/ByGuests/ThirdPartyConsent/ThirdPartySigs';
 /* Data structure for familyInfo. Each familyMember is pushed to the familyMember array here but 
 the data structure is in ./IntakePacketContent/ByGuests/FamilyMembers.js*/
 
@@ -49,35 +52,35 @@ let defaultData = {
     user_id: null,
     case_number: 1234,
     phone_one: {
-      name: 'Mary Jane',
-      number: '111222333',
-      safeToLeaveMssg: true,
+      name: '',
+      number: '',
+      safeToLeaveMssg: false,
     },
     phone_two: {
-      name: 'Peter Parker',
-      number: '111222333',
+      name: '',
+      number: '',
       safeToLeaveMssg: false,
     },
     emergencyContact: {
       name: '',
-      number: '111222333',
+      number: '',
     },
     vehicle: {
-      make: 'Honda',
-      year: '1990',
-      color: 'black',
-      model: 'x',
-      license_plate: '1123',
+      make: '',
+      year: '',
+      color: '',
+      model: '',
+      license_plate: '',
     },
-    last_permanent_address: '3211 East Ave',
+    last_permanent_address: '',
     homeless_info: {
-      prior_location: '3211 East Ave',
-      current_location: 'nowhere',
-      num_times_homeless: 5,
-      total_len_homeless: '3 months',
-      homeless_start_date: '3/5/2018',
-      length_at_prior_location: '2 years',
-      length_at_current_location: '1 year',
+      prior_location: '',
+      current_location: '',
+      num_times_homeless: 0,
+      total_len_homeless: '',
+      homeless_start_date: '',
+      length_at_prior_location: '',
+      length_at_current_location: '',
     },
     gov_benefits: {
       RRH: null,
@@ -93,9 +96,9 @@ let defaultData = {
         if_yes_who: null,
         due_date: null,
       },
-      has_insurance: true,
-      members_covered: 2,
-      health_insurance_type: 'medicaid',
+      has_insurance: false,
+      members_covered: 0,
+      health_insurance_type: '',
     },
     domestic_violence_info: {
       fleeing_dv: false,
@@ -126,10 +129,8 @@ let defaultData = {
 // Navigation path for intake form. Each name coresponds with the switch statement id.
 const steps = [
   { id: 'IntakeStart' },
-  { id: 'ContactInfo' },
-  { id: 'AnimalNo' },
-  { id: 'AnimalYes' },
   { id: 'FamilyMembers' },
+  { id: 'ContactInfo' },
   { id: 'FamilyDemographics' },
   { id: 'RaceEthnicityInfo' },
   { id: 'BarriersPage' },
@@ -143,8 +144,9 @@ const steps = [
   { id: 'ClientReleaseSignature' },
   { id: 'ClientReleaseStaffSig' },
   { id: 'ThirdPartyConsent' },
+  { id: 'ThirdPartySigs' },
   { id: 'GuestWaiver' },
-  { id: 'CaseMangement' },
+  { id: 'CaseManagement' },
   { id: 'PhotoRelease' },
   { id: 'CoreValues' },
   { id: 'AntiDiscrimination' },
@@ -158,8 +160,8 @@ const steps = [
   { id: 'Safety' },
   { id: 'AnimalNo' },
   { id: 'AnimalYes' },
-
-  //{ id: 'CmAcknowledgement'},
+  { id: 'Neighborhood' },
+  { id: 'NeighborhoodExpectations' },
 ];
 
 const IntakePacket = () => {
@@ -210,8 +212,6 @@ const IntakePacket = () => {
       return <FamilyMembers {...props} />;
     case 'FamilyDemographics':
       return <FamilyDemographics {...props} />;
-    case 'Expectations':
-      return <Expectations {...props} />;
     case 'RaceEthnicityInfo':
       return <RaceEthnicityInfo {...props} />;
     case 'BarriersPage':
@@ -236,6 +236,8 @@ const IntakePacket = () => {
       return <ClientReleaseStaffSig {...props} />;
     case 'ThirdPartyConsent':
       return <ThirdPartyConsent {...props} />;
+    case 'ThirdPartySigs':
+      return <ThirdPartySigs {...props} />;
     case 'GuestWaiver':
       return <GuestWaiver {...props} />;
     case 'CaseManagement':
@@ -266,6 +268,10 @@ const IntakePacket = () => {
       return <AnimalNo {...props} />;
     case 'AnimalYes':
       return <AnimalYes {...props} />;
+    case 'Neighborhood':
+      return <Neighborhood {...props} />;
+    case 'NeighborhoodExpectations':
+      return <NeighborhoodExpectations {...props} />;
     default:
       return null;
   }

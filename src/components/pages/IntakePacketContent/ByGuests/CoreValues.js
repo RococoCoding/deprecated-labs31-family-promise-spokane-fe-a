@@ -9,16 +9,7 @@ import React from 'react';
 import IntakeButton from '../IntakeButtons';
 
 //Ant Design imports (https://ant.design/components/overview/)
-import {
-  Form,
-  Input,
-  Button,
-  Space,
-  Card,
-  Progress,
-  Select,
-  DatePicker,
-} from 'antd';
+import { Form, Input, Card, Progress, DatePicker } from 'antd';
 
 const CoreValues = ({
   navigation,
@@ -37,7 +28,7 @@ const CoreValues = ({
   const percent = ((pageNumber + 1) / pages) * 100;
 
   // //FamilyMember Data Structure from ../../intakePacket.jsx (props)
-  const { familyMember } = formData;
+  // const { familyMember } = formData;
 
   return (
     <div style={tempFormStyle}>
@@ -66,7 +57,7 @@ const CoreValues = ({
           </Form.Item>
 
           <Form.Item>
-            <Input className="initials" />
+            <Input className="initials" placeholder="initials" />
             <strong>
               <u>Be Non-Judgmental:</u>
             </strong>
@@ -74,7 +65,7 @@ const CoreValues = ({
           </Form.Item>
 
           <Form.Item>
-            <Input className="initials" />
+            <Input className="initials" placeholder="initials" />
             <strong>
               <u>Be Respectful/ Compassionate:</u>
             </strong>
@@ -82,7 +73,7 @@ const CoreValues = ({
           </Form.Item>
 
           <Form.Item>
-            <Input className="initials" />
+            <Input className="initials" placeholder="initials" />
             <strong>
               <u>Be Present:</u>
             </strong>
@@ -92,7 +83,7 @@ const CoreValues = ({
           </Form.Item>
 
           <Form.Item>
-            <Input className="initials" />
+            <Input className="initials" placeholder="initials" />
             <strong>
               <u>Be Competent:</u>
             </strong>
@@ -102,7 +93,7 @@ const CoreValues = ({
           </Form.Item>
 
           <Form.Item>
-            <Input className="initials" />
+            <Input className="initials" placeholder="initials" />
             <strong>
               <u>Be Empowered:</u>
             </strong>
@@ -112,7 +103,7 @@ const CoreValues = ({
           </Form.Item>
 
           <Form.Item>
-            <Input className="initials" />
+            <Input className="initials" placeholder="initials" />
             <strong>
               <u>Be a Great Neighbor:</u>
             </strong>
@@ -132,11 +123,11 @@ const CoreValues = ({
           </Form.Item>
 
           <Form.Item>
-            <Input bordered={false} />
+            <Input bordered={false} placeholder="First & Last Name" />
             <hr />
             CLIENT SIGNATURE(adult)
             <DatePicker />
-            <Input bordered={false} />
+            <Input bordered={false} placeholder="First & Last Name" />
             <hr />
             CLIENT SIGNATURE(adult)
             <DatePicker />

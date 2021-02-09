@@ -8,17 +8,7 @@ import React from 'react';
 import IntakeButton from '../IntakeButtons';
 
 //Ant Design imports (https://ant.design/components/overview/)
-import {
-  Form,
-  Input,
-  Button,
-  Space,
-  Card,
-  Progress,
-  Select,
-  DatePicker,
-} from 'antd';
-import AntiDiscrimination from './AntiDiscrimination';
+import { Form, Input, Card, Progress, DatePicker } from 'antd';
 
 const Belongings = ({
   navigation,
@@ -37,7 +27,6 @@ const Belongings = ({
   const percent = ((pageNumber + 1) / pages) * 100;
 
   // //FamilyMember Data Structure from ../../intakePacket.jsx (props)
-  const { familyMember } = formData;
 
   return (
     <div style={tempFormStyle}>
@@ -65,9 +54,9 @@ const Belongings = ({
           </Form.Item>
 
           <Form.Item>
-            I <Input placeholder="First & Last Name" />, an Open Doors Guest,
-            agree to the following terms and conditions for storing and caring
-            for my personal and family belongings.
+            I <Input className="printName" placeholder="First & Last Name" />,
+            an Open Doors Guest, agree to the following terms and conditions for
+            storing and caring for my personal and family belongings.
           </Form.Item>
 
           <Form.Item>

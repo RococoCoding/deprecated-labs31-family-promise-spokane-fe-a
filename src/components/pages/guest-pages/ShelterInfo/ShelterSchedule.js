@@ -1,43 +1,14 @@
-/*
-Signatures for Shelter Schedule, Expectations and Safety Agreement
-*/
-
 import React from 'react';
 
 //Previous/Next buttons
-import IntakeButton from '../../IntakeButtons';
 
 //Ant Design imports (https://ant.design/components/overview/)
-import { Form, Card, Progress, Row, Col } from 'antd';
+import { Form, Card, Row, Col } from 'antd';
 
-const Shelter = ({
-  navigation,
-  formData,
-  setForm,
-  tempFormStyle,
-  count,
-  setCount,
-  nameString,
-  steps,
-  step,
-}) => {
-  // //Progress bar
-  const pageNumber = steps.findIndex(item => item === step);
-  const pages = steps.length;
-  const percent = ((pageNumber + 1) / pages) * 100;
-
-  // //FamilyMember Data Structure from ../../intakePacket.jsx (props)
-  // const { familyMember } = formData;
-
+const ShelterSchedule = ({ tempFormStyle }) => {
   return (
     <div style={tempFormStyle}>
-      Progress bar
-      <Progress percent={percent} status="active" showInfo={false} />
-      <Card
-        title="Shelter Schedule, Expectations and Safety Agreement"
-        bordered={false}
-      >
-        <IntakeButton navigation={navigation} />
+      <Card title="Shelter Schedule" bordered={false}>
         <Form>
           <strong>Shelter Schedule:</strong>
           <Form.Item>
@@ -202,4 +173,4 @@ const Shelter = ({
   );
 };
 
-export default Shelter;
+export default ShelterSchedule;

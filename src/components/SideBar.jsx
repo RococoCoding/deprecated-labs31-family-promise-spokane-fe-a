@@ -1,22 +1,19 @@
 import React from 'react';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu } from 'antd';
 import {
-  DesktopOutlined,
-  PieChartOutlined,
   FileOutlined,
   TeamOutlined,
-  UserOutlined,
+  InfoCircleOutlined,
+  InfoCircleFilled,
+  HomeOutlined,
 } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
-import AssessmentIcon from '@material-ui/icons/Assessment';
 import BarChartOutlined from '@ant-design/icons/BarChartOutlined';
 import MonitorOutlined from '@ant-design/icons/MonitorOutlined';
 import PieChartOutlinedIcon from '@material-ui/icons/PieChartOutlined';
 import { useSelector } from 'react-redux';
-import { HistoryOutlined } from '@material-ui/icons';
 
-const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
+const { Sider } = Layout;
 
 const SideBar = () => {
   const user = useSelector(state => state.CURRENT_USER);
@@ -26,9 +23,9 @@ const SideBar = () => {
     setCollapsed(!collapsed);
   };
 
-  const redirectToUserProfile = () => {
-    history.push('/me');
-  };
+  // const redirectToUserProfile = () => {
+  //   history.push('/me');
+  // };
 
   const redirectToAnalytics = () => {
     history.push('/analytics');
@@ -42,9 +39,9 @@ const SideBar = () => {
     history.push('/guests');
   };
 
-  const redirectToFamily = () => {
-    history.push('/family');
-  };
+  // const redirectToFamily = () => {
+  //   history.push('/family');
+  // };
 
   const redirectToMembers = () => {
     history.push('/members');
@@ -56,6 +53,14 @@ const SideBar = () => {
 
   const redirectToCheckIn = () => {
     history.push('/supervisor-checkin');
+  };
+
+  const redirectToShelterInfo = () => {
+    history.push('/shelterInfo');
+  };
+
+  const redirectToDashboard = () => {
+    history.push('/guest-dashboard');
   };
 
   return (
@@ -79,7 +84,7 @@ const SideBar = () => {
             >
               Analytics
             </Menu.Item>
-            {user.role == 'guest' && (
+            {user.role === 'guest' && (
               <Menu>
                 <Menu.Item
                   onClick={redirectToMembers}
@@ -87,6 +92,20 @@ const SideBar = () => {
                   icon={<TeamOutlined />}
                 >
                   Members
+                </Menu.Item>
+                <Menu.Item
+                  onClick={redirectToShelterInfo}
+                  key="4"
+                  icon={<InfoCircleOutlined />}
+                >
+                  Shelter Info
+                </Menu.Item>
+                <Menu.Item
+                  onClick={redirectToDashboard}
+                  key="5"
+                  icon={<HomeOutlined />}
+                >
+                  Dashboard
                 </Menu.Item>
               </Menu>
             )}
@@ -109,7 +128,7 @@ const SideBar = () => {
                 >
                   Register Family
                 </Menu.Item>
-                {user.role == 'case_manager' && (
+                {user.role === 'case_manager' && (
                   <Menu.Item
                     onClick={redirectToCaseManagerAnalytics}
                     key="5"
@@ -121,7 +140,7 @@ const SideBar = () => {
               </Menu>
             )}
 
-            {user.role == 'supervisor' && (
+            {user.role === 'supervisor' && (
               <Menu>
                 <Menu.Item
                   onClick={redirectToCheckIn}

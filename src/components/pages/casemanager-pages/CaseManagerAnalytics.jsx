@@ -2,32 +2,26 @@ import React, { useEffect, useState } from 'react';
 
 import MaterialTable from 'material-table';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
-import { useHistory } from 'react-router-dom';
+//import { useHistory } from 'react-router-dom';
 import { tableIcons } from '../../../utils/tableIcons';
-import PeopleIcon from '@material-ui/icons/People';
-// import CardShadow from '../../CardShadow';
-import FlagGuest from '../../modals/FlagGuest';
-import GuestNotes from '../../modals/GuestNotes';
+
 // import { CopyrightOutlined } from '@material-ui/icons';
-import LoadingComponent from '../../common/LoadingComponent';
 import Modal from 'react-modal';
 import '../Guests/guest.css';
 // import { CardContent, Card } from '@material-ui/core';
-import GuestMoreInfo from '../Guests/GuestMoreInfo';
 import { Checkbox } from '@material-ui/core';
-import axios from 'axios';
+
 import Visuals from './Visuals';
 Modal.setAppElement('#root');
 
-const CaseAnalytics = ({}) => {
-  const [isFlagOpen, setIsFlagOpen] = useState(false);
-  const [isNotesOpen, setIsNotesOpen] = useState(false);
+const CaseAnalytics = () => {
   const [guestId, setGuestId] = useState(null);
-  const [result, setResult] = useState(null);
-  const history = useHistory();
-  const [loading, setLoading] = useState(true);
+  // const [result, setResult] = useState(null);
+  // const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
-  const [visualization, setVisualization] = useState({});
+  const [enrolled, setEnrolled] = useState({});
+  const [age, setAge] = useState({});
+  const [members, setMembers] = useState({});
   const [state, setState] = useState({
     columns: [
       { title: 'First', field: 'first_name', type: 'hidden' },
@@ -38,10 +32,10 @@ const CaseAnalytics = ({}) => {
     ],
     data: [],
   });
-  function toggleModal(e) {
-    e.preventDefault();
-    setIsOpen(!isOpen);
-  }
+  // function toggleModal(e) {
+  //   e.preventDefault();
+  //   setIsOpen(!isOpen);
+  // }
 
   useEffect(() => {
     axiosWithAuth()
@@ -66,49 +60,31 @@ const CaseAnalytics = ({}) => {
       })
       .catch(err => {
         alert('error in fetch for members');
-      })
-      .finally(() => {
-        setLoading(false);
       });
   }, []);
 
   const runVisualization = guestId => {
     console.log(guestId);
-    //condidtional, if guestID is null, alert user to click on ONE row
-    //guest id is not coming through, for now it is hardcoded
+    if (guestId === null) {
+      alert('You must choose ONE family member by clicking checkbox');
+    }
     axiosWithAuth()
       .get(
-        `http://omar-zaffar.eba-rpnihjrj.us-east-1.elasticbeanstalk.com/Visualizations/1`
+        `http://omar-zaffar.eba-rpnihjrj.us-east-1.elasticbeanstalk.com/Visualizations/${guestId}`
       )
       .then(response => {
-        console.log(response.data);
-        //setVisualization(response.data)
+        console.log('im parsed', JSON.parse(response.data[0]));
+        setEnrolled(JSON.parse(response.data[0]));
+        setAge(JSON.parse(response.data[1]));
+        setMembers(JSON.parse(response.data[2]));
       })
       .catch(err => {
-        alert('error in DS API ');
+        alert('error in DS API '); //change this alert to console log error so user doesn't see
       });
   };
 
-  if (loading) {
-    return (
-      <div className="guest-table-container">
-        <LoadingComponent />
-      </div>
-    );
-  }
-
   return (
     <>
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={toggleModal}
-        contentLabel="My dialog"
-        className="mymodal"
-        overlayClassName="myoverlay"
-        closeTimeoutMS={500}
-      >
-        {result ? <GuestMoreInfo familyInfo={result} /> : ''}
-      </Modal>
       <div className="guest-table-container">
         <div className="guest-table">
           <MaterialTable
@@ -116,9 +92,9 @@ const CaseAnalytics = ({}) => {
               exportButton: true,
               rowStyle: rowData => ({
                 backgroundColor:
-                  rowData.flag_level == 2
+                  rowData.flag_level === 2
                     ? 'rgba(255, 255, 0, 0.419)'
-                    : rowData.flag_level == 3
+                    : rowData.flag_level === 3
                     ? 'rgba(255, 0, 0, 0.418)'
                     : 'white',
               }),
@@ -130,21 +106,24 @@ const CaseAnalytics = ({}) => {
             actions={[
               {
                 icon: Checkbox,
-                tooltip: 'Select Guest',
+                tooltip: 'Select One Guest',
                 onClick: (event, rowsData) => {
-                  setGuestId(state.data[rowsData.id - 1].id);
+                  setGuestId(state.data[rowsData.id - 1].id); //in production, there seems to be something happening here. Might need to double check that the ID is getting pulled correctly. On local host it works, live it doesnt. May need to rework how to hold the guest ID to get real results
                 },
               },
             ]}
           />
           <div>
-            <button key={guestId} onClick={() => runVisualization(guestId)}>
+            <button onClick={() => runVisualization(guestId)}>
               Run Visualization
             </button>
           </div>
           <div>
-            {/* uncomment this when ready to use visuals */}
-            {/* <Visuals visuals={visualization} /> */}
+            {/* below checking to make sure that there is data before we render the visuals page */}
+            {!(
+              Object.keys(members).length === 0 &&
+              members.constructor === Object
+            ) && <Visuals days={enrolled} current={age} family={members} />}
           </div>
         </div>
       </div>

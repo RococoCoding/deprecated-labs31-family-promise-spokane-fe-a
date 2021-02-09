@@ -1,43 +1,14 @@
-/*
-Signatures for Shelter Schedule, Expectations and Safety Agreement
-*/
-
 import React from 'react';
 
-//Previous/Next buttons
-import IntakeButton from '../../IntakeButtons';
+//Contains info from Night Shelter Expectations and Safety
 
 //Ant Design imports (https://ant.design/components/overview/)
-import { Form, Input, Card, Progress, DatePicker } from 'antd';
+import { Form, Card } from 'antd';
 
-const Safety = ({
-  navigation,
-  formData,
-  setForm,
-  tempFormStyle,
-  count,
-  setCount,
-  nameString,
-  steps,
-  step,
-}) => {
-  // //Progress bar
-  const pageNumber = steps.findIndex(item => item === step);
-  const pages = steps.length;
-  const percent = ((pageNumber + 1) / pages) * 100;
-
-  // //FamilyMember Data Structure from ../../intakePacket.jsx (props)
-  // const { familyMember } = formData;
-
+const NightShelter = ({ tempFormStyle }) => {
   return (
     <div style={tempFormStyle}>
-      Progress bar
-      <Progress percent={percent} status="active" showInfo={false} />
-      <Card
-        title="Shelter Schedule, Expectations and Safety Agreement (continued)"
-        bordered={false}
-      >
-        <IntakeButton navigation={navigation} />
+      <Card title="Night Shelter Expectations and Safety" bordered={false}>
         <Form>
           <strong>
             <u>Night Shelter Expectations:</u>
@@ -97,21 +68,10 @@ const Safety = ({
               </li>
             </ul>
           </Form.Item>
-
-          <Form.Item>
-            <Input bordered={false} placeholder="First & Last Name" />
-            <hr />
-            CLIENT SIGNATURE (adult)
-            <DatePicker />
-            <Input bordered={false} placeholder="First & Last Name" />
-            <hr />
-            CLIENT SIGNATURE (adult)
-            <DatePicker />
-          </Form.Item>
         </Form>
       </Card>
     </div>
   );
 };
 
-export default Safety;
+export default NightShelter;

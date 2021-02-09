@@ -1,97 +1,91 @@
 import React, { useEffect, useState } from 'react';
-import Modal from 'react-modal';
 import MaterialTable from 'material-table';
 import LoadingComponent from '../../common/LoadingComponent';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
 import { tableIcons } from '../../../utils/tableIcons';
-import PeopleIcon from '@material-ui/icons/People';
-import FlagIcon from '@material-ui/icons/Flag';
-import HotelIcon from '@material-ui/icons/Hotel';
-import Brightness2Icon from '@material-ui/icons/Brightness2';
-import Brightness3Icon from '@material-ui/icons/Brightness3';
-import { template, templateSettings } from 'underscore';
+import { Switch } from 'antd';
 
-Modal.setAppElement('#root');
-//add new icons
 export default function SupervisorCheckIn() {
   const [loading, setLoading] = useState(true);
-
-  const [state, setState] = useState({
+  //this sets the table so that materiatable can display it
+  //the data[] array is retrieved from the API and represents the row
+  const [table, setTable] = useState({
     columns: [
-      { title: 'Family Name', field: 'last_name' },
-      { title: 'Checked-in', field: 'checked_in' },
+      { title: 'Name', field: 'name' },
+      { title: 'Reservation', field: 'reservation_status' },
+      { title: 'Reservation ID', field: 'reservation_id' },
       { title: 'Onsite (7pm)', field: 'on_site_7pm' },
       { title: 'Onsite (10pm)', field: 'on_site_10pm' },
-      { title: 'Beds Reserved', field: 'actual_beds_reserved' },
+      { title: 'Beds Reserved(Family)', field: 'beds_reserved' },
     ],
     data: [],
   });
 
+  const clickHandler = (e, item) => {};
+
+  //need to find user ID using the name field from logs table. Then use that user ID to update the on-site, reservation fields, etc. in the members table)
+  const cancelReservation = (e, name, resId, famId) => {};
+
+  //1)get all logs
+  //2)filter by date (using filter by a random reservation ID for now as
+  //no date yet)
+  //3) display all guests with reservation
   useEffect(() => {
     axiosWithAuth()
       .get('/logs')
       .then(res => {
-        console.log('logs', res.data);
-        let date = '2020-12-12T17:38:31.123Z';
-        let copy = { ...state };
+        const date = new Date();
+        const fullDate = date.toDateString();
+        const hours = new Date().getHours();
+        const getMinutes = new Date().getMinutes();
+        const minutes = (getMinutes < 10 ? '0' : '') + getMinutes;
 
-        let formattedData = res.data.filter(item => {
-          if (item.time === date) return item;
+        //filter logs by today's date
+        let results = res.data.filter(d => {
+          if (d.date === fullDate) return d;
           else return;
         });
 
-        copy.data.push(...formattedData);
-        console.log(copy);
-
-        axiosWithAuth()
-          .get('/members/1')
-          .then(res => {
-            copy = {
-              ...copy,
-              data: copy.data.map(item => {
-                return { ...item, last_name: res.data.demographics.last_name };
-              }),
-            };
-            console.log('copy', copy);
-            setState(copy);
-            setLoading(false);
-          })
-          .catch(err => console.log(err));
+        let temp = [];
+        for (let i = 0; i < results.length; i++) {
+          results[i].members_staying.map(item => {
+            temp.push({
+              name: item,
+              family_id: results[i].family_id,
+              reservation_status: (
+                <Switch
+                  defaultChecked={true}
+                  onChange={e => {
+                    cancelReservation(
+                      e,
+                      item,
+                      results[i].reservation_id,
+                      results[i].family_id
+                    );
+                  }}
+                />
+              ),
+              reservation_id: results[i].reservation_id,
+              on_site_7pm: <Switch />,
+              on_site_10pm: (
+                <Switch
+                  onChange={e => {
+                    clickHandler(e, item);
+                  }}
+                />
+              ),
+              beds_reserved: results[i].beds_reserved,
+            });
+          });
+          //create the row for the table
+          setTable({ ...table, data: temp });
+          setLoading(false);
+        }
       })
       .catch(err => {
-        alert('error');
+        console.log(err);
       });
   }, []);
-
-  const toggleCheckedIn = rowData => {
-    let temp = { ...rowData, checked_in: !rowData.checked_in };
-
-    setState({
-      ...state,
-      data: state.data.map(item => {
-        return { ...item, checked_in: !item.checked_in };
-      }),
-    });
-  };
-
-  const toggle7pm = () => {
-    //on_site_7pm
-    setState({
-      ...state,
-      data: state.data.map(item => {
-        return { ...item, on_site_7pm: !item.on_site_7pm };
-      }),
-    });
-  };
-  const toggle10pm = () => {
-    //on_site_10pm
-    setState({
-      ...state,
-      data: state.data.map(item => {
-        return { ...item, on_site_10pm: !item.on_site_10pm };
-      }),
-    });
-  };
 
   if (loading) {
     return (
@@ -118,31 +112,8 @@ export default function SupervisorCheckIn() {
           }}
           icons={tableIcons}
           title="Guests Check-in"
-          columns={state.columns}
-          data={state.data}
-          actions={[
-            {
-              icon: HotelIcon,
-              tooltip: 'Checked-in',
-              onClick: (event, rowData) => {
-                toggleCheckedIn(rowData);
-              },
-            },
-            {
-              icon: Brightness2Icon,
-              tooltip: '7PM On-site',
-              onClick: (event, rowData) => {
-                toggle7pm();
-              },
-            },
-            {
-              icon: Brightness3Icon,
-              tooltip: '10PM On-site',
-              onClick: (event, rowData) => {
-                toggle10pm();
-              },
-            },
-          ]}
+          columns={table.columns}
+          data={table.data}
         />
       </div>
     </div>
