@@ -90,7 +90,7 @@ function App() {
         <PrivateRoute
           exact
           path="/shelterInfo"
-          roles={['guest']}
+          roles={['guest', 'pending']}
           component={ShelterInfo}
         />
         <Route
@@ -100,7 +100,13 @@ function App() {
         />
         <PrivateRoute
           path="/analytics"
-          roles={['executive_director', 'supervisor', 'case_manager', 'guest']}
+          roles={[
+            'executive_director',
+            'supervisor',
+            'case_manager',
+            'guest',
+            'pending',
+          ]}
           component={Analytics}
         />
         <PrivateRoute
