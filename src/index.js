@@ -125,7 +125,7 @@ function App() {
         />
         <PrivateRoute
           path="/guest-dashboard"
-          roles={['guest']}
+          roles={['guest', 'pending']}
           component={GuestDashboard}
         />
         <PrivateRoute
