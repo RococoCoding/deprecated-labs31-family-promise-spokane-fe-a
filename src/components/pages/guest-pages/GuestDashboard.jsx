@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import OffHours from './OffHours';
 import CurrentReservation from './CurrentReservation';
 
@@ -44,6 +45,8 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
   //logs user state of reservation status
   const [isReserved, setIsReserved] = useState(false);
   const [familyID, setFamilyID] = useState(null);
+
+  const history = useHistory();
 
   //Sets state for members staying and waitlist members
   useEffect(() => {
@@ -132,7 +135,7 @@ const GuestDashboard = ({ fetchHousehold, fetchFamily, fetchMembers }) => {
         })
         .catch(err => console.log('get family error'));
     } catch (error) {
-      alert('error');
+      // alert(error.message);
     }
   };
 
