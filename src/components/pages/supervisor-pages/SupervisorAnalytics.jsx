@@ -152,9 +152,9 @@ const Analytics = () => {
             size={380} // Number: Defines the size of the circle.
             lineWidth={10} // Number: Defines the thickness of the circle's stroke.
             progress={43} // Number: Update to change the progress and percentage.
-            progressColor="cornflowerblue" // String: Color of "progress" portion of circle.
+            progressColor="#006FBA" // String: Color of "progress" portion of circle.
             bgColor="whitesmoke" // String: Color of "empty" portion of circle.
-            textColor="hotpink" // String: Color of percentage text color.
+            textColor="#8D4982" // String: Color of percentage text color.
             textStyle={{
               font: 'bold 5rem Helvetica, Arial, sans-serif', // CSSProperties: Custom styling for percentage.
             }}
