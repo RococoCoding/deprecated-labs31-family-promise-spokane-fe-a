@@ -3,8 +3,8 @@
 import React from 'react';
 
 //components
-import SupervisorAnalitcs from './supervisor-pages/SupervisorAnalytics';
-import GuestAnalitics from './guest-pages/GuestAnalytics';
+import SupervisorAnalytics from './supervisor-pages/SupervisorAnalytics';
+import GuestAnalytics from './guest-pages/GuestAnalytics';
 
 //redux
 import { useSelector } from 'react-redux';
@@ -17,9 +17,9 @@ const Analytics = () => {
       {['supervisor', 'case_manager', 'executive_director'].includes(
         user.role
       ) ? (
-        <SupervisorAnalitcs />
+        <SupervisorAnalytics />
       ) : (
-        <GuestAnalitics />
+        <GuestAnalytics />
       )}
     </div>
   );
