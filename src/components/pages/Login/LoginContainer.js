@@ -42,6 +42,10 @@ const LoginContainer = () => {
           type: 'FACEBOOK',
           id: '0oa5rfxw0LDVVRok75d6',
         },
+        {
+          type: 'GOOGLE',
+          id: '0oa60oep2iOMBS1AA5d6',
+        },
       ],
     });
     widget.renderEl(
