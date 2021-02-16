@@ -84,32 +84,31 @@ const SideBar = () => {
             >
               Analytics
             </Menu.Item>
-            {user.role === 'guest' ||
-              ('pending' && (
-                <Menu>
-                  <Menu.Item
-                    onClick={redirectToMembers}
-                    key="3"
-                    icon={<TeamOutlined />}
-                  >
-                    Members
-                  </Menu.Item>
-                  <Menu.Item
-                    onClick={redirectToShelterInfo}
-                    key="4"
-                    icon={<InfoCircleOutlined />}
-                  >
-                    Shelter Info
-                  </Menu.Item>
-                  <Menu.Item
-                    onClick={redirectToDashboard}
-                    key="5"
-                    icon={<HomeOutlined />}
-                  >
-                    Dashboard
-                  </Menu.Item>
-                </Menu>
-              ))}
+            {(user.role === 'guest' || user.role === 'pending') && (
+              <Menu>
+                <Menu.Item
+                  onClick={redirectToMembers}
+                  key="3"
+                  icon={<TeamOutlined />}
+                >
+                  Members
+                </Menu.Item>
+                <Menu.Item
+                  onClick={redirectToShelterInfo}
+                  key="4"
+                  icon={<InfoCircleOutlined />}
+                >
+                  Shelter Info
+                </Menu.Item>
+                <Menu.Item
+                  onClick={redirectToDashboard}
+                  key="5"
+                  icon={<HomeOutlined />}
+                >
+                  Dashboard
+                </Menu.Item>
+              </Menu>
+            )}
 
             {['supervisor', 'executive_director', 'case_manager'].includes(
               user.role
