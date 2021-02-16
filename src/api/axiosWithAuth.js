@@ -5,6 +5,7 @@ const environment = process.env.ENV || 'development';
 //   environment !== 'development'
 //     ? process.env.REACT_APP_API_URI
 //     : 'http://localhost:8000/';
+//
 
 export const axiosWithAuth = () => {
   const token = JSON.parse(localStorage.getItem('okta-token-storage'))?.idToken
@@ -13,6 +14,6 @@ export const axiosWithAuth = () => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    baseURL: 'https://family-pomise-spokane.herokuapp.com',
+    baseURL: 'https://family-promise-a-be.herokuapp.com/',
   });
 };
