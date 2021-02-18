@@ -24,9 +24,9 @@ const Guests = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [state, setState] = useState({
     columns: [
-      { title: 'First', field: 'first_name', type: 'hidden' },
+      { title: 'First', field: 'first_name', col_type: 'hidden' },
       { title: 'Last ', field: 'last_name' },
-      { title: 'DOB', field: 'DOB', type: 'date' },
+      { title: 'DOB', field: 'DOB', col_type: 'date' },
       { title: 'Relationship', field: 'relationship' },
     ],
     data: [],
