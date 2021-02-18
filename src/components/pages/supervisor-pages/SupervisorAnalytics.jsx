@@ -37,17 +37,18 @@ const columns = [
   { title: 'email', field: 'email' },
   { title: '', field: 'clocked_in', type: 'boolean' },
 ];
-const rows = [
-  { name: 'Snow', surname: 'Jon', age: 35 },
-  { name: 'Lannister', surname: 'Cersei', age: 42 },
-  { name: 'Lannister', surname: 'Jaime', age: 45 },
-  { name: 'Stark', surname: 'Arya', age: 16 },
-  { name: 'Targaryen', surname: 'Daenerys', age: null },
-  { name: 'Melisandre', surname: null, age: 150 },
-  { name: 'Clifford', surname: 'Ferrara', age: 44 },
-  { name: 'Frances', surname: 'Rossini', age: 36 },
-  { name: 'Roxie', surname: 'Harvey', age: 65 },
-];
+
+// const rows = [
+//   { name: 'Snow', surname: 'Jon', age: 35 },
+//   { name: 'Lannister', surname: 'Cersei', age: 42 },
+//   { name: 'Lannister', surname: 'Jaime', age: 45 },
+//   { name: 'Stark', surname: 'Arya', age: 16 },
+//   { name: 'Targaryen', surname: 'Daenerys', age: null },
+//   { name: 'Melisandre', surname: null, age: 150 },
+//   { name: 'Clifford', surname: 'Ferrara', age: 44 },
+//   { name: 'Frances', surname: 'Rossini', age: 36 },
+//   { name: 'Roxie', surname: 'Harvey', age: 65 },
+// ];
 
 const Analytics = () => {
   const [logs, setLogs] = useState([]);
@@ -59,8 +60,11 @@ const Analytics = () => {
   useEffect(() => {
     axiosWithAuth()
       .get(`/logs`)
-      .then(res => console.log(setLogs(res.data)));
-  }, [logs]);
+      .then(res => {
+        console.log(res.data);
+        setLogs(res.data);
+      });
+  }, []);
 
   const fetchLogs = e => {
     e.preventDefault();
@@ -91,11 +95,11 @@ const Analytics = () => {
                   <Card key={log.id}>
                     <CardContent>
                       <p> Checked in: {log.checked_in ? 'Yes' : 'No'}</p>
-                      <p>Date: {new Date(log.date).toString()}</p>
+                      <p>Date: {log.date}</p>
                       <p>Family Id: {log.family_id}</p>
                       <p> On-Site: {log.on_sight ? 'Yes' : 'No'}</p>
                       <p>Supervisor Id: {log.supervisor_id}</p>
-                      <p> Time: {new Date(logs.time).toLocaleTimeString()}</p>
+                      <p> Time: {log.time}</p>
                     </CardContent>
                   </Card>
                 ))

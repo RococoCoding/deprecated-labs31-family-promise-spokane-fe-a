@@ -47,43 +47,48 @@ export default function SupervisorCheckIn() {
         });
 
         let temp = [];
-        for (let i = 0; i < results.length; i++) {
-          results[i].members_staying.map(item => {
-            temp.push({
-              name: item,
-              family_id: results[i].family_id,
-              reservation_status: (
-                <Switch
-                  defaultChecked={true}
-                  onChange={e => {
-                    cancelReservation(
-                      e,
-                      item,
-                      results[i].reservation_id,
-                      results[i].family_id
-                    );
-                  }}
-                />
-              ),
-              reservation_id: results[i].reservation_id,
-              on_site_7pm: <Switch />,
-              on_site_10pm: (
-                <Switch
-                  onChange={e => {
-                    clickHandler(e, item);
-                  }}
-                />
-              ),
-              beds_reserved: results[i].beds_reserved,
-            });
-          });
-          //create the row for the table
-          setTable({ ...table, data: temp });
+        if (results.length === 0) {
+          setTable({ ...table });
           setLoading(false);
+        } else {
+          for (let i = 0; i < results.length; i++) {
+            results[i].members_staying.map(item => {
+              temp.push({
+                name: item,
+                family_id: results[i].family_id,
+                reservation_status: (
+                  <Switch
+                    defaultChecked={true}
+                    onChange={e => {
+                      cancelReservation(
+                        e,
+                        item,
+                        results[i].reservation_id,
+                        results[i].family_id
+                      );
+                    }}
+                  />
+                ),
+                reservation_id: results[i].reservation_id,
+                on_site_7pm: <Switch />,
+                on_site_10pm: (
+                  <Switch
+                    onChange={e => {
+                      clickHandler(e, item);
+                    }}
+                  />
+                ),
+                beds_reserved: results[i].beds_reserved,
+              });
+            });
+            //create the row for the table
+            setTable({ ...table, data: temp });
+            setLoading(false);
+          }
         }
       })
       .catch(err => {
-        console.log(err);
+        console.log('err', err);
       });
   }, []);
 
