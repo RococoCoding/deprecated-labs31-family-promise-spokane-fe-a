@@ -20,6 +20,8 @@ const LoginContainer = () => {
       logo: logo,
       // add your custom logo to your signing/register widget here.
       i18n: {
+        //i18n === internationalization
+        //en === English. can add other languages?
         en: {
           'primaryauth.title':
             'Welcome to your Family Promise account. Please sign in.',
@@ -41,6 +43,10 @@ const LoginContainer = () => {
         {
           type: 'FACEBOOK',
           id: '0oa5rfxw0LDVVRok75d6',
+        },
+        {
+          type: 'GOOGLE',
+          id: '0oa60oep2iOMBS1AA5d6',
         },
       ],
     });
