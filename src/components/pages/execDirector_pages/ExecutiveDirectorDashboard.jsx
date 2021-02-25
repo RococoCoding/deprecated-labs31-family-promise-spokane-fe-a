@@ -40,35 +40,35 @@ const ExecutiveDirectorDashboard = () => {
 
   // on hold pending stakeholder feedback; not sure if needed on exec dashboard
 
-  // useEffect(() => {
-  //   axiosWithAuth()
-  //     .get('/members')
-  //     .then(res => {
-  //       console.log(res.data);
-  //       let copy = { ...state };
+  useEffect(() => {
+    axiosWithAuth()
+      .get('/members')
+      .then(res => {
+        console.log(res.data);
+        let copy = { ...state };
 
-  //       let formattedData = res.data.map(member => {
-  //         return {
-  //           ...member.demographics,
-  //           ...member.bearers,
-  //           ...member.schools,
-  //           flag_level: 0,
-  //           ...member,
-  //         };
-  //       });
+        let formattedData = res.data.map(member => {
+          return {
+            ...member.demographics,
+            ...member.bearers,
+            ...member.schools,
+            flag_level: 0,
+            ...member,
+          };
+        });
 
-  //       copy.data.push(...formattedData);
-  //       console.log(copy);
+        copy.data.push(...formattedData);
+        console.log(copy);
 
-  //       setState(copy);
-  //     })
-  //     .catch(err => {
-  //       alert('error');
-  //     })
-  //     .finally(() => {
-  //       setLoading(false);
-  //     });
-  // }, []);
+        setState(copy);
+      })
+      .catch(err => {
+        alert('error');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   const [isFlagOpen, setIsFlagOpen] = useState(false);
   const [isNotesOpen, setIsNotesOpen] = useState(false);
@@ -86,13 +86,9 @@ const ExecutiveDirectorDashboard = () => {
 
   return (
     <>
-      <Plot
-        className="DataViz"
-        data={mockData.data}
-        layout={{ width: 320, height: 240, title: 'Untitled' }}
-      />
+      <Plot className="DataViz" data={mockData.data} />
 
-      {/* <Modal
+      <Modal
         isOpen={isOpen}
         onRequestClose={toggleModal}
         contentLabel="My dialog"
@@ -102,6 +98,7 @@ const ExecutiveDirectorDashboard = () => {
       >
         {result ? <GuestMoreInfo familyInfo={result} /> : ''}
       </Modal>
+
       <div className="guest-table-container">
         {isNotesOpen && <GuestNotes setIsNotesOpen={setIsNotesOpen} />}
         {isFlagOpen && (
@@ -167,7 +164,7 @@ const ExecutiveDirectorDashboard = () => {
             ]}
           />
         </div>
-      </div> */}
+      </div>
     </>
   );
 };
