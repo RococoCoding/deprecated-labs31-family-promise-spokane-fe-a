@@ -1,0 +1,32 @@
+.data-viz-container {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  width: 100vw;
+  height: 100vh;
+  margin-left: 5%;
+}
+
+.exit-breakdown-90-day {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row: 1;
+}
+
+.moving-average-90-day {
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row: 1;
+}
+
+.mock-data {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row: 2;
+}
+
+.carrying-capacity {
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row: 2;
+}

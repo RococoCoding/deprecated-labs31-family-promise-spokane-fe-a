@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Circle from 'react-circle';
 
 import MaterialTable from 'material-table';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
@@ -15,7 +16,7 @@ import GuestNotes from '../../modals/GuestNotes';
 // import { CopyrightOutlined } from '@material-ui/icons';
 import LoadingComponent from '../../common/LoadingComponent';
 import Modal from 'react-modal';
-import '../Guests/guest.css';
+import './execDirector.css';
 // import { CardContent, Card } from '@material-ui/core';
 import GuestMoreInfo from '../Guests/GuestMoreInfo';
 import Plot from 'react-plotly.js';
@@ -84,6 +85,9 @@ const ExecutiveDirectorDashboard = () => {
       })
       .catch(err => {
         console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -100,6 +104,9 @@ const ExecutiveDirectorDashboard = () => {
       })
       .catch(err => {
         console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -119,13 +126,40 @@ const ExecutiveDirectorDashboard = () => {
 
   return (
     <>
-      <div className="data-container">
-        <h2>Mock Data</h2>
-        <Plot className="MockData" data={mockData.data} />
-        <h2>Exit Breakdown - 90 Day</h2>
-        <Plot className="ExitBreakdown90Day" data={exitBreakdown} />
-        <h2>Moving Average - 90 Day</h2>
-        <Plot className="MovingAverage90Day" data={movingAverage} />
+      <div className="data-viz-container">
+        <div className="mock-data">
+          <h2>Mock Data</h2>
+          <Plot className="MockData" data={mockData.data} />
+        </div>
+        <div className="exit-breakdown-90-day">
+          <h2>Exit Breakdown - 90 Day</h2>
+          <Plot className="ExitBreakdown90Day" data={exitBreakdown} />
+        </div>
+        <div className="moving-average-90-day">
+          <h2>Moving Average - 90 Day</h2>
+          <Plot className="MovingAverage90Day" data={movingAverage} />
+        </div>
+        <div className="carrying-capacity">
+          <h2>Carrying Capacity</h2>
+          <Circle
+            animate={true} // Boolean: Animated/Static progress
+            animationDuration="4s" //String: Length of animation
+            // responsive={true} // Boolean: Make SVG adapt to parent size
+            size={380} // Number: Defines the size of the circle.
+            lineWidth={10} // Number: Defines the thickness of the circle's stroke.
+            progress={43} // Number: Update to change the progress and percentage.
+            progressColor="#006FBA" // String: Color of "progress" portion of circle.
+            bgColor="whitesmoke" // String: Color of "empty" portion of circle.
+            textColor="#8D4982" // String: Color of percentage text color.
+            textStyle={{
+              font: 'bold 5rem Helvetica, Arial, sans-serif', // CSSProperties: Custom styling for percentage.
+            }}
+            percentSpacing={10} // Number: Adjust spacing of "%" symbol and number.
+            roundedStroke={true} // Boolean: Rounded/Flat line ends
+            showPercentage={true} // Boolean: Show/hide percentage.
+            showPercentageSymbol={true} // Boolean: Show/hide only the "%" symbol.
+          />
+        </div>
       </div>
 
       <Modal
