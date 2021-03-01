@@ -5,7 +5,7 @@ import Circle from 'react-circle';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
 import LoadingComponent from '../../common/LoadingComponent';
 import Modal from 'react-modal';
-import './execDirector.css';
+import './execDirector.scss';
 import Plot from 'react-plotly.js';
 import mockData from './mock-data.json';
 Modal.setAppElement('#root');
