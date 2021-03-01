@@ -2,23 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Circle from 'react-circle';
 
-import MaterialTable from 'material-table';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
-import { useHistory } from 'react-router-dom';
-import NoteIcon from '@material-ui/icons/Note';
-import PeopleIcon from '@material-ui/icons/People';
-import InfoIcon from '@material-ui/icons/Info';
-import { tableIcons } from '../../../utils/tableIcons';
-import FlagIcon from '@material-ui/icons/Flag';
-// import CardShadow from '../../CardShadow';
-import FlagGuest from '../../modals/FlagGuest';
-import GuestNotes from '../../modals/GuestNotes';
-// import { CopyrightOutlined } from '@material-ui/icons';
 import LoadingComponent from '../../common/LoadingComponent';
 import Modal from 'react-modal';
 import './execDirector.css';
-// import { CardContent, Card } from '@material-ui/core';
-import GuestMoreInfo from '../Guests/GuestMoreInfo';
 import Plot from 'react-plotly.js';
 import mockData from './mock-data.json';
 Modal.setAppElement('#root');
@@ -41,7 +28,6 @@ const ExecutiveDirectorDashboard = () => {
   }
 
   // on hold pending stakeholder feedback; not sure if needed on exec dashboard
-
   useEffect(() => {
     axiosWithAuth()
       .get('/members')
@@ -91,7 +77,7 @@ const ExecutiveDirectorDashboard = () => {
       });
   }, []);
 
-  // GET 90 day moving average
+  // GET 90/365 moving average
   const [movingAverage, setMovingAverage] = useState();
   useEffect(() => {
     axios
@@ -110,15 +96,9 @@ const ExecutiveDirectorDashboard = () => {
       });
   }, []);
 
-  const [isFlagOpen, setIsFlagOpen] = useState(false);
-  const [isNotesOpen, setIsNotesOpen] = useState(false);
-  const [guestId, setGuestId] = useState(null);
-  const [result, setResult] = useState(null);
-  const history = useHistory();
-
   if (loading) {
     return (
-      <div className="guest-table-container">
+      <div className="data-viz-container">
         <LoadingComponent />
       </div>
     );
@@ -135,9 +115,9 @@ const ExecutiveDirectorDashboard = () => {
           <h2>Exit Breakdown - 90 Day</h2>
           <Plot className="ExitBreakdown90Day" data={exitBreakdown} />
         </div>
-        <div className="moving-average-90-day">
-          <h2>Moving Average - 90 Day</h2>
-          <Plot className="MovingAverage90Day" data={movingAverage} />
+        <div className="moving-average-90-365">
+          <h2>Moving Average - 90/365 </h2>
+          <Plot className="MovingAverage90-365" data={movingAverage} />
         </div>
         <div className="carrying-capacity">
           <h2>Carrying Capacity</h2>
@@ -160,84 +140,6 @@ const ExecutiveDirectorDashboard = () => {
             showPercentageSymbol={true} // Boolean: Show/hide only the "%" symbol.
           />
         </div>
-      </div>
-
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={toggleModal}
-        contentLabel="My dialog"
-        className="mymodal"
-        overlayClassName="myoverlay"
-        closeTimeoutMS={500}
-      >
-        {result ? <GuestMoreInfo familyInfo={result} /> : ''}
-      </Modal>
-
-      <div className="guest-table-container">
-        {isNotesOpen && <GuestNotes setIsNotesOpen={setIsNotesOpen} />}
-        {isFlagOpen && (
-          <FlagGuest
-            setIsFlagOpen={setIsFlagOpen}
-            setState={setState}
-            guestId={guestId}
-          />
-        )}
-        {/* <div className="guest-table"> */}
-        {/* <MaterialTable
-            options={{
-              exportButton: true,
-              rowStyle: rowData => ({
-                backgroundColor:
-                  rowData.flag_level == 2
-                    ? 'rgba(255, 255, 0, 0.419)'
-                    : rowData.flag_level == 3
-                    ? 'rgba(255, 0, 0, 0.418)'
-                    : 'white',
-              }),
-            }}
-            icons={tableIcons}
-            title="Guests"
-            columns={state.columns}
-            data={state.data}
-            actions={[
-              {
-                icon: PeopleIcon,
-                tooltip: 'Family Members',
-                onClick: (event, rowData) => {
-                  // Do save operation
-                  console.log(rowData);
-                  history.push(`/family/${rowData.family_id}`);
-                },
-              },
-              {
-                icon: NoteIcon,
-                tooltip: 'Notes',
-                onClick: (event, rowData) => {
-                  // Do save operation
-                  setIsNotesOpen(true);
-                },
-              },
-              {
-                icon: FlagIcon,
-                tooltip: 'Flag Guest',
-                onClick: (event, rowData) => {
-                  setIsFlagOpen(true);
-                  setGuestId(rowData.id);
-                },
-              },
-              {
-                icon: InfoIcon,
-                tooltip: 'More Info',
-                onClick: (event, rowData) => {
-                  setResult(state.data[rowData.id - 1]);
-                  console.log(result);
-                  toggleModal(event);
-                  // Do save operation
-                },
-              },
-            ]}
-          /> */}
-        {/* </div> */}
       </div>
     </>
   );
