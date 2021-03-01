@@ -43,6 +43,7 @@ The Family Promise of Spokane  Organization is a US-based nonprofit organization
 ### User Flows
 
 [Trello Board](https://trello.com/b/FyWvcZzY/family-promise-of-spokane)
+[Labs 31 Trello Board] (https://trello.com/b/NWATDZ3U/labs-31-family-promise-a)
 
 Each user should have one associated role determining which features are available to them. Flows should be designed to accommodate the addition of more user roles in the future.
 
