@@ -12,7 +12,6 @@ Modal.setAppElement('#root');
 
 const ExecutiveDirectorDashboard = () => {
   const [loading, setLoading] = useState(true);
-  const [isOpen, setIsOpen] = useState(false);
   const [state, setState] = useState({
     columns: [
       { title: 'First', field: 'first_name', col_type: 'hidden' },
@@ -22,10 +21,6 @@ const ExecutiveDirectorDashboard = () => {
     ],
     data: [],
   });
-  function toggleModal(e) {
-    e.preventDefault();
-    setIsOpen(!isOpen);
-  }
 
   // on hold pending stakeholder feedback; not sure if needed on exec dashboard
   useEffect(() => {
