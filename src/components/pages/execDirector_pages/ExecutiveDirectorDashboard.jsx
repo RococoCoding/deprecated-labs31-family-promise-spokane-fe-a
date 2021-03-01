@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 import MaterialTable from 'material-table';
 import { axiosWithAuth } from '../../../api/axiosWithAuth';
@@ -70,6 +71,38 @@ const ExecutiveDirectorDashboard = () => {
       });
   }, []);
 
+  // GET 90 day exit breakdown
+  const [exitBreakdown, setExitBreakdown] = useState();
+  useEffect(() => {
+    axios
+      .get(
+        'http://fam-prom-the-end.eba-jknbh7ge.us-east-1.elasticbeanstalk.com/exit-pie/90'
+      )
+      .then(res => {
+        console.log(res.data);
+        setExitBreakdown(res.data.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
+  // GET 90 day moving average
+  const [movingAverage, setMovingAverage] = useState();
+  useEffect(() => {
+    axios
+      .get(
+        'http://fam-prom-the-end.eba-jknbh7ge.us-east-1.elasticbeanstalk.com/exit-moving-avg/90/365'
+      )
+      .then(res => {
+        console.log(res.data);
+        setMovingAverage(res.data.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
   const [isFlagOpen, setIsFlagOpen] = useState(false);
   const [isNotesOpen, setIsNotesOpen] = useState(false);
   const [guestId, setGuestId] = useState(null);
@@ -86,7 +119,14 @@ const ExecutiveDirectorDashboard = () => {
 
   return (
     <>
-      <Plot className="DataViz" data={mockData.data} />
+      <div className="data-container">
+        <h2>Mock Data</h2>
+        <Plot className="MockData" data={mockData.data} />
+        <h2>Exit Breakdown - 90 Day</h2>
+        <Plot className="ExitBreakdown90Day" data={exitBreakdown} />
+        <h2>Moving Average - 90 Day</h2>
+        <Plot className="MovingAverage90Day" data={movingAverage} />
+      </div>
 
       <Modal
         isOpen={isOpen}
@@ -108,8 +148,8 @@ const ExecutiveDirectorDashboard = () => {
             guestId={guestId}
           />
         )}
-        <div className="guest-table">
-          <MaterialTable
+        {/* <div className="guest-table"> */}
+        {/* <MaterialTable
             options={{
               exportButton: true,
               rowStyle: rowData => ({
@@ -162,8 +202,8 @@ const ExecutiveDirectorDashboard = () => {
                 },
               },
             ]}
-          />
-        </div>
+          /> */}
+        {/* </div> */}
       </div>
     </>
   );
