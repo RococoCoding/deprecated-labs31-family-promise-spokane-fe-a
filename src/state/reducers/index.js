@@ -17,6 +17,7 @@ import {
   TOTAL_BEDS_FAILURE,
   TOTAL_BEDS_FETCHING,
   TOTAL_BEDS_SUCCESS,
+  ADD_DOCUSIGN_URL,
   // Total beds at shelter
 } from '../types';
 
@@ -29,6 +30,7 @@ const INITIAL_STATE = {
   LOADING: false,
   ERROR: '',
   TOTAL_BEDS: 60,
+  DOCUSIGN_URL: '',
 };
 
 export const rootReducer = (state = INITIAL_STATE, action) => {
@@ -65,6 +67,9 @@ export const rootReducer = (state = INITIAL_STATE, action) => {
       return { ...state, LOADING: false, TOTAL_BEDS: action.payload };
     case TOTAL_BEDS_FAILURE:
       return { ...state, LOADING: false, ERROR: action.payload };
+    case ADD_DOCUSIGN_URL:
+      console.log('reducer', state, action.payload);
+      return { ...state, DOCUSIGN_URL: action.payload };
     default:
       return state;
   }

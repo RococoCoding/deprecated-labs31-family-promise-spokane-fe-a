@@ -20,7 +20,7 @@ function RenderHomePage(props) {
     case 'case_manager':
       return <Redirect to="/guests" />;
     case 'executive_director':
-      return <Redirect to="/analytics" />;
+      return <Redirect to="/intake" />;
     case 'pending':
       return <Redirect to="/guest-dashboard" />;
     default:

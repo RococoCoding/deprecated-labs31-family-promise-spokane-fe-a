@@ -23,4 +23,8 @@ export const setCurrentUser = () => async dispatch => {
   }
 };
 
+export const addDocusignURLAction = url => dispatch => {
+  dispatch({ type: 'ADD_DOCUSIGN_URL', payload: url });
+};
+
 export const getFamily = () => {};
