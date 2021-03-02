@@ -18,6 +18,7 @@ import {
   TOTAL_BEDS_FETCHING,
   TOTAL_BEDS_SUCCESS,
   ADD_DOCUSIGN_URL,
+  ADD_SIGNER_INFO,
   // Total beds at shelter
 } from '../types';
 
@@ -31,6 +32,7 @@ const INITIAL_STATE = {
   ERROR: '',
   TOTAL_BEDS: 60,
   DOCUSIGN_URL: '',
+  SIGNER_INFO: {},
 };
 
 export const rootReducer = (state = INITIAL_STATE, action) => {
@@ -68,8 +70,9 @@ export const rootReducer = (state = INITIAL_STATE, action) => {
     case TOTAL_BEDS_FAILURE:
       return { ...state, LOADING: false, ERROR: action.payload };
     case ADD_DOCUSIGN_URL:
-      console.log('reducer', state, action.payload);
       return { ...state, DOCUSIGN_URL: action.payload };
+    case ADD_SIGNER_INFO:
+      return { ...state, SIGNER_INFO: action.payload };
     default:
       return state;
   }

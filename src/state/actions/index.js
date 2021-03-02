@@ -27,4 +27,8 @@ export const addDocusignURLAction = url => dispatch => {
   dispatch({ type: 'ADD_DOCUSIGN_URL', payload: url });
 };
 
+export const addSignerInfo = info => dispatch => {
+  dispatch({ type: 'ADD_SIGNER_INFO', payload: info });
+};
+
 export const getFamily = () => {};
