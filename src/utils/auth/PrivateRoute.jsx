@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 const PrivateRoute = ({ component: Component, roles = [], ...rest }) => {
   const user = useSelector(state => state.CURRENT_USER);
-
+  console.log(user);
   if (!roles.includes(user.role)) {
     return <Redirect to="/" />;
   }
