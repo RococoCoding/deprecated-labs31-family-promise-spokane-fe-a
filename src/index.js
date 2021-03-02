@@ -35,6 +35,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 // import logger from 'redux-logger';
 import GuestDashboard from './components/pages/guest-pages/GuestDashboard';
+import ExecutiveDirectorDashboard from './components/pages/execDirector_pages/ExecutiveDirectorDashboard';
 import FamilyPage from './components/pages/guest-pages/FamilyPage';
 import Notes from './components/pages/Notes/Notes';
 import Members from './components/pages/guest-pages/Members';
@@ -128,6 +129,11 @@ function App() {
           path="/supervisor-checkin"
           roles={['supervisor']}
           component={SupervisorCheckIn}
+        />
+        <PrivateRoute
+          path="/executive-director-dashboard"
+          roles={['executive_director']}
+          component={ExecutiveDirectorDashboard}
         />
         <PrivateRoute
           path="/guest-dashboard"
