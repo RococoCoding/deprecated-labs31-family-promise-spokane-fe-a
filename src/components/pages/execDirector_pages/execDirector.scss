@@ -1,0 +1,56 @@
+.data-viz-container {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  width: 100vw;
+  height: 100vh;
+  @media screen and (max-width: 60em) {
+    grid-template-rows: repeat(4, 1fr);
+  }
+}
+
+.exit-breakdown-90-day {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row: 1;
+  @media screen and (max-width: 60em) {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row: 1;
+  }
+}
+
+.moving-average-90-365 {
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row: 1;
+  @media screen and (max-width: 60em) {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row: 2;
+  }
+}
+
+.mock-data {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row: 2;
+  @media screen and (max-width: 60em) {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row: 3;
+  }
+}
+
+.carrying-capacity {
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row: 2;
+  @media screen and (max-width: 60em) {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row: 4;
+  }
+}

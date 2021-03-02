@@ -18,9 +18,9 @@ function RenderHomePage(props) {
     case 'supervisor':
       return <Redirect to="/guests" />;
     case 'case_manager':
-      return <Redirect to="/guests" />;
+      return <Redirect to="/caseAnalytics" />;
     case 'executive_director':
-      return <Redirect to="/analytics" />;
+      return <Redirect to="/executive-director-dashboard" />;
     case 'pending':
       return <Redirect to="/guest-dashboard" />;
     default:
