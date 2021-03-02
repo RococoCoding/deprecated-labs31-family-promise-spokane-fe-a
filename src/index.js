@@ -147,7 +147,6 @@ function App() {
           path="/redirect"
           component={() => {
             window.location.href = docusignURL;
-            console.log('inside redirect', docusignURL);
             return null;
           }}
         />
