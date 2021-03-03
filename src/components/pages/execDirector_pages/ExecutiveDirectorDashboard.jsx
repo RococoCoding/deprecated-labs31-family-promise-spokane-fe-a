@@ -132,7 +132,7 @@ const ExecutiveDirectorDashboard = () => {
               <option value="365">365</option>
             </select>
             <br></br>
-            <label>Select DEST or INC: </label>
+            <label>Select DEST, INC, or LEN: </label>
             <select
               value={exitBreakdownFeature}
               onChange={e => {
@@ -141,6 +141,7 @@ const ExecutiveDirectorDashboard = () => {
             >
               <option value="DEST">Destination</option>
               <option value="INC">Income</option>
+              <option value="LEN">Length of stay</option>
             </select>{' '}
             <br></br>
             <button type="submit">Submit</button>
@@ -162,7 +163,7 @@ const ExecutiveDirectorDashboard = () => {
               <option value="365">365</option>
             </select>
             <br></br>
-            <label>Select DEST or INC: </label>
+            <label>Select DEST, INC, or LEN: </label>
             <select
               value={movingAvgFeature}
               onChange={e => {
@@ -171,6 +172,7 @@ const ExecutiveDirectorDashboard = () => {
             >
               <option value="DEST">Destination</option>
               <option value="INC">Income</option>
+              <option value="LEN">Length of stay</option>
             </select>
             <br></br>
             <label>Enter the amount of days back you would like to see: </label>
