@@ -77,7 +77,7 @@ const HomelessHistory = ({
             />
           </Form.Item>
 
-          <Form.Item label="Aprroximately when did you become homeless?">
+          <Form.Item label="Approximately when did you become homeless?">
             <Input
               name={'familyInfo.homeless_info.homeless_start_date'}
               value={familyInfo.homeless_info.homeless_start_date}
