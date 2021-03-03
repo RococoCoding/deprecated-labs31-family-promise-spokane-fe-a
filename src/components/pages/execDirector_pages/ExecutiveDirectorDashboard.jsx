@@ -53,7 +53,7 @@ const ExecutiveDirectorDashboard = () => {
       });
   }, []);
 
-  // GET 90 day exit breakdown
+  // GET exit breakdown
   const [exitBreakdownFeature, setExitBreakdownFeature] = useState('DEST');
   const [m, setM] = useState(90);
   const [exitBreakdownPlot, setExitBreakdownPlot] = useState(mockData.data);
@@ -121,7 +121,7 @@ const ExecutiveDirectorDashboard = () => {
             <h2>Exit Breakdown</h2>
             <label>Select 90 or 365 day moving average: </label>
             <select
-              value={parseInt(movingAvg, 10)}
+              value={parseInt(m, 10)}
               onChange={e => {
                 setM(e.target.value);
               }}
@@ -132,7 +132,7 @@ const ExecutiveDirectorDashboard = () => {
             <br></br>
             <label>Select DEST or INC: </label>
             <select
-              value={movingAvgFeature}
+              value={exitBreakdownFeature}
               onChange={e => {
                 setExitBreakdownFeature(e.target.value);
               }}
