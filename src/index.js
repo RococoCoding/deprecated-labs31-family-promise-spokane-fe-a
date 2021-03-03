@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Security, LoginCallback, SecureRoute } from '@okta/okta-react';
+import { LastLocationProvider } from 'react-router-last-location';
 
 import PrivateRoute from './utils/auth/PrivateRoute';
 import 'dotenv';
@@ -42,14 +43,17 @@ import Notes from './components/pages/Notes/Notes';
 import Members from './components/pages/guest-pages/Members';
 import CaseAnalytics from './components/pages/casemanager-pages/CaseManagerAnalytics';
 import ShelterInfo from './components/pages/guest-pages/ShelterInfo';
-const store = createStore(rootReducer, applyMiddleware(thunk));
+import StaffSig from './components/pages/IntakePacketContent/ByGuests/ClientRelease/ClientReleaseStaffSig';
 
+const store = createStore(rootReducer, applyMiddleware(thunk));
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <React.StrictMode>
+      <LastLocationProvider>
+        {/* <React.StrictMode> */}
         <App />
-      </React.StrictMode>
+        {/* </React.StrictMode> */}
+      </LastLocationProvider>
     </Router>
   </Provider>,
   document.getElementById('root')
@@ -74,6 +78,7 @@ function App() {
       <Switch>
         <Route path="/login" component={LoginPage} />
         <Route path="/implicit/callback" component={LoginCallback} />
+        {/* do not remove landingpage it's being used in bw-prep.js and code there is "super brittle" but there's nothing in there so */}
         <Route path="/landing" component={LandingPage} />
 
         {/* any of the routes you need secured should be registered as SecureRoutes */}
@@ -121,6 +126,11 @@ function App() {
           path="/intake"
           roles={['executive_director', 'supervisor', 'case_manager']}
           component={IntakePacket}
+        />
+        <PrivateRoute
+          path="/staffsig"
+          roles={['executive_director', 'supervisor', 'case_manager']}
+          component={StaffSig}
         />
         <PrivateRoute
           path="/guests"

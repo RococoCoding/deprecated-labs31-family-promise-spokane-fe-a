@@ -44,11 +44,11 @@ const CreateOktaAccountForm = ({ setUserId }) => {
 
       await axiosWithAuth().post('/users', profile);
       setUserId(userId);
+      dispatch(addSignerInfo(profile));
     } catch (error) {
       setErrors(error.response?.data?.errorCauses[0]?.errorSummary);
     } finally {
       setLoading(false);
-      dispatch(addSignerInfo(profileObj));
     }
   };
 

@@ -6,8 +6,7 @@ This component contains:
 */
 
 import React, { useEffect, useState } from 'react';
-import { useHistory, Route } from 'react-router-dom';
-import moment from 'moment';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addDocusignURLAction } from '../../../../state/actions/index';
 import axios from 'axios';
@@ -40,7 +39,8 @@ const Pets = ({
   const dispatch = useDispatch();
   let envelopeArgs = {
     signer1Email: signerInfo.email,
-    signer1Name: signerInfo.firstName + ' ' + signerInfo.lastName,
+    signer1Name: signerInfo.first_name + ' ' + signerInfo.last_name,
+    signer1Id: signerInfo.id,
   };
 
   useEffect(() => {
