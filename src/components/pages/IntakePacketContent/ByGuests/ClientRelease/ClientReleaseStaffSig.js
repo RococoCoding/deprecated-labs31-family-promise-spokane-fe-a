@@ -15,7 +15,8 @@ const ClientReleaseStaffSignature = () => {
   };
 
   function submitHandler() {}
-
+  //******************** back end isnt setup to handle this information?? ********************/
+  //***************** ******************/
   return (
     <div style={tempFormStyle}>
       <div>
