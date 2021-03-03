@@ -54,15 +54,19 @@ const ExecutiveDirectorDashboard = () => {
   }, []);
 
   // GET 90 day exit breakdown
-  const [exitBreakdown, setExitBreakdown] = useState();
-  useEffect(() => {
+  const [exitBreakdownFeature, setExitBreakdownFeature] = useState('DEST');
+  const [m, setM] = useState(90);
+  const [exitBreakdownPlot, setExitBreakdownPlot] = useState(mockData.data);
+
+  function onExitSubmit(e) {
+    e.preventDefault();
     axios
       .get(
-        'http://fam-prom-the-end.eba-jknbh7ge.us-east-1.elasticbeanstalk.com/exit-pie/90/'
+        `http://fam-prom-the-end.eba-jknbh7ge.us-east-1.elasticbeanstalk.com/pie-${exitBreakdownFeature}/${m}`
       )
       .then(res => {
         console.log(res.data);
-        setExitBreakdown(res.data.data);
+        setExitBreakdownPlot(res.data.data);
       })
       .catch(err => {
         console.log(err);
@@ -70,19 +74,19 @@ const ExecutiveDirectorDashboard = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }
 
   // GET moving average
   const [movingAvgPlot, setMovingAvgPlot] = useState(mockData.data);
-  const [movingAverage, setMovingAverage] = useState(90);
-  const [feature, setFeature] = useState('DEST');
+  const [movingAvg, setMovingAvg] = useState(90);
+  const [movingAvgFeature, setMovingAvgFeature] = useState('DEST');
   const [daysBack, setDaysBack] = useState(30);
 
-  function onSubmit(e) {
+  function onMovingSubmit(e) {
     e.preventDefault();
     axios
       .get(
-        `http://fam-prom-the-end.eba-jknbh7ge.us-east-1.elasticbeanstalk.com/moving-avg-${feature}/${movingAverage}-${daysBack}`
+        `http://fam-prom-the-end.eba-jknbh7ge.us-east-1.elasticbeanstalk.com/moving-avg-${movingAvgFeature}/${movingAvg}-${daysBack}`
       )
       .then(res => {
         console.log(res.data);
@@ -111,29 +115,56 @@ const ExecutiveDirectorDashboard = () => {
           <h2>Mock Data</h2>
           <Plot className="MockData" data={mockData.data} />
         </div>
-        <div className="exit-breakdown-90-day">
-          <h2>Exit Breakdown - 90 Day</h2>
-          <Plot className="ExitBreakdown90Day" data={exitBreakdown} />
-        </div>
-        <div className="moving-average-90-365">
-          <form onSubmit={onSubmit}>
-            <h2>Moving Average</h2>
-            <label>Select 90 day or 365 day moving average: </label>
+
+        <div className="exit-breakdown">
+          <form onSubmit={onExitSubmit}>
+            <h2>Exit Breakdown</h2>
+            <label>Select 90 or 365 day moving average: </label>
             <select
-              value={parseInt(movingAverage, 10)}
+              value={parseInt(movingAvg, 10)}
               onChange={e => {
-                setMovingAverage(e.target.value);
+                setM(e.target.value);
               }}
             >
               <option value="90">90</option>
               <option value="365">365</option>
             </select>
             <br></br>
+            <label>Select DEST or INC: </label>
+            <select
+              value={movingAvgFeature}
+              onChange={e => {
+                setExitBreakdownFeature(e.target.value);
+              }}
+            >
+              <option value="DEST">Destination</option>
+              <option value="INC">Income</option>
+            </select>{' '}
+            <br></br>
+            <button type="submit">Submit</button>
+          </form>
+          <Plot className="ExitBreakdown" data={exitBreakdownPlot} />
+        </div>
+
+        <div className="moving-average">
+          <form onSubmit={onMovingSubmit}>
+            <h2>Moving Average</h2>
             <label>Select 90 day or 365 day moving average: </label>
             <select
-              value={feature}
+              value={parseInt(movingAvg, 10)}
               onChange={e => {
-                setFeature(e.target.value);
+                setMovingAvg(e.target.value);
+              }}
+            >
+              <option value="90">90</option>
+              <option value="365">365</option>
+            </select>
+            <br></br>
+            <label>Select DEST or INC: </label>
+            <select
+              value={movingAvgFeature}
+              onChange={e => {
+                setMovingAvgFeature(e.target.value);
               }}
             >
               <option value="DEST">Destination</option>
@@ -147,11 +178,12 @@ const ExecutiveDirectorDashboard = () => {
               value={daysBack}
               onChange={e => setDaysBack(e.target.value)}
             />{' '}
-            &nbsp;
+            <br></br>
             <button type="submit">Submit</button>
           </form>
-          <Plot className="MovingAverage90-365" data={movingAvgPlot} />
+          <Plot className="MovingAverage" data={movingAvgPlot} />
         </div>
+
         <div className="carrying-capacity">
           <h2>Carrying Capacity</h2>
           <Circle
