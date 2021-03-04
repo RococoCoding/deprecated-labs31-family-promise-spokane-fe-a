@@ -9,7 +9,7 @@ You can find the deployed project at [Family Promise of Spokane](https://a.famil
 The Family Promise of Spokane  Organization is a US-based nonprofit organization based in Spokane, WA. They are an organization that helps homeless families as well as preventing families from becoming homeless. They provide shelter for families as well as rental assistance. For the full description visit their website [Family Promise of Spokane](https://www.familypromiseofspokane.org/)
 # Contributors
 
-| [Dominick Bruno ](https://github.com/DomBruno) | [Ben Somerville](https://github.com/bsmrvl) | [Henry Mead](https://www.github.com/hmead15/) | [Leslie Rodriguez](https://github.com/MaxTechniche) |
+| [Dominick Bruno ](https://github.com/DomBruno) | [Ben Somerville](https://github.com/bsmrvl) | [Henry Mead](https://www.github.com/hmead15/) | [Jacob Maxfield](https://github.com/MaxTechniche) |
 | :---: | :---: | :---: | :---: | 
 | [<img src="https://raw.githubusercontent.com/DomBruno/DomBruno/master/meatchota.jpg" width = "200" />](https://github.com/DomBruno) | [<img src="https://avatars.githubusercontent.com/u/70228881?s=460&u=05b1dfcb97cd62deaf5f2afacbd6c2372d945530&v=4" width = "200" />](https://github.com/bsmrvl) | [<img src="https://avatars.githubusercontent.com/u/63972527?s=400&u=e9b1337009dfe3c325b2168c31de65b59849b6a9&v=4" width = "200" />](https://www.github.com/hmead15/) | [<img src="https://avatars.githubusercontent.com/u/22220702?s=400&u=025f2321bc7fae395a8f3788cf1e5cdca4148c0b&v=4" width = "200" />](https://github.com/MaxTechniche) |
 | TPL | Data Scientist | Data Scientist | Data Scientist | 
