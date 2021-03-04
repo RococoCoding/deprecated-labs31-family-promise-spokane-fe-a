@@ -10,8 +10,6 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addDocusignURLAction } from '../../../../state/actions/index';
 import axios from 'axios';
-//Previous/Next buttons
-import IntakeButton from '../IntakeButtons';
 import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 
 //Ant Design imports (https://ant.design/components/overview/)
@@ -29,7 +27,7 @@ const Pets = ({
   const pageNumber = steps.findIndex(item => item === step);
   const pages = steps.length;
   const percent = ((pageNumber + 1) / pages) * 100;
-  const { next, previous } = navigation;
+  const { previous } = navigation;
   const { familyInfo, familyMember } = formData;
   //FamilyInfo from ../../intakePacket.jsx (props)
 
@@ -38,6 +36,7 @@ const Pets = ({
   const [loadDocusign, setLoadDocusign] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
+
   let envelopeArgs = {
     signer1Email: signerInfo.email,
     signer1Name: signerInfo.first_name + ' ' + signerInfo.last_name,
@@ -45,12 +44,14 @@ const Pets = ({
   };
 
   useEffect(() => {
+    // loads docusign redirect
     if (loadDocusign) {
       history.push('/redirect');
     }
   }, [loadDocusign]);
 
   function callDocusign() {
+    // save the family info before we go to docusign -- intake packet is all local state so it gets wiped away when we redirect. save it by sending to backend
     axiosWithAuth()
       .post(`/families`, familyInfo)
       .then(res => {
@@ -64,6 +65,8 @@ const Pets = ({
               console.log('MemberError', err.response);
             });
         });
+        // Docusign doesn't allow cross-origin requests (we have one request that starts at front end but has different domain than back end which ends the request to docusign) so we have to grab the URL from backend and load it via the front end
+        // save the URL in redux state so the path can update dynamically once we get it
         axios
           .post('http://localhost:8000/callDS', envelopeArgs)
           .then(res => {

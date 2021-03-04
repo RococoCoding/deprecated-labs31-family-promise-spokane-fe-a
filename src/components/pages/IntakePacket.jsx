@@ -140,6 +140,7 @@ const steps = [
   { id: 'Insurance' },
   { id: 'AdditionalInfo' },
   { id: 'Pets' },
+  // **************************** Pets is where we start the docusign flow. It skips everything after this and goes to clientReleaseStaffSig *****************
   { id: 'ClientRelease' },
   { id: 'ClientReleaseSignature' },
   { id: 'ClientReleaseStaffSig' },
