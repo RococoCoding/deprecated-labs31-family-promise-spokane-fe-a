@@ -53,35 +53,22 @@ const ExecutiveDirectorDashboard = () => {
       });
   }, []);
 
-  // GET 90 day exit breakdown
-  const [exitBreakdown, setExitBreakdown] = useState();
-  useEffect(() => {
-    axios
-      .get(
-        'http://fam-prom-the-end.eba-jknbh7ge.us-east-1.elasticbeanstalk.com/exit-pie/90'
-      )
-      .then(res => {
-        console.log(res.data);
-        setExitBreakdown(res.data.data);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+  // Labs32 - May want to consider refactoring some of the following code into separate components
 
-  // GET 90/365 moving average
-  const [movingAverage, setMovingAverage] = useState();
-  useEffect(() => {
+  // GET exit breakdown
+  const [exitBreakdownFeature, setExitBreakdownFeature] = useState('DEST');
+  const [m, setM] = useState(90);
+  const [exitBreakdownPlot, setExitBreakdownPlot] = useState(mockData.data);
+
+  function onExitSubmit(e) {
+    e.preventDefault();
     axios
       .get(
-        'http://fam-prom-the-end.eba-jknbh7ge.us-east-1.elasticbeanstalk.com/exit-moving-avg/90/365'
+        `http://fam-prom-the-end.eba-jknbh7ge.us-east-1.elasticbeanstalk.com/pie-${exitBreakdownFeature}/${m}`
       )
       .then(res => {
         console.log(res.data);
-        setMovingAverage(res.data.data);
+        setExitBreakdownPlot(res.data.data);
       })
       .catch(err => {
         console.log(err);
@@ -89,7 +76,31 @@ const ExecutiveDirectorDashboard = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }
+
+  // GET moving average
+  const [movingAvgPlot, setMovingAvgPlot] = useState(mockData.data);
+  const [movingAvg, setMovingAvg] = useState(90);
+  const [movingAvgFeature, setMovingAvgFeature] = useState('DEST');
+  const [daysBack, setDaysBack] = useState(30);
+
+  function onMovingSubmit(e) {
+    e.preventDefault();
+    axios
+      .get(
+        `http://fam-prom-the-end.eba-jknbh7ge.us-east-1.elasticbeanstalk.com/moving-avg-${movingAvgFeature}/${movingAvg}-${daysBack}`
+      )
+      .then(res => {
+        console.log(res.data);
+        setMovingAvgPlot(res.data.data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
 
   if (loading) {
     return (
@@ -106,14 +117,77 @@ const ExecutiveDirectorDashboard = () => {
           <h2>Mock Data</h2>
           <Plot className="MockData" data={mockData.data} />
         </div>
-        <div className="exit-breakdown-90-day">
-          <h2>Exit Breakdown - 90 Day</h2>
-          <Plot className="ExitBreakdown90Day" data={exitBreakdown} />
+
+        <div className="exit-breakdown">
+          <form onSubmit={onExitSubmit}>
+            <h2>Exit Breakdown</h2>
+            <label>Select 90 or 365 day moving average: </label>
+            <select
+              value={parseInt(m, 10)}
+              onChange={e => {
+                setM(e.target.value);
+              }}
+            >
+              <option value="90">90</option>
+              <option value="365">365</option>
+            </select>
+            <br></br>
+            <label>Select DEST, INC, or LEN: </label>
+            <select
+              value={exitBreakdownFeature}
+              onChange={e => {
+                setExitBreakdownFeature(e.target.value);
+              }}
+            >
+              <option value="DEST">Destination</option>
+              <option value="INC">Income</option>
+              <option value="LEN">Length of stay</option>
+            </select>{' '}
+            <br></br>
+            <button type="submit">Submit</button>
+          </form>
+          <Plot className="ExitBreakdown" data={exitBreakdownPlot} />
         </div>
-        <div className="moving-average-90-365">
-          <h2>Moving Average - 90/365 </h2>
-          <Plot className="MovingAverage90-365" data={movingAverage} />
+
+        <div className="moving-average">
+          <form onSubmit={onMovingSubmit}>
+            <h2>Moving Average</h2>
+            <label>Select 90 day or 365 day moving average: </label>
+            <select
+              value={parseInt(movingAvg, 10)}
+              onChange={e => {
+                setMovingAvg(e.target.value);
+              }}
+            >
+              <option value="90">90</option>
+              <option value="365">365</option>
+            </select>
+            <br></br>
+            <label>Select DEST, INC, or LEN: </label>
+            <select
+              value={movingAvgFeature}
+              onChange={e => {
+                setMovingAvgFeature(e.target.value);
+              }}
+            >
+              <option value="DEST">Destination</option>
+              <option value="INC">Income</option>
+              <option value="LEN">Length of stay</option>
+            </select>
+            <br></br>
+            <label>Enter the amount of days back you would like to see: </label>
+            <input
+              type="number"
+              placeholder="days back"
+              value={daysBack}
+              onChange={e => setDaysBack(e.target.value)}
+            />{' '}
+            <br></br>
+            <button type="submit">Submit</button>
+          </form>
+          <Plot className="MovingAverage" data={movingAvgPlot} />
         </div>
+
         <div className="carrying-capacity">
           <h2>Carrying Capacity</h2>
           <Circle
