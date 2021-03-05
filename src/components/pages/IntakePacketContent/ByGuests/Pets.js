@@ -12,9 +12,10 @@ import { addDocusignURLAction } from '../../../../state/actions/index';
 import axios from 'axios';
 //Previous/Next buttons
 import IntakeButton from '../IntakeButtons';
+import { axiosWithAuth } from '../../../../api/axiosWithAuth';
 
 //Ant Design imports (https://ant.design/components/overview/)
-import { Form, Input, Checkbox, Card, Progress } from 'antd';
+import { Form, Input, Checkbox, Card, Progress, Button } from 'antd';
 
 const Pets = ({
   navigation,
@@ -28,9 +29,9 @@ const Pets = ({
   const pageNumber = steps.findIndex(item => item === step);
   const pages = steps.length;
   const percent = ((pageNumber + 1) / pages) * 100;
-
+  const { next, previous } = navigation;
+  const { familyInfo, familyMember } = formData;
   //FamilyInfo from ../../intakePacket.jsx (props)
-  const { familyInfo } = formData;
 
   // ************docusign**************
   const signerInfo = useSelector(state => state.SIGNER_INFO);
@@ -50,10 +51,28 @@ const Pets = ({
   }, [loadDocusign]);
 
   function callDocusign() {
-    axios.post('http://localhost:8000/callDS', envelopeArgs).then(res => {
-      setLoadDocusign(!loadDocusign);
-      dispatch(addDocusignURLAction(res.data));
-    });
+    axiosWithAuth()
+      .post(`/families`, familyInfo)
+      .then(res => {
+        const familyId = res.data.families.id;
+        Object.keys(formData.familyMember).map(mem => {
+          familyMember[mem]['family_id'] = familyId;
+          axiosWithAuth()
+            .post('/members', familyMember[mem])
+            .then(res => console.log('Members added', res.data))
+            .catch(err => {
+              console.log('MemberError', err.response);
+            });
+        });
+        axios
+          .post('http://localhost:8000/callDS', envelopeArgs)
+          .then(res => {
+            setLoadDocusign(!loadDocusign);
+            dispatch(addDocusignURLAction(res.data));
+          })
+          .catch(err => console.log('DocuSign error', err));
+      })
+      .catch(err => console.log('FamiliesError', err));
   }
 
   return (
@@ -62,7 +81,30 @@ const Pets = ({
       <Progress percent={percent} status="active" showInfo={false} />
 
       <Card title="Pets" bordered={false}>
-        <IntakeButton navigation={navigation} />
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginBottom: '30px',
+          }}
+        >
+          <Button
+            type="primary"
+            htmlType="button"
+            onClick={previous}
+            style={{ width: '100px' }}
+          >
+            Previous
+          </Button>
+          <Button
+            type="primary"
+            htmlType="button"
+            onClick={callDocusign}
+            style={{ width: '100px' }}
+          >
+            Next
+          </Button>
+        </div>
 
         <Form layout="vertical">
           <Form.Item>
@@ -152,7 +194,6 @@ const Pets = ({
             />
           </Form.Item>
         </Form>
-        <button onClick={callDocusign}>Go to DocuSign</button>
       </Card>
     </div>
   );
