@@ -2,26 +2,26 @@
 
 # Family Promise of Spokane
 
-You can find the deployed project at [Family Promise of Spokane](https://family-profile-styling-emily.d3hmwb1bmjh3u1.amplifyapp.com//).
+You can find the deployed project at [Family Promise of Spokane](https://a.familypromisesofspokane.dev/).
 
 # Description
 
 The Family Promise of Spokane  Organization is a US-based nonprofit organization based in Spokane, WA. They are an organization that helps homeless families as well as preventing families from becoming homeless. They provide shelter for families as well as rental assistance. For the full description visit their website [Family Promise of Spokane](https://www.familypromiseofspokane.org/)
 # Contributors
 
-| [Kristine Wang](https://github.com/KristineYW) | [Tyler Etheridge](https://github.com/tyleretheridge) | [Santiago Berniz](https://github.com/sberniz/) | [Leslie Rodriguez](https://github.com/thereactgirl) |
+| [Dominick Bruno ](https://github.com/DomBruno) | [Ben Somerville](https://github.com/bsmrvl) | [Henry Mead](https://www.github.com/hmead15/) | [Jacob Maxfield](https://github.com/MaxTechniche) |
 | :---: | :---: | :---: | :---: | 
-| [<img src="https://avatars0.githubusercontent.com/u/63246056?s=400&u=a10524916b756eb26132d0803bec3cbe62ede1ef&v=4" width = "200" />](https://github.com/KristineYW) | [<img src="https://avatars3.githubusercontent.com/u/61953470?s=400&u=8f8538f4d10dcb45b9179eb6990d1ef9c1aadc8d&v=4" width = "200" />](https://github.com/tyleretheridge) | [<img src="https://avatars3.githubusercontent.com/u/6207914?s=460&u=8bfaa068f7942170423371ff10e8f04f09f41e81&v=4" width = "200" />](https://github.com/sberniz/) | [<img src="https://avatars3.githubusercontent.com/u/46256764?s=400&u=337301ad07625f6977ed520ff7092ae54bb0852f&v=4" width = "200" />](https://github.com/thereactgirl) |
-| TPL | Data Scientist | Data Scientist | Web Developer | Web Developer | 
-|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/KristineYW) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/tyleretheridge) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/sberniz/) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/thereactgirl) |
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/kristine-wang-ds/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/tylerjetheridge/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/santiago-berniz/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/thereactgirl/) |          
+| [<img src="https://raw.githubusercontent.com/DomBruno/DomBruno/master/meatchota.jpg" width = "200" />](https://github.com/DomBruno) | [<img src="https://avatars.githubusercontent.com/u/70228881?s=460&u=05b1dfcb97cd62deaf5f2afacbd6c2372d945530&v=4" width = "200" />](https://github.com/bsmrvl) | [<img src="https://avatars.githubusercontent.com/u/63972527?s=400&u=e9b1337009dfe3c325b2168c31de65b59849b6a9&v=4" width = "200" />](https://www.github.com/hmead15/) | [<img src="https://avatars.githubusercontent.com/u/22220702?s=400&u=025f2321bc7fae395a8f3788cf1e5cdca4148c0b&v=4" width = "200" />](https://github.com/MaxTechniche) |
+| TPL | Data Scientist | Data Scientist | Data Scientist | 
+|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/DomBruno) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/bsmrvl) | [<img src="https://github.com/favicon.ico" width="15"> ](https://www.github.com/hmead15/) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/MaxTechniche) |
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/dbruno93/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ben-somerville/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/hcmead) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/maxtechniche/) |          
 
-| [Emily Huntwork](https://github.com/Ehuntwork) | [Abdi Mo](https://github.com/abdimohamud) | [Isaiah Fowler](https://github.com/idongessien) |
-| :---: | :---: | :---: |  
-| [<img src="https://avatars1.githubusercontent.com/u/27293120?s=400&u=e6c0fc75189b75dea5233e02562784ed1cfa2faf&v=4" width = "200" />](https://github.com/Ehuntwork) | [<img src="https://avatars1.githubusercontent.com/u/65041807?s=400&u=2ff3514545d906fe2b734fed79c7f8d640b58ae6&v=4" width = "200" />](https://github.com/abdimohamud) | [<img src="https://avatars1.githubusercontent.com/u/66272034?s=400&u=db133631ead14125bb0d5e9515932985c6293448&v=4" width = "200" />](https://github.com/isaiah-j) | 
-| Web Developer | Web Developer | Web Developer | 
-|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Ehuntwork) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/abdimohamud) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/isaiah-j) | 
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/emily-huntwork/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/abdinajib-mohamud/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/isaiah-fowler/) |              
+| [Alice Chang](https://github.com/RococoCoding) | [Melissa Tanksley](https://github.com/MelissaTanksley) | [Evan Barton](https://github.com/notrabe) | [Ramsha Nasir](https://github.com/rnasir826) |
+| :---: | :---: | :---: | :---: | 
+| [<img src="https://avatars.githubusercontent.com/u/63833718?s=460&u=0e06ea3cc648432b6b353a4088de2933cb503e12&v=4" width = "200" />](https://github.com/RococoCoding) | [<img src="https://avatars.githubusercontent.com/u/54566934?s=460&u=66f29e10fbf4e4daff243f782dbfa9e81e87e73d&v=4" width = "200" />](https://github.com/MelissaTanksley) | [<img src="https://avatars.githubusercontent.com/u/67931904?s=400&v=4" width = "200" />](https://github.com/notrabe) | [<img src="https://media-exp1.licdn.com/dms/image/C5603AQF8flKGY9R3ug/profile-displayphoto-shrink_800_800/0/1599613738372?e=1620259200&v=beta&t=pxxDv8DMWPwC-TfpYFD4kWyKHftcCHsEojbUZFp7kQ4" width = "200" />](https://github.com/rnasir826) | 
+| Web Developer | Web Developer | Web Developer | Web Developer |
+|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/RococoCoding) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/MelissaTanksley) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/notrabe) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/rnasir826) |
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/rocococode/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/melissa-tanksley-698326191/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/notrabe/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ramshanasir14/) |
 
 <br>          
 
@@ -29,9 +29,9 @@ The Family Promise of Spokane  Organization is a US-based nonprofit organization
 <br>
 
 # Deployed Product
-[Front End Dashboard](https://family-profile-styling-emily.d3hmwb1bmjh3u1.amplifyapp.com/) |
-[Data Science API](http://a-labs29-family-promise.eba-syir5yx3.us-east-1.elasticbeanstalk.com/) |
-[Back End API](https://family-pomise-spokane.herokuapp.com/) |
+[Front End Dashboard](https://a.familypromisesofspokane.dev/) |
+[Data Science API](http://fam-prom-the-end.eba-jknbh7ge.us-east-1.elasticbeanstalk.com) |
+[Back End API](https://family-promise-a-be.herokuapp.com/) |
 
 # Linked Repositories
 [Family Promise of Spokane Back End](https://github.com/Lambda-School-Labs/family-promise-spokane-be-a) |
@@ -42,11 +42,12 @@ The Family Promise of Spokane  Organization is a US-based nonprofit organization
 
 ### User Flows
 
-[Trello Board](https://trello.com/b/FyWvcZzY/family-promise-of-spokane)
+[Trello Board](https://trello.com/b/NWATDZ3U/labs-31-family-promise-a)
+[Whimsical](https://whimsical.com/family-promise-of-spokane-labs-31-BNvk4uvz2LtHZa1W3pyhuM)
 
 Each user should have one associated role determining which features are available to them. Flows should be designed to accommodate the addition of more user roles in the future.
 
-Our product supported the following user roles:
+Our product supports the following user roles:
 
 - Executive Director
 - Supervisor: Responsible for handling the day-to-day needs of the guests at the shelter, including conducting intakes of new families.
@@ -54,21 +55,24 @@ Our product supported the following user roles:
 - Guest : A "head of household" arriving to or checked into the shelter as part of a family unit of some kind.
 
 and the following user stories:
-- All users should be able to view and update a user profile.
-- Guests should be able to check in to the shelter using a form. This form should be as simple and user-friendly as possible. We need to distinguish new guests from returning guests and log the check-in accordingly. 
-- New guests should have a profile created for them.
-- Supervisors should be able to view all guests currently checked into the shelter.
-- Case Managers should be able to look up guests and log notes associated with ongoing case management. 
-- Case Managers should be able to view and edit and Guests should be able to view those notes. Entries should be confidential between the case manager and the guest.
+- As a Supervisor I need guest signatures so I can confirm they agree to the rules and regulations.
+- As a Supervisor, I want access to predictive data so I can identify what areas/services to focus on for a successful outcome. 
+- As a Guest I need an easy way to log in to my profile so I can view and update my information. 
+- As an Executive Director, I need a dashboard to hold the relevant information so I can have ease of access.
 
 ### Key Features
 
-- Supervisors can Create guest profile 
+- Supervisors can Create guest account
 - Case Manager can view guest profile 
 - Case Manager can view the exit destination prediction
-- Guest can be flagged for mis conduct
-- notes can be added to guest's profile. 
-- Guest can view their own profile. 
+- Guest can be flagged for misconduct
+- Notes can be added to guests' profiles
+- Guest can view their own profile
+
+(Labs 31 Team Contributions)
+- Guests can sign documents through embedded signing with DocuSign
+- Guests can log in with Facebook or Google
+- Executive Director can view data science analytics visualizations through their dashboard
 
 # Tech Stack
 
@@ -93,7 +97,7 @@ and the following user stories:
 
 # User Flow
 
-![Architecture](https://github.com/Lambda-School-Labs/family-promise-spokane-fe-a/tree/main/src/assets/user-flow.png)
+![Architecture](https://raw.githubusercontent.com/Lambda-School-Labs/family-promise-spokane-fe-a/main/src/assets/user-flow.png)
 
 **If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
 
@@ -104,7 +108,7 @@ and the following user stories:
 
 
 # Support
-Please reach out to [Abdi](https://github.com/abdimohamud/), [Isaiah](https://github.com/isaiah-j), [Leslie](https://github.com/thereactgirl) or [Emily](https://github.com/Ehuntwork) for any support or questions.
+Please reach out to [Alice](https://github.com/RococoCoding), [Melissa](https://github.com/MelissaTanksley) or [Evan](https://github.com/notrabe) or [Ramsha](https://github.com/rnasir826) for any web support or questions and [Ben](https://github.com/bsmrvl), [Henry](https://www.github.com/hmead15/) or [Jacob](https://github.com/MaxTechniche) for any data science support or questions.
 
 ### Contributing
 
