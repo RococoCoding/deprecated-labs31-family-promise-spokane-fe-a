@@ -1,6 +1,6 @@
 # Family Promise
 **Timeline**: One month  
-**Tech**: JS, React, Redux, Node, third-party APIs 
+**Tech**: JS, React, Redux, Node, third-party APIs  
 **Description**: Upgrades to the intake process of a homeless shelter     
 **Contribution Type**: School team project - third-party eSignature API integration, third-party social media authentication
 **Status**: Completed  
