@@ -2,7 +2,7 @@
 **Timeline**: One month  
 **Tech**: JS, React, Redux, Node, third-party APIs  
 **Description**: Upgrades to the intake process of a homeless shelter     
-**Contribution Type**: School team project - third-party eSignature API integration, third-party social media authentication
+**Contribution Type**: School team project - third-party eSignature API integration, third-party social media authentication  
 **Status**: Completed  
 **Retrospective**: Our final month at Lambda School is working on a real-world project. They design it to mimic a real workplace as much as possible. We had meetings with our stakeholder, a project roadmap, daily standups with our team leads, etc. I started off on a team implementing third-party social media authentication, integrating Facebook to the existing Okta login widget. We were able to knock that out in a week, which made me overconfident when I ended up on the DocuSign integration team. DocuSign did not have great docs. A lot of it was outdated and their demo "out of the box" app seemed incomprehensible. We spent a week scouring the web for tutorials or anything that would help us connect the dots. Eventually we realized we would have to sit down and figure out the demo app line by line.  
 
