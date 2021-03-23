@@ -1,3 +1,13 @@
+# Family Promise
+**Timeline**: One month  
+**Tech**: JS, React, Redux, Node, third-party APIs 
+**Description**: Upgrades to the intake process of a homeless shelter     
+**Contribution Type**: School team project - third-party eSignature API integration, third-party social media authentication
+**Status**: Completed  
+**Retrospective**: Our final month at Lambda School is working on a real-world project. They design it to mimic a real workplace as much as possible. We had meetings with our stakeholder, a project roadmap, daily standups with our team leads, etc. I started off on a team implementing third-party social media authentication, integrating Facebook to the existing Okta login widget. We were able to knock that out in a week, which made me overconfident when I ended up on the DocuSign integration team. DocuSign did not have great docs. A lot of it was outdated and their demo "out of the box" app seemed incomprehensible. We spent a week scouring the web for tutorials or anything that would help us connect the dots. Eventually we realized we would have to sit down and figure out the demo app line by line. 
+
+I'm really glad I had this experience! It was a great chance to learn about keeping calm in the face of adversity and understanding what I (and we, as a team) were capable of. I've now gone through the crucible of familiarizing myself with a codebase and researching and implementing technology I am not familiar with, two things that I've heard can be the hardest part of starting your first job as a developer. I was lucky enough to be working with a great team of dedicated people who were supportive of each other and worked really well together, and I think the experience will give me a better sense of what qualities to look for in teammates in the future. For instance, I'm pretty smart and good at problem-solving but I can also be impatient, and without the steady presence of some of my teammates, I might not have sat down to actually read through the code line by line. A good team dynamic has people whose strengths complement each other, and now I have a clear example of why having someone who's not afraid to go the slow steady route can work really well with my personality.
+
 
 
 # Family Promise of Spokane
